@@ -100,7 +100,7 @@ public class playerScript : MonoBehaviour
             //{
             //    Debug.Log("Hit");
                 
-            //}
+            //} test
             
         }
     }
