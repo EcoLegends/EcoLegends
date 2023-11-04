@@ -136,10 +136,12 @@ public class playerScript : MonoBehaviour
             bool availableMov = false;
 
 
-            foreach (Vector2 v in mov_tiles_coords) {                               //trova se il player è in una casella blu
-            if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)  && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
+            foreach (Vector2 v in mov_tiles_coords)
+            {                               //trova se il player è in una casella blu
+                if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
+            }
             mov_tiles_coords.Clear();
-
+{
             if (availableMov)
             {
                 this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
