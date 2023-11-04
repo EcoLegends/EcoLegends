@@ -35,7 +35,7 @@ public class playerScript : MonoBehaviour
         Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
 
                 
-        for (int i = 0; i < movTiles.Count; i++)
+        for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli blu
         {
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
             mov_tile.transform.parent = movTiles[i].transform;
@@ -93,7 +93,7 @@ public class playerScript : MonoBehaviour
         
     }
     GameObject player_tile;
-    private void Start()
+    private void Start()  //spawna tassello lampeggiante
     {
        
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
@@ -107,8 +107,8 @@ public class playerScript : MonoBehaviour
         {
             if (dragging)
             {
-                Destroy(player_tile);
-                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+                Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
 
             }
         }
@@ -120,7 +120,7 @@ public class playerScript : MonoBehaviour
     {   
         if(canMove) 
         {
-            this.HighlightMov();
+            this.HighlightMov();                                                                //spawna tasselli blu movimento
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragging = true;
         }
@@ -132,31 +132,33 @@ public class playerScript : MonoBehaviour
     {
         if (canMove)
         {
-             dragging = false;
-        bool availableMov = false;
-        foreach (Vector2 v in mov_tiles_coords) {
+            dragging = false;
+            bool availableMov = false;
+
+
+            foreach (Vector2 v in mov_tiles_coords) {                               //trova se il player è in una casella blu
             if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)  && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
-        }
-        mov_tiles_coords.Clear();
+            mov_tiles_coords.Clear();
 
-        if (availableMov)
-        {
-            this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x);
-            this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
-        }
-        transform.position = new Vector3(x, y, -9);
+            if (availableMov)
+            {
+                this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
+                this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
+            }
+            transform.position = new Vector3(x, y, -9);                                          //tp nella nuova pos (o quella precedente se non cambiano le coord)
+                    
+            foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+            movBlueTiles.Clear();
 
-        foreach (GameObject g in movBlueTiles) Destroy(g);
-        movBlueTiles.Clear();
+            canMove = false;
 
-        canMove = false;
-
-        //temp     VV
-        canMove = true;
-        player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
-        player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
-        }
+            //temp     VV
+            canMove = true;                                                     //respawn tassello lampeggiante
+            player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+            player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
+            }
        
+        } 
     }
 }
 

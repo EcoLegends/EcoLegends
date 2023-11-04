@@ -21,15 +21,15 @@ public class PlayerTileScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        if(transparency >= 120 || transparency <= 0)
+        if(transparency >= 120 || transparency <= 0)            //inverte il verso dell'incremento
         {
             inc *= -1;
         }
 
         transparency += inc;
-        GetComponent<Renderer>().material.SetColor("_Color",new Color(1,1,1,transparency/100));
+        GetComponent<Renderer>().material.SetColor("_Color",new Color(1,1,1,transparency/100)); //cambia trasparenza
     }
 }
