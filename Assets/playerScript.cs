@@ -94,14 +94,8 @@ public class playerScript : MonoBehaviour
         if (dragging)
         {            
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-            
-            
-            //if (Collider2D.OverlapPoint((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-            //{
-            //    Debug.Log("Hit");
-                
-            //} test
-            
+            Debug.Log(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)+" "+Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)); 
+                       
         }
     }
 
