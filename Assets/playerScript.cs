@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,11 +16,14 @@ public class playerScript : MonoBehaviour
     public int x = 0;
     [Tooltip("Pos Y")]
     public int y = 0;
+    [Tooltip("Può muoversi")]
+    public bool canMove = true;
 
-    public bool hasMoved = false;
-
+    private List<Vector2> mov_tiles_coords = new List<Vector2>();
+    private List<GameObject> movBlueTiles;
     public void HighlightMov()                                          //spawna i tasselli blu del movimento
     {
+        movBlueTiles = new List<GameObject>();
         List<GameObject> movTiles = new List<GameObject>();
         List<int> movTilesDistance = new List<int>();
         GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
@@ -30,11 +34,13 @@ public class playerScript : MonoBehaviour
 
         Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
 
+                
         for (int i = 0; i < movTiles.Count; i++)
         {
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
             mov_tile.transform.parent = movTiles[i].transform;
-                       
+            mov_tiles_coords.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
+            movBlueTiles.Add(mov_tile);
         }
     }
 
@@ -86,31 +92,71 @@ public class playerScript : MonoBehaviour
         }
         
     }
+    GameObject player_tile;
+    private void Start()
+    {
+       
+        player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+        player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
+    }
 
-
-    
+   
     void Update()
     {
-        if (dragging)
-        {            
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-            Debug.Log(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)+" "+Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)); 
-                       
+        if (canMove)
+        {
+            if (dragging)
+            {
+                Destroy(player_tile);
+                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+
+            }
         }
+        
+        
     }
 
     private void OnMouseDown()
     {   
-        this.HighlightMov();
-        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        dragging = true;
+        if(canMove) 
+        {
+            this.HighlightMov();
+            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dragging = true;
+        }
+        
     }
 
     
     private void OnMouseUp()
     {
-        
-        dragging = false;
+        if (canMove)
+        {
+             dragging = false;
+        bool availableMov = false;
+        foreach (Vector2 v in mov_tiles_coords) {
+            if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)  && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
+        }
+        mov_tiles_coords.Clear();
+
+        if (availableMov)
+        {
+            this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x);
+            this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
+        }
+        transform.position = new Vector3(x, y, -9);
+
+        foreach (GameObject g in movBlueTiles) Destroy(g);
+        movBlueTiles.Clear();
+
+        canMove = false;
+
+        //temp     VV
+        canMove = true;
+        player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+        player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
+        }
+       
     }
 }
 

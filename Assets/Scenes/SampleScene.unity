@@ -289,7 +289,7 @@ Animator:
   m_GameObject: {fileID: 1467119269}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d56445df946ffce4b878c68fcfd17cfe, type: 2}
+  m_Controller: {fileID: 9100000, guid: ea772e01688294f4487d079cf3230ef8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
   movement: 3
   x: 0
   y: 0
-  hasMoved: 0
+  canMove: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
