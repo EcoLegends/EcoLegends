@@ -120,6 +120,7 @@ public class playerScript : MonoBehaviour
     {   
         if(canMove) 
         {
+            this.gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Select");
             this.HighlightMov();                                                                //spawna tasselli blu movimento
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragging = true;
