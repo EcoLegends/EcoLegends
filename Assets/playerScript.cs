@@ -11,14 +11,43 @@ public class playerScript : MonoBehaviour
     private bool dragging = false;
     private Vector3 offset;
 
-    [Tooltip("Movimento")]                                            //statistiche
-    public int movement = 3;
+                                       
     [Tooltip("Pos X")]
     public int x = 0;
-    [Tooltip("Pos Y")]
+    [Tooltip("Pos Y")]                                      //info
     public int y = 0;
-    [Tooltip("Pu� muoversi")]
+    [Tooltip("Puo' muoversi")]
     public bool canMove = true;
+
+    [Space]
+
+                                    
+    public int lvl = 1;                                         //statistiche
+    public int movement = 3;
+
+    [Space]
+
+    public int hp = 1;                                          
+    public int str;
+    public int mag;
+    public int dex;
+    public int spd;
+    public int lck;
+    public int def;
+    public int res;
+
+    [Space]
+
+    public int hpGrowth;                                    //percentuale di crescita della statistica a ogni lvlup
+    public int strGrowth;
+    public int magGrowth;
+    public int dexGrowth;
+    public int spdGrowth;
+    public int lckGrowth;
+    public int defGrowth;
+    public int resGrowth;
+
+
 
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
     private List<GameObject> movBlueTiles;
@@ -75,14 +104,12 @@ public class playerScript : MonoBehaviour
                         if (!movTiles.Contains(map[cx + i, cy + j])) {
                             movTiles.Add(map[cx + i, cy + j]);
                             movTilesDistance.Add(mov);
-                            Debug.Log("Added " + (cx + i) + "-" + (cy + j) + " with distance " + mov + " from " + (cx) + "-" + (cy));
                             AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
 
                         }
                         else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
                         {
                             movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] = mov;
-                            Debug.Log("Updated " + (cx + i) + "-" + (cy + j) + " with distance " + mov);
                             AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
                         }
 
@@ -107,7 +134,7 @@ public class playerScript : MonoBehaviour
     GameObject player_tile;
     private void Start()  //spawna tassello lampeggiante
     {
-
+        transform.position = new Vector3(x, y, -9);
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
     }
