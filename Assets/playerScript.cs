@@ -9,6 +9,8 @@ public class playerScript : MonoBehaviour
 {
     private bool dragging = false;
     private Vector3 offset;
+    private bool OnRange;
+    private Vector3 refSpeed;
 
     [Tooltip("Movimento")]                                            //statistiche
     public int movement = 3;
@@ -16,7 +18,7 @@ public class playerScript : MonoBehaviour
     public int x = 0;
     [Tooltip("Pos Y")]
     public int y = 0;
-    [Tooltip("Può muoversi")]
+    [Tooltip("Puï¿½ muoversi")]
     public bool canMove = true;
 
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
@@ -119,7 +121,15 @@ public class playerScript : MonoBehaviour
             if (dragging)
             {
                 Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
-                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
+                if(OnRange){
+                    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
+                }
+                else{
+                    Debug.Log("camera"+Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    Debug.Log("personaggio"+transform.position);
+                    transform.position = Vector3.SmoothDamp(Camera.main.ScreenToWorldPoint(Input.mousePosition), new Vector3(x,y,-9), ref refSpeed, 1);
+                }
+
 
             }
         }
@@ -148,11 +158,11 @@ public class playerScript : MonoBehaviour
         if (canMove)
         {
             dragging = false;
+            OnRange = false;
             bool availableMov = false;
 
-
             foreach (Vector2 v in mov_tiles_coords)
-            {                               //trova se il player è in una casella blu
+            {                               //trova se il player ï¿½ in una casella blu
                 if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
             }
             mov_tiles_coords.Clear();
@@ -161,6 +171,7 @@ public class playerScript : MonoBehaviour
             {
                 this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
                 this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
+                OnRange = true;
             }
             transform.position = new Vector3(x, y, -9);                                          //tp nella nuova pos (o quella precedente se non cambiano le coord)
                     
