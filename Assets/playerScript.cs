@@ -114,6 +114,8 @@ public class playerScript : MonoBehaviour
 
 
     private bool OnRange = true;
+    private float distance;
+
 
     void Update()
     {
@@ -123,6 +125,8 @@ public class playerScript : MonoBehaviour
             {
                 Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
+                distance = (transform.position - new Vector3(x, y, -9)).magnitude;
+
             }
             
 
@@ -130,14 +134,14 @@ public class playerScript : MonoBehaviour
         }
         if(!OnRange)
         {
-            Debug.Log("camera" + transform.position);
-            Debug.Log("personaggio" + new Vector3(x, y, -9));
+            float t2 = 0.1F;
+            if (distance <= movement)
+            {
+                t2 = 0.01F;
+            }
+            float t = 1 / (transform.position - new Vector3(x, y, -9)).magnitude;                               //traslazione in nuova posizione
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*t2);
             
-            float t = 1 / (transform.position - new Vector3(x, y, -9)).magnitude;
-            Debug.Log(t);
-            Debug.Log(transform.position + " - " + new Vector3(x, y, -9)+ " = "+ (transform.position - new Vector3(x, y, -9)));
-            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*0.01F);
-            Debug.Log("newpos" + transform.position);
 
             if (transform.position == new Vector3(x, y, -9)) OnRange = true;
         }
@@ -183,8 +187,7 @@ public class playerScript : MonoBehaviour
                 this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
                      
             }
-                                               //tp nella nuova pos (o quella precedente se non cambiano le coord)
-                    
+                                      
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
             movBlueTiles.Clear();
 
