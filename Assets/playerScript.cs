@@ -39,8 +39,19 @@ public class playerScript : MonoBehaviour
         {
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
             mov_tile.transform.parent = movTiles[i].transform;
-            mov_tiles_coords.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
+
+            bool add_vector = true;
+
+            foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")){
+                if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y) add_vector = false;
+            }
+
+            if (add_vector)
+            {
+                mov_tiles_coords.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
+            }
             movBlueTiles.Add(mov_tile);
+
         }
     }
 
@@ -120,7 +131,10 @@ public class playerScript : MonoBehaviour
     {   
         if(canMove) 
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Select");
+            this.gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+
+
+
             this.HighlightMov();                                                                //spawna tasselli blu movimento
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragging = true;
