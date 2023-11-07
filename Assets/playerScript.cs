@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class playerScript : MonoBehaviour
 {
     private bool dragging = false;
     private Vector3 offset;
-    private bool OnRange;
-    private Vector3 refSpeed;
 
     [Tooltip("Movimento")]                                            //statistiche
     public int movement = 3;
@@ -30,13 +29,13 @@ public class playerScript : MonoBehaviour
         List<int> movTilesDistance = new List<int>();
         GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
 
-        movTiles.Add(map[x,y]);
+        movTiles.Add(map[x, y]);
         movTilesDistance.Add(999);
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
         Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
 
-                
+
         for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli blu
         {
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
@@ -44,7 +43,7 @@ public class playerScript : MonoBehaviour
 
             bool add_vector = true;
 
-            foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")){
+            foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")) {
                 if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y) add_vector = false;
             }
 
@@ -61,24 +60,24 @@ public class playerScript : MonoBehaviour
     {
         int i = -1;
         int j = 0;
-        if(mov > 0)
+        if (mov > 0)
         {
-            for(int a = 0; a<4; a++)
+            for (int a = 0; a < 4; a++)
             {
-                
-                
-                if(cx+i>=0 && cx+i<10 && cy + j >= 0 && cy + j < 10)
+
+
+                if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
                 {
                     if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
                     {
-                            
+
                         GameObject temp = map[cx + i, cy + j];
                         if (!movTiles.Contains(map[cx + i, cy + j])) {
                             movTiles.Add(map[cx + i, cy + j]);
                             movTilesDistance.Add(mov);
-                            Debug.Log("Added " + (cx + i) + "-" + (cy + j) + " with distance " + mov+" from " + (cx) + "-" + (cy));
+                            Debug.Log("Added " + (cx + i) + "-" + (cy + j) + " with distance " + mov + " from " + (cx) + "-" + (cy));
                             AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
-                                
+
                         }
                         else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
                         {
@@ -86,34 +85,38 @@ public class playerScript : MonoBehaviour
                             Debug.Log("Updated " + (cx + i) + "-" + (cy + j) + " with distance " + mov);
                             AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
                         }
-                           
 
-                            
+
+
                     }
                 }
 
-                if (i < 1 && j == 0) i=1;
+                if (i < 1 && j == 0) i = 1;
                 else if (i == 1)
                 {
                     i = 0;
                     j = -1;
                 }
-                else j=1;
-                
+                else j = 1;
+
             }
-            
+
         }
-        
+
     }
     GameObject player_tile;
     private void Start()  //spawna tassello lampeggiante
     {
-       
+
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
     }
 
-   
+    private int oldX = 0;
+    private int oldY = 0;
+    private Vector3 oldPos;
+    private bool OnRange = true;
+
     void Update()
     {
         if (canMove)
@@ -121,18 +124,23 @@ public class playerScript : MonoBehaviour
             if (dragging)
             {
                 Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
-                if(OnRange){
-                    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
-                }
-                else{
-                    Debug.Log("camera"+Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    Debug.Log("personaggio"+transform.position);
-                    transform.position = Vector3.SmoothDamp(Camera.main.ScreenToWorldPoint(Input.mousePosition), new Vector3(x,y,-9), ref refSpeed, 1);
-                }
-
-
+                oldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
             }
+            
+
+
         }
+        if(!OnRange)
+        {
+            Debug.Log("camera" + oldPos);
+            Debug.Log("personaggio" + new Vector3(x, y, -9));
+            
+            float t = 1 / (oldPos - new Vector3(oldX, oldY, -9)).magnitude;
+            transform.position = Vector3.Lerp(oldPos, new Vector3(oldX, oldY, -9), t*0.01F);
+            Debug.Log("newpos" + transform.position);
+        }
+
         
         
     }
@@ -157,6 +165,8 @@ public class playerScript : MonoBehaviour
     {
         if (canMove)
         {
+            oldX = x;
+            oldY = y;
             dragging = false;
             OnRange = false;
             bool availableMov = false;
