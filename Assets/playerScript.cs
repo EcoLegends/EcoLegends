@@ -138,7 +138,6 @@ public class playerScript : MonoBehaviour
             float t = 1 / (new Vector3(x, y, -9)-transform.position).magnitude;                               //traslazione in nuova posizione
             transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*0.1f);
             
-
             if (transform.position == new Vector3(x, y, -9)) OnRange = true;
         }
 
