@@ -112,10 +112,10 @@ public class playerScript : MonoBehaviour
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
     }
 
-    private int oldX = 0;
-    private int oldY = 0;
-    private Vector3 oldPos;
+
     private bool OnRange = true;
+    private float distance;
+
 
     void Update()
     {
@@ -124,8 +124,9 @@ public class playerScript : MonoBehaviour
             if (dragging)
             {
                 Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
-                oldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
+                distance = (transform.position - new Vector3(x, y, -9)).magnitude;
+
             }
             
 
@@ -133,12 +134,12 @@ public class playerScript : MonoBehaviour
         }
         if(!OnRange)
         {
-            Debug.Log("camera" + oldPos);
-            Debug.Log("personaggio" + new Vector3(x, y, -9));
             
-            float t = 1 / (oldPos - new Vector3(oldX, oldY, -9)).magnitude;
-            transform.position = Vector3.Lerp(oldPos, new Vector3(oldX, oldY, -9), t*0.01F);
-            Debug.Log("newpos" + transform.position);
+            float t = 1 / (new Vector3(x, y, -9)-transform.position).magnitude;                               //traslazione in nuova posizione
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*0.1f);
+            
+
+            if (transform.position == new Vector3(x, y, -9)) OnRange = true;
         }
 
         
@@ -165,8 +166,7 @@ public class playerScript : MonoBehaviour
     {
         if (canMove)
         {
-            oldX = x;
-            oldY = y;
+            
             dragging = false;
             OnRange = false;
             bool availableMov = false;
@@ -181,10 +181,9 @@ public class playerScript : MonoBehaviour
             {
                 this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
                 this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
-                OnRange = true;
+                     
             }
-            transform.position = new Vector3(x, y, -9);                                          //tp nella nuova pos (o quella precedente se non cambiano le coord)
-                    
+                                      
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
             movBlueTiles.Clear();
 
