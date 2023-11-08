@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -221,8 +222,67 @@ public class playerScript : MonoBehaviour
             player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
             }
        
-        } 
+        }
+
+        this.levelUp();
     }
+
+    public void levelUp()
+    {
+        lvl++;
+
+        int[] increments = { 0, 0, 0, 0, 0, 0, 0, 0 }; //incrementi iniziali
+            
+        int n1 = Random.Range(0, 8);        //garantisce 1o incremento
+        int n2;
+
+        do
+        {                                   //garantisce 2o incremento
+            n2 = Random.Range(0, 8);
+        } while (n1 == n2);
+
+        increments[n1] = 1;
+        increments[n2] = 1;
+
+        int[] incrementPercentage = { hpGrowth, strGrowth, magGrowth, dexGrowth, spdGrowth, defGrowth, resGrowth };
+
+
+        for(int i = 0; i < 8; i++)
+        {
+            if (Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
+        }
+
+
+        hp += increments[0];            //incrementa i valori
+        str += increments[1];
+        mag += increments[2];
+        dex += increments[3];
+        spd += increments[4];
+        lck += increments[5];
+        def += increments[6];
+        res += increments[7];
+
+
+        //cout temp xdd
+
+
+        string[] statsNames = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res" };
+        int[] statsValues = { hp, str, mag, dex, spd, lck, def, res };
+        Debug.Log("Level Up! "+(lvl-1)+" -> "+lvl);
+
+        for( int i=0; i < 8; i++)
+        {
+            if (increments[i] > 0)
+            {
+                Debug.Log(statsNames[i] + " " + (statsValues[i]-1) +" +1 -> " + statsValues[i]);
+            }
+            else Debug.Log(statsNames[i] + " " + statsValues[i]);
+        }
+
+    }
+
+    
+
 }
 
 
