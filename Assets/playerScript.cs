@@ -28,7 +28,8 @@ public class playerScript : MonoBehaviour
 
     [Space]
 
-    public int hp = 1;                                          
+    public int max_hp = 1;
+    public int hp;                                          
     public int str;
     public int mag;
     public int dex;
@@ -48,6 +49,8 @@ public class playerScript : MonoBehaviour
     public int defGrowth;
     public int resGrowth;
 
+    [Space]
+    public heathBarScript healthbar;
 
 
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
@@ -135,6 +138,11 @@ public class playerScript : MonoBehaviour
     GameObject player_tile;
     private void Start()  //spawna tassello lampeggiante
     {
+        
+        hp = max_hp;
+        healthbar.SetMaxHealth(max_hp);
+        healthbar.SetHealth(hp);
+
         transform.position = new Vector3(x, y, -9);
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
@@ -244,7 +252,7 @@ public class playerScript : MonoBehaviour
         increments[n1] = 1;
         increments[n2] = 1;
 
-        int[] incrementPercentage = { hpGrowth, strGrowth, magGrowth, dexGrowth, spdGrowth, defGrowth, resGrowth };
+        int[] incrementPercentage = { hpGrowth, strGrowth, magGrowth, dexGrowth, spdGrowth, lckGrowth, defGrowth, resGrowth };
 
 
         for(int i = 0; i < 8; i++)
@@ -253,7 +261,7 @@ public class playerScript : MonoBehaviour
         }
 
 
-        hp += increments[0];            //incrementa i valori
+        max_hp += increments[0];            //incrementa i valori
         str += increments[1];
         mag += increments[2];
         dex += increments[3];
@@ -262,12 +270,14 @@ public class playerScript : MonoBehaviour
         def += increments[6];
         res += increments[7];
 
+        healthbar.SetMaxHealth(max_hp);
+        
 
         //cout temp xdd
 
 
-        string[] statsNames = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res" };
-        int[] statsValues = { hp, str, mag, dex, spd, lck, def, res };
+        string[] statsNames = { "maxhp", "str", "mag", "dex", "spd", "lck", "def", "res" };
+        int[] statsValues = { max_hp, str, mag, dex, spd, lck, def, res };
         Debug.Log("Level Up! "+(lvl-1)+" -> "+lvl);
 
         for( int i=0; i < 8; i++)
