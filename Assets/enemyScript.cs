@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class enemyScript : MonoBehaviour
 {
-    private bool dragging = false;
+    
     private Vector3 offset;
 
 

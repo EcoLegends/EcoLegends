@@ -20,7 +20,34 @@ public class battleManager : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(unmovedUnits.Count);
+        if(phase == "Player" &&  unmovedUnits.Count == 0)
+        {
+            phase = "Enemy";
+            Debug.Log("Enemy Phase");
+
+            //..............
+
+            StartCoroutine(wait(100));
+            
+            phase = "Player";
+            Debug.Log("Player Phase");
+            
+            foreach(GameObject unit in units)
+            {
+                unit.GetComponent<playerScript>().canMoveAgain();
+            }
+
+
+        }
         
+        
+    }
+
+
+    private IEnumerator wait(int n)
+    {
+        
+        yield return new WaitForSeconds(n);
+
     }
 }
