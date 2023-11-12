@@ -152,6 +152,12 @@ public class playerScript : MonoBehaviour
         healthbar.SetMaxHealth(max_hp);
         healthbar.SetHealth(hp);
 
+        if (x == 0 & y == 0)
+        {
+            x = (int)transform.position.x;
+            y = (int)transform.position.y;
+        }
+
         transform.position = new Vector3(x, y, -9);
 
 
@@ -164,12 +170,12 @@ public class playerScript : MonoBehaviour
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
         battleManager.unmovedUnits.Add(gameObject);
 
-        //transform.GetChild(0).GetComponent<Renderer>().material.color = Color.gray;
-        Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer));
+        Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende normale il personaggio
         foreach (Renderer childRenderer in renderers)
         {
-            childRenderer.material.color = new Color(0.5F, 0.5F, 0.5F);
+            childRenderer.material.color = new Color(1F, 1F, 1F);
         }
+
     }
 
 
@@ -235,7 +241,7 @@ public class playerScript : MonoBehaviour
                 if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
             }
             mov_tiles_coords.Clear();
-{
+            
             if (availableMov)
             {
                 this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
@@ -249,7 +255,13 @@ public class playerScript : MonoBehaviour
             canMove = false;
             battleManager.unmovedUnits.Remove(gameObject);
 
+            Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
+            foreach (Renderer childRenderer in renderers)
+            {
+                childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
             }
+
+            
        
         }
 
