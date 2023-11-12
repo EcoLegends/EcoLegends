@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
+using TMPro;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -135,17 +137,39 @@ public class playerScript : MonoBehaviour
         }
 
     }
+
+
+
     GameObject player_tile;
-    private void Start()  //spawna tassello lampeggiante
+    private void Start()  
     {
+
+        battleManager.units.Add(gameObject);                    //aggiunge alle liste globali
         
+
+
         hp = max_hp;
         healthbar.SetMaxHealth(max_hp);
         healthbar.SetHealth(hp);
 
         transform.position = new Vector3(x, y, -9);
+
+
+        this.canMoveAgain(); //spawn tassello lampeggiante
+    }
+
+    public void canMoveAgain() {
+        canMove = true;                                                     //respawn tassello lampeggiante
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
+        battleManager.unmovedUnits.Add(gameObject);
+
+        //transform.GetChild(0).GetComponent<Renderer>().material.color = Color.gray;
+        Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer));
+        foreach (Renderer childRenderer in renderers)
+        {
+            childRenderer.material.color = new Color(0.5F, 0.5F, 0.5F);
+        }
     }
 
 
@@ -223,11 +247,8 @@ public class playerScript : MonoBehaviour
             movBlueTiles.Clear();
 
             canMove = false;
+            battleManager.unmovedUnits.Remove(gameObject);
 
-            //temp     VV
-            canMove = true;                                                     //respawn tassello lampeggiante
-            player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
-            player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
             }
        
         }
