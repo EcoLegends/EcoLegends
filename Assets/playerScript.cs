@@ -30,7 +30,7 @@ public class playerScript : MonoBehaviour
 
     [Space]
 
-    public int max_hp = 1;
+    public int maxHp = 1;
     public int hp;                                          
     public int str;
     public int mag;
@@ -79,7 +79,7 @@ public class playerScript : MonoBehaviour
             bool add_vector = true;
 
             foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")) {
-                if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y) add_vector = false;
+                if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y && p != this.gameObject) add_vector = false;
             }
 
             if (add_vector)
@@ -103,21 +103,35 @@ public class playerScript : MonoBehaviour
 
                 if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
                 {
+
                     if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
                     {
 
-                        GameObject temp = map[cx + i, cy + j];
-                        if (!movTiles.Contains(map[cx + i, cy + j])) {
-                            movTiles.Add(map[cx + i, cy + j]);
-                            movTilesDistance.Add(mov);
-                            AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
+                        bool hasEnemy = false;
+
+                        foreach(GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                        {
+                            if(e.GetComponent<enemyScript>().x == (cx + i) && e.GetComponent<enemyScript>().y == (cy + j)) hasEnemy = true;
+                        }
+                        if(hasEnemy == false)
+                        {
+                            GameObject temp = map[cx + i, cy + j];
+                            if (!movTiles.Contains(map[cx + i, cy + j]))
+                            {
+                                movTiles.Add(map[cx + i, cy + j]);
+                                movTilesDistance.Add(mov);
+                                AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
+
+                            }
+                            else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
+                            {
+                                movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] = mov;
+                                AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
+                            }
+
 
                         }
-                        else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
-                        {
-                            movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] = mov;
-                            AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
-                        }
+                        
 
 
 
@@ -148,8 +162,8 @@ public class playerScript : MonoBehaviour
         
 
 
-        hp = max_hp;
-        healthbar.SetMaxHealth(max_hp);
+        hp = maxHp;
+        healthbar.SetMaxHealth(maxHp);
         healthbar.SetHealth(hp);
 
         if (x == 0 & y == 0)
@@ -161,10 +175,10 @@ public class playerScript : MonoBehaviour
         transform.position = new Vector3(x, y, -9);
 
 
-        this.canMoveAgain(); //spawn tassello lampeggiante
+        this.CanMoveAgain(); //spawn tassello lampeggiante
     }
 
-    public void canMoveAgain() {
+    public void CanMoveAgain() {
         canMove = true;                                                     //respawn tassello lampeggiante
         player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
@@ -180,7 +194,7 @@ public class playerScript : MonoBehaviour
 
 
     private bool OnRange = true;
-    private float distance;
+
 
 
     void Update()
@@ -191,7 +205,6 @@ public class playerScript : MonoBehaviour
             {
                 Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
-                distance = (transform.position - new Vector3(x, y, -9)).magnitude;
 
             }
             
@@ -237,7 +250,7 @@ public class playerScript : MonoBehaviour
             bool availableMov = false;
 
             foreach (Vector2 v in mov_tiles_coords)
-            {                               //trova se il player � in una casella blu
+            {                               //trova se il player e' in una casella blu
                 if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
             }
             mov_tiles_coords.Clear();
@@ -246,29 +259,30 @@ public class playerScript : MonoBehaviour
             {
                 this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
                 this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
-                     
+
+
+                canMove = false;
+                battleManager.unmovedUnits.Remove(gameObject);
+
+                Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
+                foreach (Renderer childRenderer in renderers)
+                {
+                    childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
+                }
+
+
             }
                                       
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
             movBlueTiles.Clear();
-
-            canMove = false;
-            battleManager.unmovedUnits.Remove(gameObject);
-
-            Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
-            foreach (Renderer childRenderer in renderers)
-            {
-                childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
-            }
-
-            
+           
        
         }
 
-        this.levelUp();
+        this.LevelUp();
     }
 
-    public void levelUp()
+    public void LevelUp()
     {
         lvl++;
 
@@ -294,7 +308,7 @@ public class playerScript : MonoBehaviour
         }
 
 
-        max_hp += increments[0];            //incrementa i valori
+        maxHp += increments[0];            //incrementa i valori
         str += increments[1];
         mag += increments[2];
         dex += increments[3];
@@ -303,14 +317,14 @@ public class playerScript : MonoBehaviour
         def += increments[6];
         res += increments[7];
 
-        healthbar.SetMaxHealth(max_hp);
+        healthbar.SetMaxHealth(maxHp);
         
 
         //cout temp xdd
 
 
         string[] statsNames = { "maxhp", "str", "mag", "dex", "spd", "lck", "def", "res" };
-        int[] statsValues = { max_hp, str, mag, dex, spd, lck, def, res };
+        int[] statsValues = { maxHp, str, mag, dex, spd, lck, def, res };
         Debug.Log("Level Up! "+(lvl-1)+" -> "+lvl);
 
         for( int i=0; i < 8; i++)

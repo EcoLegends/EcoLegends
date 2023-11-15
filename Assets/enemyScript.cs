@@ -9,11 +9,38 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+
+public class Node //usato in A*
+{
+    public int x;
+    public int y;
+    public int g;
+    public int h;
+    public int f;
+
+    public Node parent;
+
+    public Node(int x, int y, int g)
+    {
+        this.x = x;
+        this.y = y;
+        this.g = g;
+        this.parent = this;
+    }
+
+    public void CalcH(Node end)
+    {
+        this.h = (int)System.Math.Ceiling(System.Math.Pow(System.Math.Abs(end.x - this.x), 2) + System.Math.Pow(System.Math.Abs(end.y - this.y),2));    
+        this.f = g + h;
+    }
+
+
+}
+
+
 public class enemyScript : MonoBehaviour
 {
     
-    private Vector3 offset;
-
 
     [Tooltip("Pos X")]
     public int x = 0;
@@ -26,10 +53,11 @@ public class enemyScript : MonoBehaviour
 
     public int lvl = 1;                                         //statistiche
     public int movement = 3;
-
+    [Tooltip("Tipo di movimento \n'move' => si muove sempre \n'near' => si muove quando nemico e' vicino \n'attack' => non si muove")]
+    public string movType = "move";
     [Space]
 
-    public int max_hp = 1;
+    public int maxHp = 1;
     public int hp;
     public int str;
     public int mag;
@@ -54,11 +82,142 @@ public class enemyScript : MonoBehaviour
     public heathBarScript healthbar;
 
 
-    //private List<Vector2> mov_tiles_coords = new List<Vector2>();
-    //private List<GameObject> movBlueTiles;
-    //public void HighlightMov()                                          //spawna i tasselli blu del movimento
+
+
+
+
+    public void AStar()
+    {
+        Node end = new Node(6, 6, 0);   //TEMP         rimpiazzare con casella del target
+        Node start = new Node(x,y,0);
+
+        start.CalcH(end);
+
+        Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(end.x, end.y, -2), Quaternion.identity);       //temp <- spawna casella azzurra
+
+
+        GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
+
+
+        List<Node> list1 = new List<Node>();    //lista caselle temp
+        List<Node> list2 = new List<Node>();    //lista caselle finali
+
+        list1.Add(start);
+
+        Node lowest;
+
+        bool found = false;
+        int i = 0;
+
+        do
+        {
+            lowest = list1[0];
+            foreach (Node node in list1)
+            {
+                if (node.f < lowest.f) lowest = node;    //trova il nodo con f minore
+            }
+
+            
+            list1.Remove(lowest);
+            list2.Add(lowest);                            //lo aggiunge a list2
+
+            List<Node> adjacent = new List<Node> { new Node(lowest.x + 1, lowest.y, lowest.g + 1), new Node(lowest.x - 1, lowest.y, lowest.g + 1), new Node(lowest.x, lowest.y + 1, lowest.g + 1), new Node(lowest.x, lowest.y - 1, lowest.g + 1) };
+            //calcolo caselle adiacenti
+
+            foreach (Node node in adjacent)
+            {
+                node.CalcH(end);
+                        
+                if (node.x >= 0 && node.x < 10 && node.y >= 0 && node.y < 10)               //controlla se e' dentro mappa
+                {
+
+                    
+                    bool hasEnemy = false;
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                    {
+                        if (e.GetComponent<enemyScript>().x == node.x && e.GetComponent<enemyScript>().y == node.y) hasEnemy = true;
+                    }
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+                    {
+                        if (e.GetComponent<playerScript>().x == node.x && e.GetComponent<playerScript>().y == node.y) hasEnemy = true;                  //controlla che la casella non abbia player/nemici
+                    }
+
+
+
+                    if (map[node.x, node.y].GetComponent<tileScript>().canBeWalkedOn == true && hasEnemy == false)
+                    {
+
+                        bool listContains = false;
+
+                        foreach (Node n in list1)                                                   
+                        {
+                            if (n.x == node.x && node.y == n.y)                                     //se e' gia' in list1 e la sua g e' migliore allora sostituisce valore
+                            {                                
+                                if (n.g > node.g) {
+
+                                    n.parent = lowest;
+                                    n.g = lowest.g + 1;
+                                    n.h = (end.x - n.x) ^ 2 + (end.y - n.y) ^ 2;
+                                    n.f = n.g + n.h;
+
+                                }
+                                listContains = true;
+                            }
+                        }
+
+                        if (listContains == false)                          //se non e' in list1 viene aggiunto
+                        {
+
+                            node.parent = lowest;
+                            list1.Add(node);
+
+                        }
+
+
+                        if (node.x == end.x && node.y == end.y) found = true;   //se trova la casella finale termina
+
+                    }
+                }
+
+
+
+            }
+            i++;    
+            if (i > 50) { found = true; Debug.Log("Halted Loop"); }             //termina dopo 50 iterazioni
+
+
+        }while(found==false);                                                       
+
+        list2.Reverse();
+
+        Node parent = list2[0];
+
+        List<Vector3> path = new List<Vector3>();               //lista spostamento finale
+        i = 0;
+        do
+        {
+            path.Add(new Vector3(parent.x, parent.y, -9));          //prende il genitore di ogni casella e la aggiunge a path
+            parent = parent.parent;
+
+            i++;
+            if (i > 50) { parent = start; Debug.Log("Halted Parent Searching"); }
+
+        } while(parent != start);
+
+
+        foreach(Vector2 v in path) {        //temp <- spawna caselle blu 
+
+            GameObject mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject)), v, Quaternion.identity);
+
+        }
+
+
+
+    }
+
+
+    //public void Move()                                          
     //{
-    //    movBlueTiles = new List<GameObject>();
     //    List<GameObject> movTiles = new List<GameObject>();
     //    List<int> movTilesDistance = new List<int>();
     //    GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
@@ -67,77 +226,94 @@ public class enemyScript : MonoBehaviour
     //    movTilesDistance.Add(999);
     //    AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
-    //    Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
 
-
-    //    for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli blu
+       
+    //    for (int i = 0; i < movTiles.Count; i++)        
     //    {
-    //        GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
-    //        mov_tile.transform.parent = movTiles[i].transform;
-
-    //        bool add_vector = true;
-
-    //        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
-    //        {
-    //            if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y) add_vector = false;
-    //        }
-
-    //        if (add_vector)
-    //        {
-    //            mov_tiles_coords.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
-    //        }
-    //        movBlueTiles.Add(mov_tile);
-
-    //    }
-    //}
-
-    //private void AdjCheck(int cx, int cy, int mov, ref GameObject[,] map, ref List<GameObject> movTiles, ref List<int> movTilesDistance)            //trova le caselle adiacenti
-    //{
-    //    int i = -1;
-    //    int j = 0;
-    //    if (mov > 0)
-    //    {
-    //        for (int a = 0; a < 4; a++)
-    //        {
+            
 
 
-    //            if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
-    //            {
-    //                if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
-    //                {
-
-    //                    GameObject temp = map[cx + i, cy + j];
-    //                    if (!movTiles.Contains(map[cx + i, cy + j]))
-    //                    {
-    //                        movTiles.Add(map[cx + i, cy + j]);
-    //                        movTilesDistance.Add(mov);
-    //                        AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
-
-    //                    }
-    //                    else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
-    //                    {
-    //                        movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] = mov;
-    //                        AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
-    //                    }
-
-
-
-    //                }
-    //            }
-
-    //            if (i < 1 && j == 0) i = 1;
-    //            else if (i == 1)
-    //            {
-    //                i = 0;
-    //                j = -1;
-    //            }
-    //            else j = 1;
-
-    //        }
-
+                        
     //    }
 
+
+
     //}
+
+    private void AdjCheck(int cx, int cy, int mov, ref GameObject[,] map, ref List<GameObject> movTiles, ref List<int> movTilesDistance)            //trova le caselle adiacenti
+    {
+        int i = -1;
+        int j = 0;
+        if (mov > 0)
+        {
+            for (int a = 0; a < 4; a++)
+            {
+
+
+                if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
+                {
+
+                    if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
+                    {
+
+                        bool hasEnemy = false;
+
+                        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+                        {
+                            if (e.GetComponent<enemyScript>().x == (cx + i) && e.GetComponent<enemyScript>().y == (cy + j)) hasEnemy = true;
+                        }
+                        if (hasEnemy == false)
+                        {
+
+                            hasEnemy = false;
+                            foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                            {
+                                if (e.GetComponent<enemyScript>().x == (cx + i) && e.GetComponent<enemyScript>().y == (cy + j)) hasEnemy = true;
+                            }
+
+
+                            GameObject temp = map[cx + i, cy + j];
+                            if (!movTiles.Contains(map[cx + i, cy + j]))
+                            {
+                                if(hasEnemy==false) 
+                                {
+                                    movTiles.Add(map[cx + i, cy + j]);
+                                    movTilesDistance.Add(mov);
+                                }
+                                AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
+
+                            }
+                            else if (movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] < mov)
+                            {
+                                if (hasEnemy == false)
+                                {
+                                    movTilesDistance[movTiles.FindIndex(n => n.Equals(temp))] = mov;
+                                }
+                                AdjCheck(cx + i, cy + j, mov - map[cx + i, cy + j].GetComponent<tileScript>().travelCost, ref map, ref movTiles, ref movTilesDistance);
+                            }
+
+
+                        }
+
+
+
+
+                    }
+                }
+
+                if (i < 1 && j == 0) i = 1;
+                else if (i == 1)
+                {
+                    i = 0;
+                    j = -1;
+                }
+                else j = 1;
+
+            }
+
+        }
+
+    }
 
 
 
@@ -148,8 +324,8 @@ public class enemyScript : MonoBehaviour
 
 
 
-        hp = max_hp;
-        healthbar.SetMaxHealth(max_hp);
+        hp = maxHp;
+        healthbar.SetMaxHealth(maxHp);
         healthbar.SetHealth(hp);
 
         if(x == 0 & y == 0)
@@ -174,7 +350,7 @@ public class enemyScript : MonoBehaviour
     }
 
       
-    public void levelUp()
+    public void LevelUp()
     {
         lvl++;
 
@@ -200,7 +376,7 @@ public class enemyScript : MonoBehaviour
         }
 
 
-        max_hp += increments[0];            //incrementa i valori
+        maxHp += increments[0];            //incrementa i valori
         str += increments[1];
         mag += increments[2];
         dex += increments[3];
@@ -209,14 +385,14 @@ public class enemyScript : MonoBehaviour
         def += increments[6];
         res += increments[7];
 
-        healthbar.SetMaxHealth(max_hp);
+        healthbar.SetMaxHealth(maxHp);
 
 
         //cout temp xdd
 
 
         string[] statsNames = { "maxhp", "str", "mag", "dex", "spd", "lck", "def", "res" };
-        int[] statsValues = { max_hp, str, mag, dex, spd, lck, def, res };
+        int[] statsValues = { maxHp, str, mag, dex, spd, lck, def, res };
         Debug.Log("Level Up! " + (lvl - 1) + " -> " + lvl);
 
         for (int i = 0; i < 8; i++)
@@ -228,6 +404,12 @@ public class enemyScript : MonoBehaviour
             else Debug.Log(statsNames[i] + " " + statsValues[i]);
         }
 
+    }
+
+
+    public void OnMouseDown()
+    {
+        AStar();
     }
 
 

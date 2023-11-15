@@ -393,6 +393,10 @@ PrefabInstance:
       propertyPath: y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7811598891585977325, guid: 33169b9ecd24f2249822f82b3ae88407, type: 3}
+      propertyPath: maxHp
+      value: 29
+      objectReference: {fileID: 0}
     - target: {fileID: 7839375629124227048, guid: 33169b9ecd24f2249822f82b3ae88407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -1043,6 +1047,10 @@ PrefabInstance:
     - target: {fileID: 2977276377688080237, guid: 33169b9ecd24f2249822f82b3ae88407, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811598891585977325, guid: 33169b9ecd24f2249822f82b3ae88407, type: 3}
+      propertyPath: maxHp
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 7839375629124227048, guid: 33169b9ecd24f2249822f82b3ae88407, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2041,8 +2049,9 @@ MonoBehaviour:
   y: 5
   lvl: 1
   movement: 3
-  max_hp: 20
-  hp: 0
+  movType: move
+  maxHp: 20
+  hp: 20
   str: 8
   mag: 3
   dex: 6

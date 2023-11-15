@@ -27,14 +27,14 @@ public class battleManager : MonoBehaviour
 
             //..............
 
-            StartCoroutine(wait(100));
+            
             
             phase = "Player";
             Debug.Log("Player Phase");
             
             foreach(GameObject unit in units)
             {
-                unit.GetComponent<playerScript>().canMoveAgain();
+                unit.GetComponent<playerScript>().CanMoveAgain();
             }
 
 
@@ -43,11 +43,4 @@ public class battleManager : MonoBehaviour
         
     }
 
-
-    private IEnumerator wait(int n)
-    {
-        
-        yield return new WaitForSeconds(n);
-
-    }
 }
