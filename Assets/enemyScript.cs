@@ -83,18 +83,21 @@ public class enemyScript : MonoBehaviour
 
 
 
+    List<GameObject> temptiles = new List<GameObject>();
 
 
-
-    public void AStar()
+    public List<Vector3> AStar(int endx, int endy)
     {
-        Node end = new Node(6, 6, 0);   //TEMP         rimpiazzare con casella del target
+
+        Debug.Log(endx + " " + endy);
+
+        Node end = new Node(endx, endy, 0); 
         Node start = new Node(x,y,0);
 
         start.CalcH(end);
 
-        Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(end.x, end.y, -2), Quaternion.identity);       //temp <- spawna casella azzurra
-
+        GameObject mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(end.x, end.y, -2), Quaternion.identity);       //temp <- spawna casella azzurra
+        temptiles.Add(mov_tile);
 
         GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
 
@@ -140,7 +143,10 @@ public class enemyScript : MonoBehaviour
                     foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
                     {
                         if (e.GetComponent<playerScript>().x == node.x && e.GetComponent<playerScript>().y == node.y) hasEnemy = true;                  //controlla che la casella non abbia player/nemici
+                        if (hasEnemy && node.x == end.x && node.y == end.y) hasEnemy = false;
                     }
+
+                    
 
 
 
@@ -207,38 +213,17 @@ public class enemyScript : MonoBehaviour
 
         foreach(Vector2 v in path) {        //temp <- spawna caselle blu 
 
-            GameObject mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject)), v, Quaternion.identity);
+            mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject)), v, Quaternion.identity);
+            temptiles.Add(mov_tile);
 
         }
+        path.Reverse();
 
-
+        return path;
 
     }
 
 
-    //public void Move()                                          
-    //{
-    //    List<GameObject> movTiles = new List<GameObject>();
-    //    List<int> movTilesDistance = new List<int>();
-    //    GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
-
-    //    movTiles.Add(map[x, y]);
-    //    movTilesDistance.Add(999);
-    //    AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
-
-
-       
-    //    for (int i = 0; i < movTiles.Count; i++)        
-    //    {
-            
-
-
-                        
-    //    }
-
-
-
-    //}
 
     private void AdjCheck(int cx, int cy, int mov, ref GameObject[,] map, ref List<GameObject> movTiles, ref List<int> movTilesDistance)            //trova le caselle adiacenti
     {
@@ -349,6 +334,41 @@ public class enemyScript : MonoBehaviour
 
     }
 
+    public void Move()
+    {
+        foreach(GameObject t in temptiles)
+        {
+            Destroy(t);
+        }
+
+
+        if (movType == "move")
+        {
+            GameObject nearest = GameObject.FindGameObjectsWithTag("Player")[0];
+            foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (System.Math.Pow(System.Math.Abs(x - p.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - p.GetComponent<playerScript>().y), 2) < (System.Math.Pow(System.Math.Abs(x - nearest.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - nearest.GetComponent<playerScript>().y), 2))) nearest = p;
+            }
+
+            List<Vector3> path = AStar(nearest.GetComponent<playerScript>().x, nearest.GetComponent<playerScript>().y);
+
+
+            int movRemaining = movement;
+
+            foreach(Vector3 p in path)
+            {
+                movRemaining -= GameObject.Find("map").GetComponent<mapScript>().mapTiles[(int)p.x, (int)p.y].GetComponent<tileScript>().travelCost;
+                if (movRemaining < 0) break;
+                transform.position = p;
+                x = (int)p.x;
+                y = (int)p.y;
+
+            }
+
+
+        }
+    }
+
       
     public void LevelUp()
     {
@@ -404,12 +424,6 @@ public class enemyScript : MonoBehaviour
             else Debug.Log(statsNames[i] + " " + statsValues[i]);
         }
 
-    }
-
-
-    public void OnMouseDown()
-    {
-        AStar();
     }
 
 
