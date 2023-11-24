@@ -10,10 +10,6 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
-
-//faccio una modifica a caso
-
-
 public class Node //usato in A*
 {
     public int x;

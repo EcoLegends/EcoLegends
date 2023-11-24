@@ -235,6 +235,8 @@ public class playerScript : MonoBehaviour
             this.HighlightMov();                                                                //spawna tasselli blu movimento
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragging = true;
+
+            
         }
         
     }
@@ -271,6 +273,14 @@ public class playerScript : MonoBehaviour
                 }
 
 
+            }else {
+
+                foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
+                    if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>.x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>.y){
+                        Camera.transform.position=new Vector3(100,0, 0);
+                        combat(e,this.GameObject);
+                    } 
+                }
             }
                                       
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
