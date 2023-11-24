@@ -30,7 +30,7 @@ public class mapScript : MonoBehaviour
             {
                 GameObject new_tile = (GameObject) Instantiate(tile, new Vector3(i, j, 1), Quaternion.identity);
                 new_tile.transform.parent = transform;
-                new_tile.GetComponent<tileScript>().setTileData(mapArray[i, j], i, j);
+                new_tile.GetComponent<tileScript>().SetTileData(mapArray[i, j], i, j);
                 mapTiles[i, j] = new_tile;
             }
             

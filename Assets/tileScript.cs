@@ -19,7 +19,7 @@ public class tileScript : MonoBehaviour
     public int x;
     public int y;
 
-    public void setTileData(string type, int x, int y)                                                                      //setta le stat del tassello quando spawna
+    public void SetTileData(string type, int x, int y)                                                                      //setta le stat del tassello quando spawna
     {
         this.type = type;
         Object[] sp;
