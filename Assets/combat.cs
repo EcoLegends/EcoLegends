@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class combat : MonoBehaviour
 {
-    do{
+    //do{
 
 
-    }while();
+    //}while();
 }
