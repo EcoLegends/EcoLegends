@@ -279,6 +279,8 @@ public class playerScript : MonoBehaviour
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
                         Camera.main.transform.position=new Vector3(100,0, 0);
                         //combat(e,this.GameObject);
+
+                        Debug.Log("PVP");
                     } 
                 }
             }
