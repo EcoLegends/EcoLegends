@@ -55,7 +55,23 @@ public class enemyScript : MonoBehaviour
     public int movement = 3;
     [Tooltip("Tipo di movimento \n'move' => si muove sempre \n'near' => si muove quando nemico e' vicino \n'attack' => non si muove")]
     public string movType = "move";
+
+
+    [Space] //armi
+
+    public int weaponRange;
+    public int weaponWt;  //peso
+    public int weaponMt; //potenza
+    public int weaponHit;
+    public int weaponCrit;
+    public int weaponType;
+    public int weaponEffective;
+    public bool weaponIsMagic = false;         //false -> fisico      true -> magico
+
+
+
     [Space]
+
 
     public int maxHp = 1;
     public int hp;
