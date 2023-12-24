@@ -28,6 +28,19 @@ public class playerScript : MonoBehaviour
     public int lvl = 1;                                         //statistiche
     public int movement = 3;
 
+    [Space] //armi
+
+    public int weaponRange;
+    public int weaponWt;  //peso
+    public int weaponMt; //potenza
+    public int weaponHit;
+    public int weaponCrit;
+    public int weaponType;
+    public int weaponEffective;
+    public bool weaponIsMagic = false;         //false -> fisico      true -> magico
+
+
+
     [Space]
 
     public int maxHp = 1;
