@@ -30,14 +30,20 @@ public class playerScript : MonoBehaviour
 
     [Space] //armi
 
-    public int weaponRange;
+    public int weaponRange = 1;
     public int weaponWt;  //peso
     public int weaponMt; //potenza
     public int weaponHit;
     public int weaponCrit;
+    [Tooltip("1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
+    public int unitType;
+    [Tooltip("0=Niente\n1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
+    public int unitEffective;
+    [Tooltip("0=Pugni\n1=Bastone\n2=Magia\n3=Arco\n4=Shuriken\n5=Speciale\n6=Spada\n7=Lancia\n8=Ascia")]
     public int weaponType;
-    public int weaponEffective;
-    public bool weaponIsMagic = false;         //false -> fisico      true -> magico
+    [Tooltip("false -> fisico\ntrue -> magico")]
+    public bool weaponIsMagic = false;
+    
 
 
 
@@ -172,7 +178,28 @@ public class playerScript : MonoBehaviour
     {
 
         battleManager.units.Add(gameObject);                    //aggiunge alle liste globali
-        
+
+
+        switch (unitType){                                      //auto assegna efficacia
+            case 1: 
+                    unitEffective = 3; //fuoco->terra
+                    break;
+            case 2:
+                unitEffective = 1; //acqua->fuoco
+                break;
+            case 3:
+                unitEffective = 2; //terra->acqua
+                break;
+            default: 
+                unitEffective = 0; //non efficace
+                break;
+        }
+
+        Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
+
+        Debug.Log(all.Length);
+             
+        transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite) all[4*weaponType+unitType-1]; //carica icona arma
 
 
         hp = maxHp;
