@@ -30,14 +30,17 @@ public class playerScript : MonoBehaviour
 
     [Space] //armi
 
-    public int weaponRange;
+    public int weaponRange = 1;
     public int weaponWt;  //peso
     public int weaponMt; //potenza
     public int weaponHit;
     public int weaponCrit;
-    public int weaponType;
-    public int weaponEffective;
-    public bool weaponIsMagic = false;         //false -> fisico      true -> magico
+    [Tooltip("1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
+    public int unitType;
+    [Tooltip("1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
+    public int unitEffective;
+    [Tooltip("false -> fisico\ntrue -> magico")]
+    public bool weaponIsMagic = false;
 
 
 
@@ -291,7 +294,7 @@ public class playerScript : MonoBehaviour
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
                         Camera.main.transform.position=new Vector3(100,0, 0);
-                        //combat(e,this.GameObject);
+                        combat(e,this.GameObject);
 
                         Debug.Log("PVP");
                     } 
