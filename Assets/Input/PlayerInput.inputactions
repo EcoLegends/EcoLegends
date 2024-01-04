@@ -1,0 +1,54 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "12ba29f6-98e8-4886-b2de-ab86470fdd9f",
+            "actions": [
+                {
+                    "name": "MapDrag",
+                    "type": "Button",
+                    "id": "bd2ae6f9-598a-4dce-8614-cb667332e17b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowEnemyMov",
+                    "type": "Button",
+                    "id": "1fb0bda8-8e6e-4b1d-9bec-2b0acdb5a75a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77fb3bf9-840a-4596-942d-f09d8880cb5c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69434fed-2ba5-409a-937a-e822fcd83576",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowEnemyMov",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

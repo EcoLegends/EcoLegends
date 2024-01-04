@@ -50,7 +50,8 @@ public class enemyScript : MonoBehaviour
 
     [Space]
 
-
+    public string nome = "Test";
+    public string textureFile = "Edelgard";
     public int lvl = 1;                                         //statistiche
     public int movement = 3;
     [Tooltip("Tipo di movimento \n'move' => si muove sempre \n'near' => si muove quando nemico e' vicino \n'attack' => non si muove")]
@@ -106,9 +107,6 @@ public class enemyScript : MonoBehaviour
 
 
 
-    List<GameObject> temptiles = new List<GameObject>();
-
-
     public List<Vector3> AStar(int endx, int endy)
     {
 
@@ -119,8 +117,6 @@ public class enemyScript : MonoBehaviour
 
         start.CalcH(end);
 
-        GameObject mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(end.x, end.y, -2), Quaternion.identity);       //temp <- spawna casella azzurra
-        temptiles.Add(mov_tile);
 
         GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
 
@@ -234,18 +230,133 @@ public class enemyScript : MonoBehaviour
         } while(parent != start);
 
 
-        foreach(Vector2 v in path) {        //temp <- spawna caselle blu 
-
-            mov_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject)), v, Quaternion.identity);
-            temptiles.Add(mov_tile);
-
-        }
         path.Reverse();
 
         return path;
 
     }
 
+    private List<GameObject> movBlueTiles = new List<GameObject>();
+    private List<GameObject> attackRedTiles = new List<GameObject>();
+    public List<Vector2> GetMovTiles()
+    {
+        List<Vector2> movBlueTiles = new List<Vector2>();
+        List<GameObject> movTiles = new List<GameObject>();
+        List<int> movTilesDistance = new List<int>();
+        GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
+
+        movTiles.Add(map[x, y]);
+        movTilesDistance.Add(999);
+        AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
+
+        
+        for (int i = 0; i < movTiles.Count; i++)        
+        {
+            movBlueTiles.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
+            for (int r = 1; r <= weaponRange; r++)             //tasselli rossi
+            {
+                int x = -1;
+                int y = 0;
+                for (int a = 0; a < 4; a++)
+                {
+
+                    int cx = r * x + movTiles[i].GetComponent<tileScript>().x;
+                    int cy = r * y + movTiles[i].GetComponent<tileScript>().y;
+
+
+                    if (cx >= 0 && cx < 10 && cy >= 0 && cy < 10)
+                    {
+                        if (!movTiles.Contains(map[cx, cy]) && map[cx, cy].GetComponent<tileScript>().canBeWalkedOn == true)
+                        {
+
+                            movBlueTiles.Add(new Vector2(cx,cy));
+                        }
+
+                    }
+
+                    if (x < 1 && y == 0) x = 1;
+                    else if (x == 1)
+                    {
+                        x = 0;
+                        y = -1;
+                    }
+                    else y = 1;
+
+
+                }
+
+            }
+        }
+
+        return movBlueTiles;
+    }
+
+
+    public void HighlightMov()                                          //spawna i tasselli del movimento
+    {
+        movBlueTiles = new List<GameObject>();
+        List<GameObject> movTiles = new List<GameObject>();
+        List<int> movTilesDistance = new List<int>();
+        GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
+        attackRedTiles = new List<GameObject>();
+        List<GameObject> attackTiles = new List<GameObject>();
+
+        movTiles.Add(map[x, y]);
+        movTilesDistance.Add(999);
+        AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
+
+        Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
+        Object attack_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/attackTilePrefab.prefab", typeof(GameObject));
+
+
+        for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli 
+        {
+            GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
+            mov_tile.transform.parent = movTiles[i].transform;
+            mov_tile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+            movBlueTiles.Add(mov_tile);
+
+
+            for (int r = 1; r <= weaponRange; r++)             //tasselli rossi
+            {
+                int x = -1;
+                int y = 0;
+                for (int a = 0; a < 4; a++)
+                {
+                    
+                    int cx = r * x + movTiles[i].GetComponent<tileScript>().x;
+                    int cy = r * y + movTiles[i].GetComponent<tileScript>().y;
+
+
+                    if (cx >= 0 && cx < 10 && cy >= 0 && cy < 10)
+                    {
+                        if (!movTiles.Contains(map[cx, cy]) && !attackTiles.Contains(map[cx, cy]) && map[cx, cy].GetComponent<tileScript>().canBeWalkedOn == true)
+                        {
+                            attackTiles.Add(map[cx, cy]);
+                            GameObject attack_tile = (GameObject)Instantiate(attack_tile_prefab, new Vector3(map[cx, cy].GetComponent<tileScript>().x, map[cx, cy].GetComponent<tileScript>().y, -2), Quaternion.identity);
+                            attack_tile.transform.parent = map[cx, cy].transform;
+                            attack_tile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+                            attackRedTiles.Add(attack_tile);
+                        }
+
+                    }
+
+                    if (x < 1 && y == 0) x = 1;
+                    else if (x == 1)
+                    {
+                        x = 0;
+                        y = -1;
+                    }
+                    else y = 1;
+
+
+                }
+
+            }
+        }
+
+
+    }
 
 
     private void AdjCheck(int cx, int cy, int mov, ref GameObject[,] map, ref List<GameObject> movTiles, ref List<int> movTilesDistance)            //trova le caselle adiacenti
@@ -261,24 +372,17 @@ public class enemyScript : MonoBehaviour
                 if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
                 {
 
-                    if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
+                    if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true && mov >= map[cx + i, cy + j].GetComponent<tileScript>().travelCost)
                     {
 
                         bool hasEnemy = false;
 
                         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
                         {
-                            if (e.GetComponent<enemyScript>().x == (cx + i) && e.GetComponent<enemyScript>().y == (cy + j)) hasEnemy = true;
+                            if (e.GetComponent<playerScript>().x == (cx + i) && e.GetComponent<playerScript>().y == (cy + j)) hasEnemy = true;
                         }
                         if (hasEnemy == false)
                         {
-
-                            hasEnemy = false;
-                            foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
-                            {
-                                if (e.GetComponent<enemyScript>().x == (cx + i) && e.GetComponent<enemyScript>().y == (cy + j)) hasEnemy = true;
-                            }
-
 
                             GameObject temp = map[cx + i, cy + j];
                             if (!movTiles.Contains(map[cx + i, cy + j]))
@@ -323,12 +427,19 @@ public class enemyScript : MonoBehaviour
 
     }
 
-
+    Vector3 nextPosition;
 
     private void Start()
     {
+        nextPosition = transform.position;
 
         battleManager.enemies.Add(gameObject);                    //aggiunge alle liste globali
+
+
+        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
+        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        sprite.transform.parent = transform;
+        sprite.transform.SetAsFirstSibling();
 
 
         switch (unitType){                                      //auto assegna efficacia
@@ -370,22 +481,61 @@ public class enemyScript : MonoBehaviour
         
     }
 
+
+    bool nextPositionChanged;
+    
    
     void Update()
     {
-       
+       if(battleManager.canMoveEnemy==false && nextPositionChanged)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, nextPosition, Time.deltaTime*5);
+
+            if (transform.position == nextPosition)
+            {
+                nextPositionChanged = false;
+                battleManager.canMoveEnemy = true;
+            }
+        }
 
 
 
     }
 
-    public void Move()
+
+    private void OnMouseEnter()
     {
-        foreach(GameObject t in temptiles)
+        if (battleManager.phase == "Player")
         {
-            Destroy(t);
+            HighlightMov();
+        }
+    }
+
+
+    private void OnMouseExit()
+    {
+        if (battleManager.phase == "Player")
+        {
+            if(movBlueTiles.Count > 0)
+            {
+                foreach (GameObject g in movBlueTiles) Destroy(g);
+                movBlueTiles.Clear();
+                foreach (GameObject g in attackRedTiles) Destroy(g);                          
+                attackRedTiles.Clear();
+            }
+            
+
+
         }
 
+
+    }
+
+
+
+
+    public void Move()
+    {
 
         if (movType == "move")
         {
@@ -404,12 +554,15 @@ public class enemyScript : MonoBehaviour
             {
                 movRemaining -= GameObject.Find("map").GetComponent<mapScript>().mapTiles[(int)p.x, (int)p.y].GetComponent<tileScript>().travelCost;
                 if (movRemaining < 0) break;
-                transform.position = p;
+
+                nextPosition = p;
+                nextPositionChanged = true;
+
                 x = (int)p.x;
                 y = (int)p.y;
 
             }
-
+            Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
 
         }
     }
