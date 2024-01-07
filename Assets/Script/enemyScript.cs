@@ -1,12 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using TMPro;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -440,6 +433,7 @@ public class enemyScript : MonoBehaviour
         GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
         sprite.transform.parent = transform;
         sprite.transform.SetAsFirstSibling();
+        sprite.transform.Rotate(0, 180, 0);
 
 
         switch (unitType){                                      //auto assegna efficacia
@@ -505,7 +499,7 @@ public class enemyScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (battleManager.phase == "Player")
+        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             HighlightMov();
         }
@@ -514,7 +508,7 @@ public class enemyScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (battleManager.phase == "Player")
+        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             if(movBlueTiles.Count > 0)
             {

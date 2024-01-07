@@ -1,12 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using TMPro;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class playerScript : MonoBehaviour
@@ -317,7 +310,7 @@ public class playerScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (canMove && battleManager.phase == "Player")
+        if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             HighlightMov();
         }
@@ -326,7 +319,7 @@ public class playerScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(canMove && battleManager.phase == "Player") 
+        if(canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0))) 
         {
             if(movBlueTiles.Count > 0)
             {
@@ -351,7 +344,7 @@ public class playerScript : MonoBehaviour
     {   
         if(canMove && battleManager.phase == "Player" && dragging==false) 
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+           
 
             if (movBlueTiles.Count > 0)
             {
@@ -397,6 +390,11 @@ public class playerScript : MonoBehaviour
 
                 canMove = false;
                 battleManager.unmovedUnits.Remove(gameObject);
+                foreach(GameObject g in battleManager.unmovedUnits)
+                {
+                    g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+                }
+
 
                 Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
                 foreach (Renderer childRenderer in renderers)

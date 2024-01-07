@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -189,6 +187,7 @@ public class battleManager : MonoBehaviour
                 foreach (GameObject unit in units)
                 {
                     unit.GetComponent<playerScript>().CanMoveAgain();
+                    unit.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
                 }
             }
 
