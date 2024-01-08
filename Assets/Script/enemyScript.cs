@@ -420,6 +420,50 @@ public class enemyScript : MonoBehaviour
 
     }
 
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, string movType, int weaponRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
+    {
+
+        this.x = x;
+        this.y = y;
+        this.nome = nome;
+        this.textureFile = textureFile;
+        this.lvl = lvl;
+        this.movement = movement;
+        this.movType = movType;
+
+        this.weaponRange = weaponRange;
+        this.weaponWt = weaponWt;
+        this.weaponMt = weaponMt;
+        this.weaponHit = weaponHit;
+        this.weaponCrit = weaponCrit;
+        this.unitType = unitType;
+        this.weaponType = weaponType;
+        this.weaponIsMagic = weaponIsMagic;
+
+
+        this.maxHp = hp;
+        this.str = str;
+        this.mag = mag;
+        this.dex = dex;
+        this.spd = spd;
+        this.lck = lck;
+        this.def = def;
+        this.res = res;
+
+        this.hpGrowth = hpGrowth;
+        this.strGrowth = strGrowth;
+        this.magGrowth = magGrowth;
+        this.dexGrowth = dexGrowth;
+        this.spdGrowth = spdGrowth;
+        this.lckGrowth = lckGrowth;
+        this.defGrowth = defGrowth;
+        this.resGrowth = resGrowth;
+
+
+    }
+
+
     Vector3 nextPosition;
 
     private void Start()
@@ -428,6 +472,18 @@ public class enemyScript : MonoBehaviour
 
         battleManager.enemies.Add(gameObject);                    //aggiunge alle liste globali
 
+
+        hp = maxHp;
+        healthbar.SetMaxHealth(maxHp);
+        healthbar.SetHealth(hp);
+
+        if (x == 0 & y == 0)
+        {
+            x = (int)transform.position.x;
+            y = (int)transform.position.y;
+        }
+
+        transform.position = new Vector3(x, y, -9);
 
         Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
         GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
@@ -456,21 +512,6 @@ public class enemyScript : MonoBehaviour
         Debug.Log(all.Length);
 
         transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 * weaponType + unitType - 1]; //carica icona arma
-
-
-
-        hp = maxHp;
-        healthbar.SetMaxHealth(maxHp);
-        healthbar.SetHealth(hp);
-
-        if(x == 0 & y == 0)
-        {
-            x = (int) transform.position.x;
-            y = (int) transform.position.y;
-        }
-
-        transform.position = new Vector3(x, y, -9);
-
 
         
     }
