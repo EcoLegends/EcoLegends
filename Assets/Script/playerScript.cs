@@ -1,12 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using TMPro;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class playerScript : MonoBehaviour
@@ -24,7 +17,8 @@ public class playerScript : MonoBehaviour
 
     [Space]
 
-                                    
+    public string nome = "Test";
+    public string textureFile = "Edelgard";
     public int lvl = 1;                                         //statistiche
     public int movement = 3;
 
@@ -37,10 +31,13 @@ public class playerScript : MonoBehaviour
     public int weaponCrit;
     [Tooltip("1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
     public int unitType;
-    [Tooltip("1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
+
+    [Tooltip("0=Niente\n1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
     public int unitEffective;
+    [Tooltip("0=Pugni\n1=Bastone\n2=Magia\n3=Arco\n4=Shuriken\n5=Speciale\n6=Spada\n7=Lancia\n8=Ascia")]
+    public int weaponType;
     [Tooltip("false -> fisico\ntrue -> magico")]
-    public bool weaponIsMagic = false;
+    public bool weaponIsMagic = false;
 
 
 
@@ -72,25 +69,29 @@ public class playerScript : MonoBehaviour
 
 
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
-    private List<GameObject> movBlueTiles;
+    private List<GameObject> movBlueTiles = new List<GameObject>();
+    private List<GameObject> attackRedTiles = new List<GameObject>();
     public void HighlightMov()                                          //spawna i tasselli blu del movimento
     {
         movBlueTiles = new List<GameObject>();
         List<GameObject> movTiles = new List<GameObject>();
         List<int> movTilesDistance = new List<int>();
         GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
+        attackRedTiles = new List<GameObject>();
+        List<GameObject> attackTiles = new List<GameObject>();
 
         movTiles.Add(map[x, y]);
         movTilesDistance.Add(999);
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
         Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
-
+        Object attack_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/attackTilePrefab.prefab", typeof(GameObject));
 
         for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli blu
         {
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y, -2), Quaternion.identity);
             mov_tile.transform.parent = movTiles[i].transform;
+            if (dragging == false) mov_tile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
 
             bool add_vector = true;
 
@@ -103,6 +104,44 @@ public class playerScript : MonoBehaviour
                 mov_tiles_coords.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
             }
             movBlueTiles.Add(mov_tile);
+            
+
+            for(int r = 1; r<=weaponRange; r++)             //tasselli rossi
+            {
+                int x = -1;
+                int y = 0;
+                for(int a=0;a<4;a++)
+                {
+                    
+                    int cx = r * x + movTiles[i].GetComponent<tileScript>().x;
+                    int cy = r * y + movTiles[i].GetComponent<tileScript>().y;
+
+
+                    if (cx >= 0 && cx < 10 && cy >= 0 && cy < 10)
+                    {
+                        if (!movTiles.Contains(map[cx, cy]) &&  !attackTiles.Contains(map[cx, cy]) && map[cx, cy].GetComponent<tileScript>().canBeWalkedOn == true) 
+                        {
+                            attackTiles.Add(map[cx, cy]);
+                            GameObject attack_tile = (GameObject)Instantiate(attack_tile_prefab, new Vector3(map[cx, cy].GetComponent<tileScript>().x, map[cx, cy].GetComponent<tileScript>().y, -2), Quaternion.identity);
+                            attack_tile.transform.parent = map[cx, cy].transform;
+                            if (dragging == false) attack_tile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+                            attackRedTiles.Add(attack_tile);
+                        }
+                        
+                    }
+
+                    if (x < 1 && y == 0) x = 1;             
+                    else if (x == 1)
+                    {
+                        x = 0;
+                        y = -1;
+                    }
+                    else y = 1;
+
+                    
+                }
+                
+            }
 
         }
     }
@@ -120,7 +159,7 @@ public class playerScript : MonoBehaviour
                 if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
                 {
 
-                    if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true)
+                    if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true && mov >= map[cx + i, cy + j].GetComponent<tileScript>().travelCost)
                     {
 
                         bool hasEnemy = false;
@@ -170,12 +209,54 @@ public class playerScript : MonoBehaviour
 
 
 
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, int weaponRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic, 
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth) {
+
+        this.x = x;
+        this.y = y;
+        this.nome = nome;
+        this.textureFile = textureFile;
+        this.lvl = lvl;
+        this.movement = movement;
+
+        this.weaponRange = weaponRange;
+        this.weaponWt = weaponWt;
+        this.weaponMt = weaponMt;
+        this.weaponHit = weaponHit;
+        this.weaponCrit = weaponCrit;
+        this.unitType = unitType;
+        this.weaponType = weaponType;
+        this.weaponIsMagic = weaponIsMagic;
+
+
+        this.maxHp = hp;
+        this.str = str;
+        this.mag = mag;
+        this.dex = dex;
+        this.spd = spd;
+        this.lck = lck;
+        this.def = def;
+        this.res = res;
+
+        this.hpGrowth = hpGrowth;
+        this.strGrowth = strGrowth;
+        this.magGrowth = magGrowth;
+        this.dexGrowth = dexGrowth;
+        this.spdGrowth = spdGrowth;
+        this.lckGrowth = lckGrowth;
+        this.defGrowth = defGrowth;
+        this.resGrowth = resGrowth;
+
+
+    }
+
+
+
     GameObject player_tile;
     private void Start()  
     {
 
         battleManager.units.Add(gameObject);                    //aggiunge alle liste globali
-        
 
 
         hp = maxHp;
@@ -190,8 +271,34 @@ public class playerScript : MonoBehaviour
 
         transform.position = new Vector3(x, y, -9);
 
+        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
+        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        sprite.transform.parent = transform;
+        sprite.transform.SetAsFirstSibling();
 
-        this.CanMoveAgain(); //spawn tassello lampeggiante
+
+        switch (unitType){                                      //auto assegna efficacia
+            case 1: 
+                    unitEffective = 3; //fuoco->terra
+                    break;
+            case 2:
+                unitEffective = 1; //acqua->fuoco
+                break;
+            case 3:
+                unitEffective = 2; //terra->acqua
+                break;
+            default: 
+                unitEffective = 0; //non efficace
+                break;
+        }
+
+        Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
+
+        Debug.Log(all.Length);
+             
+        transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite) all[4*weaponType+unitType-1]; //carica icona arma
+
+
     }
 
     public void CanMoveAgain() {
@@ -240,17 +347,58 @@ public class playerScript : MonoBehaviour
         
     }
 
+    private void OnMouseEnter()
+    {
+        if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+        {
+            HighlightMov();
+        }
+    }
+
+
+    private void OnMouseExit()
+    {
+        if(canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0))) 
+        {
+            if(movBlueTiles.Count > 0)
+            {
+                mov_tiles_coords.Clear();
+                foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                movBlueTiles.Clear();
+
+                
+                foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                attackRedTiles.Clear();
+            }
+            
+
+
+        }
+
+        
+    }
+
+
     private void OnMouseDown()
     {   
-        if(canMove) 
+        if(canMove && battleManager.phase == "Player" && dragging==false) 
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+           
 
+            if (movBlueTiles.Count > 0)
+            {
+                mov_tiles_coords.Clear();
+                foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                movBlueTiles.Clear();
 
+                foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                attackRedTiles.Clear();
+            }
 
-            this.HighlightMov();                                                                //spawna tasselli blu movimento
-            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragging = true;
+            HighlightMov();                                                                //spawna tasselli blu movimento
+            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
 
             
         }
@@ -260,7 +408,7 @@ public class playerScript : MonoBehaviour
     
     private void OnMouseUp()
     {
-        if (canMove)
+        if (canMove && battleManager.phase == "Player")
         {
             
             dragging = false;
@@ -281,6 +429,11 @@ public class playerScript : MonoBehaviour
 
                 canMove = false;
                 battleManager.unmovedUnits.Remove(gameObject);
+                foreach(GameObject g in battleManager.unmovedUnits)
+                {
+                    g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+                }
+
 
                 Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
                 foreach (Renderer childRenderer in renderers)
@@ -303,7 +456,10 @@ public class playerScript : MonoBehaviour
                                       
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
             movBlueTiles.Clear();
-           
+            foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+            attackRedTiles.Clear();
+
+            Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
        
         }
 

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -34,6 +30,14 @@ public class tileScript : MonoBehaviour
 
                 sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/DirtTiles");
                 GetComponent<SpriteRenderer>().sprite = (Sprite)sp[62];
+                break;
+            case "Foresta":
+                this.description = "Terreno difensivo.";
+                this.canBeWalkedOn = true;
+                this.travelCost = 2;
+
+                sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Decor/TreeTile");
+                GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
                 break;
 
             default:
