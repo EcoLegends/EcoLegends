@@ -507,8 +507,6 @@ public class enemyScript : MonoBehaviour
 
         Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
 
-        Debug.Log(all.Length);
-
         transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 * weaponType + unitType - 1]; //carica icona arma
 
         
