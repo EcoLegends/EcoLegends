@@ -67,82 +67,82 @@ public class battleManager : MonoBehaviour
 
     public void pvp(GameObject e, GameObject p)
     {
-        enemy = e.GetComponent<enemyScript>();
-        player = p.GetComponent<playerScript>();
+        //enemy = e.GetComponent<enemyScript>();                 //fai ctrl+k      ctrl+u  per togliere i commenti
+        //player = p.GetComponent<playerScript>();
 
-        //calcolazione del dmg player
+        ////calcolazione del dmg player
 
-        double playerAtk;
+        //double playerAtk;
 
-        int playerHit;
+        //int playerHit;
 
-        if (player.weaponIsMagic == false){
+        //if (player.weaponIsMagic == false){
 
-            playerAtk = player.weaponMt + player.str;
+        //    playerAtk = player.weaponMt + player.str;
 
-            playerHit=player.weaponHit+player.dex;
+        //    playerHit=player.weaponHit+player.dex;
 
-        }
+        //}
 
-        else{  
+        //else{  
 
-            playerAtk = player.weaponMt + player.mag;
+        //    playerAtk = player.weaponMt + player.mag;
 
-            playerHit=player.weaponHit+(player.dex+player.lck)/2;
+        //    playerHit=player.weaponHit+(player.dex+player.lck)/2;
 
-        }
+        //}
 
-        double playerDmg;
+        //double playerDmg;
 
-        if(player.unitEffective==enemy.unitType){
+        //if(player.unitEffective==enemy.unitType){
 
-            playerDmg*=1.5;
+        //    playerDmg*=1.5;
 
-        }
-        else if(enemy.unitType!=player.unitEffective and enemy.unitType!=player.unitType){
+        //}
+        //else if(enemy.unitType!=player.unitEffective and enemy.unitType!=player.unitType){
 
-            playerHit-=15;
+        //    playerHit-=15;
 
-        }
+        //}
 
-        double playerAS;
+        //double playerAS;
 
-        playerAS = player.spd - (player.weaponWt + )
+        //playerAS = player.spd - (player.weaponWt + )
 
-        //calcolazione del dmg enemy
+        ////calcolazione del dmg enemy
 
-        double enemyAtk;
+        //double enemyAtk;
 
-        int enemyHit;
+        //int enemyHit;
 
-        if (enemy.weaponIsMagic == false){
+        //if (enemy.weaponIsMagic == false){
 
-            enemyAtk = enemy.weaponMt + enemy.str;
+        //    enemyAtk = enemy.weaponMt + enemy.str;
 
-            enemyHit=enemy.weaponHit + enemy.dex;
+        //    enemyHit=enemy.weaponHit + enemy.dex;
 
-        }
+        //}
 
-        else{  
+        //else{  
 
-            enemyAtk = enemy.weaponMt + enemy.mag;
+        //    enemyAtk = enemy.weaponMt + enemy.mag;
 
-            enemyHit = enemy.weaponHit + (enemy.dex+enemy.lck)/2;
+        //    enemyHit = enemy.weaponHit + (enemy.dex+enemy.lck)/2;
 
-        }
+        //}
 
-        double enemyDmg;
+        //double enemyDmg;
 
-        if(enemy.unitEffective==player.unitType){
+        //if(enemy.unitEffective==player.unitType){
 
-            enemyDmg*=1.5;
+        //    enemyDmg*=1.5;
 
-        }
-        else if(player.unitType!=enemy.unitEffective and player.unitType!=enemy.unitType){
+        //}
+        //else if(player.unitType!=enemy.unitEffective and player.unitType!=enemy.unitType){
 
-            enemyHit-=15;
+        //    enemyHit-=15;
 
-        }
+        //}
     }
 
 

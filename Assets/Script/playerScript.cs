@@ -312,6 +312,10 @@ public class playerScript : MonoBehaviour
             childRenderer.material.color = new Color(1F, 1F, 1F);
         }
 
+        transform.GetChild(0).GetComponent<Animator>().speed = 1;
+
+
+
     }
 
 
@@ -428,7 +432,10 @@ public class playerScript : MonoBehaviour
 
                 canMove = false;
                 battleManager.unmovedUnits.Remove(gameObject);
-                foreach(GameObject g in battleManager.unmovedUnits)
+
+                transform.GetChild(0).GetComponent<Animator>().speed = 0;
+
+                foreach (GameObject g in battleManager.unmovedUnits)
                 {
                     g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
                 }

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e28bf7052052243a01ed55ec68d1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: Preparations Theme
+  music: The Shackled Wolves
 --- !u!1 &326744647
 GameObject:
   m_ObjectHideFlags: 0
