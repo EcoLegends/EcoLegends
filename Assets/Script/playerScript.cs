@@ -447,7 +447,8 @@ public class playerScript : MonoBehaviour
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
                         Camera.main.transform.position=new Vector3(100,0, 0);
-                        combat(e,this.GameObject);
+
+                        Camera.main.GetComponent<battleManager>().pvp(e,this.gameObject);     //inizia pvp
 
                         Debug.Log("PVP");
                     } 
