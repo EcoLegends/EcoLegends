@@ -474,7 +474,7 @@ public class playerScript : MonoBehaviour
 
     public void LevelUp()
     {
-        lvl++;
+        
 
         int[] increments = { 0, 0, 0, 0, 0, 0, 0, 0 }; //incrementi iniziali
             
@@ -497,7 +497,13 @@ public class playerScript : MonoBehaviour
             if (Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
         }
 
+        Object canvas = AssetDatabase.LoadAssetAtPath("Assets/Level Up Canvas.prefab", typeof(GameObject));
 
+        GameObject levelUpCanvas = (GameObject)Instantiate(canvas, new Vector3(0.6f, 3.6f, 0), Quaternion.identity);
+
+        levelUpCanvas.GetComponent<levelUpScript>().Setup(nome,lvl,maxHp,str,mag,dex,spd,lck,def,res,increments);
+
+        lvl++;
         maxHp += increments[0];            //incrementa i valori
         str += increments[1];
         mag += increments[2];
@@ -508,9 +514,10 @@ public class playerScript : MonoBehaviour
         res += increments[7];
 
         healthbar.SetMaxHealth(maxHp);
+
+
         
 
-        //cout temp xdd
 
 
         string[] statsNames = { "maxhp", "str", "mag", "dex", "spd", "lck", "def", "res" };
