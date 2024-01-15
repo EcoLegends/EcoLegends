@@ -88,6 +88,8 @@ public class battleManager : MonoBehaviour
         int enemyProt;
         int enemyCrit;
 
+        
+
         //calcolazione del player
 
         playerAS = player.weaponWt - (player.str / 5);
