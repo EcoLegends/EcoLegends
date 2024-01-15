@@ -53,7 +53,8 @@ public class enemyScript : MonoBehaviour
 
     [Space] //armi
 
-    public int weaponRange = 1;
+    public int weaponMinRange = 1;
+    public int weaponMaxRange = 1;
     public int weaponWt;  //peso
     public int weaponMt; //potenza
     public int weaponHit;
@@ -244,7 +245,7 @@ public class enemyScript : MonoBehaviour
         for (int i = 0; i < movTiles.Count; i++)        
         {
             movBlueTiles.Add(new Vector2(movTiles[i].GetComponent<tileScript>().x, movTiles[i].GetComponent<tileScript>().y));
-            for (int r = 1; r <= weaponRange; r++)             //tasselli rossi
+            for (int r = 1; r <= weaponMaxRange; r++)             //tasselli rossi
             {
                 int x = -1;
                 int y = 0;
@@ -308,7 +309,7 @@ public class enemyScript : MonoBehaviour
             movBlueTiles.Add(mov_tile);
 
 
-            for (int r = 1; r <= weaponRange; r++)             //tasselli rossi
+            for (int r = 1; r <= weaponMaxRange; r++)             //tasselli rossi
             {
                 int x = -1;
                 int y = 0;
@@ -418,7 +419,7 @@ public class enemyScript : MonoBehaviour
 
     }
 
-    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, string movType, int weaponRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, string movType, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
                         int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
     {
 
@@ -430,7 +431,8 @@ public class enemyScript : MonoBehaviour
         this.movement = movement;
         this.movType = movType;
 
-        this.weaponRange = weaponRange;
+        this.weaponMinRange = weaponMinRange;
+        this.weaponMaxRange = weaponMaxRange;
         this.weaponWt = weaponWt;
         this.weaponMt = weaponMt;
         this.weaponHit = weaponHit;

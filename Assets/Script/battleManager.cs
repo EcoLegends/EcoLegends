@@ -65,84 +65,149 @@ public class battleManager : MonoBehaviour
     enemyScript enemy;
 
 
-    public void pvp(GameObject e, GameObject p)
+    public void pvp(GameObject e, GameObject p, string initial_turn)
     {
-        //enemy = e.GetComponent<enemyScript>();                 //fai ctrl+k      ctrl+u  per togliere i commenti
-        //player = p.GetComponent<playerScript>();
+        enemy = e.GetComponent<enemyScript>();                
+        player = p.GetComponent<playerScript>();
 
-        ////calcolazione del dmg player
+        List<string> turns = new List<string>();
+        turns.Add(initial_turn);
 
-        //double playerAtk;
 
-        //int playerHit;
+        int playerAtk;
+        int playerHit;
+        int playerAS; 
+        int playerDmg;
+        int playerProt;
+        int playerCrit;
 
-        //if (player.weaponIsMagic == false){
+        int enemyAtk;
+        int enemyHit;
+        int enemyAS;
+        int enemyDmg;
+        int enemyProt;
+        int enemyCrit;
 
-        //    playerAtk = player.weaponMt + player.str;
+        //calcolazione del player
 
-        //    playerHit=player.weaponHit+player.dex;
+        playerAS = player.weaponWt - (player.str / 5);
+        if (playerAS < 0) playerAS = 0;
+        playerAS = player.spd - playerAS;
 
-        //}
 
-        //else{  
+        if (player.weaponIsMagic == false)
+        {
 
-        //    playerAtk = player.weaponMt + player.mag;
+            playerAtk = player.weaponMt + player.str;
 
-        //    playerHit=player.weaponHit+(player.dex+player.lck)/2;
+            playerHit = player.weaponHit + player.dex;
 
-        //}
+            enemyProt = enemy.def;
 
-        //double playerDmg;
+        }
 
-        //if(player.unitEffective==enemy.unitType){
+        else
+        {
 
-        //    playerDmg*=1.5;
+            playerAtk = player.weaponMt + player.mag;
 
-        //}
-        //else if(enemy.unitType!=player.unitEffective and enemy.unitType!=player.unitType){
+            playerHit = player.weaponHit + (player.dex + player.lck) / 2;
 
-        //    playerHit-=15;
+            enemyProt = enemy.res;
+        }
 
-        //}
 
-        //double playerAS;
+        //calcolazione dell'enemy
 
-        //playerAS = player.spd - (player.weaponWt + )
+        enemyAS = enemy.weaponWt - (enemy.str / 5);
+        if (enemyAS < 0) enemyAS = 0;
+        enemyAS = enemy.spd - enemyAS;
 
-        ////calcolazione del dmg enemy
 
-        //double enemyAtk;
+        if (enemy.weaponIsMagic == false)
+        {
 
-        //int enemyHit;
+            enemyAtk = enemy.weaponMt + enemy.str;
 
-        //if (enemy.weaponIsMagic == false){
+            enemyHit = enemy.weaponHit + enemy.dex;
 
-        //    enemyAtk = enemy.weaponMt + enemy.str;
+            playerProt = player.def;
 
-        //    enemyHit=enemy.weaponHit + enemy.dex;
+        }
 
-        //}
+        else
+        {
 
-        //else{  
+            enemyAtk = enemy.weaponMt + enemy.mag;
 
-        //    enemyAtk = enemy.weaponMt + enemy.mag;
+            enemyHit = enemy.weaponHit + (enemy.dex + enemy.lck) / 2;
 
-        //    enemyHit = enemy.weaponHit + (enemy.dex+enemy.lck)/2;
+            playerProt = player.res;
+        }
 
-        //}
 
-        //double enemyDmg;
+        if (player.unitEffective == enemy.unitType)
+        {
 
-        //if(enemy.unitEffective==player.unitType){
+            playerAtk = Mathf.FloorToInt(playerAtk * 1.5f);
+            playerHit += 15;
+            enemyHit -= 15;
+        }
 
-        //    enemyDmg*=1.5;
+        if (enemy.unitEffective == player.unitType)
+        {
 
-        //}
-        //else if(player.unitType!=enemy.unitEffective and player.unitType!=enemy.unitType){
+            enemyAtk = Mathf.FloorToInt(playerAtk * 1.5f);
+            enemyHit += 15;
+            playerHit -= 15;
+        }
 
-        //    enemyHit-=15;
 
-        //}
+        playerDmg = playerAtk - enemyProt;
+        enemyDmg = enemyAtk - playerProt;
+
+        playerCrit = (player.weaponCrit + (player.dex+player.lck) / 2) - enemy.lck;
+        enemyCrit = (enemy.weaponCrit + (enemy.dex + enemy.lck) / 2) - player.lck;
+
+        playerDmg = (int)Mathf.Clamp(playerDmg, 0, 999);    //mette numeri non <0
+        enemyDmg = (int)Mathf.Clamp(enemyDmg, 0, 999);
+        playerHit = (int)Mathf.Clamp(playerHit, 0, 999);
+        enemyHit = (int)Mathf.Clamp(enemyHit, 0, 999);
+        playerCrit = (int)Mathf.Clamp(playerCrit, 0, 999);
+        enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 999);
+
+        int distance = Mathf.Abs(player.x - enemy.x) + Mathf.Abs(player.y - enemy.y);
+
+        if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
+        {
+            if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
+            {
+                turns.Add("enemy");
+                if (enemyAS >= playerAS + 4) turns.Add("enemy");
+            }
+            if (playerAS >= enemyAS + 4) turns.Add("player");
+        }
+        else
+        {
+            if (player.weaponMinRange <= distance && distance <= player.weaponMaxRange)
+            {
+                turns.Add("player");
+                if (playerAS >= enemyAS + 4) turns.Add("player");
+            }
+            if (enemyAS >= playerAS + 4) turns.Add("enemy");
+        }
+
+
+        Debug.Log("PLAYER               ENEMY");
+        Debug.Log("DMG: " + playerDmg + "               " + enemyDmg);
+        Debug.Log("HIT: " + playerHit + "               " + enemyHit);
+        Debug.Log("CRIT: " + playerCrit + "               " + enemyCrit);
+        Debug.Log("AS: " + playerAS + "               " + enemyAS);
+        Debug.Log("TURNI:");
+        foreach (string t in turns) Debug.Log(t);
+        
+
+
     }
 
 

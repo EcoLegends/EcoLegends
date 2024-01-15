@@ -42,11 +42,11 @@ public class mapScript : MonoBehaviour
 
         Object player = AssetDatabase.LoadAssetAtPath("Assets/player.prefab", typeof(GameObject));
         GameObject new_player = (GameObject) Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-        new_player.GetComponent<playerScript>().Setup(1, 1, "Byleth", "Diamant", 5, 2, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
+        new_player.GetComponent<playerScript>().Setup(1, 1, "Byleth", "Diamant", 5, 2, 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
 
         Object enemy = AssetDatabase.LoadAssetAtPath("Assets/enemy.prefab", typeof(GameObject));
         GameObject new_enemy = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy.GetComponent<enemyScript>().Setup(8, 8, "Byleth", "Diamant", 5, 2, "move", 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
+        new_enemy.GetComponent<enemyScript>().Setup(8, 8, "Byleth", "Diamant", 5, 2, "move", 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
     }
 
     // Update is called once per frame

@@ -25,7 +25,8 @@ public class playerScript : MonoBehaviour
 
     [Space] //armi
 
-    public int weaponRange = 1;
+    public int weaponMinRange = 1;
+    public int weaponMaxRange = 1;
     public int weaponWt;  //peso
     public int weaponMt; //potenza
     public int weaponHit;
@@ -107,7 +108,7 @@ public class playerScript : MonoBehaviour
             movBlueTiles.Add(mov_tile);
             
 
-            for(int r = 1; r<=weaponRange; r++)             //tasselli rossi
+            for(int r = 1; r<=weaponMaxRange; r++)             //tasselli rossi
             {
                 int x = -1;
                 int y = 0;
@@ -210,8 +211,9 @@ public class playerScript : MonoBehaviour
 
 
 
-    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, int weaponRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic, 
-                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth) {
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
+    {
 
         this.x = x;
         this.y = y;
@@ -220,7 +222,8 @@ public class playerScript : MonoBehaviour
         this.lvl = lvl;
         this.movement = movement;
 
-        this.weaponRange = weaponRange;
+        this.weaponMinRange = weaponMinRange;
+        this.weaponMaxRange = weaponMaxRange;
         this.weaponWt = weaponWt;
         this.weaponMt = weaponMt;
         this.weaponHit = weaponHit;
@@ -453,7 +456,7 @@ public class playerScript : MonoBehaviour
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
                         SceneManager.LoadScene("CombatScene");
-                        Camera.main.GetComponent<battleManager>().pvp(e,this.gameObject);     //inizia pvp
+                        Camera.main.GetComponent<battleManager>().pvp(e,this.gameObject,"player");     //inizia pvp
 
                         Debug.Log("PVP");
                     } 
@@ -469,7 +472,7 @@ public class playerScript : MonoBehaviour
        
         }
 
-        this.LevelUp();
+        //this.LevelUp();
     }
 
     public void LevelUp()
