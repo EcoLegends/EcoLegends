@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class battleManager : MonoBehaviour
 {
@@ -65,7 +67,7 @@ public class battleManager : MonoBehaviour
     enemyScript enemy;
 
 
-    public void pvp(GameObject e, GameObject p, string initial_turn)
+    public int[] pvp(GameObject e, GameObject p, string initial_turn)
     {
         enemy = e.GetComponent<enemyScript>();                
         player = p.GetComponent<playerScript>();
@@ -88,7 +90,8 @@ public class battleManager : MonoBehaviour
         int enemyProt;
         int enemyCrit;
 
-        
+        int playerAVOBonus = 0; //bonus per quando sei nelle foreste (non ho voglia)
+        int enemyAVOBonus = 0;
 
         //calcolazione del player
 
@@ -96,13 +99,17 @@ public class battleManager : MonoBehaviour
         if (playerAS < 0) playerAS = 0;
         playerAS = player.spd - playerAS;
 
+        enemyAS = enemy.weaponWt - (enemy.str / 5);
+        if (enemyAS < 0) enemyAS = 0;
+        enemyAS = enemy.spd - enemyAS;
+
 
         if (player.weaponIsMagic == false)
         {
 
             playerAtk = player.weaponMt + player.str;
 
-            playerHit = player.weaponHit + player.dex;
+            playerHit = (player.weaponHit + player.dex) - (enemyAS + enemyAVOBonus);
 
             enemyProt = enemy.def;
 
@@ -113,7 +120,7 @@ public class battleManager : MonoBehaviour
 
             playerAtk = player.weaponMt + player.mag;
 
-            playerHit = player.weaponHit + (player.dex + player.lck) / 2;
+            playerHit = (player.weaponHit + (player.dex + player.lck) / 2) - ((enemy.spd+enemy.lck)/2+ enemyAVOBonus);
 
             enemyProt = enemy.res;
         }
@@ -121,17 +128,16 @@ public class battleManager : MonoBehaviour
 
         //calcolazione dell'enemy
 
-        enemyAS = enemy.weaponWt - (enemy.str / 5);
-        if (enemyAS < 0) enemyAS = 0;
-        enemyAS = enemy.spd - enemyAS;
+        
 
 
         if (enemy.weaponIsMagic == false)
         {
+            
 
             enemyAtk = enemy.weaponMt + enemy.str;
 
-            enemyHit = enemy.weaponHit + enemy.dex;
+            enemyHit = (enemy.weaponHit + enemy.dex) - (playerAS + playerAVOBonus);
 
             playerProt = player.def;
 
@@ -142,7 +148,7 @@ public class battleManager : MonoBehaviour
 
             enemyAtk = enemy.weaponMt + enemy.mag;
 
-            enemyHit = enemy.weaponHit + (enemy.dex + enemy.lck) / 2;
+            enemyHit = (enemy.weaponHit + (enemy.dex + enemy.lck) / 2) - ((player.spd + player.lck) / 2 + playerAVOBonus);
 
             playerProt = player.res;
         }
@@ -173,12 +179,25 @@ public class battleManager : MonoBehaviour
 
         playerDmg = (int)Mathf.Clamp(playerDmg, 0, 999);    //mette numeri non <0
         enemyDmg = (int)Mathf.Clamp(enemyDmg, 0, 999);
-        playerHit = (int)Mathf.Clamp(playerHit, 0, 999);
-        enemyHit = (int)Mathf.Clamp(enemyHit, 0, 999);
-        playerCrit = (int)Mathf.Clamp(playerCrit, 0, 999);
-        enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 999);
+        playerHit = (int)Mathf.Clamp(playerHit, 0, 100);
+        enemyHit = (int)Mathf.Clamp(enemyHit, 0, 100);
+        playerCrit = (int)Mathf.Clamp(playerCrit, 0, 100);
+        enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 100);
 
-        int distance = Mathf.Abs(player.x - enemy.x) + Mathf.Abs(player.y - enemy.y);
+        Vector2 newPos = new Vector2(player.x, player.y);
+
+        foreach (GameObject t in player.movBlueTiles)
+        {
+            if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
+            {
+                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange) 
+                { 
+                    newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+                }
+            }
+        }
+
+        int distance = (int) Mathf.Abs(newPos.x - enemy.x) + (int) Mathf.Abs(newPos.y - enemy.y);               
 
         if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
         {
@@ -207,8 +226,10 @@ public class battleManager : MonoBehaviour
         Debug.Log("AS: " + playerAS + "               " + enemyAS);
         Debug.Log("TURNI:");
         foreach (string t in turns) Debug.Log(t);
-        
 
+        int[] returnList = { playerDmg, playerHit, playerCrit, playerAS, enemyDmg, enemyHit, enemyCrit, enemyAS};
+
+        return returnList;
 
     }
 

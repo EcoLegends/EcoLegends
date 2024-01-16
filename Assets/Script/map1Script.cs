@@ -52,6 +52,6 @@ public class mapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

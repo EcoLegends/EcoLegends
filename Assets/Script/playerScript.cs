@@ -71,7 +71,7 @@ public class playerScript : MonoBehaviour
 
 
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
-    private List<GameObject> movBlueTiles = new List<GameObject>();
+    public List<GameObject> movBlueTiles = new List<GameObject>();
     private List<GameObject> attackRedTiles = new List<GameObject>();
     public void HighlightMov()                                          //spawna i tasselli blu del movimento
     {
@@ -324,17 +324,33 @@ public class playerScript : MonoBehaviour
 
     private bool OnRange = true;
 
-
-
+    private bool forecastSpawned = false;
+    private GameObject forecast;
     void Update()
     {
         if (canMove)
         {
             if (dragging)
             {
-                Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
-
+                if(!forecastSpawned)
+                {
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                    {
+                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<enemyScript>().y)
+                        {
+                            forecastSpawned=true; 
+                            forecast = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Forecast Canvas.prefab", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                            forecast.transform.parent = Camera.main.transform;
+                            forecast.transform.localPosition = new Vector3(0, 0, 10);
+                            forecast.transform.localScale = Vector3.one;
+                            int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");
+                            forecast.GetComponent<forecastScript>().Setup(e, this.gameObject, output);
+                            break;
+                        }
+                    }
+                }
+                
             }
             
 
@@ -459,8 +475,11 @@ public class playerScript : MonoBehaviour
                         Camera.main.GetComponent<battleManager>().pvp(e,this.gameObject,"player");     //inizia pvp
 
                         Debug.Log("PVP");
+                        canMove=false;
                     } 
                 }
+
+                
             }
                                       
             foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
@@ -469,7 +488,10 @@ public class playerScript : MonoBehaviour
             attackRedTiles.Clear();
 
             Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
-       
+            if (!canMove)
+            {
+                Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+            }
         }
 
         //this.LevelUp();
