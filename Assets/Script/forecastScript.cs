@@ -29,6 +29,9 @@ public class forecastScript : MonoBehaviour
         string enemyHitVisual = enemyHit.ToString();
         string enemyCritVisual = enemyCrit.ToString();
 
+        List<string> turns = new List<string>();
+        turns.Add("player");
+
         Vector2 newPos = new Vector2(player.x, player.y);
 
         foreach (GameObject t in player.movBlueTiles)
@@ -46,10 +49,11 @@ public class forecastScript : MonoBehaviour
 
         if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
         {
+            turns.Add("enemy");
             playerNewHP -= enemyDmg;
-            if (enemyAS >= playerAS + 4) playerNewHP -= enemyDmg;
+            if (enemyAS >= playerAS + 4) { playerNewHP -= enemyDmg; turns.Add("enemy"); }
         }
-        if (playerAS >= enemyAS + 4) enemyNewHP -= playerDmg;
+        if (playerAS >= enemyAS + 4) { enemyNewHP -= playerDmg; turns.Add("player"); }
 
         playerNewHP = Mathf.Clamp(playerNewHP, 0, player.maxHp);
         enemyNewHP = Mathf.Clamp(enemyNewHP, 0, enemy.maxHp);
@@ -111,7 +115,46 @@ public class forecastScript : MonoBehaviour
         transform.GetChild(1).GetChild(10).GetComponent<TextMeshProUGUI>().text = enemyCritVisual.ToString();
         transform.GetChild(1).GetChild(13).GetComponent<TextMeshProUGUI>().text = enemy.nome;
 
-        
+        switch (turns.Count)
+        {
+            case 1:
+                {
+                    Destroy(transform.GetChild(2).gameObject);
+                    Destroy(transform.GetChild(3).gameObject);
+                    break;
+                }
+            case 2:
+                {
+                    Destroy(transform.GetChild(2).gameObject);
+                    Destroy(transform.GetChild(4).gameObject);
+                    break;
+                }
+            case 3:
+                {
+                    Destroy(transform.GetChild(3).gameObject);
+                    Destroy(transform.GetChild(4).gameObject);
+                    break;
+                }
+        }
+
+        int turnN = 0;
+
+        foreach(string turn in turns)
+        {
+            if(turn == "player")
+            {
+                transform.GetChild(2).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp blu");
+                transform.GetChild(2).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = playerDmg.ToString();
+            }
+            else
+            {
+                transform.GetChild(2).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp rossa");
+                transform.GetChild(2).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = enemyDmg.ToString();
+            }
+            turnN++;
+        }
+
+
     }
 
     private void Start()
@@ -156,5 +199,25 @@ public class forecastScript : MonoBehaviour
         }
         
 
+    }
+
+    IEnumerator uscita()
+    {
+        float y = 0;
+        float size = 1;
+
+        for (float i = 100; i >= 0; i -= 4)
+        {
+            y = i * 9 / 100 - 9;
+            size = i / 100;
+
+            transform.localPosition = new Vector3(0, y, 10);
+            transform.localScale = new Vector3(size, size, size);
+
+            yield return new WaitForSeconds(0.01f);
+
+        }
+
+        Destroy(gameObject);
     }
 }
