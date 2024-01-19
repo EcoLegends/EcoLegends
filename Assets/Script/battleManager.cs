@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class battleManager : MonoBehaviour
 {
@@ -267,8 +268,11 @@ public class battleManager : MonoBehaviour
 
     public void CaricaCombat(GameObject e, GameObject p, int[] output){
 
-        Object texture = Resources.Load("Characters/" + player.textureFile + "", typeof(GameObject)); 
+        enemy = e.GetComponent<enemyScript>();                
+        player = p.GetComponent<playerScript>();
+        Object texture = Resources.Load("Characters/" + player.textureFile, typeof(GameObject)); 
         GameObject sprite = (GameObject)Instantiate(texture, new Vector3(0, 1, 0), Quaternion.identity);
+        SceneManager.MoveGameObjectsToScene(sprite,SceneManager.GetSceneByName("CombatScene"));
 
     }
     void Start()

@@ -513,7 +513,7 @@ public class playerScript : MonoBehaviour
                             {
                                 SceneManager.LoadScene(1);
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
-                                //CaricaCombat(e,this.gameObject,output);
+                                Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output);
                                 Debug.Log("PVP");
                                 canMove = false;
                                 break;
