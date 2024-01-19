@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -266,15 +267,56 @@ public class battleManager : MonoBehaviour
         }
     }
 
-    public void CaricaCombat(GameObject e, GameObject p, int[] output){
+    public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output){
 
-        enemy = e.GetComponent<enemyScript>();                
-        player = p.GetComponent<playerScript>();
-        Object texture = Resources.Load("Characters/" + player.textureFile, typeof(GameObject)); 
-        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(0, 1, 0), Quaternion.identity);
-        SceneManager.MoveGameObjectsToScene(sprite,SceneManager.GetSceneByName("CombatScene"));
+
+        Scene activeScene = SceneManager.GetActiveScene();
+
+        GameObject temp = new GameObject( "temp" );
+
+        GameObject[] allObjects = activeScene.GetRootGameObjects();
+
+        foreach (GameObject go in allObjects)
+        {
+
+            go.transform.SetParent(temp.transform, false);
+
+        }
+
+        AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
+
+        while (!async.isDone)
+        {
+
+            yield return new WaitForEndOfFrame();
+
+        }
+
+        Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
+
+        GameObject sprite = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
+        SceneManager.MoveGameObjectToScene(sprite, battleScene);
+
+        SceneManager.SetActiveScene(battleScene);
+
+        temp.SetActive(false);
 
     }
+
+
+    public IEnumerator IniziaPVP(enemyScript enemy, playerScript player, int[] output)
+    {
+        yield return new WaitForSeconds(1); 
+        
+        
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("CombatScene"));
+
+        yield return new WaitForSeconds(1);
+
+        
+    }
+
     void Start()
     {
         phase = "animation";

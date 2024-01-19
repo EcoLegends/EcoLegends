@@ -191,13 +191,13 @@ public class forecastScript : MonoBehaviour
 
     IEnumerator animazione()
     {
-        float y = -9;
+        float y = -9.8f;
         float size = 0;
 
         for(float i = 0; i<=100; i+=4)
         {
-            y = i*9/100 - 9;
-            size = i / 100;
+            y = i*9/100 - 9.8f;
+            size = i / 100 * 0.8f;
 
             transform.localPosition = new Vector3(0, y, 10);
             transform.localScale = new Vector3(size, size, size);
@@ -211,13 +211,13 @@ public class forecastScript : MonoBehaviour
 
     IEnumerator uscita()
     {
-        float y = 0;
-        float size = 1;
+        float y = -0.8f;
+        float size = 0.8f;
 
         for (float i = 100; i >= 0; i -= 4)
         {
-            y = i * 9 / 100 - 9;
-            size = i / 100;
+            y = i * 9 / 100 - 9.8f;
+            size = i / 100 * 0.8f;
 
             transform.localPosition = new Vector3(0, y, 10);
             transform.localScale = new Vector3(size, size, size);

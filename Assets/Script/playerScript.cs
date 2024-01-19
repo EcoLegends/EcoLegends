@@ -511,9 +511,8 @@ public class playerScript : MonoBehaviour
                         {
                             if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
                             {
-                                SceneManager.LoadScene(1);
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
-                                Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output);
+                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output));
                                 Debug.Log("PVP");
                                 canMove = false;
                                 break;
