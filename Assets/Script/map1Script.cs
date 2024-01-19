@@ -24,10 +24,10 @@ public class mapScript : MonoBehaviour
     
     void Start()
     {
-        Object musicPlayer = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Music.prefab", typeof(GameObject)), Vector3.one, Quaternion.identity);
+        Object musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
         musicPlayer.GetComponent<musicScript>().music = music;
 
-        Object tile = AssetDatabase.LoadAssetAtPath("Assets/tilePrefab.prefab", typeof(GameObject));                                    //spawn dei tasselli mappa
+        Object tile = Resources.Load("tilePrefab", typeof(GameObject));                                    //spawn dei tasselli mappa
         for (int i = 0; i < dimY; i++)
         {
             for (int j = 0; j < dimX; j++)
@@ -40,11 +40,11 @@ public class mapScript : MonoBehaviour
             
         }
 
-        Object player = AssetDatabase.LoadAssetAtPath("Assets/player.prefab", typeof(GameObject));
+        Object player = Resources.Load("player", typeof(GameObject));
         GameObject new_player = (GameObject) Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
         new_player.GetComponent<playerScript>().Setup(1, 1, "Byleth", "Diamant", 5, 2, 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
 
-        Object enemy = AssetDatabase.LoadAssetAtPath("Assets/enemy.prefab", typeof(GameObject));
+        Object enemy = Resources.Load("enemy", typeof(GameObject));
         GameObject new_enemy = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
         new_enemy.GetComponent<enemyScript>().Setup(8, 8, "Byleth", "Diamant", 5, 2, "move", 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
     }

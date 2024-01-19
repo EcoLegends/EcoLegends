@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class playerScript : MonoBehaviour
 {
@@ -86,8 +87,8 @@ public class playerScript : MonoBehaviour
         movTilesDistance.Add(999);
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
-        Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
-        Object attack_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/attackTilePrefab.prefab", typeof(GameObject));
+        Object mov_tile_prefab = Resources.Load("movTilePrefab", typeof(GameObject));
+        Object attack_tile_prefab = Resources.Load("attackTilePrefab", typeof(GameObject));
 
         for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli blu
         {
@@ -275,9 +276,10 @@ public class playerScript : MonoBehaviour
         }
 
         transform.position = new Vector3(x, y, -9);
+        
 
-        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
-        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        var texture = Resources.Load<GameObject>("Characters/" + textureFile);   //carica la texture del personaggio
+        GameObject sprite = Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
         sprite.transform.parent = transform;
         sprite.transform.SetAsFirstSibling();
 
@@ -306,7 +308,7 @@ public class playerScript : MonoBehaviour
 
     public void CanMoveAgain() {
         canMove = true;                                                     //respawn tassello lampeggiante
-        player_tile = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/playerTilePrefab.prefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+        player_tile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
         battleManager.unmovedUnits.Add(gameObject);
 
@@ -361,7 +363,7 @@ public class playerScript : MonoBehaviour
                     if (!forecastSpawned && target != null)
                     {
                         forecastSpawned = true;
-                        forecast = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Forecast Canvas.prefab", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                        forecast = (GameObject)Instantiate(Resources.Load("Forecast Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
                         forecast.transform.parent = Camera.main.transform;
                         forecast.transform.localPosition = new Vector3(0, 0, 10);
                         forecast.transform.localScale = Vector3.one;
@@ -511,7 +513,7 @@ public class playerScript : MonoBehaviour
                             {
                                 SceneManager.LoadScene(1);
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
-                                CaricaCombat(e,this.gameObject,output);
+                                //CaricaCombat(e,this.gameObject,output);
                                 Debug.Log("PVP");
                                 canMove = false;
                                 break;
@@ -564,7 +566,7 @@ public class playerScript : MonoBehaviour
             if (Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
         }
 
-        Object canvas = AssetDatabase.LoadAssetAtPath("Assets/Level Up Canvas.prefab", typeof(GameObject));
+        Object canvas = Resources.Load("Level Up Canvas", typeof(GameObject));
 
         GameObject levelUpCanvas = (GameObject)Instantiate(canvas, new Vector3(0.6f, 3.6f, 0), Quaternion.identity);
 

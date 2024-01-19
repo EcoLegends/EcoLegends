@@ -297,8 +297,8 @@ public class enemyScript : MonoBehaviour
         movTilesDistance.Add(999);
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
-        Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTilePrefab.prefab", typeof(GameObject));
-        Object attack_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/attackTilePrefab.prefab", typeof(GameObject));
+        Object mov_tile_prefab = Resources.Load("movTilePrefab", typeof(GameObject));
+        Object attack_tile_prefab = Resources.Load("attackTilePrefab", typeof(GameObject));
 
 
         for (int i = 0; i < movTiles.Count; i++)        //spawna tasselli 
@@ -485,8 +485,8 @@ public class enemyScript : MonoBehaviour
 
         transform.position = new Vector3(x, y, -9);
 
-        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
-        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        var texture = Resources.Load<GameObject>("Characters/" + textureFile);   //carica la texture del personaggio
+        GameObject sprite = Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
         sprite.transform.parent = transform;
         sprite.transform.SetAsFirstSibling();
         sprite.transform.Rotate(0, 180, 0);

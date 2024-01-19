@@ -250,7 +250,7 @@ public class battleManager : MonoBehaviour
                 }
             }
 
-            Object mov_tile_prefab = AssetDatabase.LoadAssetAtPath("Assets/movTileEnemyAllPrefab.prefab", typeof(GameObject));
+            Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
 
 
 
@@ -267,7 +267,7 @@ public class battleManager : MonoBehaviour
 
     public void CaricaCombat(GameObject e, GameObject p, int[] output){
 
-        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + player.textureFile + ".prefab", typeof(GameObject)); 
+        Object texture = Resources.Load("Characters/" + player.textureFile + "", typeof(GameObject)); 
         GameObject sprite = (GameObject)Instantiate(texture, new Vector3(0, 1, 0), Quaternion.identity);
 
     }
@@ -277,7 +277,7 @@ public class battleManager : MonoBehaviour
         animationText = "player";
         animationTime = Time.time + 3;
 
-        phaseCanvas = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Resources/playerPhaseCanvas.prefab", typeof(GameObject)), this.transform);
+        phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
         
         
     }
@@ -300,7 +300,7 @@ public class battleManager : MonoBehaviour
             animationText = "player";
             animationTime = Time.time + 3;
 
-            phaseCanvas = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Resources/playerPhaseCanvas.prefab", typeof(GameObject)), this.transform);
+            phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
             
         }
         else if(unmovedEnemies.Count > 0 && canMoveEnemy == true)
@@ -318,7 +318,7 @@ public class battleManager : MonoBehaviour
             animationText = "enemy";
             animationTime = Time.time + 3;
 
-            phaseCanvas = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Resources/enemyPhaseCanvas.prefab", typeof(GameObject)), this.transform);
+            phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
         }
 
 
