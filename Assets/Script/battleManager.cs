@@ -229,6 +229,10 @@ public class battleManager : MonoBehaviour
 
         int[] returnList = { playerDmg, playerHit, playerCrit, playerAS, enemyDmg, enemyHit, enemyCrit, enemyAS};
 
+        Object texture = AssetDatabase.LoadAssetAtPath("Assets/Resources/Characters/" + player.textureFile + ".prefab", typeof(GameObject));   //carica la texture del personaggio
+        GameObject sprite = (GameObject)Instantiate(texture, new Vector3(0, 1, 0), Quaternion.identity);
+
+
         return returnList;
 
     }

@@ -162,6 +162,8 @@ public class forecastScript : MonoBehaviour
         StartCoroutine(animazione());
     }
 
+
+
     float inc = 0.1F;
     float transparency = 100;
     void Update()
@@ -180,6 +182,12 @@ public class forecastScript : MonoBehaviour
         transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency/100);
         transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
     }
+
+    public void Rimuovi()
+    {
+        StartCoroutine(uscita());
+    }
+
 
     IEnumerator animazione()
     {
@@ -217,7 +225,6 @@ public class forecastScript : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
         }
-
         Destroy(gameObject);
     }
 }

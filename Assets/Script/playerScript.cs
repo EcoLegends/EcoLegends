@@ -257,6 +257,7 @@ public class playerScript : MonoBehaviour
 
 
     GameObject player_tile;
+    
     private void Start()  
     {
 
@@ -324,33 +325,65 @@ public class playerScript : MonoBehaviour
 
     private bool OnRange = true;
 
-    private bool forecastSpawned = false;
+    public bool forecastSpawned = false;
     private GameObject forecast;
+    private GameObject target;
+    private GameObject oldTarget;
+    private float forecastCooldown = 0;
     void Update()
     {
+
         if (canMove)
         {
             if (dragging)
             {
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
-                if(!forecastSpawned)
+                
+                if(forecastCooldown <= Time.time)
                 {
+                    target = null;
                     foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
                     {
                         if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<enemyScript>().y)
                         {
-                            forecastSpawned=true; 
-                            forecast = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Forecast Canvas.prefab", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-                            forecast.transform.parent = Camera.main.transform;
-                            forecast.transform.localPosition = new Vector3(0, 0, 10);
-                            forecast.transform.localScale = Vector3.one;
-                            int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");
-                            forecast.GetComponent<forecastScript>().Setup(e, this.gameObject, output);
-                            break;
+                            foreach(GameObject t in attackRedTiles)
+                            {
+                                if(e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                                {
+                                    target = e;
+                                    break;
+                                }
+                            }
+                            
                         }
                     }
+
+                    if (!forecastSpawned && target != null)
+                    {
+                        forecastSpawned = true;
+                        forecast = (GameObject)Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Forecast Canvas.prefab", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                        forecast.transform.parent = Camera.main.transform;
+                        forecast.transform.localPosition = new Vector3(0, 0, 10);
+                        forecast.transform.localScale = Vector3.one;
+                        int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player");
+                        forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
+                        forecastCooldown = Time.time + 0.3f;
+                    }
+                    else if (forecastSpawned && target != oldTarget)
+                    {
+                        forecast.GetComponent<forecastScript>().Rimuovi();
+                        forecastSpawned = false;
+                        forecastCooldown = Time.time + 0.3f;
+                    }
+                    oldTarget = target;
                 }
                 
+                
+                
+            }else if (forecastSpawned) 
+            {
+                forecast.GetComponent<forecastScript>().Rimuovi();
+                forecastSpawned = false;
             }
             
 
@@ -471,11 +504,20 @@ public class playerScript : MonoBehaviour
 
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
-                        SceneManager.LoadScene(1);
-                        Camera.main.GetComponent<battleManager>().pvp(e,this.gameObject,"player");     //inizia pvp
 
-                        Debug.Log("PVP");
-                        canMove=false;
+                        foreach (GameObject t in attackRedTiles)
+                        {
+                            if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                            {
+                                SceneManager.LoadScene(1);
+                                Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+
+                                Debug.Log("PVP");
+                                canMove = false;
+                                break;
+                            }
+                        }
+
                     } 
                 }
 
