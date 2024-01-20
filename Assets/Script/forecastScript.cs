@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+
+
+
 
 public class forecastScript : MonoBehaviour
 {
-    
+    int playerNewHP;
+    int enemyNewHP;
     public void Setup(GameObject e, GameObject p, int[] returnList)
     {
         enemyScript enemy = e.GetComponent<enemyScript>();
@@ -23,8 +25,8 @@ public class forecastScript : MonoBehaviour
         int enemyCrit = returnList[6];
         int enemyAS = returnList[7];
 
-        int playerNewHP = player.hp;
-        int enemyNewHP = enemy.hp - playerDmg;
+        playerNewHP = player.hp;
+        enemyNewHP = enemy.hp - playerDmg;
 
         string enemyHitVisual = enemyHit.ToString();
         string enemyCritVisual = enemyCrit.ToString();
@@ -176,11 +178,15 @@ public class forecastScript : MonoBehaviour
             inc *= -1;
         }
 
-        Color rosso = new Color32(231, 113, 122, 255);
+        Color rosso = new Color32(204, 99, 99, 255);
 
         transparency += inc;
         transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency/100);
         transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
+
+        if(playerNewHP <= 0) transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120-transparency) / 100);
+        if (enemyNewHP <= 0) transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120-transparency) / 100);
+
     }
 
     public void Rimuovi()
