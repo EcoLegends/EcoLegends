@@ -272,11 +272,11 @@ public class battleManager : MonoBehaviour
 
         Scene activeScene = SceneManager.GetActiveScene();
 
-        GameObject temp = new GameObject( "temp" );
+        GameObject temp = new GameObject( "temp" );  // cos'è sto oggetto
 
         GameObject[] allObjects = activeScene.GetRootGameObjects();
 
-        foreach (GameObject go in allObjects)
+        foreach (GameObject go in allObjects)    //dove dichiarato go   da dove spawna?
         {
 
             go.transform.SetParent(temp.transform, false);
@@ -285,7 +285,7 @@ public class battleManager : MonoBehaviour
 
         AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
 
-        while (!async.isDone)
+        while (!async.isDone)      //questo sarebbe la roba di animazione?
         {
 
             yield return new WaitForEndOfFrame();
@@ -294,10 +294,21 @@ public class battleManager : MonoBehaviour
 
         Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
 
-        GameObject sprite = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
-        SceneManager.MoveGameObjectToScene(sprite, battleScene);
+        GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
+        SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
+
+        spritePlayer.transform.position=new Vector3(-2,0,0);
+
+        GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
+        SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
+
+        spriteEnemy.transform.position=new Vector3(2,0,0);
 
         SceneManager.SetActiveScene(battleScene);
+
+        spritePlayer.transform.GetComponent<Animator>().Play("Select");
+
+        spriteEnemy.transform.GetComponent<Animator>().Play("Select");
 
         temp.SetActive(false);
 
