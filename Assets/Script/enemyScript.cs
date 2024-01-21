@@ -516,11 +516,26 @@ public class enemyScript : MonoBehaviour
 
 
     bool nextPositionChanged;
-    
-   
+
+    private bool mouseIsOver = false;
+    private GameObject infoGUI;
+    private bool infoGUISpawned = false;
+    private float infoGUICooldown = 0;
+
     void Update()
     {
-       if(battleManager.canMoveEnemy==false && nextPositionChanged)
+        if (mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
+        {
+            infoGUISpawned = true;
+            infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+            infoGUI.transform.parent = Camera.main.transform;
+            infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+            infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            infoGUICooldown = Time.time + 0.3f;
+            infoGUI.GetComponent<infoGUIScript>().Setup(this);
+        }
+
+        if (battleManager.canMoveEnemy==false && nextPositionChanged)
         {
             transform.position = Vector3.MoveTowards(transform.position, nextPosition, Time.deltaTime*5);
 
@@ -538,6 +553,7 @@ public class enemyScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        mouseIsOver = true;
         if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             HighlightMov();
@@ -547,6 +563,13 @@ public class enemyScript : MonoBehaviour
 
     private void OnMouseExit()
     {
+        mouseIsOver = false;
+        if (battleManager.phase == "Player")
+        {
+            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+            infoGUISpawned = false;
+        }
+
         if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             if(movBlueTiles.Count > 0)

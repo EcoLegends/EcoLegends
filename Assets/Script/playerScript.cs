@@ -323,7 +323,7 @@ public class playerScript : MonoBehaviour
 
 
     }
-
+    
 
     private bool OnRange = true;
 
@@ -332,8 +332,24 @@ public class playerScript : MonoBehaviour
     private GameObject target;
     private GameObject oldTarget;
     private float forecastCooldown = 0;
+
+    private bool mouseIsOver = false;
+    private GameObject infoGUI;
+    private bool infoGUISpawned = false;
+    private float infoGUICooldown = 0;
+
     void Update()
     {
+        if (!forecastSpawned && mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
+        {
+            infoGUISpawned = true;
+            infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+            infoGUI.transform.parent = Camera.main.transform;
+            infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+            infoGUI.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+            infoGUICooldown = Time.time + 0.3f;
+            infoGUI.GetComponent<infoGUIScript>().Setup(this);
+        }
 
         if (canMove)
         {
@@ -370,6 +386,9 @@ public class playerScript : MonoBehaviour
                         int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player");
                         forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
                         forecastCooldown = Time.time + 0.3f;
+
+                        infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                        infoGUISpawned = false;
                     }
                     else if (forecastSpawned && target != oldTarget)
                     {
@@ -406,6 +425,8 @@ public class playerScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        mouseIsOver = true;
+
         if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             HighlightMov();
@@ -415,7 +436,15 @@ public class playerScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0))) 
+        mouseIsOver = false;
+        if(battleManager.phase == "Player" && infoGUISpawned)
+        {
+            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+            infoGUISpawned = false;
+        }
+        
+
+        if (canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0))) 
         {
             if(movBlueTiles.Count > 0)
             {

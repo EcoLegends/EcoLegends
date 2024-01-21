@@ -300,6 +300,7 @@ public class battleManager : MonoBehaviour
         spritePlayer.transform.position=new Vector3(-2,0,0);
 
         GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
+        spriteEnemy.transform.Rotate(0, 180, 0);
         SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
 
         spriteEnemy.transform.position=new Vector3(2,0,0);
