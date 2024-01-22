@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -199,7 +200,11 @@ public class battleManager : MonoBehaviour
             }
         }
 
-        int distance = (int) Mathf.Abs(newPos.x - enemy.x) + (int) Mathf.Abs(newPos.y - enemy.y);               
+        player.x = (int) newPos.x;
+
+        player.y = (int) newPos.y;
+
+        int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);               
 
         if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
         {
@@ -269,6 +274,8 @@ public class battleManager : MonoBehaviour
 
     public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output){
 
+        enemy = e.GetComponent<enemyScript>();                
+        player = p.GetComponent<playerScript>();
 
         Scene activeScene = SceneManager.GetActiveScene();
 
@@ -299,11 +306,19 @@ public class battleManager : MonoBehaviour
 
         spritePlayer.transform.position=new Vector3(-2,0,0);
 
+        GameObject playerParent = new GameObject();
+
+        spritePlayer.transform.SetParent(playerParent.transform);
+
         GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
         spriteEnemy.transform.Rotate(0, 180, 0);
         SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
 
         spriteEnemy.transform.position=new Vector3(2,0,0);
+
+        GameObject enemyParent = new GameObject();
+
+        spritePlayer.transform.SetParent(enemyParent.transform);
 
         SceneManager.SetActiveScene(battleScene);
 
@@ -311,7 +326,74 @@ public class battleManager : MonoBehaviour
 
         spriteEnemy.transform.GetComponent<Animator>().Play("Select");
 
-        temp.SetActive(false);
+        temp.SetActive(false);            //wow mimi nn ha risposto neanche a una domanda 
+
+        int playerHit = Random.Range(1, 100);
+
+        if(playerHit <= output[1]){
+
+            int playerCrit = Random.Range(1, 100);  //se critta
+
+            if(playerCrit <= output[2])
+                output[0]*=3;
+
+            enemy.hp-=output[0];
+
+        }
+
+        int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);
+
+        if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange){
+            
+                int enemyHit = Random.Range(1, 100);
+
+                if(enemyHit <= output[5]){
+
+                    int enemyCrit = Random.Range(1, 100);  //se critta
+
+                    if(enemyCrit <= output[6])
+                        output[4]*=3;
+
+                    player.hp-=output[4];
+                }
+
+                if (output[7] >= output[3] + 4){
+
+                    enemyHit = Random.Range(1, 100);
+
+                    if(enemyHit <= output[5]){
+
+                        int enemyCrit = Random.Range(1, 100);  //se critta
+
+                        if(enemyCrit <= output[6])
+                            output[4]*=3;
+
+                        player.hp-=output[4];
+
+                    }
+                }
+                
+        }
+            
+        if (output[3] >= output[7] + 4){
+
+            playerHit = Random.Range(1, 100);
+
+            if(playerHit <= output[1]){
+
+                int playerCrit = Random.Range(1, 100);  //se critta
+
+                if(playerCrit <= output[2])
+                    output[0]*=3;
+
+                enemy.hp-=output[0];
+
+            }
+
+        }
+            
+
+       
 
     }
 
