@@ -486,7 +486,7 @@ public class enemyScript : MonoBehaviour
         transform.position = new Vector3(x, y, -9);
 
         var texture = Resources.Load<GameObject>("Characters/" + textureFile);   //carica la texture del personaggio
-        GameObject sprite = Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        GameObject sprite = Instantiate(texture, new Vector3(0, 0, 0), Quaternion.identity);
         sprite.transform.parent = transform;
         sprite.transform.SetAsFirstSibling();
         sprite.transform.Rotate(0, 180, 0);
@@ -526,13 +526,16 @@ public class enemyScript : MonoBehaviour
     {
         if (mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
         {
-            infoGUISpawned = true;
-            infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-            infoGUI.transform.parent = Camera.main.transform;
-            infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
-            infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            infoGUICooldown = Time.time + 0.3f;
-            infoGUI.GetComponent<infoGUIScript>().Setup(this);
+            if (!(Input.GetKey(KeyCode.Mouse0)))
+            {
+                infoGUISpawned = true;
+                infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                infoGUI.transform.parent = Camera.main.transform;
+                infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+                infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                infoGUICooldown = Time.time + 0.3f;
+                infoGUI.GetComponent<infoGUIScript>().Setup(this);
+            }
         }
 
         if (battleManager.canMoveEnemy==false && nextPositionChanged)
@@ -564,7 +567,7 @@ public class enemyScript : MonoBehaviour
     private void OnMouseExit()
     {
         mouseIsOver = false;
-        if (battleManager.phase == "Player")
+        if (battleManager.phase == "Player" && infoGUI != null)
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;

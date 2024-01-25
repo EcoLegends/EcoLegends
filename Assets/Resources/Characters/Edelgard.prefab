@@ -518,7 +518,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8653719598885068355, guid: 0f06a9318ec0ab34781a48cde47a9d82, type: 3}
       propertyPath: m_Name
-      value: edelgard
+      value: Edelgard
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 0f06a9318ec0ab34781a48cde47a9d82, type: 3}
       propertyPath: m_LocalScale.x
@@ -534,11 +534,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 0f06a9318ec0ab34781a48cde47a9d82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 0f06a9318ec0ab34781a48cde47a9d82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 0f06a9318ec0ab34781a48cde47a9d82, type: 3}
       propertyPath: m_LocalPosition.z

@@ -299,26 +299,32 @@ public class battleManager : MonoBehaviour
 
         }
 
+
         Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
+        SceneManager.SetActiveScene(battleScene);
+
+        temp.SetActive(false);            //wow mimi nn ha risposto neanche a una domanda 
+
 
         GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
-        SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
-
-        spritePlayer.transform.position=new Vector3(-2,0,0);
+        //SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
 
         GameObject playerParent = new GameObject();
+        playerParent.transform.position = new Vector3(-0.35f, 0, 0);
 
         spritePlayer.transform.SetParent(playerParent.transform);
 
         GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
-        spriteEnemy.transform.Rotate(0, 180, 0);
+        
         SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
 
         spriteEnemy.transform.position=new Vector3(2,0,0);
 
         GameObject enemyParent = new GameObject();
+        spriteEnemy.transform.SetParent(enemyParent.transform);
+        enemyParent.transform.position = new Vector3(0.35f, 0, 0);
+        enemyParent.transform.Rotate(0, 180, 0);
 
-        spritePlayer.transform.SetParent(enemyParent.transform);
 
         SceneManager.SetActiveScene(battleScene);
 
@@ -326,7 +332,7 @@ public class battleManager : MonoBehaviour
 
         spriteEnemy.transform.GetComponent<Animator>().Play("Select");
 
-        temp.SetActive(false);            //wow mimi nn ha risposto neanche a una domanda 
+        
 
         int playerHit = Random.Range(1, 100);
 

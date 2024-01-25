@@ -279,7 +279,7 @@ public class playerScript : MonoBehaviour
         
 
         var texture = Resources.Load<GameObject>("Characters/" + textureFile);   //carica la texture del personaggio
-        GameObject sprite = Instantiate(texture, new Vector3(x, y, 0), Quaternion.identity);
+        GameObject sprite = Instantiate(texture, new Vector3(0, 0, 0), Quaternion.identity);
         sprite.transform.parent = transform;
         sprite.transform.SetAsFirstSibling();
 
@@ -328,6 +328,7 @@ public class playerScript : MonoBehaviour
     private bool OnRange = true;
 
     public bool forecastSpawned = false;
+    public bool previousForecastSpawned = false;
     private GameObject forecast;
     private GameObject target;
     private GameObject oldTarget;
@@ -342,15 +343,19 @@ public class playerScript : MonoBehaviour
     {
         if (!forecastSpawned && mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
         {
-            infoGUISpawned = true;
-            infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-            infoGUI.transform.parent = Camera.main.transform;
-            infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
-            infoGUI.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
-            infoGUICooldown = Time.time + 0.3f;
-            infoGUI.GetComponent<infoGUIScript>().Setup(this);
+            if(previousForecastSpawned==forecastSpawned && !(Input.GetKey(KeyCode.Mouse0)) || previousForecastSpawned != forecastSpawned && (Input.GetKey(KeyCode.Mouse0))) 
+            {
+                infoGUISpawned = true;
+                infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                infoGUI.transform.parent = Camera.main.transform;
+                infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+                infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                infoGUICooldown = Time.time + 0.3f;
+                infoGUI.GetComponent<infoGUIScript>().Setup(this);
+            }
+            
         }
-
+        previousForecastSpawned = forecastSpawned;
         if (canMove)
         {
             if (dragging)
@@ -387,8 +392,12 @@ public class playerScript : MonoBehaviour
                         forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
                         forecastCooldown = Time.time + 0.3f;
 
-                        infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-                        infoGUISpawned = false;
+                        if(infoGUI != null)
+                        {
+                            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                            infoGUISpawned = false;
+                        }
+                        
                     }
                     else if (forecastSpawned && target != oldTarget)
                     {
@@ -420,7 +429,8 @@ public class playerScript : MonoBehaviour
         }
 
         
-        
+
+
     }
 
     private void OnMouseEnter()
@@ -437,7 +447,7 @@ public class playerScript : MonoBehaviour
     private void OnMouseExit()
     {
         mouseIsOver = false;
-        if(battleManager.phase == "Player" && infoGUISpawned)
+        if(battleManager.phase == "Player" && infoGUISpawned )
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;

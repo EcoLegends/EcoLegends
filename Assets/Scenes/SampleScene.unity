@@ -2493,6 +2493,7 @@ MonoBehaviour:
   healthbar: {fileID: 1238123088305026353}
   movBlueTiles: []
   forecastSpawned: 0
+  previousForecastSpawned: 0
 --- !u!4 &7839375629899597110
 Transform:
   m_ObjectHideFlags: 0

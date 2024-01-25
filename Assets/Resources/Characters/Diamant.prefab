@@ -518,7 +518,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8653719598885068355, guid: 463f899b6f149f446a2b83eaf2773900, type: 3}
       propertyPath: m_Name
-      value: diamant
+      value: Diamant
       objectReference: {fileID: 0}
     - target: {fileID: -7561113526181806574, guid: 463f899b6f149f446a2b83eaf2773900, type: 3}
       propertyPath: m_LocalRotation.w
@@ -546,11 +546,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 463f899b6f149f446a2b83eaf2773900, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 463f899b6f149f446a2b83eaf2773900, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.085
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 463f899b6f149f446a2b83eaf2773900, type: 3}
       propertyPath: m_LocalPosition.z
