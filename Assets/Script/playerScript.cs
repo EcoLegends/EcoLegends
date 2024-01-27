@@ -37,7 +37,7 @@ public class playerScript : MonoBehaviour
 
     [Tooltip("0=Niente\n1= Fuoco\n2=Acqua\n3=Terra\n4=Aria")]
     public int unitEffective;
-    [Tooltip("0=Pugni\n1=Bastone\n2=Magia\n3=Arco\n4=Shuriken\n5=Speciale\n6=Spada\n7=Lancia\n8=Ascia")]
+    [Tooltip("0=Pugni\n1=Bastone\n2=Magia\n3=Arco\n4=Pugnale\n5=Spada\n6=Lancia\n7=Ascia")]
     public int weaponType;
     [Tooltip("false -> fisico\ntrue -> magico")]
     public bool weaponIsMagic = false;
@@ -301,8 +301,8 @@ public class playerScript : MonoBehaviour
 
         Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
              
-        transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite) all[4*weaponType+unitType-1]; //carica icona arma
-
+        transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite)all[unitType-1]; //carica icona arma
+        transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 + weaponType];
 
     }
 

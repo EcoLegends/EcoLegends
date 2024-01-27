@@ -78,7 +78,7 @@ public class forecastScript : MonoBehaviour
         transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = img;
         Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
 
-        transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 * player.weaponType + player.unitType - 1]; //carica icona arma
+        transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[player.unitType - 1]; //carica icona arma
         if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject);
         else if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
         else { Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject); }
@@ -101,7 +101,7 @@ public class forecastScript : MonoBehaviour
 
         transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().sprite = img;
         
-        transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 * enemy.weaponType + enemy.unitType - 1]; //carica icona arma
+        transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[enemy.unitType - 1]; //carica icona arma
         if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject);
         else if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject);
         else { Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject); }
