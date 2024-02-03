@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -257,7 +258,7 @@ public class battleManager : MonoBehaviour
                 }
             }
 
-            Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
+            UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
 
 
 
@@ -276,6 +277,8 @@ public class battleManager : MonoBehaviour
 
         enemy = e.GetComponent<enemyScript>();                
         player = p.GetComponent<playerScript>();
+
+        player.combat=true;
 
         Scene activeScene = SceneManager.GetActiveScene();
 
@@ -307,7 +310,9 @@ public class battleManager : MonoBehaviour
 
 
         GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
-        //SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
+        SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
+
+        spritePlayer.transform.position=new Vector3(-2,0,0);
 
         GameObject playerParent = new GameObject();
         playerParent.transform.position = new Vector3(-0.35f, 0, 0);
@@ -334,11 +339,11 @@ public class battleManager : MonoBehaviour
 
         
 
-        int playerHit = Random.Range(1, 100);
+        int playerHit = UnityEngine.Random.Range(1, 100);
 
         if(playerHit <= output[1]){
 
-            int playerCrit = Random.Range(1, 100);  //se critta
+            int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
             if(playerCrit <= output[2])
                 output[0]*=3;
@@ -351,11 +356,11 @@ public class battleManager : MonoBehaviour
 
         if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange){
             
-                int enemyHit = Random.Range(1, 100);
+                int enemyHit = UnityEngine.Random.Range(1, 100);
 
                 if(enemyHit <= output[5]){
 
-                    int enemyCrit = Random.Range(1, 100);  //se critta
+                    int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                     if(enemyCrit <= output[6])
                         output[4]*=3;
@@ -365,11 +370,11 @@ public class battleManager : MonoBehaviour
 
                 if (output[7] >= output[3] + 4){
 
-                    enemyHit = Random.Range(1, 100);
+                    enemyHit = UnityEngine.Random.Range(1, 100);
 
                     if(enemyHit <= output[5]){
 
-                        int enemyCrit = Random.Range(1, 100);  //se critta
+                        int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                         if(enemyCrit <= output[6])
                             output[4]*=3;
@@ -383,11 +388,11 @@ public class battleManager : MonoBehaviour
             
         if (output[3] >= output[7] + 4){
 
-            playerHit = Random.Range(1, 100);
+            playerHit = UnityEngine.Random.Range(1, 100);
 
             if(playerHit <= output[1]){
 
-                int playerCrit = Random.Range(1, 100);  //se critta
+                int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                 if(playerCrit <= output[2])
                     output[0]*=3;
@@ -397,9 +402,13 @@ public class battleManager : MonoBehaviour
             }
 
         }
-            
+        
 
-       
+        temp.SetActive(true);   
+
+        SceneManager.UnloadScene(1);
+
+        Debug.Log("fine");
 
     }
 
