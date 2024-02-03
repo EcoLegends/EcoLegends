@@ -9,7 +9,8 @@ public class playerScript : MonoBehaviour
     private bool dragging = false;
     private Vector3 offset;
 
-                                       
+    public bool combat;
+
     [Tooltip("Pos X")]
     public int x = 0;
     [Tooltip("Pos Y")]                                      //info
@@ -69,8 +70,6 @@ public class playerScript : MonoBehaviour
 
     [Space]
     public heathBarScript healthbar;
-
-
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
     public List<GameObject> movBlueTiles = new List<GameObject>();
     private List<GameObject> attackRedTiles = new List<GameObject>();
@@ -423,8 +422,6 @@ public class playerScript : MonoBehaviour
                 forecastSpawned = false;
             }
             
-
-
         }
         if(!OnRange)
         {
@@ -435,7 +432,12 @@ public class playerScript : MonoBehaviour
             if (transform.position == new Vector3(x, y, -9)) OnRange = true;
         }
 
-        
+        if(combat == true){
+
+            Destroy(forecast.GetComponent<forecastScript>());
+            
+            combat=false;
+        }
 
 
     }
