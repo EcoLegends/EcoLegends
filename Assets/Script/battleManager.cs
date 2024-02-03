@@ -12,6 +12,8 @@ public class battleManager : MonoBehaviour
 {
 
     public static string phase;
+    public static int mapDimX;
+    public static int mapDimY;
 
     public static List<GameObject> units = new List<GameObject>();
     public static List<GameObject> unmovedUnits = new List<GameObject>();
@@ -51,6 +53,7 @@ public class battleManager : MonoBehaviour
 
         _difference = GetMousePosition - transform.position;
         transform.position = _origin - _difference;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, (Camera.main.orthographicSize * 1.76f - 3.3f), mapDimX- (Camera.main.orthographicSize * 1.76f - 3.3f) - 1), Mathf.Clamp(transform.position.y, (Camera.main.orthographicSize * 0.98f - 3.3f), mapDimY- (Camera.main.orthographicSize * 0.98f - 3.3f) - 1), transform.position.z);
     }
 
     private Vector3 GetMousePosition => _mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); //roba del tutorial bohh
@@ -313,6 +316,7 @@ public class battleManager : MonoBehaviour
         playerParent.transform.position = new Vector3(-0.35f, 0, 0);
 
         spritePlayer.transform.SetParent(playerParent.transform);
+        spritePlayer.transform.localPosition = new Vector3(0, 0, 0);
 
         GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
         
@@ -322,6 +326,7 @@ public class battleManager : MonoBehaviour
 
         GameObject enemyParent = new GameObject();
         spriteEnemy.transform.SetParent(enemyParent.transform);
+        spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
         enemyParent.transform.position = new Vector3(0.35f, 0, 0);
         enemyParent.transform.Rotate(0, 180, 0);
 
@@ -435,9 +440,9 @@ public class battleManager : MonoBehaviour
     void Update()
     {
 
-        Camera.main.orthographicSize = Mathf.Clamp(Input.GetAxis("Mouse ScrollWheel")*-2 + Camera.main.orthographicSize,2,6.5f); //zoom
+        Camera.main.orthographicSize = Mathf.Clamp(Input.GetAxis("Mouse ScrollWheel")*-2 + Camera.main.orthographicSize,2.2f,6.5f); //zoom
         transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
-
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, (Camera.main.orthographicSize * 1.76f - 3.3f), mapDimX - (Camera.main.orthographicSize * 1.76f - 3.3f) - 1), Mathf.Clamp(transform.position.y, (Camera.main.orthographicSize * 0.98f - 3.3f), mapDimY - (Camera.main.orthographicSize * 0.98f - 3.3f) - 1), transform.position.z);
 
 
         if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true)

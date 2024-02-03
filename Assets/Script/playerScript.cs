@@ -120,9 +120,9 @@ public class playerScript : MonoBehaviour
                     int cy = r * y + movTiles[i].GetComponent<tileScript>().y;
 
 
-                    if (cx >= 0 && cx < 10 && cy >= 0 && cy < 10)
+                    if (cx >= 0 && cx < battleManager.mapDimX && cy >= 0 && cy < battleManager.mapDimY)
                     {
-                        if (!movTiles.Contains(map[cx, cy]) &&  !attackTiles.Contains(map[cx, cy]) && map[cx, cy].GetComponent<tileScript>().canBeWalkedOn == true) 
+                        if (!movTiles.Contains(map[cx, cy]) &&  !attackTiles.Contains(map[cx, cy])) //&& map[cx, cy].GetComponent<tileScript>().canBeWalkedOn == true
                         {
                             attackTiles.Add(map[cx, cy]);
                             GameObject attack_tile = (GameObject)Instantiate(attack_tile_prefab, new Vector3(map[cx, cy].GetComponent<tileScript>().x, map[cx, cy].GetComponent<tileScript>().y, -2), Quaternion.identity);
@@ -159,7 +159,7 @@ public class playerScript : MonoBehaviour
             {
 
 
-                if (cx + i >= 0 && cx + i < 10 && cy + j >= 0 && cy + j < 10)
+                if (cx + i >= 0 && cx + i < battleManager.mapDimX && cy + j >= 0 && cy + j < battleManager.mapDimY)
                 {
 
                     if (map[cx + i, cy + j].GetComponent<tileScript>().canBeWalkedOn == true && mov >= map[cx + i, cy + j].GetComponent<tileScript>().travelCost)
@@ -281,6 +281,7 @@ public class playerScript : MonoBehaviour
         var texture = Resources.Load<GameObject>("Characters/" + textureFile);   //carica la texture del personaggio
         GameObject sprite = Instantiate(texture, new Vector3(0, 0, 0), Quaternion.identity);
         sprite.transform.parent = transform;
+        sprite.transform.localPosition = new Vector3(0, 0, 0);
         sprite.transform.SetAsFirstSibling();
 
 
@@ -341,6 +342,12 @@ public class playerScript : MonoBehaviour
 
     void Update()
     {
+        if (infoGUISpawned && battleManager.unmovedUnits.Count == 0)
+        {
+            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+            infoGUISpawned = false;
+        }
+
         if (!forecastSpawned && mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
         {
             if(previousForecastSpawned==forecastSpawned && !(Input.GetKey(KeyCode.Mouse0)) || previousForecastSpawned != forecastSpawned && (Input.GetKey(KeyCode.Mouse0))) 
@@ -447,7 +454,7 @@ public class playerScript : MonoBehaviour
     private void OnMouseExit()
     {
         mouseIsOver = false;
-        if(battleManager.phase == "Player" && infoGUISpawned )
+        if(infoGUISpawned)
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;
@@ -491,6 +498,7 @@ public class playerScript : MonoBehaviour
                 attackRedTiles.Clear();
             }
 
+            transform.GetChild(0).GetComponent<Animator>().Play("Select");
             dragging = true;
             HighlightMov();                                                                //spawna tasselli blu movimento
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -16,6 +16,8 @@ public class forecastScript : MonoBehaviour
         enemyScript enemy = e.GetComponent<enemyScript>();
         playerScript player = p.GetComponent<playerScript>();
 
+        
+
         int playerDmg = returnList[0];
         int playerHit = returnList[1];
         int playerCrit = returnList[2];
@@ -24,6 +26,7 @@ public class forecastScript : MonoBehaviour
         int enemyHit = returnList[5];
         int enemyCrit = returnList[6];
         int enemyAS = returnList[7];
+        Debug.Log(playerDmg + " " + enemyDmg);
 
         playerNewHP = player.hp;
         enemyNewHP = enemy.hp - playerDmg;
@@ -117,41 +120,53 @@ public class forecastScript : MonoBehaviour
         transform.GetChild(1).GetChild(10).GetComponent<TextMeshProUGUI>().text = enemyCritVisual.ToString();
         transform.GetChild(1).GetChild(13).GetComponent<TextMeshProUGUI>().text = enemy.nome;
 
+        int child_index = 0;
+
         switch (turns.Count)
         {
             case 1:
                 {
+                    child_index = 4;
                     Destroy(transform.GetChild(2).gameObject);
                     Destroy(transform.GetChild(3).gameObject);
                     break;
                 }
             case 2:
                 {
+                    child_index = 3;
                     Destroy(transform.GetChild(2).gameObject);
                     Destroy(transform.GetChild(4).gameObject);
                     break;
                 }
             case 3:
                 {
+                    child_index = 2;
                     Destroy(transform.GetChild(3).gameObject);
                     Destroy(transform.GetChild(4).gameObject);
                     break;
                 }
         }
 
+        
+
         int turnN = 0;
 
         foreach(string turn in turns)
         {
+            Debug.Log("turno: "+turn);
             if(turn == "player")
             {
-                transform.GetChild(2).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp blu");
-                transform.GetChild(2).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = playerDmg.ToString();
+                Debug.Log(playerDmg);
+                Debug.Log(turnN);
+                transform.GetChild(child_index).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp blu");
+                transform.GetChild(child_index).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = playerDmg.ToString();
             }
             else
             {
-                transform.GetChild(2).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp rossa");
-                transform.GetChild(2).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = enemyDmg.ToString();
+                Debug.Log(enemyDmg);
+                Debug.Log(turnN);
+                transform.GetChild(child_index).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp rossa");
+                transform.GetChild(child_index).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = enemyDmg.ToString();
             }
             turnN++;
         }

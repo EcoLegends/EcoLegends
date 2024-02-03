@@ -18,34 +18,36 @@ public class tileScript : MonoBehaviour
     public void SetTileData(string type, int x, int y)                                                                      //setta le stat del tassello quando spawna
     {
         this.type = type;
-        Object[] sp;
+        //Object[] sp;
         this.x = x;
         this.y = y;
         switch (type)
         {
             case "Roccia":
+            case "Lava":
                 this.description = "Terreno non traversabile.";
                 this.canBeWalkedOn = false;
                 this.travelCost = 0;
 
-                sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/DirtTiles");
-                GetComponent<SpriteRenderer>().sprite = (Sprite)sp[62];
+                //sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/DirtTiles");
+                //GetComponent<SpriteRenderer>().sprite = (Sprite)sp[62];
                 break;
             case "Foresta":
+            case "Cespuglio":
                 this.description = "Terreno difensivo.";
                 this.canBeWalkedOn = true;
                 this.travelCost = 2;
 
-                sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Decor/TreeTile");
-                GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
+                //sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Decor/TreeTile");
+                //GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
                 break;
 
             default:
                 this.description = "Terreno neutrale.";
                 this.canBeWalkedOn = true;
                 this.travelCost = 1;
-                sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/GrassTiles");
-                GetComponent<SpriteRenderer>().sprite = (Sprite) sp[98];
+                //sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/GrassTiles");
+                //GetComponent<SpriteRenderer>().sprite = (Sprite) sp[98];
                 
                 break;
 
