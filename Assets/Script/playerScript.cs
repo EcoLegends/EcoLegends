@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class playerScript : MonoBehaviour
     private bool dragging = false;
     private Vector3 offset;
 
-    public bool combat;
 
     [Tooltip("Pos X")]
     public int x = 0;
@@ -432,13 +432,6 @@ public class playerScript : MonoBehaviour
             if (transform.position == new Vector3(x, y, -9)) OnRange = true;
         }
 
-        if(combat == true){
-
-            Destroy(forecast.GetComponent<forecastScript>());
-            
-            combat=false;
-        }
-
 
     }
 
@@ -563,7 +556,6 @@ public class playerScript : MonoBehaviour
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
                                 StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output));
                                 Debug.Log("PVP");
-                                canMove = false;
                                 break;
                             }
                         }
@@ -587,6 +579,42 @@ public class playerScript : MonoBehaviour
         }
 
         //this.LevelUp();
+    }
+
+    public IEnumerator endPvp()
+    {
+        
+        Destroy(forecast);
+
+        canMove = false;
+        battleManager.unmovedUnits.Remove(gameObject);
+
+        transform.GetChild(0).GetComponent<Animator>().speed = 0;
+
+        foreach (GameObject g in battleManager.unmovedUnits)
+        {
+            g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+        }
+
+
+        Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
+        foreach (Renderer childRenderer in renderers)
+        {
+            childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
+        }
+
+        foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+        movBlueTiles.Clear();
+        foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+        attackRedTiles.Clear();
+
+        yield return new WaitForEndOfFrame();
+
+        Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
+        if (!canMove)
+        {
+            Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+        }
     }
 
     public void LevelUp()

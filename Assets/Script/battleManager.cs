@@ -281,15 +281,14 @@ public class battleManager : MonoBehaviour
         enemy = e.GetComponent<enemyScript>();                
         player = p.GetComponent<playerScript>();
 
-        player.combat=true;
 
         Scene activeScene = SceneManager.GetActiveScene();
 
-        GameObject temp = new GameObject( "temp" );  // cos'è sto oggetto
+        GameObject temp = new GameObject( "temp" );  
 
         GameObject[] allObjects = activeScene.GetRootGameObjects();
 
-        foreach (GameObject go in allObjects)    //dove dichiarato go   da dove spawna?
+        foreach (GameObject go in allObjects)   
         {
 
             go.transform.SetParent(temp.transform, false);
@@ -298,7 +297,7 @@ public class battleManager : MonoBehaviour
 
         AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
 
-        while (!async.isDone)      //questo sarebbe la roba di animazione?
+        while (!async.isDone)     
         {
 
             yield return new WaitForEndOfFrame();
@@ -309,7 +308,7 @@ public class battleManager : MonoBehaviour
         Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
         SceneManager.SetActiveScene(battleScene);
 
-        temp.SetActive(false);            //wow mimi nn ha risposto neanche a una domanda 
+        temp.SetActive(false);         
 
 
         GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
@@ -409,9 +408,14 @@ public class battleManager : MonoBehaviour
         }
         
 
-        //temp.SetActive(true);   
+        temp.SetActive(true);
+        temp.transform.DetachChildren();
+        Destroy(temp);
 
-        //SceneManager.UnloadSceneAsync(1);
+        SceneManager.UnloadSceneAsync(1);
+        SceneManager.SetActiveScene(activeScene);
+
+        StartCoroutine(player.endPvp());
 
         Debug.Log("fine");
 
