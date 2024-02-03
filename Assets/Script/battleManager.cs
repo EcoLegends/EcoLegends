@@ -409,9 +409,9 @@ public class battleManager : MonoBehaviour
         }
         
 
-        temp.SetActive(true);   
+        //temp.SetActive(true);   
 
-        SceneManager.UnloadScene(1);
+        //SceneManager.UnloadSceneAsync(1);
 
         Debug.Log("fine");
 
