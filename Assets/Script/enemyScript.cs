@@ -561,7 +561,19 @@ public class enemyScript : MonoBehaviour
             }
         }
 
+        if(movBlueTiles.Count > 0 && battleManager.phase == "Enemy")
+        {
+            foreach (GameObject g in movBlueTiles) Destroy(g);
+            movBlueTiles.Clear();
+            foreach (GameObject g in attackRedTiles) Destroy(g);                          
+            attackRedTiles.Clear();
+        }
 
+        if (battleManager.phase == "Enemy"&&infoGUI != null)
+        {
+            Destroy(infoGUI);
+            infoGUISpawned = false;
+        }
 
     }
 
@@ -602,8 +614,21 @@ public class enemyScript : MonoBehaviour
 
     }
 
-
-
+    public void cancInfo(){
+        mouseIsOver = true;
+        if (infoGUI != null)
+        {
+            Destroy(infoGUI);
+            infoGUISpawned = false;
+        }
+        if(movBlueTiles.Count > 0)
+        {
+            foreach (GameObject g in movBlueTiles) Destroy(g);
+            movBlueTiles.Clear();
+            foreach (GameObject g in attackRedTiles) Destroy(g);                          
+            attackRedTiles.Clear();
+        }
+    }
 
     public void Move()
     {

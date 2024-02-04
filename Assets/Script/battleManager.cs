@@ -314,10 +314,8 @@ public class battleManager : MonoBehaviour
         GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
         SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
 
-        spritePlayer.transform.position=new Vector3(-2,0,0);
-
         GameObject playerParent = new GameObject();
-        playerParent.transform.position = new Vector3(-0.35f, 0, 0);
+        playerParent.transform.position = new Vector3(-2, 0, 0);
 
         spritePlayer.transform.SetParent(playerParent.transform);
         spritePlayer.transform.localPosition = new Vector3(0, 0, 0);
@@ -326,22 +324,14 @@ public class battleManager : MonoBehaviour
         
         SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
 
-        spriteEnemy.transform.position=new Vector3(2,0,0);
-
         GameObject enemyParent = new GameObject();
         spriteEnemy.transform.SetParent(enemyParent.transform);
         spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
-        enemyParent.transform.position = new Vector3(0.35f, 0, 0);
+        enemyParent.transform.position = new Vector3(2, 0, 0);
         enemyParent.transform.Rotate(0, 180, 0);
 
 
         SceneManager.SetActiveScene(battleScene);
-
-        spritePlayer.transform.GetComponent<Animator>().Play("Select");
-
-        spriteEnemy.transform.GetComponent<Animator>().Play("Select");
-
-        
 
         int playerHit = UnityEngine.Random.Range(1, 100);
 
@@ -349,10 +339,33 @@ public class battleManager : MonoBehaviour
 
             int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
-            if(playerCrit <= output[2])
-                output[0]*=3;
+            //spritePlayer.GetComponent<Animator>().Play("Attack");
 
-            enemy.hp-=output[0];
+            if(playerCrit <= output[2])
+                enemy.hp-=output[0]*3;
+            else
+                enemy.hp-=output[0];
+
+            //yield return new WaitWhile(() => spritePlayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f );    
+
+            if(enemy.hp<=0){
+                Destroy(e);
+                if(enemies.Contains(e))
+                    enemies.Remove(e);
+                enemy.cancInfo();
+                temp.SetActive(true);
+                temp.transform.DetachChildren();
+                Destroy(temp);
+
+                SceneManager.UnloadSceneAsync(1);
+                SceneManager.SetActiveScene(activeScene);
+
+                StartCoroutine(player.endPvp());
+
+                Debug.Log("fine");
+                yield break;
+            }
+            enemy.healthbar.SetHealth(enemy.hp);
 
         }
 
@@ -367,9 +380,25 @@ public class battleManager : MonoBehaviour
                     int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                     if(enemyCrit <= output[6])
-                        output[4]*=3;
+                        player.hp-=output[4]*3;
+                    else
+                        player.hp-=output[4];
 
-                    player.hp-=output[4];
+                    if(player.hp<=0){
+                        Destroy(p);
+                        temp.SetActive(true);
+                        temp.transform.DetachChildren();
+                        Destroy(temp);
+
+                        SceneManager.UnloadSceneAsync(1);
+                        SceneManager.SetActiveScene(activeScene);
+
+                        StartCoroutine(player.endPvp());
+
+                        Debug.Log("fine");
+                        yield break;
+                    }
+                    player.healthbar.SetHealth(player.hp);
                 }
 
                 if (output[7] >= output[3] + 4){
@@ -381,9 +410,26 @@ public class battleManager : MonoBehaviour
                         int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                         if(enemyCrit <= output[6])
-                            output[4]*=3;
+                            player.hp-=output[4]*3;
+                        else
+                            player.hp-=output[4];
 
-                        player.hp-=output[4];
+                        if(player.hp<=0){
+                            Destroy(p);
+                            temp.SetActive(true);
+                            temp.transform.DetachChildren();
+                            Destroy(temp);
+
+                            SceneManager.UnloadSceneAsync(1);
+                            SceneManager.SetActiveScene(activeScene);
+
+                            StartCoroutine(player.endPvp());
+
+                            Debug.Log("fine");
+                            yield break;
+                        }
+
+                        player.healthbar.SetHealth(player.hp);
 
                     }
                 }
@@ -399,10 +445,29 @@ public class battleManager : MonoBehaviour
                 int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                 if(playerCrit <= output[2])
-                    output[0]*=3;
+                    enemy.hp-=output[0]*3;
 
-                enemy.hp-=output[0];
+                else
+                    enemy.hp-=output[0];
 
+                if(enemy.hp<=0){
+                    Destroy(e);
+                    if(enemies.Contains(e))
+                        enemies.Remove(e);
+                    enemy.cancInfo();
+                    temp.SetActive(true);
+                    temp.transform.DetachChildren();
+                    Destroy(temp);
+
+                    SceneManager.UnloadSceneAsync(1);
+                    SceneManager.SetActiveScene(activeScene);
+
+                    StartCoroutine(player.endPvp());
+
+                    Debug.Log("fine");
+                    yield break;
+                }    
+                enemy.healthbar.SetHealth(enemy.hp);
             }
 
         }
