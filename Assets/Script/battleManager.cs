@@ -8,6 +8,8 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using Dev.ComradeVanti.WaitForAnim;
+using System.Text.RegularExpressions;
 
 public class battleManager : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class battleManager : MonoBehaviour
     public bool showEnemyMovement = false;
     private List<GameObject> movTiles = new List<GameObject>();
 
+    public static bool removeGUI = false;
 
     private Vector3 _origin;
     private Vector3 _difference;        //roba del tutorial bohh
@@ -339,16 +342,16 @@ public class battleManager : MonoBehaviour
 
             int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
-            //spritePlayer.GetComponent<Animator>().Play("Attack");
-
             if(playerCrit <= output[2])
-                enemy.hp-=output[0]*3;
+                Math.Clamp(enemy.hp-=output[0]*3,0,enemy.maxHp);
             else
-                enemy.hp-=output[0];
+                Math.Clamp(enemy.hp-=output[0],0,enemy.maxHp);
 
-            //yield return new WaitWhile(() => spritePlayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f );    
+            
 
-            if(enemy.hp<=0){
+            //yield return spritePlayer.GetComponent<Animator>().PlayAndWait("Attack");
+
+            if(enemy.hp==0){
                 Destroy(e);
                 if(enemies.Contains(e))
                     enemies.Remove(e);
@@ -410,9 +413,9 @@ public class battleManager : MonoBehaviour
                         int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                         if(enemyCrit <= output[6])
-                            player.hp-=output[4]*3;
+                            Math.Clamp(player.hp-=output[4]*3,0,player.maxHp);
                         else
-                            player.hp-=output[4];
+                            Math.Clamp(player.hp-=output[4],0,player.maxHp);
 
                         if(player.hp<=0){
                             Destroy(p);
@@ -445,10 +448,10 @@ public class battleManager : MonoBehaviour
                 int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
                 if(playerCrit <= output[2])
-                    enemy.hp-=output[0]*3;
+                    Math.Clamp(enemy.hp-=output[0]*3,0,enemy.maxHp);
 
                 else
-                    enemy.hp-=output[0];
+                    Math.Clamp(enemy.hp-=output[0],0,enemy.maxHp);
 
                 if(enemy.hp<=0){
                     Destroy(e);
@@ -546,6 +549,7 @@ public class battleManager : MonoBehaviour
             phase = "animation";
             animationText = "enemy";
             animationTime = Time.time + 3;
+            removeGUI=true;
 
             phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
         }
@@ -570,6 +574,7 @@ public class battleManager : MonoBehaviour
             }
             else if (animationText == "enemy")
             {
+                removeGUI = false;
                 Destroy(phaseCanvas);
                 animationText = "0";
                 phase = "Enemy";
@@ -600,7 +605,7 @@ public class battleManager : MonoBehaviour
 
         }
 
-              
+    
         
         
     }

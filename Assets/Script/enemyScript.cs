@@ -575,6 +575,36 @@ public class enemyScript : MonoBehaviour
             infoGUISpawned = false;
         }
 
+        Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x,y,0);
+        if(check.x>0.5||check.x<-0.5||check.y>0.5||check.y<-0.5 || battleManager.removeGUI){
+            if(mouseIsOver || battleManager.removeGUI){
+                 mouseIsOver = false;
+                if(infoGUISpawned)
+                {
+                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                    infoGUISpawned = false;
+                }
+                
+
+                if (battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI) 
+                {
+                    if(movBlueTiles.Count > 0)
+                    {
+                        
+                        foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                        movBlueTiles.Clear();
+
+                        
+                        foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                        attackRedTiles.Clear();
+                    }
+                    
+
+
+                }
+            }
+        }
+
     }
 
 

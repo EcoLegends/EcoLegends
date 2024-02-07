@@ -394,7 +394,14 @@ public class playerScript : MonoBehaviour
                         forecast.transform.parent = Camera.main.transform;
                         forecast.transform.localPosition = new Vector3(0, 0, 10);
                         forecast.transform.localScale = Vector3.one;
+                        int oldX = x;
+                        int oldY = y;
+
+
                         int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player");
+                        x = oldX;
+                        y = oldY;
+
                         forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
                         forecastCooldown = Time.time + 0.3f;
 
@@ -430,6 +437,36 @@ public class playerScript : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*0.1f);
             
             if (transform.position == new Vector3(x, y, -9)) OnRange = true;
+        }
+
+        Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x,y,0);
+        if(check.x>0.5||check.x<-0.5||check.y>0.5||check.y<-0.5 || battleManager.removeGUI){
+            if(mouseIsOver || battleManager.removeGUI){
+                 mouseIsOver = false;
+                if(infoGUISpawned)
+                {
+                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                    infoGUISpawned = false;
+                }
+                
+
+                if (canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI) 
+                {
+                    if(movBlueTiles.Count > 0)
+                    {
+                        mov_tiles_coords.Clear();
+                        foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                        movBlueTiles.Clear();
+
+                        
+                        foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                        attackRedTiles.Clear();
+                    }
+                    
+
+
+                }
+            }
         }
 
 
