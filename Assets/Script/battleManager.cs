@@ -200,9 +200,14 @@ public class battleManager : MonoBehaviour
         {
             if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
             {
-                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange) 
+                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange ) 
                 { 
-                    newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+                    bool check = true;
+                    foreach(GameObject pp in units){
+                        if(pp!=p&&pp.GetComponent<playerScript>().x==t.transform.position.x&&pp.GetComponent<playerScript>().y==t.transform.position.y) check=false;
+                    }
+                    if(check)
+                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
                 }
             }
         }
@@ -311,8 +316,7 @@ public class battleManager : MonoBehaviour
         Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
         SceneManager.SetActiveScene(battleScene);
 
-        temp.SetActive(false);         
-
+        temp.SetActive(false);       
 
         GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
         SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);

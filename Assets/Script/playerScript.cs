@@ -591,6 +591,7 @@ public class playerScript : MonoBehaviour
                             if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
                             {
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+                                Destroy(player_tile);
                                 StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output));
                                 Debug.Log("PVP");
                                 break;
@@ -618,9 +619,9 @@ public class playerScript : MonoBehaviour
         //this.LevelUp();
     }
 
-    public IEnumerator endPvp()
+    public void endPvp()
     {
-        
+    
         Destroy(forecast);
 
         canMove = false;
@@ -644,14 +645,11 @@ public class playerScript : MonoBehaviour
         movBlueTiles.Clear();
         foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
         attackRedTiles.Clear();
-
-        yield return new WaitForEndOfFrame();
-
-        Camera.current.GetComponent<battleManager>().UpdateEnemyMov();
-        if (!canMove)
-        {
-            Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+        GameObject.Find("Main Camera").GetComponent<battleManager>().UpdateEnemyMov();
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("InfoCanvas")){
+            Destroy(e);
         }
+        
     }
 
     public void LevelUp()
