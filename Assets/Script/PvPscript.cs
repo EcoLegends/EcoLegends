@@ -1,3 +1,4 @@
+using Dev.ComradeVanti.WaitForAnim;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,8 +60,8 @@ public class PvPscript : MonoBehaviour
             Debug.Log("fine");
             if(enemy.hp==0){
                 Destroy(e);
-                if(enemies.Contains(e))
-                    enemies.Remove(e);
+                if(battleManager.enemies.Contains(e))
+                    battleManager.enemies.Remove(e);
                 enemy.cancInfo();
                 temp.SetActive(true);
                 temp.transform.DetachChildren();
@@ -170,8 +171,8 @@ public class PvPscript : MonoBehaviour
 
                 if(enemy.hp<=0){
                     Destroy(e);
-                    if(enemies.Contains(e))
-                        enemies.Remove(e);
+                    if(battleManager.enemies.Contains(e))
+                        battleManager.enemies.Remove(e);
                     enemy.cancInfo();
                     temp.SetActive(true);
                     temp.transform.DetachChildren();

@@ -647,7 +647,7 @@ public class playerScript : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
 
-        Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
+        Camera.current.GetComponent<battleManager>().UpdateEnemyMov();
         if (!canMove)
         {
             Destroy(player_tile);                                                                   //rimuove tassello lampeggiante

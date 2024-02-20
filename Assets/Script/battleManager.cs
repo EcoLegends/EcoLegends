@@ -333,11 +333,13 @@ public class battleManager : MonoBehaviour
         enemyParent.transform.position = new Vector3(2, 0, 0);
         enemyParent.transform.Rotate(0, 180, 0);
 
-        //iniziaPvPvero( e,  p,  output,  spritePlayer,  spriteEnemy,  activeScene,  temp)
+        
 
         SceneManager.SetActiveScene(battleScene);
 
-        
+        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, activeScene, temp);
+
+
 
     }
 
