@@ -1,0 +1,864 @@
+fileFormatVersion: 2
+guid: dc102cf3bf462ff49a3d2da51cd1b401
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Manica Sx1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 251
+      width: 46
+      height: 43
+    spriteID: 93791bdb98ed1bd4f82b5551d62a92fe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 251}
+    spritePosition: {x: 70, y: 91}
+  - name: Mano Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 133
+      y: 53
+      width: 24
+      height: 24
+    spriteID: ff65fd7909fe98643ad178aaa3226ed3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 133, y: 53}
+    spritePosition: {x: 78, y: 83}
+  - name: Testa
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 111
+      width: 84
+      height: 74
+    spriteID: 827003d69f19ea442937375f3647f8fc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 111}
+    spritePosition: {x: 77, y: 150}
+  - name: Capelli
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 260
+      width: 24
+      height: 59
+    spriteID: a19c03ee1369b98498d6ea4f2f51cc7e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 260}
+    spritePosition: {x: 104, y: 134}
+  - name: Capelli
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 105
+      y: 302
+      width: 8
+      height: 27
+    spriteID: ec34cdc50766d184d81d3c1a842524de
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 105, y: 302}
+    spritePosition: {x: 143, y: 147}
+  - name: Fiori
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 133
+      y: 117
+      width: 25
+      height: 22
+    spriteID: e7eb42091d24d3142b517d6b4849b83e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 133, y: 117}
+    spritePosition: {x: 119, y: 127}
+  - name: Spalla Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 442
+      width: 31
+      height: 39
+    spriteID: bf315119027efaf4f8c75badc9b48411
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 442}
+    spritePosition: {x: 88, y: 114}
+  - name: ManicaSx2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 302
+      width: 46
+      height: 42
+    spriteID: e890855e8f5484044bf9f17dc21df0f9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 302}
+    spritePosition: {x: 70, y: 86}
+  - name: Braccio Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 101
+      y: 456
+      width: 23
+      height: 33
+    spriteID: d32aa9c30d0673047942cf8197158b14
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 101, y: 456}
+    spritePosition: {x: 83, y: 92}
+  - name: Torso1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 456
+      width: 42
+      height: 38
+    spriteID: c93fa380173da9a41aecc0308031c9c2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 456}
+    spritePosition: {x: 105, y: 127}
+  - name: Torso2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 169
+      y: 4
+      width: 34
+      height: 31
+    spriteID: 4bd0dbbcf9a271d44836a178c9f2bb39
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 169, y: 4}
+    spritePosition: {x: 109, y: 115}
+  - name: Piede Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 98
+      y: 406
+      width: 26
+      height: 42
+    spriteID: 253f620e77aced446952d0a10ba1ec2e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 98, y: 406}
+    spritePosition: {x: 103, y: 45}
+  - name: Gamba Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 111
+      width: 29
+      height: 50
+    spriteID: 95e18b998d1b2ae49a44b7fa9c35c2ab
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 96, y: 111}
+    spritePosition: {x: 104, y: 68}
+  - name: Bacino
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 406
+      width: 39
+      height: 42
+    spriteID: 256dd44620b112b429555d5e0849f8f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 406}
+    spritePosition: {x: 108, y: 85}
+  - name: Piede Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 101
+      y: 352
+      width: 24
+      height: 36
+    spriteID: 63e6f82002f53b14ea536a90cfd4c835
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 101, y: 352}
+    spritePosition: {x: 128, y: 45}
+  - name: Gamba Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 327
+      width: 27
+      height: 52
+    spriteID: b201c565ffd37c74192cc289a7b351fe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 327}
+    spritePosition: {x: 122, y: 69}
+  - name: Manica Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 193
+      width: 45
+      height: 50
+    spriteID: c49183a7cf384ac4090ee4f09e6d2ace
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 193}
+    spritePosition: {x: 131, y: 86}
+  - name: Mano Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 133
+      y: 85
+      width: 23
+      height: 24
+    spriteID: 183f5fc09b76dc543b679a06f98259ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 133, y: 85}
+    spritePosition: {x: 149, y: 83}
+  - name: Spalla Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 133
+      y: 4
+      width: 28
+      height: 41
+    spriteID: 179c4002998237d46b2bb8c01bbb5857
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 133, y: 4}
+    spritePosition: {x: 125, y: 114}
+  - name: Coda1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 51
+      y: 352
+      width: 42
+      height: 46
+    spriteID: b08cd0c1f0955694aaf69c9b81337089
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 51, y: 352}
+    spritePosition: {x: 70, y: 178}
+  - name: Coda3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 193
+      width: 39
+      height: 59
+    spriteID: a8ecf188140bab24c83330fd33ac6621
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 193}
+    spritePosition: {x: 65, y: 95}
+  - name: Coda2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 387
+      width: 27
+      height: 47
+    spriteID: 9e5be222528d48b4083c6fa1b9825fa4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 387}
+    spritePosition: {x: 75, y: 140}
+  - name: Fiori Cerchio
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 121
+      height: 99
+    spriteID: 109c91c2799c03649857c39e520a0119
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 48, y: 130}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Manica Sx1
+    spriteName: Manica Sx1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 93791bdb98ed1bd4f82b5551d62a92fe
+    layerID: 19
+    mosaicPosition: {x: 51, y: 251}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mano Sx
+    spriteName: Mano Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ff65fd7909fe98643ad178aaa3226ed3
+    layerID: 18
+    mosaicPosition: {x: 133, y: 53}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wep_ax082
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6b61b5d849ded7c40b8378f0a4bfe82d
+    layerID: 21
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Testa
+    spriteName: Testa
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 827003d69f19ea442937375f3647f8fc
+    layerID: 30
+    mosaicPosition: {x: 4, y: 111}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Capelli
+    spriteName: Capelli
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a19c03ee1369b98498d6ea4f2f51cc7e
+    layerID: 36
+    mosaicPosition: {x: 4, y: 260}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Capelli
+    spriteName: Capelli
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ec34cdc50766d184d81d3c1a842524de
+    layerID: 37
+    mosaicPosition: {x: 105, y: 302}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Fiori
+    spriteName: Fiori
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e7eb42091d24d3142b517d6b4849b83e
+    layerID: 27
+    mosaicPosition: {x: 133, y: 117}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Spalla Sx
+    spriteName: Spalla Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: bf315119027efaf4f8c75badc9b48411
+    layerID: 16
+    mosaicPosition: {x: 4, y: 442}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: ManicaSx2
+    spriteName: ManicaSx2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e890855e8f5484044bf9f17dc21df0f9
+    layerID: 20
+    mosaicPosition: {x: 51, y: 302}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Braccio Sx
+    spriteName: Braccio Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d32aa9c30d0673047942cf8197158b14
+    layerID: 17
+    mosaicPosition: {x: 101, y: 456}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso1
+    spriteName: Torso1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c93fa380173da9a41aecc0308031c9c2
+    layerID: 5
+    mosaicPosition: {x: 51, y: 456}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso2
+    spriteName: Torso2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4bd0dbbcf9a271d44836a178c9f2bb39
+    layerID: 6
+    mosaicPosition: {x: 169, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Piede Sx
+    spriteName: Piede Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 253f620e77aced446952d0a10ba1ec2e
+    layerID: 13
+    mosaicPosition: {x: 98, y: 406}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Sx
+    spriteName: Gamba Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 95e18b998d1b2ae49a44b7fa9c35c2ab
+    layerID: 12
+    mosaicPosition: {x: 96, y: 111}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Bacino
+    spriteName: Bacino
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 256dd44620b112b429555d5e0849f8f2
+    layerID: 11
+    mosaicPosition: {x: 51, y: 406}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Piede Dx
+    spriteName: Piede Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 63e6f82002f53b14ea536a90cfd4c835
+    layerID: 15
+    mosaicPosition: {x: 101, y: 352}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Dx
+    spriteName: Gamba Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b201c565ffd37c74192cc289a7b351fe
+    layerID: 14
+    mosaicPosition: {x: 4, y: 327}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Manica Dx
+    spriteName: Manica Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c49183a7cf384ac4090ee4f09e6d2ace
+    layerID: 23
+    mosaicPosition: {x: 51, y: 193}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mano Dx
+    spriteName: Mano Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 183f5fc09b76dc543b679a06f98259ee
+    layerID: 24
+    mosaicPosition: {x: 133, y: 85}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Spalla Dx
+    spriteName: Spalla Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 179c4002998237d46b2bb8c01bbb5857
+    layerID: 22
+    mosaicPosition: {x: 133, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Coda1
+    spriteName: Coda1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b08cd0c1f0955694aaf69c9b81337089
+    layerID: 32
+    mosaicPosition: {x: 51, y: 352}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Coda3
+    spriteName: Coda3
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a8ecf188140bab24c83330fd33ac6621
+    layerID: 35
+    mosaicPosition: {x: 4, y: 193}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Coda2
+    spriteName: Coda2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9e5be222528d48b4083c6fa1b9825fa4
+    layerID: 34
+    mosaicPosition: {x: 4, y: 387}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Fiori Cerchio
+    spriteName: Fiori Cerchio
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 109c91c2799c03649857c39e520a0119
+    layerID: 26
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

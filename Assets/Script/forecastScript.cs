@@ -214,6 +214,7 @@ public class forecastScript : MonoBehaviour
     {
         float y = -9.8f;
         float size = 0;
+        
 
         for(float i = 0; i<=100; i+=4)
         {

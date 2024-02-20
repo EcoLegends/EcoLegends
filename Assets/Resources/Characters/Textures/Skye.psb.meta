@@ -1,0 +1,1205 @@
+fileFormatVersion: 2
+guid: a4377fc4cc82c0748afc4f472141b92c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: 'Testa '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 132
+      y: 176
+      width: 90
+      height: 67
+    spriteID: af6de4893e6331c4183aa8e580499390
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 132, y: 176}
+    spritePosition: {x: 55, y: 169}
+  - name: Mano Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 393
+      y: 239
+      width: 23
+      height: 22
+    spriteID: aef7e2546680e36408406db2678322fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 393, y: 239}
+    spritePosition: {x: 63, y: 124}
+  - name: Avanbraccio Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 444
+      width: 30
+      height: 39
+    spriteID: 5562b34693727634aaf756203566781c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 444}
+    spritePosition: {x: 64, y: 122}
+  - name: Manica Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 417
+      y: 275
+      width: 37
+      height: 50
+    spriteID: e042784f59213cd4692cbd05e87eec7d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 417, y: 275}
+    spritePosition: {x: 53, y: 99}
+  - name: Braccio Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 113
+      y: 375
+      width: 23
+      height: 29
+    spriteID: 76519a9b1b57b634287f81db1c6cd03f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 113, y: 375}
+    spritePosition: {x: 74, y: 140}
+  - name: Mano Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 166
+      y: 339
+      width: 17
+      height: 20
+    spriteID: 523cf674051c006448ea4d952083ee1d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 166, y: 339}
+    spritePosition: {x: 134, y: 139}
+  - name: Wep_rd044
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 55
+      y: 375
+      width: 50
+      height: 93
+    spriteID: 59ceefa5baee68d4ab38f4e7cd9476fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 55, y: 375}
+    spritePosition: {x: 127, y: 119}
+  - name: Avanbraccio Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 358
+      y: 239
+      width: 27
+      height: 22
+    spriteID: eb5ba5ee19d8f6240ae55438138e15af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 358, y: 239}
+    spritePosition: {x: 119, y: 140}
+  - name: Manica Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 260
+      y: 275
+      width: 46
+      height: 50
+    spriteID: 89547af906cc8d84081b5bf72f617aad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 260, y: 275}
+    spritePosition: {x: 102, y: 109}
+  - name: Torso2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 260
+      y: 333
+      width: 39
+      height: 29
+    spriteID: 88a56df68a2e8374f9f7761f2615e6c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 260, y: 333}
+    spritePosition: {x: 89, y: 124}
+  - name: Torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 462
+      y: 275
+      width: 39
+      height: 46
+    spriteID: 6f8d5bbbbef6b0c4aa171846aff7315d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 462, y: 275}
+    spritePosition: {x: 84, y: 138}
+  - name: Braccio Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 427
+      y: 234
+      width: 29
+      height: 29
+    spriteID: 2f95782e29f37f148bb63c568cc61afb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 427, y: 234}
+    spritePosition: {x: 107, y: 146}
+  - name: Gamba Sx1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 417
+      y: 333
+      width: 36
+      height: 34
+    spriteID: 91f113373ff5b5045967664f9516623b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 417, y: 333}
+    spritePosition: {x: 92, y: 99}
+  - name: Gamba Sx2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 130
+      y: 339
+      width: 28
+      height: 26
+    spriteID: 4627093a4d2427a4193183378f4be0fe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 130, y: 339}
+    spritePosition: {x: 90, y: 115}
+  - name: Gamba Dx1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 314
+      y: 326
+      width: 37
+      height: 38
+    spriteID: 4f6a32a3589749e4f853c8e2649e1941
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 314, y: 326}
+    spritePosition: {x: 106, y: 102}
+  - name: Gamba Dx2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 464
+      y: 234
+      width: 26
+      height: 32
+    spriteID: 66664dcea81d10f47aff3559d5e04b6b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 464, y: 234}
+    spritePosition: {x: 105, y: 121}
+  - name: Piede Sx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 331
+      width: 28
+      height: 51
+    spriteID: c363608f1b83c8241be364b610e66830
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 331}
+    spritePosition: {x: 98, y: 86}
+  - name: Piede Dx
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 390
+      width: 26
+      height: 46
+    spriteID: 97294476f22db5646a43f8630630adfa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 390}
+    spritePosition: {x: 107, y: 89}
+  - name: Pollo Testa
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 303
+      y: 176
+      width: 47
+      height: 89
+    spriteID: c31ead44b872e8a42bac8b22aca15770
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 303, y: 176}
+    spritePosition: {x: 158, y: 107}
+  - name: Pollo Filo blu1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 55
+      y: 176
+      width: 69
+      height: 91
+    spriteID: 9a18f295a3137ce43bf4c8561f155949
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 55, y: 176}
+    spritePosition: {x: 114, y: 56}
+  - name: Pollo Filo blu2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 230
+      y: 176
+      width: 65
+      height: 84
+    spriteID: ad5fa140502955547aed502c30a858b4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 230, y: 176}
+    spritePosition: {x: 110, y: 77}
+  - name: Pollo Filo blu3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 176
+      width: 43
+      height: 147
+    spriteID: f22edf7a3edea594fa5fe5da72bc7567
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 176}
+    spritePosition: {x: 149, y: 49}
+  - name: Pollo Treccia
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 427
+      y: 176
+      width: 66
+      height: 50
+    spriteID: 2afcafdea14bf5c4ba75820946247698
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 427, y: 176}
+    spritePosition: {x: 105, y: 102}
+  - name: Pollo Pelo
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 130
+      y: 275
+      width: 54
+      height: 56
+    spriteID: 53ba7199f65416943a87093414b36a98
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 130, y: 275}
+    spritePosition: {x: 105, y: 67}
+  - name: Pollo Collo
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 192
+      y: 275
+      width: 60
+      height: 48
+    spriteID: 046c7de553bed354cbfd81512e3ca8d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 192, y: 275}
+    spritePosition: {x: 127, y: 106}
+  - name: Pollo Gamba Davanti
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 367
+      y: 328
+      width: 39
+      height: 37
+    spriteID: 56b6f51edcc6ff54d85b51c41517fb1f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 367, y: 328}
+    spritePosition: {x: 71, y: 59}
+  - name: Pollo Ala Davanti2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 358
+      y: 176
+      width: 61
+      height: 55
+    spriteID: b09f82a5bb842e34aad2c000af02890b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 358, y: 176}
+    spritePosition: {x: 38, y: 98}
+  - name: Pollo Sella
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 192
+      y: 331
+      width: 53
+      height: 29
+    spriteID: 2d6ea0b51ca9d6c47b7d51643d9f7425
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 192, y: 331}
+    spritePosition: {x: 84, y: 115}
+  - name: Pollo Ala Davanti1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 85
+      width: 79
+      height: 83
+    spriteID: 8f8418c709c603b4ca97fe7128496225
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 85}
+    spritePosition: {x: 16, y: 96}
+  - name: Pollo Corpo
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 94
+      height: 73
+    spriteID: 1082eb5838bd6b44d9fa8e761281a27a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 62, y: 70}
+  - name: Pollo Gamba Davanti2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 462
+      y: 329
+      width: 35
+      height: 26
+    spriteID: d2950aebac998e44199c73a9e6b45db2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 462, y: 329}
+    spritePosition: {x: 65, y: 57}
+  - name: Pollo Piede Davanti
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 314
+      y: 275
+      width: 45
+      height: 43
+    spriteID: a9e7fbc26e563aa449a03eff6ee155b1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 314, y: 275}
+    spritePosition: {x: 54, y: 29}
+  - name: Pollo Ala Dietro
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 55
+      y: 275
+      width: 67
+      height: 92
+    spriteID: 86a1e60cb1ae057458d13a75db70bbb9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 55, y: 275}
+    spritePosition: {x: 83, y: 102}
+  - name: Pollo Piede Dietro
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 367
+      y: 275
+      width: 42
+      height: 45
+    spriteID: dc020060de3ee3445b90d517264cd976
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 367, y: 275}
+    spritePosition: {x: 83, y: 46}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: 'Testa '
+    spriteName: 'Testa '
+    isGroup: 0
+    parentIndex: -1
+    spriteID: af6de4893e6331c4183aa8e580499390
+    layerID: 97
+    mosaicPosition: {x: 132, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mano Sx
+    spriteName: Mano Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: aef7e2546680e36408406db2678322fd
+    layerID: 84
+    mosaicPosition: {x: 393, y: 239}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Avanbraccio Sx
+    spriteName: Avanbraccio Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5562b34693727634aaf756203566781c
+    layerID: 83
+    mosaicPosition: {x: 4, y: 444}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Manica Sx
+    spriteName: Manica Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e042784f59213cd4692cbd05e87eec7d
+    layerID: 85
+    mosaicPosition: {x: 417, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Braccio Sx
+    spriteName: Braccio Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 76519a9b1b57b634287f81db1c6cd03f
+    layerID: 81
+    mosaicPosition: {x: 113, y: 375}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Mano Dx
+    spriteName: Mano Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 523cf674051c006448ea4d952083ee1d
+    layerID: 107
+    mosaicPosition: {x: 166, y: 339}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wep_rd044
+    spriteName: Wep_rd044
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 59ceefa5baee68d4ab38f4e7cd9476fd
+    layerID: 105
+    mosaicPosition: {x: 55, y: 375}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Avanbraccio Dx
+    spriteName: Avanbraccio Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: eb5ba5ee19d8f6240ae55438138e15af
+    layerID: 86
+    mosaicPosition: {x: 358, y: 239}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Manica Dx
+    spriteName: Manica Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 89547af906cc8d84081b5bf72f617aad
+    layerID: 88
+    mosaicPosition: {x: 260, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso2
+    spriteName: Torso2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 88a56df68a2e8374f9f7761f2615e6c5
+    layerID: 72
+    mosaicPosition: {x: 260, y: 333}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Torso
+    spriteName: Torso
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6f8d5bbbbef6b0c4aa171846aff7315d
+    layerID: 69
+    mosaicPosition: {x: 462, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Braccio Dx
+    spriteName: Braccio Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2f95782e29f37f148bb63c568cc61afb
+    layerID: 79
+    mosaicPosition: {x: 427, y: 234}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Sx1
+    spriteName: Gamba Sx1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 91f113373ff5b5045967664f9516623b
+    layerID: 75
+    mosaicPosition: {x: 417, y: 333}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Sx2
+    spriteName: Gamba Sx2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4627093a4d2427a4193183378f4be0fe
+    layerID: 73
+    mosaicPosition: {x: 130, y: 339}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Dx1
+    spriteName: Gamba Dx1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4f6a32a3589749e4f853c8e2649e1941
+    layerID: 76
+    mosaicPosition: {x: 314, y: 326}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamba Dx2
+    spriteName: Gamba Dx2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 66664dcea81d10f47aff3559d5e04b6b
+    layerID: 74
+    mosaicPosition: {x: 464, y: 234}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Piede Sx
+    spriteName: Piede Sx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c363608f1b83c8241be364b610e66830
+    layerID: 77
+    mosaicPosition: {x: 4, y: 331}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Piede Dx
+    spriteName: Piede Dx
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 97294476f22db5646a43f8630630adfa
+    layerID: 78
+    mosaicPosition: {x: 4, y: 390}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gruppo 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 44207bea233509c4c8ef69e96986b662
+    layerID: 67
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Pollo Testa
+    spriteName: Pollo Testa
+    isGroup: 0
+    parentIndex: 18
+    spriteID: c31ead44b872e8a42bac8b22aca15770
+    layerID: 33
+    mosaicPosition: {x: 303, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Filo blu1
+    spriteName: Pollo Filo blu1
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 9a18f295a3137ce43bf4c8561f155949
+    layerID: 32
+    mosaicPosition: {x: 55, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Filo blu2
+    spriteName: Pollo Filo blu2
+    isGroup: 0
+    parentIndex: 18
+    spriteID: ad5fa140502955547aed502c30a858b4
+    layerID: 30
+    mosaicPosition: {x: 230, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Filo blu3
+    spriteName: Pollo Filo blu3
+    isGroup: 0
+    parentIndex: 18
+    spriteID: f22edf7a3edea594fa5fe5da72bc7567
+    layerID: 28
+    mosaicPosition: {x: 4, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Treccia
+    spriteName: Pollo Treccia
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 2afcafdea14bf5c4ba75820946247698
+    layerID: 23
+    mosaicPosition: {x: 427, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Pelo
+    spriteName: Pollo Pelo
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 53ba7199f65416943a87093414b36a98
+    layerID: 25
+    mosaicPosition: {x: 130, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Collo
+    spriteName: Pollo Collo
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 046c7de553bed354cbfd81512e3ca8d8
+    layerID: 17
+    mosaicPosition: {x: 192, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Gamba Davanti
+    spriteName: Pollo Gamba Davanti
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 56b6f51edcc6ff54d85b51c41517fb1f
+    layerID: 7
+    mosaicPosition: {x: 367, y: 328}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Ala Davanti2
+    spriteName: Pollo Ala Davanti2
+    isGroup: 0
+    parentIndex: 18
+    spriteID: b09f82a5bb842e34aad2c000af02890b
+    layerID: 15
+    mosaicPosition: {x: 358, y: 176}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Sella
+    spriteName: Pollo Sella
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 2d6ea0b51ca9d6c47b7d51643d9f7425
+    layerID: 14
+    mosaicPosition: {x: 192, y: 331}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Ala Davanti1
+    spriteName: Pollo Ala Davanti1
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 8f8418c709c603b4ca97fe7128496225
+    layerID: 13
+    mosaicPosition: {x: 4, y: 85}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Corpo
+    spriteName: Pollo Corpo
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 1082eb5838bd6b44d9fa8e761281a27a
+    layerID: 5
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Gamba Davanti2
+    spriteName: Pollo Gamba Davanti2
+    isGroup: 0
+    parentIndex: 18
+    spriteID: d2950aebac998e44199c73a9e6b45db2
+    layerID: 8
+    mosaicPosition: {x: 462, y: 329}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Piede Davanti
+    spriteName: Pollo Piede Davanti
+    isGroup: 0
+    parentIndex: 18
+    spriteID: a9e7fbc26e563aa449a03eff6ee155b1
+    layerID: 10
+    mosaicPosition: {x: 314, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Ala Dietro
+    spriteName: Pollo Ala Dietro
+    isGroup: 0
+    parentIndex: 18
+    spriteID: 86a1e60cb1ae057458d13a75db70bbb9
+    layerID: 16
+    mosaicPosition: {x: 55, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Pollo Piede Dietro
+    spriteName: Pollo Piede Dietro
+    isGroup: 0
+    parentIndex: 18
+    spriteID: dc020060de3ee3445b90d517264cd976
+    layerID: 12
+    mosaicPosition: {x: 367, y: 275}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []
