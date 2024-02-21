@@ -286,9 +286,11 @@ public class battleManager : MonoBehaviour
 
     public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output){
 
+        
         enemy = e.GetComponent<enemyScript>();                
         player = p.GetComponent<playerScript>();
 
+        enemy.movType = "move";
 
         Scene activeScene = SceneManager.GetActiveScene();
 

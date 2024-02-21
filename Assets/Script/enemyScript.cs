@@ -663,7 +663,7 @@ public class enemyScript : MonoBehaviour
     public void Move()
     {
 
-        if (movType == "move")
+        if (movType == "move" || movType == "near")
         {
             GameObject nearest = GameObject.FindGameObjectsWithTag("Player")[0];
             foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
@@ -676,20 +676,34 @@ public class enemyScript : MonoBehaviour
 
             int movRemaining = movement;
 
-            foreach(Vector3 p in path)
+            Debug.Log(movType + GetMovTiles().Contains(new Vector2(nearest.GetComponent<playerScript>().x, nearest.GetComponent<playerScript>().y)));
+
+            if (movType == "near" && GetMovTiles().Contains(new Vector2(nearest.GetComponent<playerScript>().x, nearest.GetComponent<playerScript>().y)) == true || movType=="move")
             {
-                movRemaining -= GameObject.Find("map").GetComponent<mapScript>().mapTiles[(int)p.x, (int)p.y].GetComponent<tileScript>().travelCost;
-                if (movRemaining < 0) break;
+                foreach (Vector3 p in path)
+                {
+                    movRemaining -= GameObject.Find("map").GetComponent<mapScript>().mapTiles[(int)p.x, (int)p.y].GetComponent<tileScript>().travelCost;
+                    if (movRemaining < 0) break;
 
-                nextPosition = p;
-                nextPositionChanged = true;
+                    nextPosition = p;
+                    nextPositionChanged = true;
 
-                x = (int)p.x;
-                y = (int)p.y;
+                    x = (int)p.x;
+                    y = (int)p.y;
 
+                }
+                Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
             }
-            Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
-
+            else
+            {
+                nextPosition = transform.position;
+                nextPositionChanged = true;
+            }
+        }
+        else
+        {
+            nextPosition = transform.position;
+            nextPositionChanged = true;
         }
     }
 
