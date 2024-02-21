@@ -2,8 +2,11 @@ using Dev.ComradeVanti.WaitForAnim;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class PvPscript : MonoBehaviour
 {
@@ -44,21 +47,21 @@ public class PvPscript : MonoBehaviour
 
             int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
 
+            Debug.Log("inizio");
+            spritePlayer.GetComponent<Animator>().Play("Attack");
+            GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(true);//GetComponent<TextMeshProUGUI>().text
+            
             if (playerCrit <= output[2])
             {
-
-                //GameObject.Find("dannoPlayer").SetActive(true);             //BISOGNA TROVARE IL PADRE E FARE GETCHILD()
+                GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                 enemy.hp = Math.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
             }
             else
             {
-
-                //GameObject.Find("dannoPlayer").SetActive(true);
+                GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                 enemy.hp = Math.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
             }
 
-            Debug.Log("inizio");
-            spritePlayer.GetComponent<Animator>().Play("Attack");
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
@@ -67,7 +70,9 @@ public class PvPscript : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
+            GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(false);
             Debug.Log("fine");
+
             if (enemy.hp == 0)
             {
 
@@ -94,7 +99,7 @@ public class PvPscript : MonoBehaviour
         {
             Debug.Log("inizio");
             spritePlayer.GetComponent<Animator>().Play("Attack");
-            //GameObject.Find("mancatoPlayer").SetActive(true);
+            GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
@@ -103,7 +108,7 @@ public class PvPscript : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
             }
-            //GameObject.Find("mancatoPlayer").SetActive(false);
+            GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(false);
             Debug.Log("fine");
 
         }
@@ -119,13 +124,18 @@ public class PvPscript : MonoBehaviour
             {
 
                 int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
-
-                if (enemyCrit <= output[6])
-                    player.hp = Math.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
-                else
-                    player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
                 Debug.Log("inizio");
                 spriteEnemy.GetComponent<Animator>().Play("Attack");
+                GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(true);
+
+                if (enemyCrit <= output[6]){
+                    GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
+                    player.hp = Math.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
+                }
+                else{
+                    GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
+                    player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
+                }
                 AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -134,6 +144,7 @@ public class PvPscript : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
+                GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(false);
                 Debug.Log("fine");
                 if (player.hp <= 0)
                 {
@@ -161,7 +172,7 @@ public class PvPscript : MonoBehaviour
             {
                 Debug.Log("inizio");
                 spriteEnemy.GetComponent<Animator>().Play("Attack");
-                //GameObject.Find("mancatoEnemyr").SetActive(true);
+                GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
                 AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -170,7 +181,7 @@ public class PvPscript : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
-                //GameObject.Find("mancatoEnemyr").SetActive(false);
+                GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(false);
                 Debug.Log("fine");
             }
 
@@ -183,14 +194,19 @@ public class PvPscript : MonoBehaviour
                 {
 
                     int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
-
-                    if (enemyCrit <= output[6])
-                        player.hp = Math.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
-                    else
-                        player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
-
                     Debug.Log("inizio");
                     spriteEnemy.GetComponent<Animator>().Play("Attack");
+                    GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(true);
+
+                    if (enemyCrit <= output[6]){
+                        
+                        GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
+                        player.hp = Math.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
+                    }
+                    else{
+                        GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
+                        player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
+                    }
                     AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -199,6 +215,7 @@ public class PvPscript : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                     }
+                    GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(false);
                     Debug.Log("fine");
                     if (player.hp <= 0)
                     {
@@ -229,7 +246,7 @@ public class PvPscript : MonoBehaviour
                 {
                     Debug.Log("inizio");
                     spriteEnemy.GetComponent<Animator>().Play("Attack");
-                    //GameObject.Find("mancatoEnemyr").SetActive(true);
+                    GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
                     AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -238,7 +255,7 @@ public class PvPscript : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                     }
-                    //GameObject.Find("mancatoEnemyr").SetActive(false);
+                    GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(false);
                     Debug.Log("fine");
                 }
             }
@@ -254,15 +271,19 @@ public class PvPscript : MonoBehaviour
             {
 
                 int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
-
-                if (playerCrit <= output[2])
-                    enemy.hp = Math.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
-
-                else
-                    enemy.hp = Math.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
-
                 Debug.Log("inizio");
                 spritePlayer.GetComponent<Animator>().Play("Attack");
+                GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(true);
+
+                if (playerCrit <= output[2]){
+                    GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
+                    enemy.hp = Math.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
+                }
+                else{
+                    GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
+                    enemy.hp = Math.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
+                }
+                
                 AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -271,6 +292,7 @@ public class PvPscript : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
+                GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(false);
                 Debug.Log("fine");
 
                 if (enemy.hp == 0)
@@ -300,7 +322,7 @@ public class PvPscript : MonoBehaviour
 
                 Debug.Log("inizio");
                 spritePlayer.GetComponent<Animator>().Play("Attack");
-                //GameObject.Find("mancatoPlayer").SetActive(true);
+                GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
                 AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -309,7 +331,7 @@ public class PvPscript : MonoBehaviour
                 {
                     yield return new WaitForEndOfFrame();
                 }
-                //GameObject.Find("mancatoPlayer").SetActive(false);
+                GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(false);
                 Debug.Log("fine");
             }
 

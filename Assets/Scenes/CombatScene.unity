@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1352527354}
   - component: {fileID: 1352527353}
   m_Layer: 5
-  m_Name: dannoPlayer
+  m_Name: dannoEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 1604676464}
   - component: {fileID: 1604676463}
   m_Layer: 5
-  m_Name: dannoEnemy
+  m_Name: dannoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.931, y: -0.0156}
+  m_AnchoredPosition: {x: -1.41, y: -0.0156}
   m_SizeDelta: {x: 1.9936, y: 0.4436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025128193
@@ -654,7 +654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.42, y: -0.0156}
+  m_AnchoredPosition: {x: 1.95, y: -0.0156}
   m_SizeDelta: {x: 1.9936, y: 0.4436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3705110939734939318
@@ -783,8 +783,8 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3337832177493449953}
-  - {fileID: 1352527352}
   - {fileID: 1604676462}
+  - {fileID: 1352527352}
   - {fileID: 2025128192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
