@@ -61,11 +61,11 @@ public class PvPscript : MonoBehaviour
                 GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                 enemy.hp = Math.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
             }
-
+            yield return new WaitForEndOfFrame();
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
-            Debug.Log(duration);
+            Debug.Log(firstClip.length);
             while (Time.time < duration)
             {
                 yield return new WaitForEndOfFrame();
@@ -100,6 +100,7 @@ public class PvPscript : MonoBehaviour
             Debug.Log("inizio");
             spritePlayer.GetComponent<Animator>().Play("Attack");
             GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForEndOfFrame();
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
@@ -136,6 +137,7 @@ public class PvPscript : MonoBehaviour
                     GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
                     player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
                 }
+                yield return new WaitForEndOfFrame();
                 AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -173,6 +175,7 @@ public class PvPscript : MonoBehaviour
                 Debug.Log("inizio");
                 spriteEnemy.GetComponent<Animator>().Play("Attack");
                 GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
+                yield return new WaitForEndOfFrame();
                 AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -207,6 +210,7 @@ public class PvPscript : MonoBehaviour
                         GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
                         player.hp = Math.Clamp(player.hp -= output[4], 0, player.maxHp);
                     }
+                    yield return new WaitForEndOfFrame();
                     AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -247,6 +251,7 @@ public class PvPscript : MonoBehaviour
                     Debug.Log("inizio");
                     spriteEnemy.GetComponent<Animator>().Play("Attack");
                     GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
+                    yield return new WaitForEndOfFrame();
                     AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -283,7 +288,7 @@ public class PvPscript : MonoBehaviour
                     GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                     enemy.hp = Math.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
                 }
-                
+                yield return new WaitForEndOfFrame();
                 AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
@@ -323,6 +328,7 @@ public class PvPscript : MonoBehaviour
                 Debug.Log("inizio");
                 spritePlayer.GetComponent<Animator>().Play("Attack");
                 GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
+                yield return new WaitForEndOfFrame();
                 AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                 AnimationClip firstClip = clipInfos[0].clip;
                 float duration = firstClip.length + Time.time;
