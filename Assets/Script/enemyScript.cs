@@ -529,9 +529,9 @@ public class enemyScript : MonoBehaviour
 
     bool nextPositionChanged;
 
-    private bool mouseIsOver = false;
+    public bool mouseIsOver = false;
     private GameObject infoGUI;
-    private bool infoGUISpawned = false;
+    public bool infoGUISpawned = false;
     private float infoGUICooldown = 0;
 
     void Update()

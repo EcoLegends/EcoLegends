@@ -649,7 +649,29 @@ public class playerScript : MonoBehaviour
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("InfoCanvas")){
             Destroy(e);
         }
-        
+
+        StartCoroutine(fixaStoBugDiMerda());
+
+    }
+
+    IEnumerator fixaStoBugDiMerda()
+    {
+        for(int i = 0; i < 60; i++)
+        {
+            foreach (GameObject e in GameObject.FindGameObjectsWithTag("InfoCanvas"))
+            {
+                Destroy(e);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            e.GetComponent<enemyScript>().infoGUISpawned = false;
+
+        }
+
     }
 
     public void LevelUp()
