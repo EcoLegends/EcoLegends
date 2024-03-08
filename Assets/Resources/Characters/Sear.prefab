@@ -520,6 +520,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sear
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 3b6bd6cfd17ba7441a0e69613b7f3f26, type: 3}
+      propertyPath: m_TagString
+      value: distante
+      objectReference: {fileID: 0}
     - target: {fileID: -7561113526181806574, guid: 3b6bd6cfd17ba7441a0e69613b7f3f26, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.027446989

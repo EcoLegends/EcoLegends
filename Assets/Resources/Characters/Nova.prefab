@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 3555825856309128785}
   m_Layer: 0
   m_Name: Nova
-  m_TagString: Untagged
+  m_TagString: vicino
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
