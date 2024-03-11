@@ -284,7 +284,7 @@ public class battleManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output){
+    public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output, string initial_turn){
 
         
         enemy = e.GetComponent<enemyScript>();                
@@ -343,7 +343,7 @@ public class battleManager : MonoBehaviour
 
         SceneManager.SetActiveScene(battleScene);
 
-        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, activeScene, temp);
+        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, activeScene, temp, initial_turn);
 
 
 

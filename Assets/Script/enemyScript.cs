@@ -1,6 +1,8 @@
+
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class Node //usato in A*
@@ -518,7 +520,7 @@ public class enemyScript : MonoBehaviour
                 break;
         }
 
-        Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
+        UnityEngine.Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
 
         transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = (Sprite)all[unitType - 1]; //carica icona arma
         transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = (Sprite)all[4 + weaponType];
@@ -557,6 +559,29 @@ public class enemyScript : MonoBehaviour
             if (transform.position == nextPosition)
             {
                 nextPositionChanged = false;
+                
+                GameObject nearest = GameObject.FindGameObjectsWithTag("Player")[0];
+                foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+                {
+                    if (System.Math.Pow(System.Math.Abs(x - p.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - p.GetComponent<playerScript>().y), 2) < (System.Math.Pow(System.Math.Abs(x - nearest.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - nearest.GetComponent<playerScript>().y), 2))) nearest = p;
+                }
+                
+                
+
+
+                int distance = (int)Mathf.Abs(nearest.transform.position.x - nextPosition.x) + (int)Mathf.Abs(nearest.transform.position.y - nextPosition.y);
+                Debug.Log("Inizia PVP Enemy "+distance);
+                if(distance<=weaponMaxRange&&distance>=weaponMinRange){
+
+                    int [] output = Camera.main.GetComponent<battleManager>().pvp(this.gameObject, nearest, "enemy");     //inizia pvp
+                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(this.gameObject,nearest,output, "enemy"));
+
+
+                }
+
+
+
+
                 battleManager.canMoveEnemy = true;
             }
         }
@@ -705,6 +730,7 @@ public class enemyScript : MonoBehaviour
             nextPosition = transform.position;
             nextPositionChanged = true;
         }
+
     }
 
       

@@ -592,7 +592,7 @@ public class playerScript : MonoBehaviour
                             {
                                 int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
                                 Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output));
+                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
                                 Debug.Log("PVP");
                                 break;
                             }
