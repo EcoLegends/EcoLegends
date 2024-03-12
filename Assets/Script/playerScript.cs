@@ -449,11 +449,17 @@ public class playerScript : MonoBehaviour
                     if(movBlueTiles.Count > 0)
                     {
                         mov_tiles_coords.Clear();
-                        foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                        foreach (GameObject g in movBlueTiles){
+                            if(g!=null)
+                                Destroy(g);
+                        }                          //elimina tasselli blu
                         movBlueTiles.Clear();
 
                         
-                        foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                        foreach (GameObject g in attackRedTiles){
+                            if(g!=null)
+                                Destroy(g);
+                        }                          //elimina tasselli rossi
                         attackRedTiles.Clear();
                     }
                     
