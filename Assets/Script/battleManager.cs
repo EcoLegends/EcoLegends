@@ -343,7 +343,7 @@ public class battleManager : MonoBehaviour
 
         SceneManager.SetActiveScene(battleScene);
 
-        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, activeScene, temp, initial_turn);
+        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn);
 
 
 

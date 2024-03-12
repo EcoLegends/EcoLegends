@@ -38,20 +38,21 @@ public class PvPscript : MonoBehaviour
     // }
 
 
-    public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, Scene activeScene, GameObject temp, string initial_turn)
+    public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn)
     {
 
-        StartCoroutine(iniziaPvP(e, p, output, spritePlayer, spriteEnemy, activeScene, temp, initial_turn));
+        StartCoroutine(iniziaPvP(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn));
 
     }
 
 
 
-    public IEnumerator iniziaPvP(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, Scene activeScene, GameObject temp, string initial_turn)
+    public IEnumerator iniziaPvP(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn)
     {
 
         int playerAS = output[3];
         int enemyAS = output[7];
+        bool move = false;
         
         List<string> turns = new List<string>();
         turns.Add(initial_turn);
@@ -101,7 +102,17 @@ public class PvPscript : MonoBehaviour
                     GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(true);
                     
                     
-                    
+                    if(move == false && player.weaponMaxRange==1){
+
+                        for (float i = 0; i < 100; i++)
+                        {
+                        playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                        yield return new WaitForEndOfFrame();
+
+                        }
+
+                        move = true;
+                    }
                     
                 
                     if (playerCrit <= output[2])
@@ -119,6 +130,8 @@ public class PvPscript : MonoBehaviour
                     }
                     
                     yield return new WaitForEndOfFrame();
+                    
+
                     AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -167,9 +180,21 @@ public class PvPscript : MonoBehaviour
                 else         //player miss
                 {
                     Debug.Log("inizio");
+
+                    if(move == false && player.weaponMaxRange==1){
+
+                        for (float i = 0; i < 100; i++)
+                        {
+                        playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                        yield return new WaitForEndOfFrame();
+
+                        }
+
+                        move = true;
+                    }
+
                     spritePlayer.GetComponent<Animator>().Play("Attack");
 
-                    
 
                     sprite = GameObject.Find("Info Canvas").transform.GetChild(0).gameObject;
                     sprite.transform.localScale = Vector3.zero;
@@ -229,6 +254,18 @@ public class PvPscript : MonoBehaviour
                     sprite = GameObject.Find("Info Canvas").transform.GetChild(2).gameObject;
                     sprite.transform.localScale = Vector3.zero;
                     GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(true);    
+
+                    if(move == false && enemy.weaponMaxRange==1){
+
+                        for (float i = 0; i < 100; i++)
+                        {
+                        enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                        yield return new WaitForEndOfFrame();
+
+                        }
+
+                        move = true;
+                    }
                        
                     
                     if (enemyCrit <= output[6]){
@@ -244,6 +281,7 @@ public class PvPscript : MonoBehaviour
                     }
                     
                     yield return new WaitForEndOfFrame();
+                    
                     AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                     AnimationClip firstClip = clipInfos[0].clip;
                     float duration = firstClip.length + Time.time;
@@ -294,6 +332,19 @@ public class PvPscript : MonoBehaviour
                 else               //enemy miss
                 {
                     Debug.Log("inizio");
+
+                    if(move == false && enemy.weaponMaxRange==1){
+
+                        for (float i = 0; i < 100; i++)
+                        {
+                        enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                        yield return new WaitForEndOfFrame();
+
+                        }
+
+                        move = true;
+                    } 
+                    
                     spriteEnemy.GetComponent<Animator>().Play("Attack");
 
                     sprite = GameObject.Find("Info Canvas").transform.GetChild(3).gameObject;
