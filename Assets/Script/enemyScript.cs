@@ -578,11 +578,14 @@ public class enemyScript : MonoBehaviour
 
 
                 }
+                else
+                {
+                    battleManager.canMoveEnemy = true;
+                }
 
 
 
-
-                battleManager.canMoveEnemy = true;
+                
             }
         }
 

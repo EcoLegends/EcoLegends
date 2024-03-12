@@ -312,13 +312,7 @@ public class playerScript : MonoBehaviour
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
         battleManager.unmovedUnits.Add(gameObject);
 
-        Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende normale il personaggio
-        foreach (Renderer childRenderer in renderers)
-        {
-            childRenderer.material.color = new Color(1F, 1F, 1F);
-        }
-
-        transform.GetChild(0).GetComponent<Animator>().speed = 1;
+        
 
 
 
@@ -341,7 +335,7 @@ public class playerScript : MonoBehaviour
 
     void Update()
     {
-        if (infoGUISpawned && battleManager.unmovedUnits.Count == 0)
+        if (infoGUI!= null && infoGUISpawned && battleManager.unmovedUnits.Count == 0)
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;
@@ -621,7 +615,7 @@ public class playerScript : MonoBehaviour
 
     public void endPvp()
     {
-    
+        if (!(battleManager.phase == "Player")) return;
         Destroy(forecast);
 
         canMove = false;

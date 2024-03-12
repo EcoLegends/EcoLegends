@@ -5037,7 +5037,7 @@ GameObject:
   - component: {fileID: 4611421587589498327}
   m_Layer: 5
   m_Name: Forecast Canvas
-  m_TagString: Untagged
+  m_TagString: Rimuovere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

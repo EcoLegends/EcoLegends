@@ -379,6 +379,7 @@ public class battleManager : MonoBehaviour
             phase = "animation";
             animationText = "player";
             animationTime = Time.time + 3;
+            Debug.Log("EEEEEEEEEEEEEA");
 
             phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
             
@@ -398,6 +399,8 @@ public class battleManager : MonoBehaviour
             animationText = "enemy";
             animationTime = Time.time + 3;
             removeGUI=true;
+
+            
 
             phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
         }
@@ -427,6 +430,21 @@ public class battleManager : MonoBehaviour
                 animationText = "0";
                 phase = "Enemy";
                 Debug.Log("Enemy Phase");
+
+                foreach (GameObject p in GameObject.FindGameObjectsWithTag("Rimuovere")) Destroy(p);
+                foreach (GameObject p in GameObject.FindGameObjectsWithTag("InfoCanvas")) Destroy(p);
+
+
+                foreach (GameObject p in units)
+                {
+                    Component[] renderers = p.transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende normale il personaggio
+                    foreach (Renderer childRenderer in renderers)
+                    {
+                        childRenderer.material.color = new Color(1F, 1F, 1F);
+                    }
+
+                    p.transform.GetChild(0).GetComponent<Animator>().speed = 1;
+                }
 
                 foreach (GameObject enemy in enemies)
                 {
