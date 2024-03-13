@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -333,9 +334,54 @@ public class playerScript : MonoBehaviour
     private bool infoGUISpawned = false;
     private float infoGUICooldown = 0;
 
+
+    private int counter = 0;
     void Update()
     {
-        if (infoGUI!= null && infoGUISpawned && battleManager.unmovedUnits.Count == 0)
+
+        if (!Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition)).Contains(GetComponent<Collider2D>()))
+        {
+
+            if(!dragging) counter++;
+
+            if (counter == 20) {
+                mouseIsOver = false;
+                if (infoGUI != null)
+                {
+                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                    infoGUISpawned = false;
+                    infoGUI = null;
+                }
+                if (forecast != null)
+                {
+                    forecast.GetComponent<forecastScript>().Rimuovi();
+                    forecastSpawned = false;
+                    forecast = null;
+                }
+                if (movBlueTiles.Count > 0)
+                {
+                    mov_tiles_coords.Clear();
+                    foreach (GameObject g in movBlueTiles)
+                    {
+                        if (g != null)
+                            Destroy(g);
+                    }                          //elimina tasselli blu
+                    movBlueTiles.Clear();
+
+
+                    foreach (GameObject g in attackRedTiles)
+                    {
+                        if (g != null)
+                            Destroy(g);
+                    }                          //elimina tasselli rossi
+                    attackRedTiles.Clear();
+                }
+            }
+            
+
+        }
+        else { mouseIsOver = true; counter = 0; }
+        if (infoGUI != null && infoGUISpawned && battleManager.unmovedUnits.Count == 0)
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;
@@ -476,7 +522,7 @@ public class playerScript : MonoBehaviour
     {
         mouseIsOver = true;
 
-        if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
         {
             HighlightMov();
         }
@@ -486,7 +532,7 @@ public class playerScript : MonoBehaviour
     private void OnMouseExit()
     {
         mouseIsOver = false;
-        if(infoGUISpawned)
+        if(infoGUISpawned && infoGUI != null)
         {
             infoGUI.GetComponent<infoGUIScript>().Rimuovi();
             infoGUISpawned = false;

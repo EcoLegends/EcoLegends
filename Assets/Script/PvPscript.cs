@@ -79,7 +79,7 @@ public class PvPscript : MonoBehaviour
         }
         
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1);
 
 
         foreach(string turn in turns){
