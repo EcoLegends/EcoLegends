@@ -117,14 +117,16 @@ public class PvPscript : MonoBehaviour
                 
                     if (playerCrit <= output[2])
                     {
-                        spritePlayer.GetComponent<Animator>().Play("Crit");
+                        if (move) spritePlayer.GetComponent<Animator>().Play("Crit");
+                        else spritePlayer.GetComponent<Animator>().Play("Crit2");
                         GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=(output[0]*3).ToString();
                         enemy.hp = Mathf.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(true);
                     }
                     else
                     {
-                        spritePlayer.GetComponent<Animator>().Play("Attack");
+                        if (move) spritePlayer.GetComponent<Animator>().Play("Attack");
+                        else spritePlayer.GetComponent<Animator>().Play("Attack2");
                         GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                         enemy.hp = Mathf.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
                     }
@@ -193,8 +195,8 @@ public class PvPscript : MonoBehaviour
                         move = true;
                     }
 
-                    spritePlayer.GetComponent<Animator>().Play("Attack");
-
+                    if (move) spritePlayer.GetComponent<Animator>().Play("Attack");
+                    else spritePlayer.GetComponent<Animator>().Play("Attack2");
 
                     sprite = GameObject.Find("Info Canvas").transform.GetChild(0).gameObject;
                     sprite.transform.localScale = Vector3.zero;
@@ -269,13 +271,16 @@ public class PvPscript : MonoBehaviour
                        
                     
                     if (enemyCrit <= output[6]){
-                        spriteEnemy.GetComponent<Animator>().Play("Crit");
+                        if (move) spriteEnemy.GetComponent<Animator>().Play("Crit");
+                        else spriteEnemy.GetComponent<Animator>().Play("Crit2");
                         GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=(output[4]*3).ToString();
                         player.hp = Mathf.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
                         GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.SetActive(true);
                     }
                     else{
-                        spriteEnemy.GetComponent<Animator>().Play("Attack");
+                        if (move) spriteEnemy.GetComponent<Animator>().Play("Attack");
+                        else spriteEnemy.GetComponent<Animator>().Play("Attack2");
+
                         GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
                         player.hp = Mathf.Clamp(player.hp -= output[4], 0, player.maxHp);
                     }
@@ -345,7 +350,8 @@ public class PvPscript : MonoBehaviour
                         move = true;
                     } 
                     
-                    spriteEnemy.GetComponent<Animator>().Play("Attack");
+                    if(move) spriteEnemy.GetComponent<Animator>().Play("Attack");
+                    else spriteEnemy.GetComponent<Animator>().Play("Attack2");
 
                     sprite = GameObject.Find("Info Canvas").transform.GetChild(3).gameObject;
                     sprite.transform.localScale = Vector3.zero;
