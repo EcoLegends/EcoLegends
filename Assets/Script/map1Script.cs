@@ -66,28 +66,28 @@ public class mapScript : MonoBehaviour
 
             Object player = Resources.Load("player", typeof(GameObject));
         GameObject new_player1 = (GameObject) Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-        new_player1.GetComponent<playerScript>().Setup(12,1,"Nova","Nova",1,4,1,1,5,5,90,0,1,5,false,26,10,5,6,9,5,5,3,70,65,30,45,75,40,30,15);
+        new_player1.GetComponent<playerScript>().Setup(12,1,"Nova","Nova",1,4,1,1,5,5,90,0,1,5,false,26,6,6,6,9,5,5,3,70,65,30,45,75,40,30,15);
 
         GameObject new_player2 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-        new_player2.GetComponent<playerScript>().Setup(14,1,"Sear","Sear",1,4,1,2,3,3,90,0,1,2,true,22,6,12,6,7,6,4,7,45,30,65,45,45,35,25,45);
+        new_player2.GetComponent<playerScript>().Setup(14,1,"Sear","Sear",1,4,1,2,3,3,90,0,1,2,true,22,6,6,6,7,6,4,7,45,30,65,45,45,35,25,45);
 
         Object enemy = Resources.Load("enemy", typeof(GameObject));
         GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy1.GetComponent<enemyScript>().Setup(12, 5, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy1.GetComponent<enemyScript>().Setup(12, 5, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
         GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy2.GetComponent<enemyScript>().Setup(14, 6, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy2.GetComponent<enemyScript>().Setup(14, 6, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
         GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy3.GetComponent<enemyScript>().Setup(6, 9, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy3.GetComponent<enemyScript>().Setup(6, 9, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
         GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy4.GetComponent<enemyScript>().Setup(7, 10, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy4.GetComponent<enemyScript>().Setup(7, 10, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
         GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy5.GetComponent<enemyScript>().Setup(17, 10, "???", "Edelgard", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 7, 5, 9, 4, 1, 5);
+        new_enemy5.GetComponent<enemyScript>().Setup(17, 10, "???", "Edelgard", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 3, 5, 9, 4, 1, 5);
         GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy6.GetComponent<enemyScript>().Setup(18, 14, "???", "Edelgard", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 7, 5, 9, 4, 1, 5);
+        new_enemy6.GetComponent<enemyScript>().Setup(18, 14, "???", "Edelgard", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 3, 5, 9, 4, 1, 5);
         GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
         GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
 
     }
 
