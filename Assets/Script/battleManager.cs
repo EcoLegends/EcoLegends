@@ -366,113 +366,132 @@ public class battleManager : MonoBehaviour
 
     public static bool canMoveEnemy = true;
 
+    bool stop=false;
+
     void Update()
     {
 
-        Camera.main.orthographicSize = Mathf.Clamp(Input.GetAxis("Mouse ScrollWheel")*-2 + Camera.main.orthographicSize,2.2f,6.5f); //zoom
-        transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, (Camera.main.orthographicSize * 1.76f - 3.3f), mapDimX - (Camera.main.orthographicSize * 1.76f - 3.3f) - 1), Mathf.Clamp(transform.position.y, (Camera.main.orthographicSize * 0.98f - 3.3f), mapDimY - (Camera.main.orthographicSize * 0.98f - 3.3f) - 1), transform.position.z);
+        if(!stop){
 
+            Camera.main.orthographicSize = Mathf.Clamp(Input.GetAxis("Mouse ScrollWheel")*-2 + Camera.main.orthographicSize,2.2f,6.5f); //zoom
+            transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, (Camera.main.orthographicSize * 1.76f - 3.3f), mapDimX - (Camera.main.orthographicSize * 1.76f - 3.3f) - 1), Mathf.Clamp(transform.position.y, (Camera.main.orthographicSize * 0.98f - 3.3f), mapDimY - (Camera.main.orthographicSize * 0.98f - 3.3f) - 1), transform.position.z);
 
-        if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true)
-        {
-            phase = "animation";
-            animationText = "player";
-            animationTime = Time.time + 3;
-            Debug.Log("EEEEEEEEEEEEEA");
+            if(units.Count == 0){
 
-            phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
-            
-        }
-        else if(unmovedEnemies.Count > 0 && canMoveEnemy == true)
-        {
-            canMoveEnemy = false;
-            unmovedEnemies[0].GetComponent<enemyScript>().Move();
-            unmovedEnemies.RemoveAt(0);
-            
-        }
+                GameObject perdi = Instantiate(Resources.Load<GameObject>("perdi"));
 
+                stop = true;
 
-        if (phase == "Player" && unmovedUnits.Count == 0 && animationText == "0")
-        {
-            phase = "animation";
-            animationText = "enemy";
-            animationTime = Time.time + 3;
-            removeGUI=true;
+            }
 
-            
+            if(enemies.Count == 0){
 
-            phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
-        }
+                GameObject vinci = Instantiate(Resources.Load<GameObject>("vinci"));
 
+                stop = true;
 
+            }
 
-        if (phase == "animation")
-        {
-            if (Time.time < animationTime)
+            if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true)
             {
-                float gradient = animationTime - Time.time;
-                if (animationTime - Time.time > 2 ) gradient = 3 - gradient;
+                phase = "animation";
+                animationText = "player";
+                animationTime = Time.time + 3;
+                Debug.Log("EEEEEEEEEEEEEA");
 
-                if (animationTime - Time.time > 1 && animationTime - Time.time < 2) gradient = 1;
+                phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
+                
+            }
+            else if(unmovedEnemies.Count > 0 && canMoveEnemy == true)
+            {
+                canMoveEnemy = false;
+                unmovedEnemies[0].GetComponent<enemyScript>().Move();
+                unmovedEnemies.RemoveAt(0);
+                
+            }
+
+
+            if (phase == "Player" && unmovedUnits.Count == 0 && animationText == "0")
+            {
+                phase = "animation";
+                animationText = "enemy";
+                animationTime = Time.time + 3;
+                removeGUI=true;
 
                 
 
-                phaseCanvas.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
-                phaseCanvas.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
-                phaseCanvas.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
-
+                phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
             }
-            else if (animationText == "enemy")
+
+
+
+            if (phase == "animation")
             {
-                removeGUI = false;
-                Destroy(phaseCanvas);
-                animationText = "0";
-                phase = "Enemy";
-                Debug.Log("Enemy Phase");
-
-                foreach (GameObject p in GameObject.FindGameObjectsWithTag("Rimuovere")) Destroy(p);
-                foreach (GameObject p in GameObject.FindGameObjectsWithTag("InfoCanvas")) Destroy(p);
-
-
-                foreach (GameObject p in units)
+                if (Time.time < animationTime)
                 {
-                    Component[] renderers = p.transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende normale il personaggio
-                    foreach (Renderer childRenderer in renderers)
+                    float gradient = animationTime - Time.time;
+                    if (animationTime - Time.time > 2 ) gradient = 3 - gradient;
+
+                    if (animationTime - Time.time > 1 && animationTime - Time.time < 2) gradient = 1;
+
+                    
+
+                    phaseCanvas.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
+                    phaseCanvas.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
+                    phaseCanvas.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, (gradient));
+
+                }
+                else if (animationText == "enemy")
+                {
+                    removeGUI = false;
+                    Destroy(phaseCanvas);
+                    animationText = "0";
+                    phase = "Enemy";
+                    Debug.Log("Enemy Phase");
+
+                    foreach (GameObject p in GameObject.FindGameObjectsWithTag("Rimuovere")) Destroy(p);
+                    foreach (GameObject p in GameObject.FindGameObjectsWithTag("InfoCanvas")) Destroy(p);
+
+
+                    foreach (GameObject p in units)
                     {
-                        childRenderer.material.color = new Color(1F, 1F, 1F);
+                        Component[] renderers = p.transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende normale il personaggio
+                        foreach (Renderer childRenderer in renderers)
+                        {
+                            childRenderer.material.color = new Color(1F, 1F, 1F);
+                        }
+
+                        p.transform.GetChild(0).GetComponent<Animator>().speed = 1;
                     }
 
-                    p.transform.GetChild(0).GetComponent<Animator>().speed = 1;
-                }
+                    foreach (GameObject enemy in enemies)
+                    {
+                        unmovedEnemies.Add(enemy);
+                    }
+                    canMoveEnemy = true;
 
-                foreach (GameObject enemy in enemies)
-                {
-                    unmovedEnemies.Add(enemy);
+
                 }
-                canMoveEnemy = true;
+                else if(animationText == "player")
+                {
+                    Destroy(phaseCanvas);
+                    phase = "Player";
+                    animationText = "0";
+                    Debug.Log("Player Phase");
+
+                    foreach (GameObject unit in units)
+                    {
+                        unit.GetComponent<playerScript>().CanMoveAgain();
+                        unit.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+                    }
+                }
 
 
             }
-            else if(animationText == "player")
-            {
-                Destroy(phaseCanvas);
-                phase = "Player";
-                animationText = "0";
-                Debug.Log("Player Phase");
-
-                foreach (GameObject unit in units)
-                {
-                    unit.GetComponent<playerScript>().CanMoveAgain();
-                    unit.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
-                }
-            }
-
-
-        }
 
     
-        
+        }
         
     }
 
