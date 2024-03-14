@@ -100,8 +100,33 @@ public class battleManager : MonoBehaviour
         int enemyProt;
         int enemyCrit;
 
-        int playerAVOBonus = 0; //bonus per quando sei nelle foreste (non ho voglia)
-        int enemyAVOBonus = 0;
+        Vector2 newPos = new Vector2(player.x, player.y);
+
+        foreach (GameObject t in player.movBlueTiles)
+        {
+            if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
+            {
+                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
+                {
+                    bool check = true;
+                    foreach (GameObject pp in units)
+                    {
+                        if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<playerScript>().y == t.transform.position.y) check = false;
+                    }
+                    if (check)
+                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+                }
+            }
+        }
+
+        player.x = (int)newPos.x;
+
+        player.y = (int)newPos.y;
+
+        int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus; 
+        int enemyAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[enemy.x, enemy.y].GetComponent<tileScript>().avoBonus;
+        Debug.Log("AVO BONUS: " + playerAVOBonus + " " + enemyAVOBonus);
+        
 
         //calcolazione del player
 
@@ -194,27 +219,7 @@ public class battleManager : MonoBehaviour
         playerCrit = (int)Mathf.Clamp(playerCrit, 0, 100);
         enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 100);
 
-        Vector2 newPos = new Vector2(player.x, player.y);
-
-        foreach (GameObject t in player.movBlueTiles)
-        {
-            if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
-            {
-                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange ) 
-                { 
-                    bool check = true;
-                    foreach(GameObject pp in units){
-                        if(pp!=p&&pp.GetComponent<playerScript>().x==t.transform.position.x&&pp.GetComponent<playerScript>().y==t.transform.position.y) check=false;
-                    }
-                    if(check)
-                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
-                }
-            }
-        }
-
-        player.x = (int) newPos.x;
-
-        player.y = (int) newPos.y;
+        
 
         int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);               
 
@@ -398,7 +403,7 @@ public class battleManager : MonoBehaviour
                 phase = "animation";
                 animationText = "player";
                 animationTime = Time.time + 3;
-                Debug.Log("EEEEEEEEEEEEEA");
+                UpdateEnemyMov();
 
                 phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
                 

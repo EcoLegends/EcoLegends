@@ -422,7 +422,7 @@ public class enemyScript : MonoBehaviour
     }
 
     public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, string movType, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
-                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res)
     {
 
         this.x = x;
@@ -453,14 +453,8 @@ public class enemyScript : MonoBehaviour
         this.def = def;
         this.res = res;
 
-        this.hpGrowth = hpGrowth;
-        this.strGrowth = strGrowth;
-        this.magGrowth = magGrowth;
-        this.dexGrowth = dexGrowth;
-        this.spdGrowth = spdGrowth;
-        this.lckGrowth = lckGrowth;
-        this.defGrowth = defGrowth;
-        this.resGrowth = resGrowth;
+
+
 
 
     }

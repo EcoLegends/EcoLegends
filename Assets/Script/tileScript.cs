@@ -12,6 +12,7 @@ public class tileScript : MonoBehaviour
     public bool canBeWalkedOn = true;
     [Tooltip("Costo di movimento")]
     public int travelCost = 1;
+    public int avoBonus = 0;
     public int x;
     public int y;
 
@@ -37,7 +38,7 @@ public class tileScript : MonoBehaviour
                 this.description = "Terreno difensivo.";
                 this.canBeWalkedOn = true;
                 this.travelCost = 2;
-
+                this.avoBonus = 30;
                 //sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Decor/TreeTile");
                 //GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
                 break;

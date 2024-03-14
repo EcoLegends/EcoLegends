@@ -62,14 +62,33 @@ public class mapScript : MonoBehaviour
             }
             
         }
+             //x, y, nome, textureFile, lvl, mov, wMinR, weMaxR, wWt, wMt, wHit, wCrit, unitType, wType, wIsMagic, hp, str, mag, dex, spd, lck, def,res, hpG, strG, magG, dexG, spdG, lckG, defG, resG
 
-        //Object player = Resources.Load("player", typeof(GameObject));
-        //GameObject new_player = (GameObject) Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-        //new_player.GetComponent<playerScript>().Setup(1, 1, "Byleth", "Diamant", 5, 2, 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
+            Object player = Resources.Load("player", typeof(GameObject));
+        GameObject new_player1 = (GameObject) Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+        new_player1.GetComponent<playerScript>().Setup(12,1,"Nova","Nova",1,4,1,1,5,5,90,0,1,5,false,26,10,5,6,9,5,5,3,70,65,30,45,75,40,30,15);
 
-        //Object enemy = Resources.Load("enemy", typeof(GameObject));
-        //GameObject new_enemy = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        //new_enemy.GetComponent<enemyScript>().Setup(8, 8, "Byleth", "Diamant", 5, 2, "move", 1, 2, 1, 3, 2, 4, 1, 4, true, 30, 12, 33, 3, 2, 5, 4, 23, 32, 45, 11, 23, 34, 33, 77, 33);
+        GameObject new_player2 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+        new_player2.GetComponent<playerScript>().Setup(14,1,"Sear","Sear",1,4,1,2,3,3,90,0,1,2,true,22,6,12,6,7,6,4,7,45,30,65,45,45,35,25,45);
+
+        Object enemy = Resources.Load("enemy", typeof(GameObject));
+        GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy1.GetComponent<enemyScript>().Setup(12, 5, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy2.GetComponent<enemyScript>().Setup(14, 6, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy3.GetComponent<enemyScript>().Setup(6, 9, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy4.GetComponent<enemyScript>().Setup(7, 10, "???", "Diamant", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy5.GetComponent<enemyScript>().Setup(17, 10, "???", "Edelgard", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 7, 5, 9, 4, 1, 5);
+        GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy6.GetComponent<enemyScript>().Setup(18, 14, "???", "Edelgard", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 7, 5, 9, 4, 1, 5);
+        GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+        GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+        new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "Diamant", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 7, 4, 5, 9, 4, 5, 1);
+
     }
 
     // Update is called once per frame
