@@ -11,6 +11,7 @@ public class forecastScript : MonoBehaviour
 {
     int playerNewHP;
     int enemyNewHP;
+    public bool heal = false;
     public void Setup(GameObject e, GameObject p, int[] returnList)
     {
         enemyScript enemy = e.GetComponent<enemyScript>();
@@ -39,6 +40,8 @@ public class forecastScript : MonoBehaviour
 
         Vector2 newPos = new Vector2(player.x, player.y);
 
+
+
         foreach (GameObject t in player.movBlueTiles)
         {
             if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
@@ -52,13 +55,13 @@ public class forecastScript : MonoBehaviour
 
         int distance = (int)Mathf.Abs(newPos.x - enemy.x) + (int)Mathf.Abs(newPos.y - enemy.y);
 
-        if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
+        if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange && !heal)
         {
             turns.Add("enemy");
             playerNewHP -= enemyDmg;
             if (enemyAS >= playerAS + 4) { playerNewHP -= enemyDmg; turns.Add("enemy"); }
         }
-        if (playerAS >= enemyAS + 4) { enemyNewHP -= playerDmg; turns.Add("player"); }
+        if (playerAS >= enemyAS + 4 && !heal) { enemyNewHP -= playerDmg; turns.Add("player"); }
 
         playerNewHP = Mathf.Clamp(playerNewHP, 0, player.maxHp);
         enemyNewHP = Mathf.Clamp(enemyNewHP, 0, enemy.maxHp);
@@ -66,7 +69,7 @@ public class forecastScript : MonoBehaviour
         string enemyDmgVisual = (player.hp - playerNewHP).ToString();
         string playerDmgVisual = (enemy.hp - enemyNewHP).ToString();
         
-        if (!(enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange))
+        if (!(enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange) || heal)
         {
             enemyDmgVisual = "--";
             enemyHitVisual = "--";
@@ -79,14 +82,17 @@ public class forecastScript : MonoBehaviour
         Sprite img = Resources.Load<Sprite>("Characters/Artwork/Combat/" + player.textureFile);
 
         transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = img;
+
         Object[] all = Resources.LoadAll<Sprite>("weaponIcons");
 
-        transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[player.unitType - 1]; //carica icona arma
-        if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject);
-        else if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
-        else { Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject); }
-
-
+        if (!heal)
+        {
+            transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[player.unitType - 1]; //carica icona arma
+            if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject);
+            else if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
+            else { Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject); }
+        }
+        
         transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(player.maxHp);
         transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetHealth(playerNewHP);
         transform.GetChild(0).GetChild(2).GetChild(3).localPosition = new Vector3((float)playerNewHP / (float)player.maxHp * 3.155f - 1.64f, 0.3615f, 0);
@@ -103,11 +109,14 @@ public class forecastScript : MonoBehaviour
         img = Resources.Load<Sprite>("Characters/Artwork/Combat/" + enemy.textureFile);
 
         transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().sprite = img;
+        if (!heal)
+        {
+            transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[enemy.unitType - 1]; //carica icona arma
+            if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject);
+            else if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject);
+            else { Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject); }
+        }
         
-        transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().sprite = (Sprite)all[enemy.unitType - 1]; //carica icona arma
-        if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject);
-        else if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject);
-        else { Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject); }
 
 
         transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(enemy.maxHp);
@@ -121,6 +130,8 @@ public class forecastScript : MonoBehaviour
         transform.GetChild(1).GetChild(13).GetComponent<TextMeshProUGUI>().text = enemy.nome;
 
         int child_index = 0;
+
+        
 
         switch (turns.Count)
         {
@@ -193,14 +204,20 @@ public class forecastScript : MonoBehaviour
             inc *= -1;
         }
 
-        Color rosso = new Color32(204, 99, 99, 255);
-
         transparency += inc;
-        transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency/100);
+
+        Color rosso = new Color32(113, 231, 146, 255);
+
+        if (!heal)
+        {   rosso = new Color32(204, 99, 99, 255);
+            transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
+
+            if (playerNewHP <= 0) transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120 - transparency) / 100);
+            if (enemyNewHP <= 0) transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120 - transparency) / 100);
+        }
         transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
 
-        if(playerNewHP <= 0) transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120-transparency) / 100);
-        if (enemyNewHP <= 0) transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120-transparency) / 100);
+        
 
     }
 
