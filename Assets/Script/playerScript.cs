@@ -70,6 +70,7 @@ public class playerScript : MonoBehaviour
     public int resGrowth;
 
     [Space]
+    public bool heal;
     public heathBarScript healthbar;
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
     public List<GameObject> movBlueTiles = new List<GameObject>();
@@ -647,6 +648,23 @@ public class playerScript : MonoBehaviour
                     } 
                 }
 
+                foreach( GameObject p in GameObject.FindGameObjectsWithTag("Player")){
+                    if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true){
+
+                        foreach (GameObject t in movBlueTiles)
+                        {
+                            if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                            {
+                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+                                Destroy(player_tile);
+                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
+                                Debug.Log("PVP");
+                                break;
+                            }
+                        }
+
+                    } 
+                }
                 
             }
                                       

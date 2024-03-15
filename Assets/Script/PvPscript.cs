@@ -53,6 +53,7 @@ public class PvPscript : MonoBehaviour
         int playerAS = output[3];
         int enemyAS = output[7];
         bool move = false;
+
         
         List<string> turns = new List<string>();
         turns.Add(initial_turn);
@@ -111,6 +112,10 @@ public class PvPscript : MonoBehaviour
 
                         }
 
+                        
+                        GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
                         move = true;
                     }
                     
@@ -173,6 +178,7 @@ public class PvPscript : MonoBehaviour
                     }
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
+                    yield return new WaitForEndOfFrame();
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
                     Debug.Log("fine");
@@ -191,6 +197,10 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                         }
+
+                        GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
 
                         move = true;
                     }
@@ -234,7 +244,7 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                     }
-
+                    yield return new WaitForEndOfFrame();
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     Debug.Log("fine");
@@ -262,6 +272,9 @@ public class PvPscript : MonoBehaviour
                         for (float i = 0; i < 100; i++)
                         {
                         enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                        GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
                         yield return new WaitForEndOfFrame();
 
                         }
@@ -326,7 +339,7 @@ public class PvPscript : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                     }
-
+                    yield return new WaitForEndOfFrame();
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
@@ -346,7 +359,9 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                         }
-
+                        GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
+                        GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
                         move = true;
                     } 
                     
@@ -389,7 +404,7 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                     }
-
+                    yield return new WaitForEndOfFrame();
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     Debug.Log("fine");
