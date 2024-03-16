@@ -1,0 +1,430 @@
+fileFormatVersion: 2
+guid: 2f913be6b48ae9449ae22118e51162f1
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Livello 62
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 714
+      y: 1479
+      width: 48
+      height: 39
+    spriteID: c2ac42dbb6056a54f9776d568d22d557
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 714, y: 1479}
+    spritePosition: {x: 288, y: 187}
+  - name: Livello 60
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 852
+      y: 577
+      width: 199
+      height: 261
+    spriteID: 25f02688b43f4df48843b5c06d6149a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 852, y: 577}
+    spritePosition: {x: 475, y: 101}
+  - name: Livello 64
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 852
+      y: 351
+      width: 239
+      height: 218
+    spriteID: 162eb45180aae7d4d935113c76b52b74
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 852, y: 351}
+    spritePosition: {x: 145, y: 144}
+  - name: Livello 39
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1076
+      width: 717
+      height: 395
+    spriteID: 2f59e45ee1daebd4880e63276629878f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1076}
+    spritePosition: {x: 54, y: 69}
+  - name: Rettangolo 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1479
+      width: 702
+      height: 390
+    spriteID: 28a07dd3e6282524aabbf10477e2871e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2, y: 1478}
+    spritePosition: {x: 69, y: 69}
+  - name: "Luminosit\xE0/contrasto 1"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 714
+      y: 1526
+      width: 0
+      height: 0
+    spriteID: 32bbf8891c0c2194c8e4782188d690d2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 714, y: 1526}
+    spritePosition: {x: 0, y: 528}
+  - name: Livello 61
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 852
+      y: 4
+      width: 556
+      height: 339
+    spriteID: ec09823baf92cf94e85216e2cef32a1b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 852, y: 4}
+    spritePosition: {x: 192, y: 93}
+  - name: Livello 54
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 840
+      height: 528
+    spriteID: 7aa0c8a70a915f346bcdbd234529b95d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 0, y: 0}
+  - name: Livello 44
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 540
+      width: 840
+      height: 528
+    spriteID: f3946b6f688ad274fbca8dc26439dd9b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 540}
+    spritePosition: {x: 0, y: 0}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Livello 62
+    spriteName: Livello 62
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c2ac42dbb6056a54f9776d568d22d557
+    layerID: 204
+    mosaicPosition: {x: 714, y: 1479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Livello 60
+    spriteName: Livello 60
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 25f02688b43f4df48843b5c06d6149a5
+    layerID: 198
+    mosaicPosition: {x: 852, y: 577}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Livello 64
+    spriteName: Livello 64
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 162eb45180aae7d4d935113c76b52b74
+    layerID: 206
+    mosaicPosition: {x: 852, y: 351}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: terrain_atlas
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 406356d49dcfc2046bc8782a9dc91711
+    layerID: 122
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Livello 39
+    spriteName: Livello 39
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2f59e45ee1daebd4880e63276629878f
+    layerID: 140
+    mosaicPosition: {x: 4, y: 1076}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Rettangolo 1
+    spriteName: Rettangolo 1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 28a07dd3e6282524aabbf10477e2871e
+    layerID: 136
+    mosaicPosition: {x: 4, y: 1479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: "Luminosit\xE0/contrasto 1"
+    spriteName: "Luminosit\xE0/contrasto 1"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 32bbf8891c0c2194c8e4782188d690d2
+    layerID: 200
+    mosaicPosition: {x: 714, y: 1526}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Livello 61
+    spriteName: Livello 61
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ec09823baf92cf94e85216e2cef32a1b
+    layerID: 201
+    mosaicPosition: {x: 852, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Livello 54
+    spriteName: Livello 54
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7aa0c8a70a915f346bcdbd234529b95d
+    layerID: 159
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Livello 44
+    spriteName: Livello 44
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f3946b6f688ad274fbca8dc26439dd9b
+    layerID: 146
+    mosaicPosition: {x: 4, y: 540}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

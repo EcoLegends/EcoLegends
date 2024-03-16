@@ -263,7 +263,7 @@ public class battleManager : MonoBehaviour
     {
         if (showEnemyMovement)
         {
-            foreach (GameObject g in movTiles) Destroy(g);
+            foreach (GameObject g in movTiles) if(g!=null) Destroy(g);
             List<Vector2> mov = new List<Vector2>();
 
             foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))

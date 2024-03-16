@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4037763051502876528}
   m_Layer: 0
   m_Name: movTileEnemyAllPrefab
-  m_TagString: Untagged
+  m_TagString: tileViola
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

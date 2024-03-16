@@ -335,12 +335,12 @@ public class playerScript : MonoBehaviour
     private GameObject infoGUI;
     private bool infoGUISpawned = false;
     private float infoGUICooldown = 0;
-
+    private GameObject newPosTile;
 
     private int counter = 0;
     void Update()
     {
-
+        if(!forecastSpawned && newPosTile!= null) Destroy(newPosTile);
         if (!Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition)).Contains(GetComponent<Collider2D>()))
         {
 
@@ -441,11 +441,14 @@ public class playerScript : MonoBehaviour
 
 
                         int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player");
+                        newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+                        newPosTile.tag = "Rimuovere";
                         x = oldX;
                         y = oldY;
 
                         forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
                         forecastCooldown = Time.time + 0.3f;
+                        
 
                         if(infoGUI != null)
                         {

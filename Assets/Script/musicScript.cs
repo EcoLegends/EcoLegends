@@ -21,6 +21,38 @@ public class musicScript : MonoBehaviour
         
     }
 
+    public void ChangeMusic(string new_music)
+    {
+        if(music!= new_music) 
+        { 
+            music = new_music;
+            StartCoroutine(FadeOut(GetComponent<AudioSource>(), music));
+            
+        }
+        
+    }
+
+    public static IEnumerator FadeOut(AudioSource audioSource,string music)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime/0.5f;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+        AudioClip musicStart = (AudioClip)Resources.Load("Sounds/Music/Intro - " + music);
+        audioSource.clip = (AudioClip)Resources.Load("Sounds/Music/Loop - " + music);
+
+
+        audioSource.PlayOneShot(musicStart);
+        audioSource.PlayScheduled(AudioSettings.dspTime + musicStart.length);
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);

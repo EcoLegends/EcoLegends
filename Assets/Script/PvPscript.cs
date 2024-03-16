@@ -57,7 +57,8 @@ public class PvPscript : MonoBehaviour
         int enemyAS = output[7];
         bool move = false;
 
-        
+        GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN+"_pvp");
+        GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
         List<string> turns = new List<string>();
         turns.Add(initial_turn);
 
@@ -81,6 +82,12 @@ public class PvPscript : MonoBehaviour
         }
         if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
         }
+
+        if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
+        yield return new WaitForEndOfFrame();
+        UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
+        GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("tileViola")) Destroy(g);
 
         int damageDealt = 0;
 

@@ -99,7 +99,9 @@ public class enemyScript : MonoBehaviour
     [Space]
     public heathBarScript healthbar;
 
-
+    [Space]
+    public bool boss = false;
+    public string musica = "no";
 
     public List<Vector3> AStar(int endx, int endy)
     {
@@ -241,6 +243,8 @@ public class enemyScript : MonoBehaviour
 
         movTiles.Add(map[x, y]);
         movTilesDistance.Add(999);
+
+        
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
         
@@ -297,6 +301,7 @@ public class enemyScript : MonoBehaviour
 
         movTiles.Add(map[x, y]);
         movTilesDistance.Add(999);
+        
         AdjCheck(x, y, movement, ref map, ref movTiles, ref movTilesDistance);
 
         Object mov_tile_prefab = Resources.Load("movTilePrefab", typeof(GameObject));
@@ -453,9 +458,42 @@ public class enemyScript : MonoBehaviour
         this.def = def;
         this.res = res;
 
+    }
+
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, string movType, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, string musica)
+    {
+
+        this.x = x;
+        this.y = y;
+        this.nome = nome;
+        this.textureFile = textureFile;
+        this.lvl = lvl;
+        this.movement = movement;
+        this.movType = movType;
+
+        this.weaponMinRange = weaponMinRange;
+        this.weaponMaxRange = weaponMaxRange;
+        this.weaponWt = weaponWt;
+        this.weaponMt = weaponMt;
+        this.weaponHit = weaponHit;
+        this.weaponCrit = weaponCrit;
+        this.unitType = unitType;
+        this.weaponType = weaponType;
+        this.weaponIsMagic = weaponIsMagic;
 
 
+        this.maxHp = hp;
+        this.str = str;
+        this.mag = mag;
+        this.dex = dex;
+        this.spd = spd;
+        this.lck = lck;
+        this.def = def;
+        this.res = res;
 
+        boss = true;
+        this.musica = musica;
 
     }
 
