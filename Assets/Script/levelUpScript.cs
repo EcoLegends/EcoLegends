@@ -59,7 +59,16 @@ public class levelUpScript : MonoBehaviour
         string[] names = { "HP", "Str", "Mag", "Dex", "Spd", "Lck", "Def", "Res" };
         int[] values = { hp, str, mag, dex, spd, lck, def, res };
 
-        yield return new WaitForSeconds(1);
+        float scale = 0;
+
+        for(int i = 0; i < 100; i++)
+        {
+            scale += (0.36f / 100);
+            GetComponent<RectTransform>().localScale = new Vector3 (scale, scale, scale);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(0.5f);
 
         transform.GetChild(11).GetComponent<AudioSource>().PlayOneShot(levelUp);
 
@@ -109,7 +118,17 @@ public class levelUpScript : MonoBehaviour
 
 
         yield return new WaitForSeconds(1);
+        scale = 0.36f;
+
+        for (int i = 0; i < 100; i++)
+        {
+            scale -= (0.36f / 100);
+            GetComponent<RectTransform>().localScale = new Vector3(scale, scale, scale);
+            yield return new WaitForEndOfFrame();
+        }
+        GameObject.Find("CombatCamera").GetComponent<PvPscript>().finitoLvlUp = true;
         Destroy(this.gameObject);
+        
     }
     void Update()
     {

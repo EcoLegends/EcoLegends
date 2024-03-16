@@ -24,6 +24,7 @@ public class playerScript : MonoBehaviour
     public string nome = "Test";
     public string textureFile = "Edelgard";
     public int lvl = 1;                                         //statistiche
+    public int exp = 0;
     public int movement = 3;
 
     [Space] //armi
@@ -213,7 +214,7 @@ public class playerScript : MonoBehaviour
 
 
 
-    public void Setup(int x, int y, string nome, string textureFile, int lvl, int movement, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
+    public void Setup(int x, int y, string nome, string textureFile, int lvl, int exp, int movement, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
                         int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
     {
 
@@ -649,21 +650,21 @@ public class playerScript : MonoBehaviour
                 }
 
                 foreach( GameObject p in GameObject.FindGameObjectsWithTag("Player")){
-                    if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true){
+                    //if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true){
 
-                        foreach (GameObject t in movBlueTiles)
-                        {
-                            if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
-                            {
-                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
-                                Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
-                                Debug.Log("PVP");
-                                break;
-                            }
-                        }
+                    //    foreach (GameObject t in movBlueTiles)
+                    //    {
+                    //        if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                    //        {
+                    //            int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+                    //            Destroy(player_tile);
+                    //            StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
+                    //            Debug.Log("PVP");
+                    //            break;
+                    //        }
+                    //    }
 
-                    } 
+                    //} 
                 }
                 
             }

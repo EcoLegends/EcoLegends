@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.Analytics;
 
 public class PvPscript : MonoBehaviour
 {
@@ -15,9 +18,9 @@ public class PvPscript : MonoBehaviour
     
     GameObject sprite;
     Vector3 oldPos;
-    
 
-    
+    public bool finitoLvlUp = false;
+
 
     void Start()
     {
@@ -78,7 +81,8 @@ public class PvPscript : MonoBehaviour
         }
         if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
         }
-        
+
+        int damageDealt = 0;
 
         yield return new WaitForSeconds(1);
 
@@ -127,6 +131,7 @@ public class PvPscript : MonoBehaviour
                         GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=(output[0]*3).ToString();
                         enemy.hp = Mathf.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(true);
+                        damageDealt += output[0] * 3;
                     }
                     else
                     {
@@ -134,6 +139,7 @@ public class PvPscript : MonoBehaviour
                         else spritePlayer.GetComponent<Animator>().Play("Attack2");
                         GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                         enemy.hp = Mathf.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
+                        damageDealt += output[0];
                     }
                     
                     yield return new WaitForEndOfFrame();
@@ -176,9 +182,9 @@ public class PvPscript : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                     }
+                    yield return new WaitForSeconds(1);
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
-                    yield return new WaitForEndOfFrame();
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
                     Debug.Log("fine");
@@ -244,7 +250,7 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                     }
-                    yield return new WaitForEndOfFrame();
+                    yield return new WaitForSeconds(1);
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     Debug.Log("fine");
@@ -339,7 +345,7 @@ public class PvPscript : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                     }
-                    yield return new WaitForEndOfFrame();
+                    yield return new WaitForSeconds(1);
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
@@ -404,24 +410,91 @@ public class PvPscript : MonoBehaviour
                         yield return new WaitForEndOfFrame();
 
                     }
-                    yield return new WaitForEndOfFrame();
+                    
+                    yield return new WaitForSeconds(1);
                     sprite.SetActive(false);
                     sprite.transform.position = oldPos;
                     Debug.Log("fine");
                 }
 
             }
-            yield return new WaitForSeconds(1);
+           
 
         }
 
         if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
 
 
+        int expGained = Mathf.Clamp(damageDealt, 0, 20);
+        if (expGained != 0)
+        {
+
+
+            int expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 2));
+            if (enemy.hp == 0) expGained = Mathf.Clamp(30 + (enemy.lvl - 1),0, 100);
+
+
+            GameObject expGUI = (GameObject)Instantiate(Resources.Load("ExpCanvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+            expGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.nome;
+            expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - player.exp).ToString();
+            expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained).ToString();
+            expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
+            expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
+
+            float y = expGUI.transform.position.y * -1;
+            for (int i = 0; i < 100; i++)
+            {
+                y += 0.01516f;
+                expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
+                yield return new WaitForEndOfFrame();
+            }
+
+            yield return new WaitForSeconds(0.5f);
+            bool lvlup = false;
+            AudioClip expSfx = (AudioClip)Resources.Load("Sounds/SFX/Exp");
+            
+            for (int i = 0; i < expGained; i++)
+            {
+                yield return new WaitForSeconds(1/(float)expGained);
+                player.exp++;
+                if(i%2==0 || expGained < 15)expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
+                if (player.exp >= expNeeded)
+                {
+                    player.exp = 0;
+                    expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 1));
+                    expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
+                    expGUI.transform.GetChild(6).GetChild(1).GetComponent<Image>().color = new Color(0, 186, 50);
+                    lvlup = true;
+                }
+                expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - (player.exp)).ToString();
+                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained - i).ToString();
+
+                expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
+
+            }
+            expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "0";
+
+            yield return new WaitForSeconds(2);
+
+            for (int i = 0; i < 100; i++)
+            {
+                y -= 0.01516f;
+                expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
+                yield return new WaitForEndOfFrame();
+            }
+
+            if (lvlup)
+            {
+                finitoLvlUp = false;
+                LevelUp(player);
+                while (!finitoLvlUp) yield return new WaitForEndOfFrame();
+            }
+
+        }
 
         if (enemy.hp == 0)
         {
-
+            
             if (battleManager.enemies.Contains(e))
                 battleManager.enemies.Remove(e);
             enemy.cancInfo();
@@ -474,6 +547,51 @@ public class PvPscript : MonoBehaviour
         player.endPvp();
         
         Debug.Log("fine");
+
+    }
+
+
+    public void LevelUp(playerScript player)
+    {
+
+
+        int[] increments = { 0, 0, 0, 0, 0, 0, 0, 0 }; //incrementi iniziali
+
+        int n1 = Random.Range(0, 8);        //garantisce 1o incremento
+        int n2;
+
+        do
+        {                                   //garantisce 2o incremento
+            n2 = Random.Range(0, 8);
+        } while (n1 == n2);
+
+        increments[n1] = 1;
+        increments[n2] = 1;
+
+        int[] incrementPercentage = { player.hpGrowth, player.strGrowth, player.magGrowth, player.dexGrowth, player.spdGrowth, player.lckGrowth, player.defGrowth, player.resGrowth };
+
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
+        }
+
+        Object canvas = Resources.Load("Level Up Canvas", typeof(GameObject));
+
+        GameObject levelUpCanvas = (GameObject)Instantiate(canvas, new Vector3(0.159606f, 0.9915071f, 0), Quaternion.identity);
+        levelUpCanvas.GetComponent<levelUpScript>().Setup(player.nome, player.lvl, player.maxHp, player.str, player.mag, player.dex, player.spd, player.lck, player.def, player.res, increments);
+
+        player.lvl++;
+        player.maxHp += increments[0];            //incrementa i valori
+        player.str += increments[1];
+        player.mag += increments[2];
+        player.dex += increments[3];
+        player.spd += increments[4];
+        player.lck += increments[5];
+        player.def += increments[6];
+        player.res += increments[7];
+
+        player.healthbar.SetMaxHealth(player.maxHp);
 
     }
 

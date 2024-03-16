@@ -18,6 +18,6 @@ public class heathBarScript : MonoBehaviour
     public void SetHealth(int health)
     {
         slider.value = health;
-        hpText.text = health.ToString();
+        if(hpText!=null) hpText.text = health.ToString();
     }
 }

@@ -714,7 +714,7 @@ public class enemyScript : MonoBehaviour
                     y = (int)p.y;
 
                 }
-                Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
+                GameObject.Find("Main Camera").GetComponent<battleManager>().UpdateEnemyMov();
             }
             else
             {
