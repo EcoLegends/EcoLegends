@@ -1,15 +1,11 @@
-using Dev.ComradeVanti.WaitForAnim;
 
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.Analytics;
+using Unity.Mathematics;
 
 public class PvPscript : MonoBehaviour
 {
@@ -556,17 +552,24 @@ public class PvPscript : MonoBehaviour
             sprite.transform.localScale = Vector3.zero;
             sprite.SetActive(true);
 
-            spritePlayer.GetComponent<Animator>().Play("Attack");
+            spritePlayer.GetComponent<Animator>().Play("Heal");
             GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=(player.lvl+9).ToString();
             player2.hp = Mathf.Clamp(player2.hp += player.lvl+9, 0, player2.maxHp);
 
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
+            float half = firstClip.length / 2 + Time.time;
+            bool enemyMissStarted = false;
             Debug.Log(firstClip.length);
 
             while (Time.time < duration)
             {
+                if (Time.time > half && !enemyMissStarted)
+                {
+                    enemyMissStarted = true;
+                    spritePlayer.GetComponent<Animator>().Play("Select");
+                }
                 yield return new WaitForEndOfFrame();
             }
 
@@ -613,12 +616,12 @@ public class PvPscript : MonoBehaviour
 
         int[] increments = { 0, 0, 0, 0, 0, 0, 0, 0 }; //incrementi iniziali
 
-        int n1 = Random.Range(0, 8);        //garantisce 1o incremento
+        int n1 = UnityEngine.Random.Range(0, 8);        //garantisce 1o incremento
         int n2;
 
         do
         {                                   //garantisce 2o incremento
-            n2 = Random.Range(0, 8);
+            n2 = UnityEngine.Random.Range(0, 8);
         } while (n1 == n2);
 
         increments[n1] = 1;
@@ -629,7 +632,7 @@ public class PvPscript : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            if (Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
+            if (UnityEngine.Random.Range(1, 100) <= incrementPercentage[i]) increments[i] = 1;        //se il numero e' minore della % di crescita allora stat incrementa
         }
 
         Object canvas = Resources.Load("Level Up Canvas", typeof(GameObject));

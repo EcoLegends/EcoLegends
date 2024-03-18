@@ -215,7 +215,7 @@ public class playerScript : MonoBehaviour
 
 
     public void Setup(int x, int y, string nome, string textureFile, int lvl, int exp, int movement, int weaponMinRange, int weaponMaxRange, int weaponWt, int weaponMt, int weaponHit, int weaponCrit, int unitType, int weaponType, bool weaponIsMagic,
-                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth)
+                        int hp, int str, int mag, int dex, int spd, int lck, int def, int res, int hpGrowth, int strGrowth, int magGrowth, int dexGrowth, int spdGrowth, int lckGrowth, int defGrowth, int resGrowth, bool heal)
     {
 
         this.x = x;
@@ -253,7 +253,7 @@ public class playerScript : MonoBehaviour
         this.lckGrowth = lckGrowth;
         this.defGrowth = defGrowth;
         this.resGrowth = resGrowth;
-
+        this.heal = heal;
 
     }
 
@@ -488,9 +488,9 @@ public class playerScript : MonoBehaviour
         if(check.x>0.5||check.x<-0.5||check.y>0.5||check.y<-0.5 || battleManager.removeGUI){
             if(mouseIsOver || battleManager.removeGUI){
                  mouseIsOver = false;
-                if(infoGUISpawned)
+                if(infoGUISpawned )
                 {
-                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                    if(infoGUI != null)infoGUI.GetComponent<infoGUIScript>().Rimuovi();
                     infoGUISpawned = false;
                 }
                 
