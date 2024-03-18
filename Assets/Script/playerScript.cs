@@ -72,6 +72,7 @@ public class playerScript : MonoBehaviour
 
     [Space]
     public bool heal;
+    public bool cura;//se vuoi curare
     public heathBarScript healthbar;
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
     public List<GameObject> movBlueTiles = new List<GameObject>();
@@ -411,7 +412,8 @@ public class playerScript : MonoBehaviour
                 transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
                 
                 if(forecastCooldown <= Time.time)
-                {
+                {   
+                    bool cura=false;
                     target = null;
                     foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
                     {
@@ -422,6 +424,7 @@ public class playerScript : MonoBehaviour
                                 if(e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
                                 {
                                     target = e;
+                                    cura = false;
                                     break;
                                 }
                             }
@@ -429,10 +432,31 @@ public class playerScript : MonoBehaviour
                         }
                     }
 
+                    foreach( GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+                    {
+                        if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true && e!=this.gameObject)
+                        {
+
+                            foreach (GameObject t in movBlueTiles)
+                            {
+                                if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
+                                {
+                                    target = e; 
+                                    cura = true;
+                                    break;
+                                }
+                            }
+
+                        } 
+                    }
+
                     if (!forecastSpawned && target != null)
                     {
                         forecastSpawned = true;
-                        forecast = (GameObject)Instantiate(Resources.Load("Forecast Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                        if(cura==false)
+                            forecast = (GameObject)Instantiate(Resources.Load("Forecast Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                        else
+                            forecast = (GameObject)Instantiate(Resources.Load("Forecast HEAL Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
                         forecast.transform.parent = Camera.main.transform;
                         forecast.transform.localPosition = new Vector3(0, 0, 10);
                         forecast.transform.localScale = Vector3.one;
@@ -440,13 +464,13 @@ public class playerScript : MonoBehaviour
                         int oldY = y;
 
 
-                        int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player");
+                        int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player",cura);
                         newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
                         newPosTile.tag = "Rimuovere";
                         x = oldX;
                         y = oldY;
 
-                        forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output);
+                        forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
                         forecastCooldown = Time.time + 0.3f;
                         
 
@@ -633,6 +657,8 @@ public class playerScript : MonoBehaviour
 
 
             }else {
+                
+                
 
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
@@ -641,9 +667,10 @@ public class playerScript : MonoBehaviour
                         {
                             if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
                             {
-                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+                                cura=false;
+                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player",cura);     //inizia pvp
                                 Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
+                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player",cura));
                                 Debug.Log("PVP");
                                 break;
                             }
@@ -651,7 +678,6 @@ public class playerScript : MonoBehaviour
 
                     } 
                 }
-
                 foreach( GameObject e in GameObject.FindGameObjectsWithTag("Player")){
                     if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true){
 
@@ -659,9 +685,10 @@ public class playerScript : MonoBehaviour
                         {
                             if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
                             {
-                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player");     //inizia pvp
+                                cura = true;
+                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player",cura);     //inizia pvp
                                 Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player"));
+                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player", cura));
                                 Debug.Log("PVP");
                                 break;
                             }

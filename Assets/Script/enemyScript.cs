@@ -605,8 +605,8 @@ public class enemyScript : MonoBehaviour
                 Debug.Log("Inizia PVP Enemy "+distance);
                 if(distance<=weaponMaxRange&&distance>=weaponMinRange){
 
-                    int [] output = Camera.main.GetComponent<battleManager>().pvp(this.gameObject, nearest, "enemy");     //inizia pvp
-                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(this.gameObject,nearest,output, "enemy"));
+                    int [] output = Camera.main.GetComponent<battleManager>().pvp(this.gameObject, nearest, "enemy",false);     //inizia pvp
+                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(this.gameObject,nearest,output, "enemy",false));
 
 
                 }

@@ -11,8 +11,8 @@ public class forecastScript : MonoBehaviour
 {
     int playerNewHP;
     int enemyNewHP;
-    public bool heal = false;
-    public void Setup(GameObject e, GameObject p, int[] returnList)
+    
+    public void Setup(GameObject e, GameObject p, int[] returnList, bool heal)
     {
         enemyScript enemy = e.GetComponent<enemyScript>();
         playerScript player = p.GetComponent<playerScript>();

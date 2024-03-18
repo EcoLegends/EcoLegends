@@ -77,12 +77,12 @@ public class battleManager : MonoBehaviour
     enemyScript enemy;
 
 
-    public int[] pvp(GameObject e, GameObject p, string initial_turn)
+    public int[] pvp(GameObject e, GameObject p, string initial_turn, bool cura)
     {
         
         player = p.GetComponent<playerScript>();
 
-        if(player.heal==false)
+        if(cura==false)
         {
             enemy = e.GetComponent<enemyScript>();                
             
@@ -296,13 +296,13 @@ public class battleManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output, string initial_turn){
+    public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output, string initial_turn, bool cura){
 
     
                     
         playerScript player = p.GetComponent<playerScript>();
 
-        if(player.heal==false)
+        if(cura==false)
         {
             enemyScript enemy = e.GetComponent<enemyScript>();;
 
