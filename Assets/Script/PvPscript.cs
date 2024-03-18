@@ -53,494 +53,542 @@ public class PvPscript : MonoBehaviour
     public IEnumerator iniziaPvP(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn)
     {
 
-        int playerAS = output[3];
-        int enemyAS = output[7];
-        bool move = false;
-
-        GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN+"_pvp");
-        GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
-        List<string> turns = new List<string>();
-        turns.Add(initial_turn);
-
-        enemyScript enemy = e.GetComponent<enemyScript>();
         playerScript player = p.GetComponent<playerScript>();
 
-        int distance = (int)Mathf.Abs(player.x - enemy.x) + (int)Mathf.Abs(player.y - enemy.y);
+        if(player.heal==false)
+        {
+            int playerAS = output[3];
+            int enemyAS = output[7];
+            bool move = false;
 
-        if(initial_turn=="player"){
-            if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
-        {
-            turns.Add("enemy");
-            if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
-        }
-        if (playerAS >= enemyAS + 4) { turns.Add("player"); }
-        }else{
-            if (player.weaponMinRange <= distance && distance <= player.weaponMaxRange)
-        {
-            turns.Add("player");
+            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN+"_pvp");
+            GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
+            List<string> turns = new List<string>();
+            turns.Add(initial_turn);
+
+            enemyScript enemy = e.GetComponent<enemyScript>();
+            
+
+            int distance = (int)Mathf.Abs(player.x - enemy.x) + (int)Mathf.Abs(player.y - enemy.y);
+
+            if(initial_turn=="player"){
+                if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
+            {
+                turns.Add("enemy");
+                if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
+            }
             if (playerAS >= enemyAS + 4) { turns.Add("player"); }
-        }
-        if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
-        }
+            }else{
+                if (player.weaponMinRange <= distance && distance <= player.weaponMaxRange)
+            {
+                turns.Add("player");
+                if (playerAS >= enemyAS + 4) { turns.Add("player"); }
+            }
+            if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
+            }
 
-        if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
-        yield return new WaitForEndOfFrame();
-        UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
-        GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
-        foreach (GameObject g in GameObject.FindGameObjectsWithTag("tileViola")) Destroy(g);
+            if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
+            yield return new WaitForEndOfFrame();
+            UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
+            GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("tileViola")) Destroy(g);
 
-        int damageDealt = 0;
+            int damageDealt = 0;
 
-        yield return new WaitForSeconds(1);
-
-
-        foreach(string turn in turns){
+            yield return new WaitForSeconds(1);
 
 
-            if (player.hp <= 0||enemy.hp<=0) break;
+            foreach(string turn in turns){
 
-            if(turn=="player"){
-                int playerHit = UnityEngine.Random.Range(1, 100); //player hit
-                if (playerHit <= output[1])
-                {
 
-                    int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
+                if (player.hp <= 0||enemy.hp<=0) break;
 
-                    Debug.Log("inizio");
+                if(turn=="player"){
+                    int playerHit = UnityEngine.Random.Range(1, 100); //player hit
+                    if (playerHit <= output[1])
+                    {
 
-                    sprite = GameObject.Find("Info Canvas").transform.GetChild(1).gameObject;
-                    GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = Vector3.zero;
-                    sprite.transform.localScale = Vector3.zero;
-                    GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                        int playerCrit = UnityEngine.Random.Range(1, 100);  //se critta
+
+                        Debug.Log("inizio");
+
+                        sprite = GameObject.Find("Info Canvas").transform.GetChild(1).gameObject;
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = Vector3.zero;
+                        sprite.transform.localScale = Vector3.zero;
+                        GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.SetActive(true);
+                        
+                        
+                        if(move == false && player.weaponMaxRange==1){
+
+                            for (float i = 0; i < 100; i++)
+                            {
+                            playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                            yield return new WaitForEndOfFrame();
+
+                            }
+
+                            
+                            GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
+                            move = true;
+                        }
+                        
                     
-                    
-                    if(move == false && player.weaponMaxRange==1){
+                        if (playerCrit <= output[2])
+                        {
+                            if (move) spritePlayer.GetComponent<Animator>().Play("Crit");
+                            else spritePlayer.GetComponent<Animator>().Play("Crit2");
+                            GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=(output[0]*3).ToString();
+                            enemy.hp = Mathf.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(true);
+                            damageDealt += output[0] * 3;
+                        }
+                        else
+                        {
+                            if (move) spritePlayer.GetComponent<Animator>().Play("Attack");
+                            else spritePlayer.GetComponent<Animator>().Play("Attack2");
+                            GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
+                            enemy.hp = Mathf.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
+                            damageDealt += output[0];
+                        }
+                        
+                        yield return new WaitForEndOfFrame();
+                        
+
+                        AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        AnimationClip firstClip = clipInfos[0].clip;
+                        float duration = firstClip.length + Time.time;
+                        Debug.Log(firstClip.length);
+
+                        
+
+                        while (Time.time < duration)
+                        {
+                            yield return new WaitForEndOfFrame();
+                        }
+
+                        oldPos = sprite.transform.position;
+
+                        spriteEnemy.GetComponent<Animator>().Play("Hurt");
+                        yield return new WaitForEndOfFrame();
+                        clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        firstClip = clipInfos[0].clip;
+                        duration = firstClip.length + Time.time;
 
                         for (float i = 0; i < 100; i++)
                         {
-                        playerParent.transform.position += new Vector3(0.035f, 0, 0);
-                        yield return new WaitForEndOfFrame();
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            yield return new WaitForEndOfFrame();
 
                         }
 
                         
-                        GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
-                        move = true;
+                        
+                        Debug.Log(firstClip.length);
+                        while (Time.time < duration)
+                        {
+                            yield return new WaitForEndOfFrame();
+                        }
+                        yield return new WaitForSeconds(1);
+                        sprite.SetActive(false);
+                        sprite.transform.position = oldPos;
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
+                        Debug.Log("fine");
+                        enemy.healthbar.SetHealth(enemy.hp);
+
                     }
-                    
-                
-                    if (playerCrit <= output[2])
+                    else         //player miss
                     {
-                        if (move) spritePlayer.GetComponent<Animator>().Play("Crit");
-                        else spritePlayer.GetComponent<Animator>().Play("Crit2");
-                        GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=(output[0]*3).ToString();
-                        enemy.hp = Mathf.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
-                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(true);
-                        damageDealt += output[0] * 3;
-                    }
-                    else
-                    {
+                        Debug.Log("inizio");
+
+                        if(move == false && player.weaponMaxRange==1){
+
+                            for (float i = 0; i < 100; i++)
+                            {
+                            playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                            yield return new WaitForEndOfFrame();
+
+                            }
+
+                            GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
+
+                            move = true;
+                        }
+
                         if (move) spritePlayer.GetComponent<Animator>().Play("Attack");
                         else spritePlayer.GetComponent<Animator>().Play("Attack2");
-                        GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
-                        enemy.hp = Mathf.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
-                        damageDealt += output[0];
-                    }
-                    
-                    yield return new WaitForEndOfFrame();
-                    
 
-                    AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    AnimationClip firstClip = clipInfos[0].clip;
-                    float duration = firstClip.length + Time.time;
-                    Debug.Log(firstClip.length);
+                        sprite = GameObject.Find("Info Canvas").transform.GetChild(0).gameObject;
+                        sprite.transform.localScale = Vector3.zero;
+                        GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
 
-                    
-
-                    while (Time.time < duration)
-                    {
                         yield return new WaitForEndOfFrame();
-                    }
+                        AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        AnimationClip firstClip = clipInfos[0].clip;
+                        float duration = firstClip.length + Time.time;
+                        float half = firstClip.length / 2 + Time.time;
+                        bool enemyMissStarted = false;
+                        Debug.Log(firstClip.length);
 
-                    oldPos = sprite.transform.position;
 
-                    spriteEnemy.GetComponent<Animator>().Play("Hurt");
-                    yield return new WaitForEndOfFrame();
-                    clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    firstClip = clipInfos[0].clip;
-                    duration = firstClip.length + Time.time;
 
-                    for (float i = 0; i < 100; i++)
-                    {
-                        sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position += new Vector3(0, 0.01f, 0);
-                        sprite.transform.position += new Vector3(0, 0.01f, 0);
-                        yield return new WaitForEndOfFrame();
+                        
 
-                    }
+                        while (Time.time < duration)
+                        {
+                            if(Time.time > half && !enemyMissStarted)
+                            {
+                                enemyMissStarted = true;
+                                spriteEnemy.GetComponent<Animator>().Play("Miss");
+                            }
+                            yield return new WaitForEndOfFrame();
+                        }
 
-                    
-                    
-                    Debug.Log(firstClip.length);
-                    while (Time.time < duration)
-                    {
-                        yield return new WaitForEndOfFrame();
-                    }
-                    yield return new WaitForSeconds(1);
-                    sprite.SetActive(false);
-                    sprite.transform.position = oldPos;
-                    GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
-                    GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
-                    Debug.Log("fine");
-                    enemy.healthbar.SetHealth(enemy.hp);
+                        oldPos = sprite.transform.position;
 
-                }
-                else         //player miss
-                {
-                    Debug.Log("inizio");
-
-                    if(move == false && player.weaponMaxRange==1){
 
                         for (float i = 0; i < 100; i++)
                         {
-                        playerParent.transform.position += new Vector3(0.035f, 0, 0);
-                        yield return new WaitForEndOfFrame();
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            yield return new WaitForEndOfFrame();
 
                         }
-
-                        GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
-
-                        move = true;
-                    }
-
-                    if (move) spritePlayer.GetComponent<Animator>().Play("Attack");
-                    else spritePlayer.GetComponent<Animator>().Play("Attack2");
-
-                    sprite = GameObject.Find("Info Canvas").transform.GetChild(0).gameObject;
-                    sprite.transform.localScale = Vector3.zero;
-                    GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.SetActive(true);
-
-                    yield return new WaitForEndOfFrame();
-                    AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    AnimationClip firstClip = clipInfos[0].clip;
-                    float duration = firstClip.length + Time.time;
-                    float half = firstClip.length / 2 + Time.time;
-                    bool enemyMissStarted = false;
-                    Debug.Log(firstClip.length);
+                        yield return new WaitForSeconds(1);
+                        sprite.SetActive(false);
+                        sprite.transform.position = oldPos;
+                        Debug.Log("fine");
 
 
-
-                    
-
-                    while (Time.time < duration)
-                    {
-                        if(Time.time > half && !enemyMissStarted)
-                        {
-                            enemyMissStarted = true;
-                            spriteEnemy.GetComponent<Animator>().Play("Miss");
-                        }
-                        yield return new WaitForEndOfFrame();
-                    }
-
-                    oldPos = sprite.transform.position;
-
-
-                    for (float i = 0; i < 100; i++)
-                    {
-                        sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        sprite.transform.position += new Vector3(0, 0.01f, 0);
-                        yield return new WaitForEndOfFrame();
 
                     }
-                    yield return new WaitForSeconds(1);
-                    sprite.SetActive(false);
-                    sprite.transform.position = oldPos;
-                    Debug.Log("fine");
-
-
-
                 }
-            }
-            else{
-                int enemyHit = UnityEngine.Random.Range(1, 100);
+                else{
+                    int enemyHit = UnityEngine.Random.Range(1, 100);
 
-                if (enemyHit <= output[5])             //enemy hit
-                {
+                    if (enemyHit <= output[5])             //enemy hit
+                    {
 
-                    int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
-                    Debug.Log("inizio");
+                        int enemyCrit = UnityEngine.Random.Range(1, 100);  //se critta
+                        Debug.Log("inizio");
 
-                    GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = Vector3.zero;
-                    sprite = GameObject.Find("Info Canvas").transform.GetChild(2).gameObject;
-                    sprite.transform.localScale = Vector3.zero;
-                    GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(true);    
+                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = Vector3.zero;
+                        sprite = GameObject.Find("Info Canvas").transform.GetChild(2).gameObject;
+                        sprite.transform.localScale = Vector3.zero;
+                        GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.SetActive(true);    
 
-                    if(move == false && enemy.weaponMaxRange==1){
+                        if(move == false && enemy.weaponMaxRange==1){
 
+                            for (float i = 0; i < 100; i++)
+                            {
+                            enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                            GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
+                            yield return new WaitForEndOfFrame();
+
+                            }
+
+                            move = true;
+                        }
+                        
+                        
+                        if (enemyCrit <= output[6]){
+                            if (move) spriteEnemy.GetComponent<Animator>().Play("Crit");
+                            else spriteEnemy.GetComponent<Animator>().Play("Crit2");
+                            GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=(output[4]*3).ToString();
+                            player.hp = Mathf.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.SetActive(true);
+                        }
+                        else{
+                            if (move) spriteEnemy.GetComponent<Animator>().Play("Attack");
+                            else spriteEnemy.GetComponent<Animator>().Play("Attack2");
+
+                            GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
+                            player.hp = Mathf.Clamp(player.hp -= output[4], 0, player.maxHp);
+                        }
+                        
+                        yield return new WaitForEndOfFrame();
+                        
+                        AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        AnimationClip firstClip = clipInfos[0].clip;
+                        float duration = firstClip.length + Time.time;
+                        Debug.Log(firstClip.length);
+
+                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = Vector3.zero;
+                        sprite.transform.localScale = Vector3.zero;
+
+                        while (Time.time < duration)
+                        {
+                            yield return new WaitForEndOfFrame();
+                        }
+
+                        oldPos = sprite.transform.position;
+
+                        spritePlayer.GetComponent<Animator>().Play("Hurt");
+                        yield return new WaitForEndOfFrame();
+                        clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        firstClip = clipInfos[0].clip;
+                        duration = firstClip.length + Time.time;
                         for (float i = 0; i < 100; i++)
                         {
-                        enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
-                        GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
-                        yield return new WaitForEndOfFrame();
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            yield return new WaitForEndOfFrame();
 
                         }
 
-                        move = true;
+                        
+
+
+                        
+                        Debug.Log(firstClip.length);
+                        while (Time.time < duration)
+                        {
+                            yield return new WaitForEndOfFrame();
+                        }
+                        yield return new WaitForSeconds(1);
+                        sprite.SetActive(false);
+                        sprite.transform.position = oldPos;
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
+                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
+                        Debug.Log("fine");
+                        player.healthbar.SetHealth(player.hp);
                     }
-                       
-                    
-                    if (enemyCrit <= output[6]){
-                        if (move) spriteEnemy.GetComponent<Animator>().Play("Crit");
-                        else spriteEnemy.GetComponent<Animator>().Play("Crit2");
-                        GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=(output[4]*3).ToString();
-                        player.hp = Mathf.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
-                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.SetActive(true);
-                    }
-                    else{
-                        if (move) spriteEnemy.GetComponent<Animator>().Play("Attack");
+                    else               //enemy miss
+                    {
+                        Debug.Log("inizio");
+
+                        if(move == false && enemy.weaponMaxRange==1){
+
+                            for (float i = 0; i < 100; i++)
+                            {
+                            enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                            yield return new WaitForEndOfFrame();
+
+                            }
+                            GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
+                            move = true;
+                        } 
+                        
+                        if(move) spriteEnemy.GetComponent<Animator>().Play("Attack");
                         else spriteEnemy.GetComponent<Animator>().Play("Attack2");
 
-                        GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
-                        player.hp = Mathf.Clamp(player.hp -= output[4], 0, player.maxHp);
-                    }
-                    
-                    yield return new WaitForEndOfFrame();
-                    
-                    AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    AnimationClip firstClip = clipInfos[0].clip;
-                    float duration = firstClip.length + Time.time;
-                    Debug.Log(firstClip.length);
-
-                    GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = Vector3.zero;
-                    sprite.transform.localScale = Vector3.zero;
-
-                    while (Time.time < duration)
-                    {
+                        sprite = GameObject.Find("Info Canvas").transform.GetChild(3).gameObject;
+                        sprite.transform.localScale = Vector3.zero;
+                        GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
+                        
                         yield return new WaitForEndOfFrame();
-                    }
-
-                    oldPos = sprite.transform.position;
-
-                    spritePlayer.GetComponent<Animator>().Play("Hurt");
-                    yield return new WaitForEndOfFrame();
-                    clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    firstClip = clipInfos[0].clip;
-                    duration = firstClip.length + Time.time;
-                    for (float i = 0; i < 100; i++)
-                    {
-                        sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position += new Vector3(0, 0.01f, 0);
-                        sprite.transform.position += new Vector3(0, 0.01f, 0);
-                        yield return new WaitForEndOfFrame();
-
-                    }
-
-                    
+                        AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+                        AnimationClip firstClip = clipInfos[0].clip;
+                        float duration = firstClip.length + Time.time;
+                        float half = firstClip.length / 2 + Time.time;
+                        bool enemyMissStarted = false;
+                        Debug.Log(firstClip.length);
 
 
-                    
-                    Debug.Log(firstClip.length);
-                    while (Time.time < duration)
-                    {
-                        yield return new WaitForEndOfFrame();
-                    }
-                    yield return new WaitForSeconds(1);
-                    sprite.SetActive(false);
-                    sprite.transform.position = oldPos;
-                    GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
-                    GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
-                    Debug.Log("fine");
-                    player.healthbar.SetHealth(player.hp);
-                }
-                else               //enemy miss
-                {
-                    Debug.Log("inizio");
 
-                    if(move == false && enemy.weaponMaxRange==1){
+                        
+
+                        while (Time.time < duration)
+                        {
+                            if (Time.time > half && !enemyMissStarted)
+                            {
+                                enemyMissStarted = true;
+                                spritePlayer.GetComponent<Animator>().Play("Miss");
+                            }
+                            yield return new WaitForEndOfFrame();
+                        }
+
+                        oldPos = sprite.transform.position;
+
 
                         for (float i = 0; i < 100; i++)
                         {
-                        enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
-                        yield return new WaitForEndOfFrame();
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            yield return new WaitForEndOfFrame();
 
                         }
-                        GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
-                        GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
-                        move = true;
-                    } 
-                    
-                    if(move) spriteEnemy.GetComponent<Animator>().Play("Attack");
-                    else spriteEnemy.GetComponent<Animator>().Play("Attack2");
-
-                    sprite = GameObject.Find("Info Canvas").transform.GetChild(3).gameObject;
-                    sprite.transform.localScale = Vector3.zero;
-                    GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.SetActive(true);
-                    
-                    yield return new WaitForEndOfFrame();
-                    AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
-                    AnimationClip firstClip = clipInfos[0].clip;
-                    float duration = firstClip.length + Time.time;
-                    float half = firstClip.length / 2 + Time.time;
-                    bool enemyMissStarted = false;
-                    Debug.Log(firstClip.length);
-
-
-
-                    
-
-                    while (Time.time < duration)
-                    {
-                        if (Time.time > half && !enemyMissStarted)
-                        {
-                            enemyMissStarted = true;
-                            spritePlayer.GetComponent<Animator>().Play("Miss");
-                        }
-                        yield return new WaitForEndOfFrame();
+                        
+                        yield return new WaitForSeconds(1);
+                        sprite.SetActive(false);
+                        sprite.transform.position = oldPos;
+                        Debug.Log("fine");
                     }
 
-                    oldPos = sprite.transform.position;
-
-
-                    for (float i = 0; i < 100; i++)
-                    {
-                        sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                        sprite.transform.position += new Vector3(0, 0.01f, 0);
-                        yield return new WaitForEndOfFrame();
-
-                    }
-                    
-                    yield return new WaitForSeconds(1);
-                    sprite.SetActive(false);
-                    sprite.transform.position = oldPos;
-                    Debug.Log("fine");
                 }
-
-            }
-           
-
-        }
-
-        if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
-
-
-        int expGained = Mathf.Clamp(damageDealt, 0, 20);
-        if (expGained != 0)
-        {
-
-
-            int expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 2));
-            if (enemy.hp == 0) expGained = Mathf.Clamp(30 + (enemy.lvl - 1),0, 100);
-
-
-            GameObject expGUI = (GameObject)Instantiate(Resources.Load("ExpCanvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-            expGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.nome;
-            expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - player.exp).ToString();
-            expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained).ToString();
-            expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
-            expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
-
-            float y = expGUI.transform.position.y * -1;
-            for (int i = 0; i < 100; i++)
-            {
-                y += 0.01516f;
-                expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
-                yield return new WaitForEndOfFrame();
-            }
-
-            yield return new WaitForSeconds(0.5f);
-            bool lvlup = false;
-            AudioClip expSfx = (AudioClip)Resources.Load("Sounds/SFX/Exp");
             
-            for (int i = 0; i < expGained; i++)
-            {
-                yield return new WaitForSeconds(1/(float)expGained);
-                player.exp++;
-                if(i%2==0 || expGained < 15)expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
-                if (player.exp >= expNeeded)
-                {
-                    player.exp = 0;
-                    expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 1));
-                    expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
-                    expGUI.transform.GetChild(6).GetChild(1).GetComponent<Image>().color = new Color(0, 186, 50);
-                    lvlup = true;
-                }
-                expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - (player.exp)).ToString();
-                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained - i).ToString();
 
+            }
+
+            if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
+
+
+            int expGained = Mathf.Clamp(damageDealt, 0, 20);
+            if (expGained != 0)
+            {
+
+
+                int expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 2));
+                if (enemy.hp == 0) expGained = Mathf.Clamp(30 + (enemy.lvl - 1),0, 100);
+
+
+                GameObject expGUI = (GameObject)Instantiate(Resources.Load("ExpCanvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                expGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.nome;
+                expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - player.exp).ToString();
+                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained).ToString();
+                expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
                 expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
 
+                float y = expGUI.transform.position.y * -1;
+                for (int i = 0; i < 100; i++)
+                {
+                    y += 0.01516f;
+                    expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                yield return new WaitForSeconds(0.5f);
+                bool lvlup = false;
+                AudioClip expSfx = (AudioClip)Resources.Load("Sounds/SFX/Exp");
+                
+                for (int i = 0; i < expGained; i++)
+                {
+                    yield return new WaitForSeconds(1/(float)expGained);
+                    player.exp++;
+                    if(i%2==0 || expGained < 15)expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
+                    if (player.exp >= expNeeded)
+                    {
+                        player.exp = 0;
+                        expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 1));
+                        expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
+                        expGUI.transform.GetChild(6).GetChild(1).GetComponent<Image>().color = new Color(0, 186, 50);
+                        lvlup = true;
+                    }
+                    expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - (player.exp)).ToString();
+                    expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained - i).ToString();
+
+                    expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
+
+                }
+                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "0";
+
+                yield return new WaitForSeconds(2);
+
+                for (int i = 0; i < 100; i++)
+                {
+                    y -= 0.01516f;
+                    expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                if (lvlup)
+                {
+                    finitoLvlUp = false;
+                    LevelUp(player);
+                    while (!finitoLvlUp) yield return new WaitForEndOfFrame();
+                }
+
             }
-            expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "0";
 
-            yield return new WaitForSeconds(2);
-
-            for (int i = 0; i < 100; i++)
+            if (enemy.hp == 0)
             {
-                y -= 0.01516f;
-                expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
+                
+                if (battleManager.enemies.Contains(e))
+                    battleManager.enemies.Remove(e);
+                enemy.cancInfo();
+                temp.SetActive(true);
+                temp.transform.DetachChildren();
+                Destroy(temp);
+                Destroy(e);
+                yield return new WaitForEndOfFrame();
+                SceneManager.UnloadSceneAsync(1);
+                SceneManager.SetActiveScene(activeScene);
+
+                    
+                player.endPvp();
+
+                Debug.Log("fine");
+                yield break;
+            }
+
+            if (player.hp <= 0)
+            {
+
+                temp.SetActive(true);
+                temp.transform.DetachChildren();
+                if (battleManager.units.Contains(p))
+                    battleManager.units.Remove(p);
+                if (battleManager.unmovedUnits.Contains(p))
+                    battleManager.unmovedUnits.Remove(p);
+                Destroy(temp);
+                Destroy(p);
+                yield return new WaitForEndOfFrame();
+                SceneManager.UnloadSceneAsync(1);
+                SceneManager.SetActiveScene(activeScene);
+
+                player.endPvp();
+                Destroy(p);
+                Debug.Log("fine");
+                yield break;
+            }
+        }
+        else{
+
+            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN+"_pvp");
+            GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
+
+            playerScript player2 = e.GetComponent<playerScript>();
+
+            sprite = GameObject.Find("Info Canvas").transform.GetChild(6).gameObject;
+            sprite.transform.localScale = Vector3.zero;
+            sprite.SetActive(true);
+
+            spritePlayer.GetComponent<Animator>().Play("Attack");
+            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=(player.lvl+9).ToString();
+            player2.hp = Mathf.Clamp(player2.hp += player.lvl+9, 0, player2.maxHp);
+
+            AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
+            AnimationClip firstClip = clipInfos[0].clip;
+            float duration = firstClip.length + Time.time;
+            Debug.Log(firstClip.length);
+
+            while (Time.time < duration)
+            {
                 yield return new WaitForEndOfFrame();
             }
 
-            if (lvlup)
+            oldPos = sprite.transform.position;
+
+                        
+            for (float i = 0; i < 100; i++)
             {
-                finitoLvlUp = false;
-                LevelUp(player);
-                while (!finitoLvlUp) yield return new WaitForEndOfFrame();
+                sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                sprite.transform.position += new Vector3(0, 0.01f, 0);
+                yield return new WaitForEndOfFrame();
+
             }
 
-        }
-
-        if (enemy.hp == 0)
-        {
+            yield return new WaitForSeconds(1);
+            sprite.SetActive(false);
+            sprite.transform.position = oldPos;
             
-            if (battleManager.enemies.Contains(e))
-                battleManager.enemies.Remove(e);
-            enemy.cancInfo();
-            temp.SetActive(true);
-            temp.transform.DetachChildren();
-            Destroy(temp);
-            Destroy(e);
-            yield return new WaitForEndOfFrame();
-            SceneManager.UnloadSceneAsync(1);
-            SceneManager.SetActiveScene(activeScene);
+            player2.healthbar.SetHealth(player2.hp);
 
-                
-            player.endPvp();
 
-            Debug.Log("fine");
-            yield break;
         }
-
-        if (player.hp <= 0)
-        {
-
-            temp.SetActive(true);
-            temp.transform.DetachChildren();
-            if (battleManager.units.Contains(p))
-                battleManager.units.Remove(p);
-            if (battleManager.unmovedUnits.Contains(p))
-                battleManager.unmovedUnits.Remove(p);
-            Destroy(temp);
-            Destroy(p);
-            yield return new WaitForEndOfFrame();
-            SceneManager.UnloadSceneAsync(1);
-            SceneManager.SetActiveScene(activeScene);
-
-            player.endPvp();
-            Destroy(p);
-            Debug.Log("fine");
-            yield break;
-        }
-
 
         
 
@@ -554,6 +602,7 @@ public class PvPscript : MonoBehaviour
         player.endPvp();
         
         Debug.Log("fine");
+        
 
     }
 

@@ -79,182 +79,189 @@ public class battleManager : MonoBehaviour
 
     public int[] pvp(GameObject e, GameObject p, string initial_turn)
     {
-        enemy = e.GetComponent<enemyScript>();                
+        
         player = p.GetComponent<playerScript>();
 
-        List<string> turns = new List<string>();
-        turns.Add(initial_turn);
-
-
-        int playerAtk;
-        int playerHit;
-        int playerAS; 
-        int playerDmg;
-        int playerProt;
-        int playerCrit;
-
-        int enemyAtk;
-        int enemyHit;
-        int enemyAS;
-        int enemyDmg;
-        int enemyProt;
-        int enemyCrit;
-
-        Vector2 newPos = new Vector2(player.x, player.y);
-
-        foreach (GameObject t in player.movBlueTiles)
+        if(player.heal==false)
         {
-            if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
-            {
-                if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
-                {
-                    bool check = true;
-                    foreach (GameObject pp in units)
-                    {
-                        if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<playerScript>().y == t.transform.position.y) check = false;
-                    }
-                    if (check)
-                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
-                }
-            }
-        }
-
-        player.x = (int)newPos.x;
-
-        player.y = (int)newPos.y;
-
-        int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus; 
-        int enemyAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[enemy.x, enemy.y].GetComponent<tileScript>().avoBonus;
-        Debug.Log("AVO BONUS: " + playerAVOBonus + " " + enemyAVOBonus);
-        
-
-        //calcolazione del player
-
-        playerAS = player.weaponWt - (player.str / 5);
-        if (playerAS < 0) playerAS = 0;
-        playerAS = player.spd - playerAS;
-
-        enemyAS = enemy.weaponWt - (enemy.str / 5);
-        if (enemyAS < 0) enemyAS = 0;
-        enemyAS = enemy.spd - enemyAS;
-
-
-        if (player.weaponIsMagic == false)
-        {
-
-            playerAtk = player.weaponMt + player.str;
-
-            playerHit = (player.weaponHit + player.dex) - (enemyAS + enemyAVOBonus);
-
-            enemyProt = enemy.def;
-
-        }
-
-        else
-        {
-
-            playerAtk = player.weaponMt + player.mag;
-
-            playerHit = (player.weaponHit + (player.dex + player.lck) / 2) - ((enemy.spd+enemy.lck)/2+ enemyAVOBonus);
-
-            enemyProt = enemy.res;
-        }
-
-
-        //calcolazione dell'enemy
-
-        
-
-
-        if (enemy.weaponIsMagic == false)
-        {
+            enemy = e.GetComponent<enemyScript>();                
             
 
-            enemyAtk = enemy.weaponMt + enemy.str;
-
-            enemyHit = (enemy.weaponHit + enemy.dex) - (playerAS + playerAVOBonus);
-
-            playerProt = player.def;
-
-        }
-
-        else
-        {
-
-            enemyAtk = enemy.weaponMt + enemy.mag;
-
-            enemyHit = (enemy.weaponHit + (enemy.dex + enemy.lck) / 2) - ((player.spd + player.lck) / 2 + playerAVOBonus);
-
-            playerProt = player.res;
-        }
+            List<string> turns = new List<string>();
+            turns.Add(initial_turn);
 
 
-        if (player.unitEffective == enemy.unitType)
-        {
+            int playerAtk;
+            int playerHit;
+            int playerAS; 
+            int playerDmg;
+            int playerProt;
+            int playerCrit;
 
-            playerAtk = Mathf.FloorToInt(playerAtk * 1.5f);
-            playerHit += 15;
-            enemyHit -= 15;
-        }
+            int enemyAtk;
+            int enemyHit;
+            int enemyAS;
+            int enemyDmg;
+            int enemyProt;
+            int enemyCrit;
 
-        if (enemy.unitEffective == player.unitType)
-        {
+            Vector2 newPos = new Vector2(player.x, player.y);
 
-            enemyAtk = Mathf.FloorToInt(playerAtk * 1.5f);
-            enemyHit += 15;
-            playerHit -= 15;
-        }
-
-
-        playerDmg = playerAtk - enemyProt;
-        enemyDmg = enemyAtk - playerProt;
-
-        playerCrit = (player.weaponCrit + (player.dex+player.lck) / 2) - enemy.lck;
-        enemyCrit = (enemy.weaponCrit + (enemy.dex + enemy.lck) / 2) - player.lck;
-
-        playerDmg = (int)Mathf.Clamp(playerDmg, 0, 999);    //mette numeri non <0
-        enemyDmg = (int)Mathf.Clamp(enemyDmg, 0, 999);
-        playerHit = (int)Mathf.Clamp(playerHit, 0, 100);
-        enemyHit = (int)Mathf.Clamp(enemyHit, 0, 100);
-        playerCrit = (int)Mathf.Clamp(playerCrit, 0, 100);
-        enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 100);
-
-        
-
-        int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);               
-
-        if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
-        {
-            if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
+            foreach (GameObject t in player.movBlueTiles)
             {
-                turns.Add("enemy");
-                if (enemyAS >= playerAS + 4) turns.Add("enemy");
+                if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
+                {
+                    if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
+                    {
+                        bool check = true;
+                        foreach (GameObject pp in units)
+                        {
+                            if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<enemyScript>().y == t.transform.position.y) check = false;
+                        }
+                        if (check)
+                            newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+                    }
+                }
             }
-            if (playerAS >= enemyAS + 4) turns.Add("player");
-        }
-        else
-        {
-            if (player.weaponMinRange <= distance && distance <= player.weaponMaxRange)
+
+            player.x = (int)newPos.x;
+
+            player.y = (int)newPos.y;
+
+            int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus; 
+            int enemyAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[enemy.x, enemy.y].GetComponent<tileScript>().avoBonus;
+            Debug.Log("AVO BONUS: " + playerAVOBonus + " " + enemyAVOBonus);
+            
+
+            //calcolazione del player
+
+            playerAS = player.weaponWt - (player.str / 5);
+            if (playerAS < 0) playerAS = 0;
+            playerAS = player.spd - playerAS;
+
+            enemyAS = enemy.weaponWt - (enemy.str / 5);
+            if (enemyAS < 0) enemyAS = 0;
+            enemyAS = enemy.spd - enemyAS;
+
+
+            if (player.weaponIsMagic == false)
             {
-                turns.Add("player");
+
+                playerAtk = player.weaponMt + player.str;
+
+                playerHit = (player.weaponHit + player.dex) - (enemyAS + enemyAVOBonus);
+
+                enemyProt = enemy.def;
+
+            }
+
+            else
+            {
+
+                playerAtk = player.weaponMt + player.mag;
+
+                playerHit = (player.weaponHit + (player.dex + player.lck) / 2) - ((enemy.spd+enemy.lck)/2+ enemyAVOBonus);
+
+                enemyProt = enemy.res;
+            }
+
+
+            //calcolazione dell'enemy
+
+            
+
+
+            if (enemy.weaponIsMagic == false)
+            {
+                
+
+                enemyAtk = enemy.weaponMt + enemy.str;
+
+                enemyHit = (enemy.weaponHit + enemy.dex) - (playerAS + playerAVOBonus);
+
+                playerProt = player.def;
+
+            }
+
+            else
+            {
+
+                enemyAtk = enemy.weaponMt + enemy.mag;
+
+                enemyHit = (enemy.weaponHit + (enemy.dex + enemy.lck) / 2) - ((player.spd + player.lck) / 2 + playerAVOBonus);
+
+                playerProt = player.res;
+            }
+
+
+            if (player.unitEffective == enemy.unitType)
+            {
+
+                playerAtk = Mathf.FloorToInt(playerAtk * 1.5f);
+                playerHit += 15;
+                enemyHit -= 15;
+            }
+
+            if (enemy.unitEffective == player.unitType)
+            {
+
+                enemyAtk = Mathf.FloorToInt(playerAtk * 1.5f);
+                enemyHit += 15;
+                playerHit -= 15;
+            }
+
+
+            playerDmg = playerAtk - enemyProt;
+            enemyDmg = enemyAtk - playerProt;
+
+            playerCrit = (player.weaponCrit + (player.dex+player.lck) / 2) - enemy.lck;
+            enemyCrit = (enemy.weaponCrit + (enemy.dex + enemy.lck) / 2) - player.lck;
+
+            playerDmg = (int)Mathf.Clamp(playerDmg, 0, 999);    //mette numeri non <0
+            enemyDmg = (int)Mathf.Clamp(enemyDmg, 0, 999);
+            playerHit = (int)Mathf.Clamp(playerHit, 0, 100);
+            enemyHit = (int)Mathf.Clamp(enemyHit, 0, 100);
+            playerCrit = (int)Mathf.Clamp(playerCrit, 0, 100);
+            enemyCrit = (int)Mathf.Clamp(enemyCrit, 0, 100);
+
+            
+
+            int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);               
+
+            if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
+            {
+                if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
+                {
+                    turns.Add("enemy");
+                    if (enemyAS >= playerAS + 4) turns.Add("enemy");
+                }
                 if (playerAS >= enemyAS + 4) turns.Add("player");
             }
-            if (enemyAS >= playerAS + 4) turns.Add("enemy");
+            else
+            {
+                if (player.weaponMinRange <= distance && distance <= player.weaponMaxRange)
+                {
+                    turns.Add("player");
+                    if (playerAS >= enemyAS + 4) turns.Add("player");
+                }
+                if (enemyAS >= playerAS + 4) turns.Add("enemy");
+            }
+
+
+            Debug.Log("PLAYER               ENEMY");
+            Debug.Log("DMG: " + playerDmg + "               " + enemyDmg);
+            Debug.Log("HIT: " + playerHit + "               " + enemyHit);
+            Debug.Log("CRIT: " + playerCrit + "               " + enemyCrit);
+            Debug.Log("AS: " + playerAS + "               " + enemyAS);
+            Debug.Log("TURNI:");
+            foreach (string t in turns) Debug.Log(t);
+
+            int[] returnList = { playerDmg, playerHit, playerCrit, playerAS, enemyDmg, enemyHit, enemyCrit, enemyAS};
+
+            return returnList;
         }
 
-
-        Debug.Log("PLAYER               ENEMY");
-        Debug.Log("DMG: " + playerDmg + "               " + enemyDmg);
-        Debug.Log("HIT: " + playerHit + "               " + enemyHit);
-        Debug.Log("CRIT: " + playerCrit + "               " + enemyCrit);
-        Debug.Log("AS: " + playerAS + "               " + enemyAS);
-        Debug.Log("TURNI:");
-        foreach (string t in turns) Debug.Log(t);
-
-        int[] returnList = { playerDmg, playerHit, playerCrit, playerAS, enemyDmg, enemyHit, enemyCrit, enemyAS};
-
-        return returnList;
-
+        return null;
     }
 
 
@@ -291,65 +298,127 @@ public class battleManager : MonoBehaviour
 
     public IEnumerator CaricaCombat(GameObject e, GameObject p, int[] output, string initial_turn){
 
-        
-        enemy = e.GetComponent<enemyScript>();                
-        player = p.GetComponent<playerScript>();
+    
+                    
+        playerScript player = p.GetComponent<playerScript>();
 
-        enemy.movType = "move";
-
-        Scene activeScene = SceneManager.GetActiveScene();
-
-        GameObject temp = new GameObject( "temp" );  
-
-        GameObject[] allObjects = activeScene.GetRootGameObjects();
-
-        foreach (GameObject go in allObjects)   
+        if(player.heal==false)
         {
+            enemyScript enemy = e.GetComponent<enemyScript>();;
 
-            go.transform.SetParent(temp.transform, false);
 
+            enemy.movType = "move";
+
+            Scene activeScene = SceneManager.GetActiveScene();
+
+            GameObject temp = new GameObject( "temp" );  
+
+            GameObject[] allObjects = activeScene.GetRootGameObjects();
+
+            foreach (GameObject go in allObjects)   
+            {
+
+                go.transform.SetParent(temp.transform, false);
+
+            }
+
+            AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
+
+            while (!async.isDone)     
+            {
+
+                yield return new WaitForEndOfFrame();
+
+            }
+
+
+            Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
+            SceneManager.SetActiveScene(battleScene);
+
+            temp.SetActive(false);       
+
+            GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
+            SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
+
+            GameObject playerParent = new GameObject();
+            playerParent.transform.position = new Vector3(-2, 0, 0);
+
+            spritePlayer.transform.SetParent(playerParent.transform);
+            spritePlayer.transform.localPosition = new Vector3(0, 0, 0);
+
+            GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
+            
+            SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
+
+            GameObject enemyParent = new GameObject();
+            spriteEnemy.transform.SetParent(enemyParent.transform);
+            spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
+            enemyParent.transform.position = new Vector3(2, 0, 0);
+            enemyParent.transform.Rotate(0, 180, 0);
+
+            
+
+            SceneManager.SetActiveScene(battleScene);
+
+            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn);
         }
+        else{
 
-        AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
+            playerScript player2 = e.GetComponent<playerScript>();;
 
-        while (!async.isDone)     
-        {
+            Scene activeScene = SceneManager.GetActiveScene();
 
-            yield return new WaitForEndOfFrame();
+            GameObject temp = new GameObject( "temp" );  
 
+            GameObject[] allObjects = activeScene.GetRootGameObjects();
+
+            foreach (GameObject go in allObjects)   
+            {
+
+                go.transform.SetParent(temp.transform, false);
+
+            }
+
+            AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
+
+            while (!async.isDone)     
+            {
+
+                yield return new WaitForEndOfFrame();
+
+            }
+
+
+            Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
+            SceneManager.SetActiveScene(battleScene);
+
+            temp.SetActive(false);       
+
+            GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
+            SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
+
+            GameObject playerParent = new GameObject();
+            playerParent.transform.position = new Vector3(-2, 0, 0);
+
+            spritePlayer.transform.SetParent(playerParent.transform);
+            spritePlayer.transform.localPosition = new Vector3(0, 0, 0);
+
+            GameObject spritePlayer2 = Instantiate(Resources.Load<GameObject>("Characters/" + player2.textureFile));
+            
+            SceneManager.MoveGameObjectToScene(spritePlayer2, battleScene);
+
+            GameObject player2Parent = new GameObject();
+            spritePlayer2.transform.SetParent(player2Parent.transform);
+            spritePlayer2.transform.localPosition = new Vector3(0, 0, 0);
+            player2Parent.transform.position = new Vector3(2, 0, 0);
+            player2Parent.transform.Rotate(0, 180, 0);
+
+            
+
+            SceneManager.SetActiveScene(battleScene);
+
+            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spritePlayer2, playerParent, player2Parent,activeScene, temp, initial_turn);
         }
-
-
-        Scene battleScene = SceneManager.GetSceneByName( "CombatScene" );
-        SceneManager.SetActiveScene(battleScene);
-
-        temp.SetActive(false);       
-
-        GameObject spritePlayer = Instantiate(Resources.Load<GameObject>("Characters/" + player.textureFile));
-        SceneManager.MoveGameObjectToScene(spritePlayer, battleScene);
-
-        GameObject playerParent = new GameObject();
-        playerParent.transform.position = new Vector3(-2, 0, 0);
-
-        spritePlayer.transform.SetParent(playerParent.transform);
-        spritePlayer.transform.localPosition = new Vector3(0, 0, 0);
-
-        GameObject spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile));
-        
-        SceneManager.MoveGameObjectToScene(spriteEnemy, battleScene);
-
-        GameObject enemyParent = new GameObject();
-        spriteEnemy.transform.SetParent(enemyParent.transform);
-        spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
-        enemyParent.transform.position = new Vector3(2, 0, 0);
-        enemyParent.transform.Rotate(0, 180, 0);
-
-        
-
-        SceneManager.SetActiveScene(battleScene);
-
-        GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn);
-
 
 
     }
