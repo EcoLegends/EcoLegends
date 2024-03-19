@@ -261,7 +261,9 @@ public class battleManager : MonoBehaviour
             return returnList;
         }
 
-        return null;
+        int [] array = {0,0,0,0,0,0,0,0};
+
+        return array;
     }
 
 
@@ -360,7 +362,7 @@ public class battleManager : MonoBehaviour
 
             SceneManager.SetActiveScene(battleScene);
 
-            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn);
+            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn, cura);
         }
         else{
 
@@ -417,7 +419,7 @@ public class battleManager : MonoBehaviour
 
             SceneManager.SetActiveScene(battleScene);
 
-            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spritePlayer2, playerParent, player2Parent,activeScene, temp, initial_turn);
+            GameObject.Find("CombatCamera").GetComponent<PvPscript>().iniziaPvPvero(e, p, output, spritePlayer, spritePlayer2, playerParent, player2Parent,activeScene, temp, initial_turn, cura);
         }
 
 
