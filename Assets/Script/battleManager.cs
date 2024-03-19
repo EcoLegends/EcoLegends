@@ -81,7 +81,7 @@ public class battleManager : MonoBehaviour
         if(cura==false)
         {
             playerScript player = p.GetComponent<playerScript>();
-            enemy = e.GetComponent<enemyScript>();                
+            enemyScript enemy = e.GetComponent<enemyScript>();                
             
 
             List<string> turns = new List<string>();
