@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -472,7 +472,7 @@ public class playerScript : MonoBehaviour
                         y = oldY;
                         try{
                         forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
-                        }catch(Exception e){};
+                        }catch(System.Exception e){};
                         forecastCooldown = Time.time + 0.3f;
                         
 

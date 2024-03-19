@@ -80,10 +80,9 @@ public class battleManager : MonoBehaviour
     public int[] pvp(GameObject e, GameObject p, string initial_turn, bool cura)
     {
         
-        player = p.GetComponent<playerScript>();
-
         if(cura==false)
         {
+            playerScript player = p.GetComponent<playerScript>();
             enemy = e.GetComponent<enemyScript>();                
             
 
@@ -116,7 +115,7 @@ public class battleManager : MonoBehaviour
                         bool check = true;
                         foreach (GameObject pp in units)
                         {
-                            if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<enemyScript>().y == t.transform.position.y) check = false;
+                            if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<playerScript>().y == t.transform.position.y) check = false;
                         }
                         if (check)
                             newPos = new Vector2(t.transform.position.x, t.transform.position.y);
