@@ -77,13 +77,10 @@ public class battleManager : MonoBehaviour
 
     public int[] pvp(GameObject e, GameObject p, string initial_turn, bool cura)
     {
-        playerScript player;
-        enemyScript enemy;
-
-        player = p.GetComponent<playerScript>();
-
+        
         if(cura==false)
         {
+            playerScript player = p.GetComponent<playerScript>();
             enemy = e.GetComponent<enemyScript>();                
             
 

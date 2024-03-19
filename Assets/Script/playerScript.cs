@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -462,15 +463,9 @@ public class playerScript : MonoBehaviour
                         forecast.transform.localScale = Vector3.one;
                         int oldX = x;
                         int oldY = y;
-                        int[] output = {0,0,0,0,0,0,0,0 };
-                        Debug.Log(target.ToString());
-                        Debug.Log(gameObject.ToString());
-                        Debug.Log(cura.ToString());
-                        Debug.Log(Camera.main.GetComponent<battleManager>().ToString());
-                        
-                        
-                            output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player", cura);
-                        
+
+
+                        int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player",cura);
                         newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
                         newPosTile.tag = "Rimuovere";
                         x = oldX;
