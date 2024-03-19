@@ -14,7 +14,9 @@ public class forecastScript : MonoBehaviour
     bool heal = false;
     public void Setup(GameObject e, GameObject p, int[] returnList, bool heal)
     {
-        enemyScript enemy = e.GetComponent<enemyScript>();
+        enemyScript enemy = null;
+
+        if(!heal) enemy = e.GetComponent<enemyScript>();
         playerScript player = p.GetComponent<playerScript>();
         this.heal = heal;
         
@@ -30,7 +32,7 @@ public class forecastScript : MonoBehaviour
         Debug.Log(playerDmg + " " + enemyDmg);
 
         playerNewHP = player.hp;
-        enemyNewHP = enemy.hp - playerDmg;
+        if (!heal)  enemyNewHP = enemy.hp - playerDmg;
 
         string enemyHitVisual = enemyHit.ToString();
         string enemyCritVisual = enemyCrit.ToString();
