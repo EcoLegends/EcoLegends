@@ -11,12 +11,12 @@ public class forecastScript : MonoBehaviour
 {
     int playerNewHP;
     int enemyNewHP;
-    
+    bool heal = false;
     public void Setup(GameObject e, GameObject p, int[] returnList, bool heal)
     {
         enemyScript enemy = e.GetComponent<enemyScript>();
         playerScript player = p.GetComponent<playerScript>();
-
+        this.heal = heal;
         
 
         int playerDmg = returnList[0];

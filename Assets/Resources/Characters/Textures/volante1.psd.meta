@@ -133,8 +133,8 @@ ScriptedImporter:
     - name: bone_2
       guid: 4f5fe511f06f48b409c5fc68912bdb23
       position: {x: 155.91435, y: -0.000014280602, z: 0}
-      rotation: {x: 0, y: 0, z: 0.30948082, w: 0.95090574}
-      length: 108.70973
+      rotation: {x: 0, y: 0, z: 0.3094809, w: 0.95090574}
+      length: 108.7097
       parentId: 1
       color:
         serializedVersion: 2
@@ -150,9 +150,9 @@ ScriptedImporter:
         rgba: 4294901760
     - name: bone_3
       guid: 0da7f75c84ac9d1408d161062246cbfa
-      position: {x: 108.709694, y: -0.000017564666, z: 0}
-      rotation: {x: 0, y: 0, z: -0.42054912, w: 0.90726984}
-      length: 88.144
+      position: {x: 108.70974, y: -0.000019566787, z: 0}
+      rotation: {x: 0, y: 0, z: -0.4205492, w: 0.9072697}
+      length: 88.14401
       parentId: 2
       color:
         serializedVersion: 2
@@ -617,16 +617,16 @@ ScriptedImporter:
     - name: bone_2
       guid: 4f5fe511f06f48b409c5fc68912bdb23
       position: {x: 155.91435, y: -0.000020852014, z: 0}
-      rotation: {x: 0, y: 0, z: 0.30948082, w: 0.9509057}
-      length: 108.709724
+      rotation: {x: 0, y: 0, z: 0.3094809, w: 0.9509057}
+      length: 108.70971
       parentId: 0
       color:
         serializedVersion: 2
         rgba: 4278255615
     - name: bone_3
       guid: 0da7f75c84ac9d1408d161062246cbfa
-      position: {x: 108.709694, y: 0.0000010475487, z: 0}
-      rotation: {x: 0, y: 0, z: -0.42054912, w: 0.9072698}
+      position: {x: 108.70974, y: -0.000012431314, z: 0}
+      rotation: {x: 0, y: 0, z: -0.42054924, w: 0.9072698}
       length: 88.144005
       parentId: 1
       color:
@@ -671,7 +671,7 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.48959628, y: 0.497295}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -684,8 +684,8 @@ ScriptedImporter:
   platformSettings: []
   mosaicLayers: 1
   characterMode: 1
-  documentPivot: {x: 0.5, y: 0}
-  documentAlignment: 7
+  documentPivot: {x: 0.48959628, y: 0.497295}
+  documentAlignment: 9
   importHiddenLayers: 0
   layerMappingOption: 2
   generatePhysicsShape: 0

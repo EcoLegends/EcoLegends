@@ -154,7 +154,7 @@ ScriptedImporter:
     - name: bone_2
       guid: 147d854bc4aada84b8990b5ac7c7f94a
       position: {x: 198.42488, y: -0.00000040263876, z: 0}
-      rotation: {x: 0, y: 0, z: -0.015436024, w: 0.99988085}
+      rotation: {x: 0, y: 0, z: -0.015436028, w: 0.9998809}
       length: 163.05382
       parentId: 1
       color:
@@ -587,7 +587,7 @@ ScriptedImporter:
     - name: bone_2
       guid: 147d854bc4aada84b8990b5ac7c7f94a
       position: {x: 198.42488, y: -0.000003561685, z: 0}
-      rotation: {x: 0, y: 0, z: -0.015436028, w: 0.9998809}
+      rotation: {x: 0, y: 0, z: -0.015436024, w: 0.99988085}
       length: 163.05382
       parentId: 0
       color:
@@ -632,7 +632,7 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.52913034, y: 0.47440705}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -645,8 +645,8 @@ ScriptedImporter:
   platformSettings: []
   mosaicLayers: 1
   characterMode: 1
-  documentPivot: {x: 0.5, y: 0}
-  documentAlignment: 7
+  documentPivot: {x: 0.52913034, y: 0.47440705}
+  documentAlignment: 9
   importHiddenLayers: 0
   layerMappingOption: 2
   generatePhysicsShape: 0
