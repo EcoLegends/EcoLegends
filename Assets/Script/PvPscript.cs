@@ -9,7 +9,6 @@ using Unity.Mathematics;
 
 public class PvPscript : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     
     GameObject sprite;
@@ -18,23 +17,6 @@ public class PvPscript : MonoBehaviour
     public bool finitoLvlUp = false;
 
 
-    void Start()
-    {
-
-    }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    //     if(showDamage){
-    //         Debug.Log("au");
-    //         Debug.Log(sprite.transform.position);
-            
-    //         sprite.transform.position=Vector3.Lerp(sprite.transform.position,newPos,t*0.1f);
-    //     }
-        
-    // }
 
 
     public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn, bool cura)
@@ -50,20 +32,167 @@ public class PvPscript : MonoBehaviour
     {
 
         playerScript player = p.GetComponent<playerScript>();
+        GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvp");
+        GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
 
-        if(cura==false)
+
+        if (cura==false)
         {
+            
+
+
             int playerAS = output[3];
             int enemyAS = output[7];
             bool move = false;
 
-            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN+"_pvp");
-            GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
             List<string> turns = new List<string>();
             turns.Add(initial_turn);
 
             enemyScript enemy = e.GetComponent<enemyScript>();
-            
+            if (!battleManager.dialoghiFatti.Contains(player.nome + "-" + enemy.nome))
+            {
+                battleManager.dialoghiFatti.Add(player.nome + "-" + enemy.nome);
+                string dialogo = player.nome + "-" + enemy.nome;
+                if(mapScript.mapN == 2) 
+                {
+                    if (enemy.boss)
+                    {
+                        if(GameObject.Find("Music(Clone)").GetComponent<musicScript>().music!= enemy.musica) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic("Boss Intro");
+                        List<Dialogo> d = new List<Dialogo>();
+
+                        Debug.Log(dialogo);
+
+                        switch (dialogo)
+                        {
+                            case "Nova-Granius?":
+                                {
+                                    d.Add(new Dialogo("Nova", "Nova", "Granius! Cosa diavolo sta succedendo qui?", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "Sono arrivata appena in tempo per vederti assediato da questi mostri!", true, true));
+                                    d.Add(new Dialogo("Granius?","Granius_evil", "Nova... finalmente sei arrivata. Ma non hai idea di cosa sia successo.", false,false));
+                                    d.Add(new Dialogo("Granius?","Granius_evil", "Il nostro impero è stato invaso e distrutto dall'inquinamento che avanza nella nostra terra.", false, false));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Morgrath, lui è l'unico che ci può salvare. Non posso più fidarmi di te o di nessun altro.", false, false));
+                                    d.Add(new Dialogo("Nova", "Nova", "Cosa stai dicendo, Granius? Tu e Morgrath?", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "Sei sempre stato un difensore della natura, un nostro alleato! E ora ti allei col Grande Inquinatore?", true, true));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Le cose sono cambiate. Ora devo affrontarti, Nova. Non c'è altra scelta.", false, false));
+                                    d.Add(new Dialogo("Nova", "Nova", "Non posso crederci... ma non importa cosa sia successo.", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "Granius, io ti salverò e non mi arrenderò senza lottare. Se è così che deve essere, allora che lo sia.", true, true));
+                                    break;
+                                }
+                            case "Sear-Granius?":
+                                {
+                                    d.Add(new Dialogo("Sear", "Sear", "Granius! Resisti! Arrivo subito! Lascia che ti aiuti!", true, true));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Ah, Sear... finalmente sei arrivato. Peccato che sia troppo tardi per te.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Granius? Cosa ti è successo?", true, true));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Nulla che tu possa capire, Sear. Sono diventato più potente di quanto avrei mai immaginato.", false, false));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Morgrath mi ha aperto gli occhi. Ora vedo la vera natura del mondo.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Morgrath? Il Grande Inquinatore? No, Granius, non puoi credere a quello che ti ha detto. ", true, true));
+                                    d.Add(new Dialogo("Sear", "Sear", "È solo un inganno, e tu sei stato trascinato nella sua oscurità.", true, true));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "Non c'è ritorno per me, Sear. Sono diventato ciò che dovevo essere.", false, false));
+                                    d.Add(new Dialogo("Granius?", "Granius_evil", "E ora devo eliminare chiunque cerchi di ostacolarmi.", false, false)); 
+                                    d.Add(new Dialogo("Sear", "Sear", "Allora sarà una battaglia. Granius, prometto che ti salverò!", true, true));
+                                    break;
+                                }
+                            case "Nova-Thera?":
+                                {
+                                    d.Add(new Dialogo("Nova", "Nova", "Thera! Vengo subito! Prendi la mia mano e scappiamo da qui!", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Nova... è troppo tardi. Non posso scappare. E non ho bisogno del tuo aiuto.", false, false));
+                                    d.Add(new Dialogo("Nova", "Nova", "Cosa intendi, Thera? Cosa sta succedendo qui?", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Sono cambiata, Nova.", false, false));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "L'inquinamento ha rivelato la vera natura delle cose, e ho visto di non avere nessuna speranza contro di loro.", false, false));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Ora sono con Morgrath.", false, false));
+                                    d.Add(new Dialogo("Nova", "Nova", "No, Thera, non puoi arrenderti così! Cosa ti ha fatto Morgrath?", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Morgrath non mi ha fatto nulla. Mi ha solo aperto gli occhi sulla realtà.", false, false));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "E ora devo eliminare qualsiasi ostacolo si frapponga sulla nostra strada.", false, false)); 
+                                    d.Add(new Dialogo("Nova", "Nova", "Allora sono obbligata a fermarti, Thera. Non vi lascerò avere la meglio senza lottare.", true, true));
+                                    
+                                    break;
+                                }
+                            case "Sear-Thera?":
+                                {
+                                    d.Add(new Dialogo("Sear", "Sear", "Thera! Ti raggiungo subito! Tieniti forte, arrivo!", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Sear... non hai bisogno di preoccuparti per me. La mia situazione è sotto controllo.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Thera? Cosa sta succedendo qui?", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "Non importa. Quello che devi sapere è che sono ora dalla parte di Morgrath.", false, false));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "E non ci sarà pietà per chiunque cerchi di fermarci.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Ma che stai dicendo? Thera, non puoi lasciare che Morgrath ti manipoli in questo modo! Non sei tu!", true, true));
+                                    d.Add(new Dialogo("Thera?", "Thera_evil", "È inutile, Sear. Il mio destino è stato scritto, e ora devo seguirlo fino in fondo.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Allora sarà una battaglia, Thera. Non posso permetterti di vincere.", true, true));
+
+
+                                    break;
+                                }
+                        }
+
+                        GameObject deez = (GameObject)Instantiate(Resources.Load("Dialogo", typeof(GameObject)), new Vector3(0, 0, 0), Quaternion.identity);
+
+                        bool dx=false, sx=false;
+                        deez.transform.GetChild(0).GetChild(0).localScale = Vector3.zero;
+                        deez.transform.GetChild(0).GetChild(1).localScale = Vector3.zero;
+                        deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+
+                        
+
+
+                        yield return new WaitForSeconds(1);
+                        for (float i=0; i <= 85; i++)
+                        {
+                            deez.transform.position = new Vector3(0, i / 100, 0);
+                            yield return new WaitForEndOfFrame();
+                        }
+                        yield return new WaitForSeconds(0.5f);
+                        foreach (Dialogo dial in d)
+                        {
+                            deez.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                            deez.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                            deez.transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                            deez.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+
+                            deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+                            int index = 0;
+                            if (!dial.latoSX) index = 1;
+                            if(!dial.player) deez.transform.GetChild(0).GetChild(index).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("enemyNameBanner");
+                            deez.transform.GetChild(0).GetChild(index).GetChild(0).GetComponent<SpriteRenderer>().sprite = dial.sprite;
+                            deez.transform.GetChild(0).GetChild(index).GetChild(1).GetComponent<TextMeshProUGUI>().text = dial.nome;
+
+                            deez.transform.GetChild(0).GetChild(index).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                            deez.transform.GetChild(0).GetChild(index).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+
+                            if (dial.latoSX && !sx)
+                            {
+                                sx = true;
+                                for(float i = 0; i <= 100; i++)
+                                {
+                                    deez.transform.GetChild(0).GetChild(0).localScale = new Vector3(9.259258f* (i/100), 5.185184f * (i/100), 9.259258f * (i/100));
+                                    yield return new WaitForEndOfFrame();
+                                }
+                            }
+                            if (!dial.latoSX && !dx)
+                            {
+                                dx = true;
+                                for (float i = 0; i <= 100; i++)
+                                {
+                                    deez.transform.GetChild(0).GetChild(1).localScale = new Vector3(9.259258f * (i / 100), 5.185184f * (i / 100), 9.259258f * (i / 100));
+                                    yield return new WaitForEndOfFrame();
+                                }
+                            }
+                            
+                            for(int i=0;i<=dial.text.Length;i++)
+                            {
+                                deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text =  dial.text.Substring(0,i);
+                                yield return new WaitForSeconds(0.025f);
+                            }
+                            yield return new WaitForSeconds(3);
+                        }
+                        for (float i = 85; i >= 0; i--)
+                        {
+                            deez.transform.position = new Vector3(0, i / 100, 0);
+                            yield return new WaitForEndOfFrame();
+                        }
+                        Destroy(deez);
+
+                    }
+                }
+            }
 
             int distance = (int)Mathf.Abs(player.x - enemy.x) + (int)Mathf.Abs(player.y - enemy.y);
 
@@ -84,7 +213,7 @@ public class PvPscript : MonoBehaviour
             }
 
             if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1);
             UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
             foreach (GameObject g in GameObject.FindGameObjectsWithTag("tileViola")) Destroy(g);

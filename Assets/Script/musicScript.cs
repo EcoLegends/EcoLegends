@@ -38,7 +38,7 @@ public class musicScript : MonoBehaviour
 
         while (audioSource.volume > 0)
         {
-            audioSource.volume -= startVolume * Time.deltaTime/0.5f;
+            audioSource.volume -= startVolume * Time.deltaTime/1f;
 
             yield return null;
         }

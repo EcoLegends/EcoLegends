@@ -22,6 +22,8 @@ public class battleManager : MonoBehaviour
     public static List<GameObject> unmovedUnits = new List<GameObject>();
     public static List<GameObject> enemies = new List<GameObject>();
 
+    public static List<string> dialoghiFatti = new List<string>();
+
     public bool showEnemyMovement = false;
     private List<GameObject> movTiles = new List<GameObject>();
 

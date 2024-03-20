@@ -148,9 +148,9 @@ public class mapScript : MonoBehaviour
                     new_enemy8.GetComponent<enemyScript>().Setup(25, 14, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
 
                     GameObject new_enemy9 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy9.GetComponent<enemyScript>().Setup(10, 13, "Granius", "Granius_evil", 3, 3, "near", 1, 2, 6, 6, 90, 0, 3, 4, false, 25, 9, 3, 7, 10, 7, 5, 2, "Inconsistant One");
+                    new_enemy9.GetComponent<enemyScript>().Setup(10, 1, "Granius?", "Granius_evil", 3, 3, "near", 1, 2, 6, 6, 90, 0, 3, 4, false, 25, 9, 3, 7, 10, 7, 5, 2, "Inconsistant One");
                     GameObject new_enemy10 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy10.GetComponent<enemyScript>().Setup(15, 13, "Thera", "Thera_evil", 3, 3, "near", 1, 1, 5, 5, 90, 0, 3, 7, false, 29, 10, 5, 5, 8, 6, 6, 3, "Inconsistant One");
+                    new_enemy10.GetComponent<enemyScript>().Setup(15, 1, "Thera?", "Thera_evil", 3, 3, "near", 1, 1, 5, 5, 90, 0, 3, 7, false, 29, 10, 5, 5, 8, 6, 6, 3, "Inconsistant One");
                     break;
                 }
             
