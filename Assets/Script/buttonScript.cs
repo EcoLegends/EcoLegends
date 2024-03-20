@@ -10,13 +10,6 @@ public class buttonScript : MonoBehaviour
     
     public void OnClick()
     {
-        switch (button)
-        {
-            case 0:
-                {
-                    Destroy(transform.parent.gameObject);
-                    break;
-                }
-        }
+        
     }
 }
