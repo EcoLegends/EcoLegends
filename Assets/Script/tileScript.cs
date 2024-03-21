@@ -42,13 +42,20 @@ public class tileScript : MonoBehaviour
                 sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Decor/TreeTile");
                 GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
                 break;
+            case "Acqua":
+                this.description = "Terreno difficile da traversare.";
+                this.canBeWalkedOn = true;
+                this.travelCost = 3;
+                sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/GrassTiles");
+                GetComponent<SpriteRenderer>().sprite = (Sprite)sp[1];
+                break;
 
             default:
                 this.description = "Terreno neutrale.";
                 this.canBeWalkedOn = true;
                 this.travelCost = 1;
                 sp = Resources.LoadAll("Platformer Tileset - Pixelart Grasslands/Sprites/Textures/Tiles/GrassTiles");
-                GetComponent<SpriteRenderer>().sprite = (Sprite) sp[98];
+                //GetComponent<SpriteRenderer>().sprite = (Sprite) sp[98];
                 
                 break;
 

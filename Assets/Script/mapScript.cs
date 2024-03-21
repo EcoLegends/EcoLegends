@@ -6,10 +6,10 @@ using UnityEngine;
 public class mapScript : MonoBehaviour
 {
     public const int dimX = 16; //altezza
-    public const int dimY = 29; //largezza              //   1        2            3          4       5         6         7         8          9        10          11      12       13        14         15        16        17        18        19        20       21         22        23        24         25       26            27      28        29
+    public const int dimY = 29; //largezza             
     public string[,] mapArray;
 
-
+    public static bool finitoSpawn = false;
 
 
     public string music = "Preparations Theme";
@@ -17,7 +17,7 @@ public class mapScript : MonoBehaviour
     public GameObject[,] mapTiles = new GameObject[dimY, dimX];
     public static int mapN = 1;
     public int mapNum = 1;
-    void Start()
+    void Awake()
     {
         mapN = mapNum;
         Camera.main.gameObject.transform.position = new Vector3(13, 4.5f, -10);
@@ -131,19 +131,19 @@ public class mapScript : MonoBehaviour
 
                     Object enemy = Resources.Load("enemy", typeof(GameObject));
                     GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy1.GetComponent<enemyScript>().Setup(9, 9, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
+                    new_enemy1.GetComponent<enemyScript>().Setup(9, 9, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 21, 3, 4, 5, 9, 4, 4, 1);
                     GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy2.GetComponent<enemyScript>().Setup(14, 9, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy3.GetComponent<enemyScript>().Setup(19, 10, "???", "terra2", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 17, 4, 3, 5, 9, 4, 1, 5);
+                    new_enemy3.GetComponent<enemyScript>().Setup(19, 10, "???", "terra2", 2, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 17, 4, 3, 5, 9, 4, 1, 5);
                     GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy4.GetComponent<enemyScript>().Setup(22, 11, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
+                    new_enemy4.GetComponent<enemyScript>().Setup(22, 11, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 19, 4, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy5.GetComponent<enemyScript>().Setup(4, 12, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy6.GetComponent<enemyScript>().Setup(12, 14, "???", "terra2", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 17, 4, 3, 5, 9, 4, 1, 5);
+                    new_enemy6.GetComponent<enemyScript>().Setup(12, 14, "???", "terra2", 2, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 18, 4, 3, 5, 9, 4, 1, 5);
                     GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy7.GetComponent<enemyScript>().Setup(19, 14, "???", "terra2", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 17, 4, 3, 5, 9, 4, 1, 5);
+                    new_enemy7.GetComponent<enemyScript>().Setup(19, 14, "???", "terra2", 2, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 17, 4, 3, 5, 9, 4, 1, 5);
                     GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy8.GetComponent<enemyScript>().Setup(25, 14, "???", "terra1", 2, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 3, 4, 5, 9, 4, 5, 1);
 
@@ -153,7 +153,74 @@ public class mapScript : MonoBehaviour
                     new_enemy10.GetComponent<enemyScript>().Setup(15, 1, "Thera?", "Thera_evil", 3, 3, "near", 1, 1, 5, 5, 90, 0, 3, 7, false, 29, 10, 5, 5, 8, 6, 6, 3, "Inconsistant One");
                     break;
                 }
-            
+
+            case 3:
+                {                                     //                       3                  5              7                 9                  11                13              15                   17              19                21                  23               25               27                  29 
+                    mapArray = new string[dimX, dimY]{  {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},              //layout mappa
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"}, 
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Cespuglio","Cespuglio","Cespuglio","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Acqua","Acqua","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Cespuglio","Cespuglio","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Sabbia"},
+                                                        {"Sabbia","Sabbia","Acqua","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Cespuglio","Cespuglio","Sabbia","Sabbia","Sabbia"},
+                                                        {"Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia","Sabbia"} };
+
+
+
+                    StreamReader reader = new StreamReader(path);
+                    string[] nova = reader.ReadLine().Split(",");
+                    string[] sear = reader.ReadLine().Split(",");
+
+
+                    Object player = Resources.Load("player", typeof(GameObject));
+                    GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player1.GetComponent<playerScript>().Setup(13, 2, nova[0], nova[1], int.Parse(nova[2]), int.Parse(nova[3]), int.Parse(nova[4]), int.Parse(nova[5]), int.Parse(nova[6]), int.Parse(nova[7]), int.Parse(nova[8]), int.Parse(nova[9]), int.Parse(nova[10]), int.Parse(nova[11]), int.Parse(nova[12]), bool.Parse(nova[13]), int.Parse(nova[14]), int.Parse(nova[15]), int.Parse(nova[16]), int.Parse(nova[17]), int.Parse(nova[18]), int.Parse(nova[19]), int.Parse(nova[20]), int.Parse(nova[21]), int.Parse(nova[22]), int.Parse(nova[23]), int.Parse(nova[24]), int.Parse(nova[25]), int.Parse(nova[26]), int.Parse(nova[27]), int.Parse(nova[28]), int.Parse(nova[29]), bool.Parse(nova[30]));
+
+                    GameObject new_player2 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player2.GetComponent<playerScript>().Setup(10, 1, sear[0], sear[1], int.Parse(sear[2]), int.Parse(sear[3]), int.Parse(sear[4]), int.Parse(sear[5]), int.Parse(sear[6]), int.Parse(sear[7]), int.Parse(sear[8]), int.Parse(sear[9]), int.Parse(sear[10]), int.Parse(sear[11]), int.Parse(sear[12]), bool.Parse(sear[13]), int.Parse(sear[14]), int.Parse(sear[15]), int.Parse(sear[16]), int.Parse(sear[17]), int.Parse(sear[18]), int.Parse(sear[19]), int.Parse(sear[20]), int.Parse(sear[21]), int.Parse(sear[22]), int.Parse(sear[23]), int.Parse(sear[24]), int.Parse(sear[25]), int.Parse(sear[26]), int.Parse(sear[27]), int.Parse(sear[28]), int.Parse(sear[29]), bool.Parse(sear[30]));
+
+                    GameObject new_player3 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player3.GetComponent<playerScript>().Setup(19, 1, "Granius", "Granius",3,0,4,1,2,6,6,90,0,3,4,false,27,9,3,8,10,7,6,5,65,40,25,70,80,45,30,15,false);
+
+                    GameObject new_player4 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player4.GetComponent<playerScript>().Setup(16, 2, "Thera", "Thera", 3, 0, 4, 1, 1, 7,8,75,0,3,7,false,29,13,5,5,6,6,7,3,90,60,20,30,50,35,35,20,false);
+
+
+                    Object enemy = Resources.Load("enemy", typeof(GameObject));
+                    GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy1.GetComponent<enemyScript>().Setup(12, 11, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 4, 4, 5, 9, 4, 5, 1);
+                    GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy2.GetComponent<enemyScript>().Setup(16, 11, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 23, 3, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy3.GetComponent<enemyScript>().Setup(1, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 5, 4, 5, 9, 4, 5, 1);
+                    GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy4.GetComponent<enemyScript>().Setup(6, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 3, 4, 5, 9, 4, 5, 1);
+                    GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy5.GetComponent<enemyScript>().Setup(19, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 3, 4, 5, 9, 4, 5, 4);
+                    GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy6.GetComponent<enemyScript>().Setup(3, 14, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 5, 5, 9, 4, 3, 5);
+                    GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy7.GetComponent<enemyScript>().Setup(26, 14, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 4, 5, 9, 4, 2, 5);
+                    GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy8.GetComponent<enemyScript>().Setup(8, 15, "???", "acqua2", 3, 4, "near", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 3, 5, 9, 4, 4, 5);
+                    GameObject new_enemy9 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy9.GetComponent<enemyScript>().Setup(18, 15, "???", "acqua2", 3, 4, "near", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 6, 5, 9, 4, 1, 5);
+
+
+                    GameObject new_enemy10 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);                                 //sylvain stats
+                    new_enemy10.GetComponent<enemyScript>().Setup(11, 14, "Acquira?", "Acquira_evil", 4, 3, "near", 1, 2, 6, 6, 90, 0, 2, 6, false, 30, 12, 5, 5, 8, 6, 6, 3, "The Ashen Demon");
+                    GameObject new_enemy11 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);                                 //linhardt stats
+                    new_enemy11.GetComponent<enemyScript>().Setup(15, 14, "Hydris?", "Hydris_evil", 4, 3, "near", 1, 1, 5, 5, 90, 0, 2, 1, true, 26, 5, 10, 6, 7, 7, 5, 9, "The Ashen Demon");
+                    break;
+                }
         }
 
 
@@ -177,7 +244,7 @@ public class mapScript : MonoBehaviour
             
         }
 
-        
+        finitoSpawn = true;
 
     }
 
