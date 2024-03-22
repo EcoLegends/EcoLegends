@@ -7,6 +7,12 @@ TagManager:
   - Enemy
   - InfoCanvas
   - Rimuovere
+  - Restart
+  - Cap1
+  - Cap2
+  - Cap3
+  - Cap4
+  - Cap5
   layers:
   - Default
   - TransparentFX

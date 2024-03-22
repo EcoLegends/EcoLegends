@@ -25,11 +25,11 @@ public class buttonScript : MonoBehaviour
     
     public IEnumerator asin(AsyncOperation async){
         while (!async.isDone)     
-            {
+        {
 
-                yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
 
-            }
+        }
     }
     public void OnClick()
     {
@@ -52,7 +52,7 @@ public class buttonScript : MonoBehaviour
             if(e==this.gameObject){
                 Scene activeScene = SceneManager.GetActiveScene();
 
-                GameObject temp = new GameObject( "temp" );  
+                /*GameObject temp = new GameObject( "temp" );  
 
                 GameObject[] allObjects = activeScene.GetRootGameObjects();
 
@@ -62,6 +62,7 @@ public class buttonScript : MonoBehaviour
                     go.transform.SetParent(temp.transform, false);
 
                 }
+                */
 
                 AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene", LoadSceneMode.Additive);
 
@@ -70,8 +71,8 @@ public class buttonScript : MonoBehaviour
 
                 Scene battleScene = SceneManager.GetSceneByName( "MainScene" );
                 SceneManager.SetActiveScene(battleScene);
-
-                temp.SetActive(false);
+                
+                SceneManager.UnloadSceneAsync(activeScene);
             }
         }
     }
