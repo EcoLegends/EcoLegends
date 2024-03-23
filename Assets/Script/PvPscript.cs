@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 
 public class PvPscript : MonoBehaviour
 {
@@ -587,12 +588,17 @@ public class PvPscript : MonoBehaviour
 
 
             int expGained = Mathf.Clamp(damageDealt, 0, 20);
+            if (player.hp == 0) expGained = 0;
             if (expGained != 0)
             {
 
 
                 int expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 2));
-                if (enemy.hp == 0) expGained = Mathf.Clamp(30 + (enemy.lvl - 1),0, 100);
+                if (enemy.hp == 0)
+                {
+                    expGained = Mathf.Clamp(30 + (enemy.lvl - 1), 0, 100);
+                    if (enemy.boss) expGained += 20;
+                }
 
 
                 GameObject expGUI = (GameObject)Instantiate(Resources.Load("ExpCanvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
@@ -651,6 +657,11 @@ public class PvPscript : MonoBehaviour
                     while (!finitoLvlUp) yield return new WaitForEndOfFrame();
                 }
 
+                List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Aeria", "Skye" };
+
+                string[] arrLine = System.IO.File.ReadAllLines("Assets/Resources/dati.txt");
+                arrLine[nomi.IndexOf(player.nome)] = player.nome+","+player.textureFile+","+player.lvl+","+player.exp+","+player.movement+","+player.weaponMinRange+","+player.weaponMaxRange+","+player.weaponWt+","+player.weaponMt+","+player.weaponHit+","+player.weaponCrit+","+player.unitType+","+player.weaponType+","+player.weaponIsMagic+","+player.hp+","+player.str+","+player.mag+","+player.dex+","+player.spd+","+player.lck+","+player.def+","+player.res+","+player.hpGrowth+","+player.strGrowth+","+player.magGrowth+","+player.dexGrowth+","+player.spdGrowth+","+player.lckGrowth+","+player.defGrowth+","+player.resGrowth+","+player.heal;
+                System.IO.File.WriteAllLines("Assets/Resources/dati.txt",arrLine);
             }
 
             if (enemy.hp == 0)
@@ -684,6 +695,7 @@ public class PvPscript : MonoBehaviour
                 if (battleManager.unmovedUnits.Contains(p))
                     battleManager.unmovedUnits.Remove(p);
                 Destroy(temp);
+                player.endPvp();
                 Destroy(p);
                 yield return new WaitForEndOfFrame();
                 SceneManager.UnloadSceneAsync(1);

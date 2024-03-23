@@ -59,9 +59,9 @@ public class battleManager : MonoBehaviour
         {
             if (units.Count == 0)
             {
-
+                Debug.Log("PERSO!!!!");
                 GameObject perdi = Instantiate(Resources.Load<GameObject>("perdi"));
-                perdi.transform.parent = Camera.main.transform;
+                perdi.transform.parent = gameObject.transform;
                 perdi.transform.localPosition = new Vector3(0, 0, 10);
                 perdi.transform.localScale = Vector3.one;
                 stop = true;
@@ -70,9 +70,9 @@ public class battleManager : MonoBehaviour
 
             if (enemies.Count == 0)
             {
-
+                Debug.Log("VINTO!!!!");
                 GameObject vinci = Instantiate(Resources.Load<GameObject>("vinci"));
-                vinci.transform.parent = Camera.main.transform;
+                vinci.transform.parent = gameObject.transform;
                 vinci.transform.localPosition = new Vector3(0, 0, 10);
                 vinci.transform.localScale = Vector3.one;
                 stop = true; 
