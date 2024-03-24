@@ -19,6 +19,12 @@ public class mapScript : MonoBehaviour
     public int mapNum = 1;
     void Awake()
     {
+        string p = "Assets/Resources/mappaScelta.txt";
+        StreamReader r = new StreamReader(p);
+        string l = r.ReadLine();
+
+        mapNum=int.Parse(l);
+
         mapN = mapNum;
         Camera.main.gameObject.transform.position = new Vector3(13, 4.5f, -10);
 

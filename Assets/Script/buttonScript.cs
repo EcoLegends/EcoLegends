@@ -33,7 +33,6 @@ public class buttonScript : MonoBehaviour
     }
     public void OnClick()
     {
-        Debug.Log("ciao");
         foreach( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){       //restart
 
             if(e==this.gameObject){
@@ -50,29 +49,90 @@ public class buttonScript : MonoBehaviour
         foreach( GameObject e in GameObject.FindGameObjectsWithTag("Cap1")){       //start cap1
 
             if(e==this.gameObject){
-                Scene activeScene = SceneManager.GetActiveScene();
 
-                /*GameObject temp = new GameObject( "temp" );  
+                string path = "Assets/Resources/mappaScelta.txt";
 
-                GameObject[] allObjects = activeScene.GetRootGameObjects();
-
-                foreach (GameObject go in allObjects)   
-                {
-
-                    go.transform.SetParent(temp.transform, false);
-
-                }
-                */
-
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene", LoadSceneMode.Additive);
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine("1");
+                writer.Close();
+                
+                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
 
                 asin(async);
 
-
-                Scene battleScene = SceneManager.GetSceneByName( "MainScene" );
-                SceneManager.SetActiveScene(battleScene);
                 
-                SceneManager.UnloadSceneAsync(activeScene);
+            }
+        }
+
+        foreach( GameObject e in GameObject.FindGameObjectsWithTag("Cap2")){       //start cap2
+
+            if(e==this.gameObject){
+
+                string path = "Assets/Resources/mappaScelta.txt";
+
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine("2");
+                writer.Close();
+                
+                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+
+                asin(async);
+
+                
+            }
+        }
+
+        foreach( GameObject e in GameObject.FindGameObjectsWithTag("Cap3")){       //start cap3
+
+            if(e==this.gameObject){
+
+                string path = "Assets/Resources/mappaScelta.txt";
+
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine("3");
+                writer.Close();
+                
+                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+
+                asin(async);
+
+                
+            }
+        }
+
+        foreach( GameObject e in GameObject.FindGameObjectsWithTag("Cap4")){       //start cap4
+
+            if(e==this.gameObject){
+
+                string path = "Assets/Resources/mappaScelta.txt";
+
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine("4");
+                writer.Close();
+                
+                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+
+                asin(async);
+
+                
+            }
+        }
+
+        foreach( GameObject e in GameObject.FindGameObjectsWithTag("Cap5")){       //start cap5
+
+            if(e==this.gameObject){
+
+                string path = "Assets/Resources/mappaScelta.txt";
+
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine("5");
+                writer.Close();
+                
+                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+
+                asin(async);
+
+                
             }
         }
     }
