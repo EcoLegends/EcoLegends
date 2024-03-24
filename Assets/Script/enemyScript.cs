@@ -570,138 +570,152 @@ public class enemyScript : MonoBehaviour
 
     void Update()
     {
-        if (mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            if (!(Input.GetKey(KeyCode.Mouse0)))
+            if (mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
             {
-                infoGUISpawned = true;
-                infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-                infoGUI.transform.parent = Camera.main.transform;
-                infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
-                infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                infoGUICooldown = Time.time + 0.3f;
-                infoGUI.GetComponent<infoGUIScript>().Setup(this);
+                if (!(Input.GetKey(KeyCode.Mouse0)))
+                {
+                    infoGUISpawned = true;
+                    infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                    infoGUI.transform.parent = Camera.main.transform;
+                    infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+                    infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                    infoGUICooldown = Time.time + 0.3f;
+                    infoGUI.GetComponent<infoGUIScript>().Setup(this);
+                }
             }
-        }
 
-        if (battleManager.canMoveEnemy==false && nextPositionChanged)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, nextPosition, Time.deltaTime*5);
-
-            if (transform.position == nextPosition)
+            if (battleManager.canMoveEnemy == false && nextPositionChanged)
             {
-                nextPositionChanged = false;
-                
-                GameObject nearest = GameObject.FindGameObjectsWithTag("Player")[0];
-                foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+                transform.position = Vector3.MoveTowards(transform.position, nextPosition, Time.deltaTime * 5);
+
+                if (transform.position == nextPosition)
                 {
-                    if (System.Math.Pow(System.Math.Abs(x - p.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - p.GetComponent<playerScript>().y), 2) < (System.Math.Pow(System.Math.Abs(x - nearest.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - nearest.GetComponent<playerScript>().y), 2))) nearest = p;
-                }
-                
-                
+                    nextPositionChanged = false;
 
-
-                int distance = (int)Mathf.Abs(nearest.transform.position.x - nextPosition.x) + (int)Mathf.Abs(nearest.transform.position.y - nextPosition.y);
-                Debug.Log("Inizia PVP Enemy "+distance);
-                if(distance<=weaponMaxRange&&distance>=weaponMinRange){
-
-                    int [] output = Camera.main.GetComponent<battleManager>().pvp(this.gameObject, nearest, "enemy",false);     //inizia pvp
-                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(this.gameObject,nearest,output, "enemy",false));
-
-
-                }
-                else
-                {
-                    battleManager.canMoveEnemy = true;
-                }
-
-
-
-                
-            }
-        }
-
-        if(movBlueTiles.Count > 0 && battleManager.phase == "Enemy")
-        {
-            foreach (GameObject g in movBlueTiles) Destroy(g);
-            movBlueTiles.Clear();
-            foreach (GameObject g in attackRedTiles) Destroy(g);                          
-            attackRedTiles.Clear();
-        }
-
-        if (battleManager.phase == "Enemy"&&infoGUI != null)
-        {
-            Destroy(infoGUI);
-            infoGUISpawned = false;
-        }
-
-        Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x,y,0);
-        if(check.x>0.5||check.x<-0.5||check.y>0.5||check.y<-0.5 || battleManager.removeGUI){
-            if(mouseIsOver || battleManager.removeGUI){
-                 mouseIsOver = false;
-                if(infoGUISpawned)
-                {
-                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-                    infoGUISpawned = false;
-                }
-                
-
-                if (battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI) 
-                {
-                    if(movBlueTiles.Count > 0)
+                    GameObject nearest = GameObject.FindGameObjectsWithTag("Player")[0];
+                    foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
                     {
-                        
-                        foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
-                        movBlueTiles.Clear();
-
-                        
-                        foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
-                        attackRedTiles.Clear();
+                        if (System.Math.Pow(System.Math.Abs(x - p.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - p.GetComponent<playerScript>().y), 2) < (System.Math.Pow(System.Math.Abs(x - nearest.GetComponent<playerScript>().x), 2) + System.Math.Pow(System.Math.Abs(y - nearest.GetComponent<playerScript>().y), 2))) nearest = p;
                     }
-                    
+
+
+
+
+                    int distance = (int)Mathf.Abs(nearest.transform.position.x - nextPosition.x) + (int)Mathf.Abs(nearest.transform.position.y - nextPosition.y);
+                    Debug.Log("Inizia PVP Enemy " + distance);
+                    if (distance <= weaponMaxRange && distance >= weaponMinRange)
+                    {
+                        try
+                        {
+                            int[] output = Camera.main.GetComponent<battleManager>().pvp(this.gameObject, nearest, "enemy", false);     //inizia pvp
+                            StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(this.gameObject, nearest, output, "enemy", false));
+                        }
+                        catch (System.Exception e) { }
+                        
+
+
+                    }
+                    else
+                    {
+                        battleManager.canMoveEnemy = true;
+                    }
+
+
 
 
                 }
             }
-        }
 
+            if (movBlueTiles.Count > 0 && battleManager.phase == "Enemy")
+            {
+                foreach (GameObject g in movBlueTiles) Destroy(g);
+                movBlueTiles.Clear();
+                foreach (GameObject g in attackRedTiles) Destroy(g);
+                attackRedTiles.Clear();
+            }
+
+            if (battleManager.phase == "Enemy" && infoGUI != null)
+            {
+                Destroy(infoGUI);
+                infoGUISpawned = false;
+            }
+
+            Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x, y, 0);
+            if (check.x > 0.5 || check.x < -0.5 || check.y > 0.5 || check.y < -0.5 || battleManager.removeGUI)
+            {
+                if (mouseIsOver || battleManager.removeGUI)
+                {
+                    mouseIsOver = false;
+                    if (infoGUISpawned)
+                    {
+                        infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                        infoGUISpawned = false;
+                    }
+
+
+                    if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI)
+                    {
+                        if (movBlueTiles.Count > 0)
+                        {
+
+                            foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                            movBlueTiles.Clear();
+
+
+                            foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                            attackRedTiles.Clear();
+                        }
+
+
+
+                    }
+                }
+            }
+        }
     }
 
 
     private void OnMouseEnter()
     {
-        mouseIsOver = true;
-        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            HighlightMov();
+            mouseIsOver = true;
+            if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+            {
+                HighlightMov();
+            }
         }
     }
 
 
     private void OnMouseExit()
     {
-        mouseIsOver = false;
-        if (battleManager.phase == "Player" && infoGUI != null)
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-            infoGUISpawned = false;
-        }
-
-        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
-        {
-            if(movBlueTiles.Count > 0)
+            mouseIsOver = false;
+            if (battleManager.phase == "Player" && infoGUI != null)
             {
-                foreach (GameObject g in movBlueTiles) Destroy(g);
-                movBlueTiles.Clear();
-                foreach (GameObject g in attackRedTiles) Destroy(g);                          
-                attackRedTiles.Clear();
+                infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                infoGUISpawned = false;
             }
-            
 
+            if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+            {
+                if (movBlueTiles.Count > 0)
+                {
+                    foreach (GameObject g in movBlueTiles) Destroy(g);
+                    movBlueTiles.Clear();
+                    foreach (GameObject g in attackRedTiles) Destroy(g);
+                    attackRedTiles.Clear();
+                }
+
+
+
+            }
 
         }
-
-
     }
 
     public void cancInfo(){

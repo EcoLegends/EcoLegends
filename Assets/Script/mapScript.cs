@@ -57,12 +57,13 @@ public class mapScript : MonoBehaviour
                                                         {"Basalto","Basalto","Lava","Lava","Lava","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Lava","Basalto","Basalto","Basalto","Lava","Lava","Lava"},
                                                         {"Basalto","Basalto","Lava","Lava","Lava","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto","Basalto"} };
 
+                    File.WriteAllText(path, string.Empty);
                     StreamWriter writer = new StreamWriter(path, false);
                     writer.WriteLine("Nova,Nova,1,0,4,1,1,5,5,90,5,1,5,false,26,6,6,6,9,5,5,3,70,65,30,45,75,40,30,15,false");
                     writer.WriteLine("Sear,Sear,1,0,4,1,2,3,3,90,5,1,2,true,22,6,6,6,7,6,4,7,45,30,65,45,45,35,25,45,false");
                     writer.Close();
 
-
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial1"), Camera.main.gameObject.transform);
 
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");

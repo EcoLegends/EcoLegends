@@ -31,13 +31,17 @@ public class battleManager : MonoBehaviour
 
     private Vector3 _origin;
     private Vector3 _difference;        //roba del tutorial bohh
-    private Camera _mainCamera;
+    public static Camera _mainCamera;
     private bool _isDragging;
 
     List<GameObject> unmovedEnemies = new List<GameObject>();
 
     string animationText = "0";
     float animationTime = 0f;
+
+
+    public static int pvpTutorial = 0;
+    private int phaseTutorial = 0;
 
     GameObject phaseCanvas;
 
@@ -48,14 +52,20 @@ public class battleManager : MonoBehaviour
 
     public void OnDrag(InputAction.CallbackContext ctx) //roba del tutorial bohh
     {
-        if (ctx.started) _origin = GetMousePosition;
+        if (!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
+        {
+            if (ctx.started) _origin = GetMousePosition;
 
-        _isDragging = ctx.started || ctx.performed;
+            _isDragging = ctx.started || ctx.performed;
+        }
+        
     }
 
     private void LateUpdate() //roba del tutorial bohh
     {
-        if (!stop && mapScript.finitoSpawn)
+        
+
+        if (!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length==0)
         {
             if (units.Count == 0)
             {
@@ -94,11 +104,12 @@ public class battleManager : MonoBehaviour
 
     public void OnPressC(InputAction.CallbackContext ctx)
     {
-        if(ctx.started) showEnemyMovement = !showEnemyMovement;
-        Debug.Log("Show: "+showEnemyMovement);
-        UpdateEnemyMov();
-        if(showEnemyMovement == false) foreach(GameObject g in movTiles) Destroy(g);
-
+        if (!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) { 
+            if (ctx.started) showEnemyMovement = !showEnemyMovement;
+            Debug.Log("Show: " + showEnemyMovement);
+            UpdateEnemyMov();
+            if (showEnemyMovement == false) foreach (GameObject g in movTiles) Destroy(g);
+        }
     }
 
 
@@ -468,12 +479,18 @@ public class battleManager : MonoBehaviour
 
     public static bool canMoveEnemy = true;
 
-    bool stop=false;
+    public static bool stop=false;
 
     void Update()
     {
-
-        if(!stop){
+        if (!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) && phaseCanvas!=null) { 
+            animationTime = Time.time + 3;
+            phaseCanvas.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            phaseCanvas.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            phaseCanvas.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
+        if (!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
+        {
 
             Camera.main.orthographicSize = Mathf.Clamp(Input.GetAxis("Mouse ScrollWheel")*-2 + Camera.main.orthographicSize,2.2f,6.5f); //zoom
             transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
@@ -489,7 +506,24 @@ public class battleManager : MonoBehaviour
                 UpdateEnemyMov();
 
                 phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
-                
+                phaseTutorial++;
+
+                if (mapScript.mapN == 1 && phaseTutorial == 2)
+                {
+
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial8"), Camera.main.gameObject.transform);
+                }
+                if (mapScript.mapN == 1 && phaseTutorial == 4)
+                {
+
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial10"), Camera.main.gameObject.transform);
+                }
+                if (mapScript.mapN == 1 && phaseTutorial == 6)
+                {
+
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial12"), Camera.main.gameObject.transform);
+                }
+
             }
             else if(unmovedEnemies.Count > 0 && canMoveEnemy == true)
             {
@@ -507,7 +541,13 @@ public class battleManager : MonoBehaviour
                 animationTime = Time.time + 3;
                 removeGUI=true;
 
-                
+                phaseTutorial++;
+
+                if (mapScript.mapN==1&&phaseTutorial==1)
+                {
+                    
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial6"), Camera.main.gameObject.transform);
+                }
 
                 phaseCanvas = (GameObject)Instantiate(Resources.Load("enemyPhaseCanvas", typeof(GameObject)), this.transform);
             }

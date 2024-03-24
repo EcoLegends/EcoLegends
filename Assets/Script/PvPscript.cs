@@ -585,9 +585,22 @@ public class PvPscript : MonoBehaviour
             }
 
             if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
+            if (enemy.hp == 0)
+            {
+                GameObject particle = Instantiate(Resources.Load<GameObject>("Petals Prefab 1"));
+                particle.transform.position = new Vector3(enemyParent.transform.position.x-0.5f, enemyParent.transform.position.y+0.5f, -3.5f);
 
+                particle.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-            int expGained = Mathf.Clamp(damageDealt, 0, 20);
+                for(float i = 0; i <= 100; i++)
+                {
+
+                    enemyParent.transform.localScale = new Vector3(1-i / 100, 1-i / 100, 1-i / 100);
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+
+                int expGained = Mathf.Clamp(damageDealt, 0, 20);
             if (player.hp == 0) expGained = 0;
             if (expGained != 0)
             {

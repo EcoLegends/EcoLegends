@@ -342,377 +342,400 @@ public class playerScript : MonoBehaviour
     private int counter = 0;
     void Update()
     {
-        if(!forecastSpawned && newPosTile!= null) Destroy(newPosTile);
-        if (!Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition)).Contains(GetComponent<Collider2D>()))
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-
-            if(!dragging) counter++;
-
-            if (counter == 20) {
-                mouseIsOver = false;
-                if (infoGUI != null)
-                {
-                    infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-                    infoGUISpawned = false;
-                    infoGUI = null;
-                }
-                if (forecast != null)
-                {
-                    forecast.GetComponent<forecastScript>().Rimuovi();
-                    forecastSpawned = false;
-                    forecast = null;
-                }
-                if (movBlueTiles.Count > 0)
-                {
-                    mov_tiles_coords.Clear();
-                    foreach (GameObject g in movBlueTiles)
-                    {
-                        if (g != null)
-                            Destroy(g);
-                    }                          //elimina tasselli blu
-                    movBlueTiles.Clear();
-
-
-                    foreach (GameObject g in attackRedTiles)
-                    {
-                        if (g != null)
-                            Destroy(g);
-                    }                          //elimina tasselli rossi
-                    attackRedTiles.Clear();
-                }
-            }
-            
-
-        }
-        else { mouseIsOver = true; counter = 0; }
-        if (infoGUI != null && infoGUISpawned && battleManager.unmovedUnits.Count == 0)
-        {
-            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-            infoGUISpawned = false;
-        }
-
-        if (!forecastSpawned && mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
-        {
-            if(previousForecastSpawned==forecastSpawned && !(Input.GetKey(KeyCode.Mouse0)) || previousForecastSpawned != forecastSpawned && (Input.GetKey(KeyCode.Mouse0))) 
+            if (!forecastSpawned && newPosTile != null) Destroy(newPosTile);
+            if (!Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition)).Contains(GetComponent<Collider2D>()))
             {
-                infoGUISpawned = true;
-                infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-                infoGUI.transform.parent = Camera.main.transform;
-                infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
-                infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                infoGUICooldown = Time.time + 0.3f;
-                infoGUI.GetComponent<infoGUIScript>().Setup(this);
-            }
-            
-        }
-        previousForecastSpawned = forecastSpawned;
-        if (canMove)
-        {
-            if (dragging)
-            {
-                transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
-                
-                if(forecastCooldown <= Time.time)
-                {   
-                    bool cura=false;
-                    target = null;
-                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+
+                if (!dragging) counter++;
+
+                if (counter == 20)
+                {
+                    mouseIsOver = false;
+                    if (infoGUI != null)
                     {
-                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<enemyScript>().y)
-                        {
-                            foreach(GameObject t in attackRedTiles)
-                            {
-                                if(e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
-                                {
-                                    target = e;
-                                    cura = false;
-                                    break;
-                                }
-                            }
-                            
-                        }
+                        infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                        infoGUISpawned = false;
+                        infoGUI = null;
                     }
-
-                    foreach( GameObject e in GameObject.FindGameObjectsWithTag("Player"))
-                    {
-                        if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true && e!=this.gameObject)
-                        {
-
-                            foreach (GameObject t in movBlueTiles)
-                            {
-                                if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
-                                {
-                                    target = e; 
-                                    cura = true;
-                                    break;
-                                }
-                            }
-
-                        } 
-                    }
-
-                    if (!forecastSpawned && target != null)
-                    {
-                        forecastSpawned = true;
-                        if(cura==false)
-                            forecast = (GameObject)Instantiate(Resources.Load("Forecast Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-                        else
-                            forecast = (GameObject)Instantiate(Resources.Load("Forecast HEAL Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
-                        forecast.transform.parent = Camera.main.transform;
-                        forecast.transform.localPosition = new Vector3(0, 0, 10);
-                        forecast.transform.localScale = Vector3.one;
-                        int oldX = x;
-                        int oldY = y;
-
-
-                        int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player",cura);
-                        newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
-                        newPosTile.tag = "Rimuovere";
-                        x = oldX;
-                        y = oldY;
-                        
-                        forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
-                        
-                        forecastCooldown = Time.time + 0.3f;
-                        
-
-                        if(infoGUI != null)
-                        {
-                            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-                            infoGUISpawned = false;
-                        }
-                        
-                    }
-                    else if (forecastSpawned && target != oldTarget)
+                    if (forecast != null)
                     {
                         forecast.GetComponent<forecastScript>().Rimuovi();
                         forecastSpawned = false;
-                        forecastCooldown = Time.time + 0.3f;
+                        forecast = null;
                     }
-                    oldTarget = target;
-                }
-                
-                
-                
-            }else if (forecastSpawned) 
-            {
-                forecast.GetComponent<forecastScript>().Rimuovi();
-                forecastSpawned = false;
-            }
-            
-        }
-        if(!OnRange)
-        {
-            
-            float t = 1 / (new Vector3(x, y, -9)-transform.position).magnitude;                               //traslazione in nuova posizione
-            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t*0.1f);
-            
-            if (transform.position == new Vector3(x, y, -9)) OnRange = true;
-        }
-
-        Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x,y,0);
-        if(check.x>0.5||check.x<-0.5||check.y>0.5||check.y<-0.5 || battleManager.removeGUI){
-            if(mouseIsOver || battleManager.removeGUI){
-                 mouseIsOver = false;
-                if(infoGUISpawned )
-                {
-                    if(infoGUI != null)infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-                    infoGUISpawned = false;
-                }
-                
-
-                if (canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI) 
-                {
-                    if(movBlueTiles.Count > 0)
+                    if (movBlueTiles.Count > 0)
                     {
                         mov_tiles_coords.Clear();
-                        foreach (GameObject g in movBlueTiles){
-                            if(g!=null)
+                        foreach (GameObject g in movBlueTiles)
+                        {
+                            if (g != null)
                                 Destroy(g);
                         }                          //elimina tasselli blu
                         movBlueTiles.Clear();
 
-                        
-                        foreach (GameObject g in attackRedTiles){
-                            if(g!=null)
+
+                        foreach (GameObject g in attackRedTiles)
+                        {
+                            if (g != null)
                                 Destroy(g);
                         }                          //elimina tasselli rossi
                         attackRedTiles.Clear();
                     }
-                    
+                }
+
+
+            }
+            else { mouseIsOver = true; counter = 0; }
+            if (infoGUI != null && infoGUISpawned && battleManager.unmovedUnits.Count == 0)
+            {
+                infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                infoGUISpawned = false;
+            }
+
+            if (!forecastSpawned && mouseIsOver && !infoGUISpawned && infoGUICooldown <= Time.time && battleManager.phase == "Player")
+            {
+                if (previousForecastSpawned == forecastSpawned && !(Input.GetKey(KeyCode.Mouse0)) || previousForecastSpawned != forecastSpawned && (Input.GetKey(KeyCode.Mouse0)))
+                {
+                    infoGUISpawned = true;
+                    infoGUI = (GameObject)Instantiate(Resources.Load("Info Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                    infoGUI.transform.parent = Camera.main.transform;
+                    infoGUI.transform.localPosition = new Vector3(0.108f, 0, 11);
+                    infoGUI.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                    infoGUICooldown = Time.time + 0.3f;
+                    infoGUI.GetComponent<infoGUIScript>().Setup(this);
+                }
+
+            }
+            previousForecastSpawned = forecastSpawned;
+            if (canMove)
+            {
+                if (dragging)
+                {
+                    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;      //cambia pos
+
+                    if (forecastCooldown <= Time.time)
+                    {
+                        bool cura = false;
+                        target = null;
+                        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                        {
+                            if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<enemyScript>().y)
+                            {
+                                foreach (GameObject t in attackRedTiles)
+                                {
+                                    if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                                    {
+                                        target = e;
+                                        cura = false;
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+                        {
+                            if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true && e != this.gameObject)
+                            {
+
+                                foreach (GameObject t in movBlueTiles)
+                                {
+                                    if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
+                                    {
+                                        target = e;
+                                        cura = true;
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        if (!forecastSpawned && target != null)
+                        {
+                            forecastSpawned = true;
+                            if (cura == false)
+                                forecast = (GameObject)Instantiate(Resources.Load("Forecast Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                            else
+                                forecast = (GameObject)Instantiate(Resources.Load("Forecast HEAL Canvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                            forecast.transform.parent = Camera.main.transform;
+                            forecast.transform.localPosition = new Vector3(0, 0, 10);
+                            forecast.transform.localScale = Vector3.one;
+                            int oldX = x;
+                            int oldY = y;
+
+
+                            int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player", cura);
+                            newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+                            newPosTile.tag = "Rimuovere";
+                            x = oldX;
+                            y = oldY;
+
+                            forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
+
+                            forecastCooldown = Time.time + 0.3f;
+
+
+                            if (infoGUI != null)
+                            {
+                                infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                                infoGUISpawned = false;
+                            }
+
+                        }
+                        else if (forecastSpawned && target != oldTarget)
+                        {
+                            forecast.GetComponent<forecastScript>().Rimuovi();
+                            forecastSpawned = false;
+                            forecastCooldown = Time.time + 0.3f;
+                        }
+                        oldTarget = target;
+                    }
+
 
 
                 }
+                else if (forecastSpawned)
+                {
+                    forecast.GetComponent<forecastScript>().Rimuovi();
+                    forecastSpawned = false;
+                }
+
+            }
+            if (!OnRange)
+            {
+
+                float t = 1 / (new Vector3(x, y, -9) - transform.position).magnitude;                               //traslazione in nuova posizione
+                transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, -9), t * 0.1f);
+
+                if (transform.position == new Vector3(x, y, -9)) OnRange = true;
+            }
+
+            Vector3 check = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(x, y, 0);
+            if (check.x > 0.5 || check.x < -0.5 || check.y > 0.5 || check.y < -0.5 || battleManager.removeGUI)
+            {
+                if (mouseIsOver || battleManager.removeGUI)
+                {
+                    mouseIsOver = false;
+                    if (infoGUISpawned)
+                    {
+                        if (infoGUI != null) infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                        infoGUISpawned = false;
+                    }
+
+
+                    if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)) || battleManager.removeGUI)
+                    {
+                        if (movBlueTiles.Count > 0)
+                        {
+                            mov_tiles_coords.Clear();
+                            foreach (GameObject g in movBlueTiles)
+                            {
+                                if (g != null)
+                                    Destroy(g);
+                            }                          //elimina tasselli blu
+                            movBlueTiles.Clear();
+
+
+                            foreach (GameObject g in attackRedTiles)
+                            {
+                                if (g != null)
+                                    Destroy(g);
+                            }                          //elimina tasselli rossi
+                            attackRedTiles.Clear();
+                        }
+
+
+
+                    }
+                }
             }
         }
-
 
     }
 
     private void OnMouseEnter()
     {
-        mouseIsOver = true;
-
-        if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            HighlightMov();
+            mouseIsOver = true;
+
+            if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+            {
+                HighlightMov();
+            }
         }
     }
 
 
     private void OnMouseExit()
     {
-        mouseIsOver = false;
-        if(infoGUISpawned && infoGUI != null)
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            infoGUI.GetComponent<infoGUIScript>().Rimuovi();
-            infoGUISpawned = false;
-        }
-        
-
-        if (canMove && battleManager.phase == "Player" &&!(Input.GetKey(KeyCode.Mouse0))) 
-        {
-            if(movBlueTiles.Count > 0)
+            mouseIsOver = false;
+            if (infoGUISpawned && infoGUI != null)
             {
-                mov_tiles_coords.Clear();
-                foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
-                movBlueTiles.Clear();
-
-                
-                foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
-                attackRedTiles.Clear();
+                infoGUI.GetComponent<infoGUIScript>().Rimuovi();
+                infoGUISpawned = false;
             }
-            
 
 
+            if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+            {
+                if (movBlueTiles.Count > 0)
+                {
+                    mov_tiles_coords.Clear();
+                    foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                    movBlueTiles.Clear();
+
+
+                    foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                    attackRedTiles.Clear();
+                }
+
+
+
+            }
         }
-
         
     }
 
 
     private void OnMouseDown()
-    {   
-        if(canMove && battleManager.phase == "Player" && dragging==false) 
+    {
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-           
-
-            if (movBlueTiles.Count > 0)
+            if (canMove && battleManager.phase == "Player" && dragging == false)
             {
-                mov_tiles_coords.Clear();
-                foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
-                movBlueTiles.Clear();
 
-                foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
-                attackRedTiles.Clear();
+
+                if (movBlueTiles.Count > 0)
+                {
+                    mov_tiles_coords.Clear();
+                    foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                    movBlueTiles.Clear();
+
+                    foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                    attackRedTiles.Clear();
+                }
+
+                transform.GetChild(0).GetComponent<Animator>().Play("Select");
+                dragging = true;
+                HighlightMov();                                                                //spawna tasselli blu movimento
+                offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+
             }
-
-            transform.GetChild(0).GetComponent<Animator>().Play("Select");
-            dragging = true;
-            HighlightMov();                                                                //spawna tasselli blu movimento
-            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-
-            
         }
-        
     }
 
     
     private void OnMouseUp()
     {
-        if (canMove && battleManager.phase == "Player")
+        if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            
-            dragging = false;
-            OnRange = false;
-            bool availableMov = false;
-
-            foreach (Vector2 v in mov_tiles_coords)
-            {                               //trova se il player e' in una casella blu
-                if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
-            }
-            mov_tiles_coords.Clear();
-            
-            if (availableMov)
+            if (canMove && battleManager.phase == "Player")
             {
-                this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
-                this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
 
+                dragging = false;
+                OnRange = false;
+                bool availableMov = false;
 
-                canMove = false;
-                battleManager.unmovedUnits.Remove(gameObject);
+                foreach (Vector2 v in mov_tiles_coords)
+                {                               //trova se il player e' in una casella blu
+                    if (v.x == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) && v.y == Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)) { availableMov = true; break; }
+                }
+                mov_tiles_coords.Clear();
 
-                transform.GetChild(0).GetComponent<Animator>().speed = 0;
-
-                foreach (GameObject g in battleManager.unmovedUnits)
+                if (availableMov)
                 {
-                    g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+                    this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
+                    this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
+
+
+                    canMove = false;
+                    battleManager.unmovedUnits.Remove(gameObject);
+
+                    transform.GetChild(0).GetComponent<Animator>().speed = 0;
+
+                    foreach (GameObject g in battleManager.unmovedUnits)
+                    {
+                        g.transform.GetChild(0).GetComponent<Animator>().Play("Select");          //inizia animazione di selezione personaggio
+                    }
+
+
+                    Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
+                    foreach (Renderer childRenderer in renderers)
+                    {
+                        childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
+                    }
+
+
                 }
-
-
-                Component[] renderers = transform.GetChild(0).GetComponentsInChildren(typeof(Renderer)); //rende grigio il personaggio
-                foreach (Renderer childRenderer in renderers)
+                else
                 {
-                    childRenderer.material.color = new Color(0.3F, 0.3F, 0.3F);
-                }
 
 
-            }else {
-                
-                
 
-                foreach( GameObject e in GameObject.FindGameObjectsWithTag("Enemy")){
-                    if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<enemyScript>().y){
-
-                        foreach (GameObject t in attackRedTiles)
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
+                    {
+                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<enemyScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<enemyScript>().y)
                         {
-                            if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+
+                            foreach (GameObject t in attackRedTiles)
                             {
-                                cura=false;
-                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player",cura);     //inizia pvp
-                                Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player",cura));
-                                Debug.Log("PVP");
-                                break;
+                                if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
+                                {
+                                    cura = false;
+                                    int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player", cura);     //inizia pvp
+                                    Destroy(player_tile);
+                                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e, this.gameObject, output, "player", cura));
+                                    Debug.Log("PVP");
+                                    break;
+                                }
                             }
+
                         }
-
-                    } 
-                }
-                foreach( GameObject e in GameObject.FindGameObjectsWithTag("Player")){
-                    if(Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x)==e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y)==e.GetComponent<playerScript>().y && heal==true){
-
-                        foreach (GameObject t in movBlueTiles)
+                    }
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
+                    {
+                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true)
                         {
-                            if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
+
+                            foreach (GameObject t in movBlueTiles)
                             {
-                                cura = true;
-                                int [] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player",cura);     //inizia pvp
-                                Destroy(player_tile);
-                                StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e,this.gameObject,output,"player", cura));
-                                Debug.Log("PVP");
-                                break;
+                                if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
+                                {
+                                    cura = true;
+                                    int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player", cura);     //inizia pvp
+                                    Destroy(player_tile);
+                                    StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e, this.gameObject, output, "player", cura));
+                                    Debug.Log("PVP");
+                                    break;
+                                }
                             }
+
                         }
+                    }
 
-                    } 
                 }
-                
-            }
-                                      
-            foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
-            movBlueTiles.Clear();
-            foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
-            attackRedTiles.Clear();
 
-            Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
-            if (!canMove)
-            {
-                Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+                foreach (GameObject g in movBlueTiles) Destroy(g);                          //elimina tasselli blu
+                movBlueTiles.Clear();
+                foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
+                attackRedTiles.Clear();
+
+                Camera.main.GetComponent<battleManager>().UpdateEnemyMov();
+                if (!canMove)
+                {
+                    Destroy(player_tile);                                                                   //rimuove tassello lampeggiante
+                }
             }
         }
-
         //this.LevelUp();
     }
 
@@ -720,6 +743,17 @@ public class playerScript : MonoBehaviour
     {
         if (!(battleManager.phase == "Player")) return;
         Destroy(forecast);
+
+        if (mapScript.mapN == 1)
+        {
+            battleManager.pvpTutorial++;
+            Debug.Log("EEEEE" + battleManager.pvpTutorial);
+            if(battleManager.pvpTutorial==1)
+            {
+                GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial4"), battleManager._mainCamera.gameObject.transform);
+            }
+        }
+        
 
         canMove = false;
         battleManager.unmovedUnits.Remove(gameObject);
@@ -753,21 +787,9 @@ public class playerScript : MonoBehaviour
 
     IEnumerator fixaStoBugDiMerda()
     {
-        for(int i = 0; i < 60; i++)
-        {
-            foreach (GameObject e in GameObject.FindGameObjectsWithTag("InfoCanvas"))
-            {
-                Destroy(e);
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            e.GetComponent<enemyScript>().infoGUISpawned = false;
-
-        }
+        yield return new WaitForEndOfFrame();
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Rimuovere")) Destroy(p);
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("InfoCanvas")) Destroy(p);
 
     }
 

@@ -13,6 +13,8 @@ TagManager:
   - Cap3
   - Cap4
   - Cap5
+  - tileViola
+  - Tutorial
   layers:
   - Default
   - TransparentFX
