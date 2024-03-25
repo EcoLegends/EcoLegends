@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6803853006654373950
+--- !u!1001 &5162333657560260219
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2074867453010968235, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: button
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2254011295543859309, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_text
-      value: 3/4
+      value: 1/4
       objectReference: {fileID: 0}
     - target: {fileID: 2254011295543859309, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_fontSize
@@ -23,15 +23,23 @@ PrefabInstance:
     - target: {fileID: 2396948657881511231, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 831d1e47f5989d742aa01f69dab5dfd4, type: 3}
+      objectReference: {fileID: 21300000, guid: 8f4034035d026874796898963775989d, type: 3}
     - target: {fileID: 2405344659989266991, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_Name
-      value: tutorial2
+      value: tutorial0
       objectReference: {fileID: 0}
     - target: {fileID: 5131475405560694545, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_text
-      value: "Puoi spostare il personaggio su qualunque degli spazi blu. \nSpostarlo
-        terminer\xE0 la sua azione."
+      value: "I tuoi personaggi appaiono in blu.\nOgni personaggio pu\xF2 compiere
+        una singola azione durante il turno: muoversi o attaccare."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131475405560694545, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
+      propertyPath: m_margin.x
+      value: -0.07267678
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131475405560694545, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
+      propertyPath: m_margin.z
+      value: -0.14945364
       objectReference: {fileID: 0}
     - target: {fileID: 5131475405560694545, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_fontColor.b
@@ -48,10 +56,6 @@ PrefabInstance:
     - target: {fileID: 5131475405560694545, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261238035424199592, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
-      propertyPath: button
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6221934968114874499, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -94,6 +98,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7939630547733929561, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
+      propertyPath: m_text
+      value: I Personaggi
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939630547733929561, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -110,7 +118,8 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 972535050846056631, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff906f1a3a50cbf4ebc3c15b971b1ebf, type: 3}

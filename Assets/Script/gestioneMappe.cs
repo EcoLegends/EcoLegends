@@ -8,7 +8,7 @@ public class gestioneMappe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (System.IO.File.Exists("completedMaps.txt")==false){ //controlla file mappe completate
+        if (System.IO.File.Exists("Assets/Resources/completedMaps.txt") ==false){ //controlla file mappe completate
 
             string p = "Assets/Resources/completedMaps.txt";
 
@@ -16,7 +16,7 @@ public class gestioneMappe : MonoBehaviour
             writer.WriteLine("0");
             writer.Close();
         }
-        if (System.IO.File.Exists("mappaScelta.txt")==false){ //controlla file mappe scelta
+        if (System.IO.File.Exists("Assets/Resources/mappaScelta.txt") ==false){ //controlla file mappe scelta
 
             string p = "Assets/Resources/mappaScelta.txt";
 
@@ -27,9 +27,10 @@ public class gestioneMappe : MonoBehaviour
 
         string path = "Assets/Resources/completedMaps.txt";
         StreamReader reader = new StreamReader(path);
-        string leggi = reader.ReadLine();
+        int leggi = int.Parse(reader.ReadLine());
+        Debug.Log(leggi);
 
-        if(leggi=="2"){ //controlla cap2
+        if(leggi>=2){ //controlla cap2
 
             GameObject.Find("bottone 2").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("bottone 2").transform.GetChild(1).gameObject.SetActive(true);
@@ -39,7 +40,7 @@ public class gestioneMappe : MonoBehaviour
             GameObject.Find("bottone 2").transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(leggi=="3"){ //controlla cap3
+        if(leggi>=3){ //controlla cap3
 
             GameObject.Find("bottone 3").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("bottone 3").transform.GetChild(1).gameObject.SetActive(true);
@@ -49,7 +50,7 @@ public class gestioneMappe : MonoBehaviour
             GameObject.Find("bottone 3").transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(leggi=="4"){ //controlla cap4
+        if(leggi >= 4){ //controlla cap4
 
             GameObject.Find("bottone 4").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("bottone 4").transform.GetChild(1).gameObject.SetActive(true);
@@ -59,7 +60,7 @@ public class gestioneMappe : MonoBehaviour
             GameObject.Find("bottone 4").transform.GetChild(1).gameObject.SetActive(false);
         }
 
-        if(leggi=="5"){ //controlla cap3
+        if(leggi >= 5){ //controlla cap5
 
             GameObject.Find("bottone 5").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("bottone 5").transform.GetChild(1).gameObject.SetActive(true);

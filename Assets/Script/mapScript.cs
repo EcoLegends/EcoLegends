@@ -69,7 +69,7 @@ public class mapScript : MonoBehaviour
                     writer.WriteLine("Sear,Sear,1,0,4,1,2,3,3,90,5,1,2,true,22,6,6,6,7,6,4,7,45,30,65,45,45,35,25,45,false");
                     writer.Close();
 
-                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial1"), Camera.main.gameObject.transform);
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial0"), Camera.main.gameObject.transform);
 
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
