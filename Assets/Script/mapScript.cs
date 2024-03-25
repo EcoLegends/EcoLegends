@@ -26,6 +26,10 @@ public class mapScript : MonoBehaviour
         mapNum=int.Parse(l);
 
         mapN = mapNum;
+
+        string[] musicArr = { "The Shackled Wolves", "Salvation And Loss", "The Apex of The World", "Trial of Heroes" };
+        music = musicArr[mapNum];
+
         Camera.main.gameObject.transform.position = new Vector3(13, 4.5f, -10);
 
 
@@ -86,20 +90,20 @@ public class mapScript : MonoBehaviour
                     Object enemy = Resources.Load("enemy", typeof(GameObject));
                     GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy1.GetComponent<enemyScript>().Setup(12, 5, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
-                    GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy2.GetComponent<enemyScript>().Setup(14, 6, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 19, 3, 4, 4, 9, 4, 5, 1);
-                    GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy3.GetComponent<enemyScript>().Setup(6, 9, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 3, 4, 5, 9, 5, 5, 1);
-                    GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy4.GetComponent<enemyScript>().Setup(7, 10, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
-                    GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy5.GetComponent<enemyScript>().Setup(17, 10, "???", "terra2", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 3, 5, 9, 4, 1, 5);
-                    GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy6.GetComponent<enemyScript>().Setup(18, 14, "???", "terra2", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 15, 4, 3, 5, 8, 4, 1, 5);
-                    GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
-                    GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 6, 4, 5, 9, 4, 5, 1);
+                    //GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy2.GetComponent<enemyScript>().Setup(14, 6, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 19, 3, 4, 4, 9, 4, 5, 1);
+                    //GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy3.GetComponent<enemyScript>().Setup(6, 9, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 17, 3, 4, 5, 9, 5, 5, 1);
+                    //GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy4.GetComponent<enemyScript>().Setup(7, 10, "???", "terra1", 1, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
+                    //GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy5.GetComponent<enemyScript>().Setup(17, 10, "???", "terra2", 1, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 14, 4, 3, 5, 9, 4, 1, 5);
+                    //GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy6.GetComponent<enemyScript>().Setup(18, 14, "???", "terra2", 1, 3, "near", 1, 2, 3, 3, 90, 0, 3, 2, true, 15, 4, 3, 5, 8, 4, 1, 5);
+                    //GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
+                    //GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    //new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 6, 4, 5, 9, 4, 5, 1);
                     break;
                 }
             case 2:

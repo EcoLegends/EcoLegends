@@ -380,8 +380,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2913222979184644860, guid: 114a44ca9d01c1b4f84e9e86ce2a9287, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 655855414}
   m_SourcePrefab: {fileID: 100100000, guid: 114a44ca9d01c1b4f84e9e86ce2a9287, type: 3}
+--- !u!1 &655855413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2913222979184644860, guid: 114a44ca9d01c1b4f84e9e86ce2a9287, type: 3}
+  m_PrefabInstance: {fileID: 655855412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &655855414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655855413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3b1f1bb77581247a2a9c30c945b82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vinci: 0
 --- !u!1 &911973313
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,8 +618,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8870376559256005947, guid: 75a0a27579f7bca4dbb8b1920b35e0da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1408362251}
   m_SourcePrefab: {fileID: 100100000, guid: 75a0a27579f7bca4dbb8b1920b35e0da, type: 3}
+--- !u!1 &1408362250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8870376559256005947, guid: 75a0a27579f7bca4dbb8b1920b35e0da, type: 3}
+  m_PrefabInstance: {fileID: 1408362249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1408362251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408362250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3b1f1bb77581247a2a9c30c945b82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vinci: 1
 --- !u!1 &2070367203
 GameObject:
   m_ObjectHideFlags: 0

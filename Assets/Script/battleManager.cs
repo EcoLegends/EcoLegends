@@ -45,6 +45,11 @@ public class battleManager : MonoBehaviour
 
     GameObject phaseCanvas;
 
+
+    public static bool canMoveEnemy = true;
+
+    public static bool stop = false;
+
     private void Awake() //roba del tutorial bohh
     {
         _mainCamera = Camera.main;
@@ -467,15 +472,14 @@ public class battleManager : MonoBehaviour
         animationTime = Time.time + 3;
 
         phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
-        
+
+        stop = false;
         
     }
 
     
 
-    public static bool canMoveEnemy = true;
-
-    public static bool stop=false;
+    
 
     void Update()
     {

@@ -342,6 +342,7 @@ public class playerScript : MonoBehaviour
     private int counter = 0;
     void Update()
     {
+        Debug.Log(!battleManager.stop + " " + mapScript.finitoSpawn + " " + GameObject.FindGameObjectsWithTag("Tutorial").Length);
         if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
             if (!forecastSpawned && newPosTile != null) Destroy(newPosTile);
@@ -636,6 +637,7 @@ public class playerScript : MonoBehaviour
     
     private void OnMouseUp()
     {
+        
         if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
             if (canMove && battleManager.phase == "Player")
@@ -756,7 +758,7 @@ public class playerScript : MonoBehaviour
         
 
         canMove = false;
-        battleManager.unmovedUnits.Remove(gameObject);
+        if(gameObject!=null)battleManager.unmovedUnits.Remove(gameObject);
 
         transform.GetChild(0).GetComponent<Animator>().speed = 0;
 

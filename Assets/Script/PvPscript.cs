@@ -688,7 +688,7 @@ public class PvPscript : MonoBehaviour
                 Destroy(temp);
                 Destroy(e);
                 yield return new WaitForEndOfFrame();
-                SceneManager.UnloadSceneAsync(1);
+                SceneManager.UnloadSceneAsync(2);
                 SceneManager.SetActiveScene(activeScene);
 
                     
@@ -703,18 +703,18 @@ public class PvPscript : MonoBehaviour
 
                 temp.SetActive(true);
                 temp.transform.DetachChildren();
+                player.endPvp();
                 if (battleManager.units.Contains(p))
                     battleManager.units.Remove(p);
                 if (battleManager.unmovedUnits.Contains(p))
                     battleManager.unmovedUnits.Remove(p);
                 Destroy(temp);
-                player.endPvp();
-                Destroy(p);
                 yield return new WaitForEndOfFrame();
-                SceneManager.UnloadSceneAsync(1);
+                Destroy(p);
+                SceneManager.UnloadSceneAsync(2);
                 SceneManager.SetActiveScene(activeScene);
 
-                player.endPvp();
+                
                 Destroy(p);
                 Debug.Log("fine");
                 yield break;
@@ -778,7 +778,7 @@ public class PvPscript : MonoBehaviour
         temp.transform.DetachChildren();
         Destroy(temp);
 
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.UnloadSceneAsync(2);
         SceneManager.SetActiveScene(activeScene);
 
         player.endPvp();
