@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEditorInternal;
 /*
 string path = "Assets/Resources/dati.txt";
 
@@ -20,7 +21,7 @@ public class buttonScript : MonoBehaviour
     {
 
         StartCoroutine(asin(async));
-
+        StartCoroutine(animation());
     }
     
     public IEnumerator asin(AsyncOperation async){
@@ -31,6 +32,11 @@ public class buttonScript : MonoBehaviour
 
         }
     }
+    public IEnumerator animation(){
+        
+        yield return new WaitForSeconds(1f);
+
+    }
     public void OnClick()
     {
         foreach( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){       //restart
@@ -39,9 +45,12 @@ public class buttonScript : MonoBehaviour
 
                 string path = "Assets/Resources/completedMaps.txt";
                 StreamWriter writer = new StreamWriter(path, false);
-                writer.WriteLine("0");
+                writer.WriteLine("1");
                 writer.Close();
 
+                AsyncOperation async = SceneManager.LoadSceneAsync( "Menu");
+
+                asin(async);
             }
 
         }
@@ -56,6 +65,8 @@ public class buttonScript : MonoBehaviour
                 writer.WriteLine("1");
                 writer.Close();
                 
+                //GameObject.Find("Crossfade").transition.SetTrigger("Start");
+
                 AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
 
                 asin(async);
