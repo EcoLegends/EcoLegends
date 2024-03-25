@@ -68,7 +68,7 @@ public class battleManager : MonoBehaviour
 
     private void LateUpdate() //roba del tutorial bohh
     {
-        
+        transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
 
         if (!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length==0)
         {
@@ -129,7 +129,7 @@ public class battleManager : MonoBehaviour
             List<string> turns = new List<string>();
             turns.Add(initial_turn);
 
-
+            
             int playerAtk;
             int playerHit;
             int playerAS; 
@@ -169,6 +169,9 @@ public class battleManager : MonoBehaviour
 
             int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus; 
             int enemyAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[enemy.x, enemy.y].GetComponent<tileScript>().avoBonus;
+
+            if (player.haFattoQualcosa == false && player.nome == "Skye") { playerAVOBonus += 15; }
+
             Debug.Log("AVO BONUS: " + playerAVOBonus + " " + enemyAVOBonus);
             
 
@@ -255,6 +258,10 @@ public class battleManager : MonoBehaviour
 
             playerCrit = (player.weaponCrit + (player.dex+player.lck) / 2) - enemy.lck;
             enemyCrit = (enemy.weaponCrit + (enemy.dex + enemy.lck) / 2) - player.lck;
+
+            
+            if (playerAVOBonus > 0 && player.nome == "Granius") { playerCrit += 20; }
+            
 
             playerDmg = (int)Mathf.Clamp(playerDmg, 0, 999);    //mette numeri non <0
             enemyDmg = (int)Mathf.Clamp(enemyDmg, 0, 999);

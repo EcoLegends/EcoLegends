@@ -71,6 +71,9 @@ public class playerScript : MonoBehaviour
     public int defGrowth;
     public int resGrowth;
 
+
+    public bool haFattoQualcosa;
+
     [Space]
     public bool heal;
     public bool cura;//se vuoi curare
@@ -317,9 +320,7 @@ public class playerScript : MonoBehaviour
         player_tile.GetComponent<PlayerTileScript>().PlayerTile(x, y);
         battleManager.unmovedUnits.Add(gameObject);
 
-        
-
-
+        haFattoQualcosa = true;
 
     }
     
@@ -342,7 +343,12 @@ public class playerScript : MonoBehaviour
     private int counter = 0;
     void Update()
     {
-        Debug.Log(!battleManager.stop + " " + mapScript.finitoSpawn + " " + GameObject.FindGameObjectsWithTag("Tutorial").Length);
+        if(nome=="Aeria")
+        {
+            if (hp == maxHp) weaponMaxRange = 3;
+            else weaponMaxRange = 2;
+
+        }
         if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
             if (!forecastSpawned && newPosTile != null) Destroy(newPosTile);
@@ -658,7 +664,7 @@ public class playerScript : MonoBehaviour
                     this.x = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x); //cambia posizione
                     this.y = Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y);
 
-
+                    haFattoQualcosa = false;
                     canMove = false;
                     battleManager.unmovedUnits.Remove(gameObject);
 
@@ -749,7 +755,7 @@ public class playerScript : MonoBehaviour
         if (mapScript.mapN == 1)
         {
             battleManager.pvpTutorial++;
-            Debug.Log("EEEEE" + battleManager.pvpTutorial);
+            
             if(battleManager.pvpTutorial==1)
             {
                 GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial4"), battleManager._mainCamera.gameObject.transform);

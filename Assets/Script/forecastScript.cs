@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.UI;
 
 
@@ -19,7 +20,10 @@ public class forecastScript : MonoBehaviour
             enemyScript enemy = e.GetComponent<enemyScript>();
             playerScript player = p.GetComponent<playerScript>();
             this.heal = cura;
+
+            float playerInitialHP = player.hp / (float)player.maxHp * 100;
             
+
 
             int playerDmg = returnList[0];
             int playerHit = returnList[1];
@@ -67,6 +71,14 @@ public class forecastScript : MonoBehaviour
 
             playerNewHP = Mathf.Clamp(playerNewHP, 0, player.maxHp);
             enemyNewHP = Mathf.Clamp(enemyNewHP, 0, enemy.maxHp);
+            if (playerNewHP == 0 && player.nome == "Nova" && playerInitialHP >= 25)
+            {
+                playerNewHP = 1;
+            }
+            if (playerNewHP != 0 && player.nome == "Hydris")
+            {
+                playerNewHP = Mathf.Clamp(playerNewHP + 5, 0, player.maxHp);
+            }
 
             string enemyDmgVisual = (player.hp - playerNewHP).ToString();
             string playerDmgVisual = (enemy.hp - enemyNewHP).ToString();
@@ -164,6 +176,8 @@ public class forecastScript : MonoBehaviour
 
             int turnN = 0;
 
+            int playerInitialHPP = player.hp;
+
             foreach(string turn in turns)
             {
                 Debug.Log("turno: "+turn);
@@ -180,6 +194,14 @@ public class forecastScript : MonoBehaviour
                     Debug.Log(turnN);
                     transform.GetChild(child_index).GetChild(turnN).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("freccia pvp rossa");
                     transform.GetChild(child_index).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = enemyDmg.ToString();
+                    
+                    if (playerInitialHPP-enemyDmg <= 0 && player.nome == "Nova" && playerInitialHP >= 25)
+                    {
+                        
+                        transform.GetChild(child_index).GetChild(turnN).GetChild(0).GetComponent<TextMeshProUGUI>().text = (playerInitialHPP-1).ToString();
+                    }
+                    playerInitialHPP = Mathf.Clamp(playerInitialHPP-enemyDmg,1,999);
+
                 }
                 turnN++;
             }

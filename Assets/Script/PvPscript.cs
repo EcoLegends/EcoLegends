@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public class PvPscript : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class PvPscript : MonoBehaviour
             bool move = false;
 
             List<string> turns = new List<string>();
-            turns.Add(initial_turn);
+            
 
             enemyScript enemy = e.GetComponent<enemyScript>();
             if (!battleManager.dialoghiFatti.Contains(player.nome + "-" + enemy.nome))
@@ -133,7 +134,7 @@ public class PvPscript : MonoBehaviour
                         deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
 
                         
-
+                        
 
                         yield return new WaitForSeconds(1);
                         for (float i=0; i <= 85; i++)
@@ -222,7 +223,36 @@ public class PvPscript : MonoBehaviour
 
             int distance = (int)Mathf.Abs(player.x - enemy.x) + (int)Mathf.Abs(player.y - enemy.y);
 
-            if(initial_turn=="player"){
+            if(temp.transform.GetChild(3).GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus > 0 && player.nome=="Granius")
+            {
+                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                skill.GetComponent<skillGUIScript>().Setup("Istinto Selvaggio");
+            }
+
+            if (player.haFattoQualcosa==false  && player.nome == "Skye")
+            {
+                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                skill.GetComponent<skillGUIScript>().Setup("In Guardia");
+            }
+
+            if (initial_turn=="enemy" && player.nome == "Sear" && (float)player.hp/ (float)player.maxHp <= 0.25f)
+            {
+                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                skill.GetComponent<skillGUIScript>().Setup("Vantaggio");
+                initial_turn = "player";
+            }
+            turns.Add(initial_turn);
+
+            if (player.nome == "Aeria" && player.weaponMaxRange==3)
+            {
+                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                skill.GetComponent<skillGUIScript>().Setup("Dio del Vento");
+            }
+            
+
+            float playerInitialHP = player.hp / (float)player.maxHp*100;
+
+            if (initial_turn=="player"){
                 if (enemy.weaponMinRange <= distance && distance <= enemy.weaponMaxRange)
             {
                 turns.Add("enemy");
@@ -284,7 +314,7 @@ public class PvPscript : MonoBehaviour
                             GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position = new Vector3(playerParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(3).gameObject.transform.position.z);
                             move = true;
                         }
-                        
+                        int dmg;
                     
                         if (playerCrit <= output[2])
                         {
@@ -294,6 +324,7 @@ public class PvPscript : MonoBehaviour
                             enemy.hp = Mathf.Clamp(enemy.hp -= output[0] * 3, 0, enemy.maxHp);
                             GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(true);
                             damageDealt += output[0] * 3;
+                            dmg = output[0] * 3;
                         }
                         else
                         {
@@ -302,8 +333,22 @@ public class PvPscript : MonoBehaviour
                             GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=output[0].ToString();
                             enemy.hp = Mathf.Clamp(enemy.hp -= output[0], 0, enemy.maxHp);
                             damageDealt += output[0];
+                            dmg = output[0];
                         }
                         
+                        if(enemy.hp <= 0 && player.nome=="Thera" && UnityEngine.Random.Range(1, 100) < player.dex)
+                        {
+                            GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                            skill.GetComponent<skillGUIScript>().Setup("Giardino Fiorito");
+                            player.hp = Mathf.Clamp(player.hp += dmg / 2, 0, player.maxHp);
+                            player.healthbar.SetHealth(player.hp);
+                            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = (dmg/2).ToString();
+                            GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(true);
+                            GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x -0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                            GameObject.Find("Info Canvas").transform.GetChild(6).localScale = Vector3.zero;
+                        }
+                        
+
                         yield return new WaitForEndOfFrame();
                         
 
@@ -332,6 +377,10 @@ public class PvPscript : MonoBehaviour
                             sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
                             GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
                             GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position += new Vector3(0, 0.01f, 0);
+
+                            GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f, 0);
+                            GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+
                             sprite.transform.position += new Vector3(0, 0.01f, 0);
                             yield return new WaitForEndOfFrame();
 
@@ -348,6 +397,7 @@ public class PvPscript : MonoBehaviour
                         sprite.SetActive(false);
                         sprite.transform.position = oldPos;
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.SetActive(false);
+                        GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(false);
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
                         Debug.Log("fine");
                         enemy.healthbar.SetHealth(enemy.hp);
@@ -449,23 +499,45 @@ public class PvPscript : MonoBehaviour
 
                             move = true;
                         }
-                        
-                        
+
+                        int hpPrec = player.hp;
+                        int dmgPrec = output[4];
+                        if (player.nome == "Acquira" && UnityEngine.Random.Range(1, 100) < player.dex)
+                        {
+                            GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                            skill.GetComponent<skillGUIScript>().Setup("Acqua Cristallina");
+                            output[4] = output[4] / 2;
+                        }
                         if (enemyCrit <= output[6]){
                             if (move) spriteEnemy.GetComponent<Animator>().Play("Crit");
                             else spriteEnemy.GetComponent<Animator>().Play("Crit2");
                             GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=(output[4]*3).ToString();
                             player.hp = Mathf.Clamp(player.hp -= output[4] * 3, 0, player.maxHp);
+                            if(player.hp==0 && player.nome=="Nova" && playerInitialHP >= 30)
+                            {
+                                GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (hpPrec - 1).ToString();
+                                player.hp = 1;
+                                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                                skill.GetComponent<skillGUIScript>().Setup("Persistenza");
+                            }
                             GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.SetActive(true);
                         }
                         else{
                             if (move) spriteEnemy.GetComponent<Animator>().Play("Attack");
                             else spriteEnemy.GetComponent<Animator>().Play("Attack2");
-
                             GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=output[4].ToString();
                             player.hp = Mathf.Clamp(player.hp -= output[4], 0, player.maxHp);
+                            if (player.hp == 0 && player.nome == "Nova" && playerInitialHP >= 30)
+                            {
+                                GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = (hpPrec - 1).ToString();
+                                player.hp = 1;
+                                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                                skill.GetComponent<skillGUIScript>().Setup("Persistenza");
+                            }
                         }
-                        
+                        output[4] = dmgPrec;
+
+
                         yield return new WaitForEndOfFrame();
                         
                         AnimatorClipInfo[] clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
@@ -584,6 +656,32 @@ public class PvPscript : MonoBehaviour
 
             }
 
+            if (player.hp>=0 && player.nome == "Hydris")
+            {
+                GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
+                skill.GetComponent<skillGUIScript>().Setup("Guarigione");
+                player.hp = Mathf.Clamp(player.hp += 5 / 2, 0, player.maxHp);
+                player.healthbar.SetHealth(player.hp);
+                GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = (5).ToString();
+                GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(true);
+                GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x - 0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
+                GameObject.Find("Info Canvas").transform.GetChild(6).localScale = Vector3.zero;
+                for (float i = 0; i < 100; i++)
+                {
+                   
+                    GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f, 0);
+                    GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+
+                    yield return new WaitForEndOfFrame();
+
+                }
+
+
+                yield return new WaitForSeconds(1);
+                
+                GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(false);
+            }
+
             if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
             if (enemy.hp == 0)
             {
@@ -643,7 +741,7 @@ public class PvPscript : MonoBehaviour
                         player.exp = 0;
                         expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 1));
                         expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
-                        expGUI.transform.GetChild(6).GetChild(1).GetComponent<Image>().color = new Color(0, 186, 50);
+                        expGUI.transform.GetChild(6).GetChild(1).GetComponent<UnityEngine.UI.Image>().color = new Color(0, 186, 50);
                         lvlup = true;
                     }
                     expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - (player.exp)).ToString();
@@ -671,10 +769,14 @@ public class PvPscript : MonoBehaviour
                 }
 
                 List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Aeria", "Skye" };
-
-                string[] arrLine = System.IO.File.ReadAllLines("Assets/Resources/dati.txt");
-                arrLine[nomi.IndexOf(player.nome)] = player.nome+","+player.textureFile+","+player.lvl+","+player.exp+","+player.movement+","+player.weaponMinRange+","+player.weaponMaxRange+","+player.weaponWt+","+player.weaponMt+","+player.weaponHit+","+player.weaponCrit+","+player.unitType+","+player.weaponType+","+player.weaponIsMagic+","+player.hp+","+player.str+","+player.mag+","+player.dex+","+player.spd+","+player.lck+","+player.def+","+player.res+","+player.hpGrowth+","+player.strGrowth+","+player.magGrowth+","+player.dexGrowth+","+player.spdGrowth+","+player.lckGrowth+","+player.defGrowth+","+player.resGrowth+","+player.heal;
-                System.IO.File.WriteAllLines("Assets/Resources/dati.txt",arrLine);
+                try
+                {
+                    string[] arrLine = System.IO.File.ReadAllLines("Assets/Resources/dati.txt");
+                    arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.hp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
+                    System.IO.File.WriteAllLines("Assets/Resources/dati.txt", arrLine);
+                }
+                catch (System.Exception) { }
+                
             }
 
             if (enemy.hp == 0)

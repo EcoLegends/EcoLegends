@@ -34,6 +34,10 @@ public class infoGUIScript : MonoBehaviour
         int playerAS = player.weaponWt - (player.str / 5);
         if (playerAS < 0) playerAS = 0;
         playerAS = player.spd - playerAS;
+        int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus;
+        
+        if (player.haFattoQualcosa == false && player.nome == "Skye") { playerAVOBonus += 15; }
+        playerAS += playerAVOBonus;
 
         transform.GetChild(0).GetChild(17).GetComponent<TextMeshProUGUI>().text = playerAS.ToString();
         transform.GetChild(0).GetChild(19).GetComponent<TextMeshProUGUI>().text = player.def.ToString();
