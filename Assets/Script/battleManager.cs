@@ -83,6 +83,7 @@ public class battleManager : MonoBehaviour
 
             if (enemies.Count == 0)
             {
+                
                 Debug.Log("VINTO!!!!");
                 stop = true;
                 mapScript.finitoSpawn = false;

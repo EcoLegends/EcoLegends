@@ -19,6 +19,9 @@ public class winloseScript : MonoBehaviour
     {
         for(float i = 0; i <= 500; i++)
         {
+            transform.parent.localScale = Vector3.one * Camera.main.orthographicSize / 5;
+            
+
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 500);
             yield return new WaitForEndOfFrame();
         }
