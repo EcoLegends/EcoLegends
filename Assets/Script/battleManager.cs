@@ -474,8 +474,27 @@ public class battleManager : MonoBehaviour
         phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
 
         stop = false;
-        
-    }
+        units = new List<GameObject>();
+        unmovedUnits = new List<GameObject>();
+        enemies = new List<GameObject>();
+
+        dialoghiFatti = new List<string>();
+
+        showEnemyMovement = false;
+        movTiles = new List<GameObject>();
+
+        removeGUI = false;
+
+    
+        unmovedEnemies = new List<GameObject>();
+
+        pvpTutorial = 0;
+        phaseTutorial = 0;
+
+
+        GameObject map = Instantiate(Resources.Load<GameObject>("Mappe/Mappe Prefab/map1"));
+
+}
 
     
 

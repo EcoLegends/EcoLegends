@@ -78,7 +78,7 @@ public class mapScript : MonoBehaviour
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
                     string[] sear = reader.ReadLine().Split(",");
-
+                    reader.Close();
 
                     Object player = Resources.Load("player", typeof(GameObject));
                     GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
@@ -130,7 +130,7 @@ public class mapScript : MonoBehaviour
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
                     string[] sear = reader.ReadLine().Split(",");
-
+                    reader.Close();
 
                     Object player = Resources.Load("player", typeof(GameObject));
                     GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
@@ -194,7 +194,7 @@ public class mapScript : MonoBehaviour
                     string[] sear = reader.ReadLine().Split(",");
                     string[] granius = reader.ReadLine().Split(",");
                     string[] thera = reader.ReadLine().Split(",");
-
+                    reader.Close();
 
                     Object player = Resources.Load("player", typeof(GameObject));
                     GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
@@ -276,7 +276,7 @@ public class mapScript : MonoBehaviour
                     string[] hydris = reader.ReadLine().Split(",");
                     string[] aeria = reader.ReadLine().Split(",");
                     string[] skye = reader.ReadLine().Split(",");
-
+                    reader.Close();
 
                     Object player = Resources.Load("player", typeof(GameObject));
                     GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);

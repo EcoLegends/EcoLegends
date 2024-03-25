@@ -28,6 +28,7 @@ public class gestioneMappe : MonoBehaviour
         string path = "Assets/Resources/completedMaps.txt";
         StreamReader reader = new StreamReader(path);
         int leggi = int.Parse(reader.ReadLine());
+        reader.Close();
         Debug.Log(leggi);
 
         if(leggi>=2){ //controlla cap2
