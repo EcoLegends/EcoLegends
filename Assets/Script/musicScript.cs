@@ -58,8 +58,24 @@ public class musicScript : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
     }
     // Update is called once per frame
-    void Update()
+    public void Rimuovi()
     {
-        
+        StartCoroutine(FadeOut(GetComponent<AudioSource>()));
+    }
+
+    public static IEnumerator FadeOut(AudioSource audioSource)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / 1f;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+
+        Destroy(audioSource.gameObject);
     }
 }

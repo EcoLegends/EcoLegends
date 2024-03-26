@@ -72,54 +72,54 @@ public class PvPscript : MonoBehaviour
                                     d.Add(new Dialogo("Nova", "Nova", "Granius! Cosa diavolo sta succedendo qui?", true, true));
                                     d.Add(new Dialogo("Nova", "Nova", "Sono arrivata appena in tempo per vederti assediato da questi mostri!", true, true));
                                     d.Add(new Dialogo("Granius?",enemy.textureFile, "Nova... finalmente sei arrivata. Ma non hai idea di cosa sia successo.", false,false));
-                                    d.Add(new Dialogo("Granius?",enemy.textureFile, "Il nostro impero � stato invaso e distrutto dall'inquinamento che avanza nella nostra terra.", false, false));
-                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Morgrath, lui � l'unico che ci pu� salvare. Non posso pi� fidarmi di te o di nessun altro.", false, false));
+                                    d.Add(new Dialogo("Granius?",enemy.textureFile, "Il nostro impero è stato invaso e distrutto dall'inquinamento che avanza nella nostra terra.", false, false));
+                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Morgrath, lui è l'unico che ci può salvare. Non posso più fidarmi di te o di nessun altro.", false, false));
                                     d.Add(new Dialogo("Nova", "Nova", "Cosa stai dicendo, Granius? Tu e Morgrath?", true, true));
                                     d.Add(new Dialogo("Nova", "Nova", "Sei sempre stato un difensore della natura, un nostro alleato! E ora ti allei col Grande Inquinatore?", true, true));
-                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Le cose sono cambiate. Ora devo affrontarti, Nova. Non c'� altra scelta.", false, false));
+                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Le cose sono cambiate. Ora devo affrontarti, Nova. Non c'è altra scelta.", false, false));
                                     d.Add(new Dialogo("Nova", "Nova", "Non posso crederci... ma non importa cosa sia successo.", true, true));
-                                    d.Add(new Dialogo("Nova", "Nova", "Granius, io ti salver� e non mi arrender� senza lottare. Se � cos� che deve essere, allora che lo sia.", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "Granius, io ti salverà e non mi arrenderò senza lottare. Se è così che deve essere, allora che lo sia.", true, true));
                                     break;
                                 }
                             case "Sear-Granius?":
                                 {
                                     d.Add(new Dialogo("Sear", "Sear", "Granius! Resisti! Arrivo subito! Lascia che ti aiuti!", true, true));
                                     d.Add(new Dialogo("Granius?", enemy.textureFile, "Ah, Sear... finalmente sei arrivato. Peccato che sia troppo tardi per te.", false, false));
-                                    d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Granius? Cosa ti � successo?", true, true));
-                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Nulla che tu possa capire, Sear. Sono diventato pi� potente di quanto avrei mai immaginato.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Granius? Cosa ti è successo?", true, true));
+                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Nulla che tu possa capire, Sear. Sono diventato più potente di quanto avrei mai immaginato.", false, false));
                                     d.Add(new Dialogo("Granius?", enemy.textureFile, "Morgrath mi ha aperto gli occhi. Ora vedo la vera natura del mondo.", false, false));
                                     d.Add(new Dialogo("Sear", "Sear", "Morgrath? Il Grande Inquinatore? No, Granius, non puoi credere a quello che ti ha detto. ", true, true));
-                                    d.Add(new Dialogo("Sear", "Sear", "� solo un inganno, e tu sei stato trascinato nella sua oscurit�.", true, true));
-                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Non c'� ritorno per me, Sear. Sono diventato ci� che dovevo essere.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "È solo un inganno, e tu sei stato trascinato nella sua oscurità.", true, true));
+                                    d.Add(new Dialogo("Granius?", enemy.textureFile, "Non c'è ritorno per me, Sear. Sono diventato ciò che dovevo essere.", false, false));
                                     d.Add(new Dialogo("Granius?", enemy.textureFile, "E ora devo eliminare chiunque cerchi di ostacolarmi.", false, false)); 
-                                    d.Add(new Dialogo("Sear", "Sear", "Allora sar� una battaglia. Granius, prometto che ti salver�!", true, true));
+                                    d.Add(new Dialogo("Sear", "Sear", "Allora sarà una battaglia. Granius, prometto che ti salverò!", true, true));
                                     break;
                                 }
                             case "Nova-Thera?":
                                 {
                                     d.Add(new Dialogo("Nova", "Nova", "Thera! Vengo subito! Prendi la mia mano e scappiamo da qui!", true, true));
-                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Nova... � troppo tardi. Non posso scappare. E non ho bisogno del tuo aiuto.", false, false));
+                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Nova... è troppo tardi. Non posso scappare. E non ho bisogno del tuo aiuto.", false, false));
                                     d.Add(new Dialogo("Nova", "Nova", "Cosa intendi, Thera? Cosa sta succedendo qui?", true, true));
                                     d.Add(new Dialogo("Thera?", enemy.textureFile, "Sono cambiata, Nova.", false, false));
                                     d.Add(new Dialogo("Thera?", enemy.textureFile, "L'inquinamento ha rivelato la vera natura delle cose, e ho visto di non avere nessuna speranza contro di loro.", false, false));
                                     d.Add(new Dialogo("Thera?", enemy.textureFile, "Ora sono con Morgrath.", false, false));
-                                    d.Add(new Dialogo("Nova", "Nova", "No, Thera, non puoi arrenderti cos�! Cosa ti ha fatto Morgrath?", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "No, Thera, non puoi arrenderti così! Cosa ti ha fatto Morgrath?", true, true));
                                     d.Add(new Dialogo("Thera?", enemy.textureFile, "Morgrath non mi ha fatto nulla. Mi ha solo aperto gli occhi sulla realt�.", false, false));
                                     d.Add(new Dialogo("Thera?", enemy.textureFile, "E ora devo eliminare qualsiasi ostacolo si frapponga sulla nostra strada.", false, false)); 
-                                    d.Add(new Dialogo("Nova", "Nova", "Allora sono obbligata a fermarti, Thera. Non vi lascer� avere la meglio senza lottare.", true, true));
+                                    d.Add(new Dialogo("Nova", "Nova", "Allora sono obbligata a fermarti, Thera. Non vi lascerò avere la meglio senza lottare.", true, true));
                                     
                                     break;
                                 }
                             case "Sear-Thera?":
                                 {
                                     d.Add(new Dialogo("Sear", "Sear", "Thera! Ti raggiungo subito! Tieniti forte, arrivo!", true, true));
-                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Sear... non hai bisogno di preoccuparti per me. La mia situazione � sotto controllo.", false, false));
+                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Sear... non hai bisogno di preoccuparti per me. La mia situazione è sotto controllo.", false, false));
                                     d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Thera? Cosa sta succedendo qui?", true, true));
-                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Non importa. Quello che devi sapere � che sono ora dalla parte di Morgrath.", false, false));
-                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "E non ci sar� piet� per chiunque cerchi di fermarci.", false, false));
+                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "Non importa. Quello che devi sapere è che sono ora dalla parte di Morgrath.", false, false));
+                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "E non ci sarà pietà per chiunque cerchi di fermarci.", false, false));
                                     d.Add(new Dialogo("Sear", "Sear", "Ma che stai dicendo? Thera, non puoi lasciare che Morgrath ti manipoli in questo modo! Non sei tu!", true, true));
-                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "� inutile, Sear. Il mio destino � stato scritto, e ora devo seguirlo fino in fondo.", false, false));
-                                    d.Add(new Dialogo("Sear", "Sear", "Allora sar� una battaglia, Thera. Non posso permetterti di vincere.", true, true));
+                                    d.Add(new Dialogo("Thera?", enemy.textureFile, "È inutile, Sear. Il mio destino è stato scritto, e ora devo seguirlo fino in fondo.", false, false));
+                                    d.Add(new Dialogo("Sear", "Sear", "Allora sarà una battaglia, Thera. Non posso permetterti di vincere.", true, true));
 
 
                                     break;
@@ -772,7 +772,7 @@ public class PvPscript : MonoBehaviour
                 try
                 {
                     string[] arrLine = System.IO.File.ReadAllLines("Assets/Resources/dati.txt");
-                    arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.hp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
+                    arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.maxHp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
                     System.IO.File.WriteAllLines("Assets/Resources/dati.txt", arrLine);
                 }
                 catch (System.Exception) { }
