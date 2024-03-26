@@ -74,6 +74,8 @@ public class playerScript : MonoBehaviour
 
     public bool haFattoQualcosa;
 
+    bool tutorialFatto = false;
+
     [Space]
     public bool heal;
     public bool cura;//se vuoi curare
@@ -566,8 +568,23 @@ public class playerScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
+       
         if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
+            if (!tutorialFatto)
+            {
+                if (nome == "Nova" && mapScript.mapN == 2) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial14"), Camera.main.gameObject.transform); return; }
+                if (nome == "Sear" && mapScript.mapN == 2) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial16"), Camera.main.gameObject.transform); return; }
+
+                if (nome == "Granius" && mapScript.mapN == 3) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial18"), Camera.main.gameObject.transform); return; }
+                if (nome == "Thera" && mapScript.mapN == 3) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial20"), Camera.main.gameObject.transform); return; }
+
+                if (nome == "Acquira" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial22"), Camera.main.gameObject.transform); return; }
+                if (nome == "Hydris" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial24"), Camera.main.gameObject.transform); return; }
+                if (nome == "Aeria" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial26"), Camera.main.gameObject.transform); return; }
+                if (nome == "Skye" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial28"), Camera.main.gameObject.transform); return; }
+                
+            }
             mouseIsOver = true;
 
             if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
