@@ -21,7 +21,7 @@ public class buttonScript : MonoBehaviour
     {
 
         StartCoroutine(asin(async));
-        StartCoroutine(animation());
+        
     }
     
     public IEnumerator asin(AsyncOperation async){
@@ -31,11 +31,6 @@ public class buttonScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
         }
-    }
-    public IEnumerator animation(){
-        
-        yield return new WaitForSeconds(1f);
-
     }
     public void OnClick()
     {
@@ -47,7 +42,7 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
                 writer.Close();
-
+                
                 AsyncOperation async = SceneManager.LoadSceneAsync( "Menu");
 
                 asin(async);
@@ -64,14 +59,10 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
                 writer.Close();
-                
-                //GameObject.Find("Crossfade").transition.SetTrigger("Start");
-
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().change=true;
+                AsyncOperation async = SceneManager.LoadSceneAsync( "Menu");
 
                 asin(async);
-
-                
             }
         }
 
