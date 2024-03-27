@@ -19,14 +19,14 @@ public class mapScript : MonoBehaviour
     public int mapNum = 1;
     void Awake()
     {
-        string p = "Assets/Resources/mappaScelta.txt";
+        string p = Application.streamingAssetsPath+"mappaScelta.txt";
         StreamReader r = new StreamReader(p);
         string l = r.ReadLine();
         
         mapNum =int.Parse(l);
         r.Close();
 
-        r = new StreamReader("Assets/Resources/completedMaps.txt");
+        r = new StreamReader(Application.streamingAssetsPath+"completedMaps.txt");
         l = r.ReadLine();
 
         int mapCompleted = int.Parse(l);
@@ -51,7 +51,7 @@ public class mapScript : MonoBehaviour
 
         Object musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
         musicPlayer.GetComponent<musicScript>().music = music;
-        string path = "Assets/Resources/dati.txt";
+        string path = Application.streamingAssetsPath+"dati.txt";
         switch (mapNum)
         {
             case 1:

@@ -42,13 +42,13 @@ public class winloseScript : MonoBehaviour
         { 
             scene = "Menu";
             
-            StreamReader r = new StreamReader("Assets/Resources/mappaScelta.txt");
+            StreamReader r = new StreamReader(Application.streamingAssetsPath+"mappaScelta.txt");
             string l = r.ReadLine();
 
             int mapScelta = int.Parse(l);
             r.Close();
 
-            r = new StreamReader("Assets/Resources/completedMaps.txt");
+            r = new StreamReader(Application.streamingAssetsPath+"completedMaps.txt");
             l = r.ReadLine();
 
             int mapCompleted = int.Parse(l);
@@ -56,21 +56,21 @@ public class winloseScript : MonoBehaviour
 
             if(mapCompleted <= mapScelta)
             {
-                StreamWriter writer = new StreamWriter("Assets/Resources/completedMaps.txt", false);
+                StreamWriter writer = new StreamWriter(Application.streamingAssetsPath+"completedMaps.txt", false);
                 writer.WriteLine(mapScelta+1);
                 writer.Close();
 
 
                 if (mapScelta == 2)
                 {
-                    writer = new StreamWriter("Assets/Resources/dati.txt", true);
+                    writer = new StreamWriter(Application.streamingAssetsPath+"dati.txt", true);
                     writer.WriteLine("Granius,Granius,4,0,4,1,2,6,6,90,5,3,4,false,27,9,3,8,10,8,7,5,65,40,25,70,80,45,30,15,false");
                     writer.WriteLine("Thera,Thera,4,0,4,1,1,7,8,75,5,3,7,false,29,13,5,7,6,8,7,4,90,60,20,30,50,35,35,20,false");
                     writer.Close();
                 }
                 if(mapScelta == 3)
                 {
-                    writer = new StreamWriter("Assets/Resources/dati.txt", true);
+                    writer = new StreamWriter(Application.streamingAssetsPath+"dati.txt", true);
                     writer.WriteLine("Acquira,Acquira,6,0,4,1,1,6,6,85,5,2,6,false,30,15,5,7,8,6,8,5,85,55,30,40,40,40,45,30,false");
                     writer.WriteLine("Hydris,Hydris,6,0,4,1,2,4,4,80,5,2,1,true,26,5,12,6,7,7,5,9,40,30,55,40,40,55,25,50,true");
                     writer.WriteLine("Aeria,Aeria,6,0,4,1,2,6,6,90,5,4,3,false,28,14,5,9,8,6,8,5,45,40,20,75,50,35,20,30,false");

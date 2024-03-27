@@ -13,12 +13,12 @@ public class skillGUIScript : MonoBehaviour
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = skill;
 
         string[] arr = { "Vantaggio", "Persistenza", "Istinto Selvaggio", "Giardino Fiorito", "Acqua Cristallina", "Guarigione", "Dio del Vento", "In Guardia" };
-        Debug.Log(ArrayUtility.IndexOf(arr, skill));
+        Debug.Log(System.Array.IndexOf(arr, skill));
 
         Sprite[] sprites = Resources.LoadAll<Sprite>("skillsIcons");
         Debug.Log(sprites.Length);
 
-        transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = sprites[ArrayUtility.IndexOf(arr, skill)];
+        transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = sprites[System.Array.IndexOf(arr, skill)];
         StartCoroutine(anim());
     }
 
