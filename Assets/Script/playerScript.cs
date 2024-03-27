@@ -108,7 +108,11 @@ public class playerScript : MonoBehaviour
             bool add_vector = true;
 
             foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")) {
-                if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y && p != this.gameObject) add_vector = false;
+                if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y && p != this.gameObject)
+                {
+                    if (heal) mov_tile.GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("tileOverlay")[3];
+                    add_vector = false;
+                }
             }
 
             if (add_vector)
@@ -483,6 +487,7 @@ public class playerScript : MonoBehaviour
                             x = oldX;
                             y = oldY;
 
+                            Debug.Log(cura);
                             forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
 
                             forecastCooldown = Time.time + 0.3f;
@@ -583,7 +588,6 @@ public class playerScript : MonoBehaviour
                 if (nome == "Hydris" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial24"), Camera.main.gameObject.transform); return; }
                 if (nome == "Aeria" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial26"), Camera.main.gameObject.transform); return; }
                 if (nome == "Skye" && mapScript.mapN == 4) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial28"), Camera.main.gameObject.transform); return; }
-                
             }
             mouseIsOver = true;
 

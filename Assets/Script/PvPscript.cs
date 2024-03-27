@@ -834,8 +834,8 @@ public class PvPscript : MonoBehaviour
             sprite.SetActive(true);
 
             spritePlayer.GetComponent<Animator>().Play("Heal");
-            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=(player.lvl+9).ToString();
-            player2.hp = Mathf.Clamp(player2.hp += 8+player.mag/3, 0, player2.maxHp);
+            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=((8 + player.mag / 3)).ToString();
+            player2.hp = Mathf.Clamp(player2.hp += (8+player.mag/3), 0, player2.maxHp);
 
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
