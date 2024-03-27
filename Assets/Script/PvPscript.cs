@@ -807,9 +807,9 @@ public class PvPscript : MonoBehaviour
                 List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Hydris", "Aeria", "Skye" };
                 try
                 {
-                    string[] arrLine = System.IO.File.ReadAllLines(Application.streamingAssetsPath+"dati.txt");
+                    string[] arrLine = System.IO.File.ReadAllLines(Application.streamingAssetsPath+"/dati.txt");
                     arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.maxHp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
-                    System.IO.File.WriteAllLines(Application.streamingAssetsPath+"dati.txt", arrLine);
+                    System.IO.File.WriteAllLines(Application.streamingAssetsPath+"/dati.txt", arrLine);
                 }
                 catch (System.Exception) { }
                 

@@ -78,4 +78,25 @@ public class musicScript : MonoBehaviour
 
         Destroy(audioSource.gameObject);
     }
+
+    public void Stop()
+    {
+        StartCoroutine(FadeOut2(GetComponent<AudioSource>()));
+    }
+
+    public static IEnumerator FadeOut2(AudioSource audioSource)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / 1f;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+
+        
+    }
 }

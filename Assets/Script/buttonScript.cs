@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 /*
-string path = Application.streamingAssetsPath+"dati.txt";
+string path = Application.streamingAssetsPath+"/dati.txt";
 
 StreamWriter writer = new StreamWriter(path, false);
 writer.WriteLine("...")
@@ -42,7 +42,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"completedMaps.txt";
+                string path = Application.streamingAssetsPath+"/completedMaps.txt";
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
                 writer.Close();
@@ -58,7 +58,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"mappaScelta.txt";
+                string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
@@ -78,7 +78,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"mappaScelta.txt";
+                string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("2");
@@ -96,7 +96,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"mappaScelta.txt";
+                string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("3");
@@ -114,7 +114,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"mappaScelta.txt";
+                string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("4");
@@ -132,7 +132,7 @@ public class buttonScript : MonoBehaviour
 
             if(e==this.gameObject){
 
-                string path = Application.streamingAssetsPath+"mappaScelta.txt";
+                string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("5");
