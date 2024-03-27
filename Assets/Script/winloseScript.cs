@@ -18,14 +18,17 @@ public class winloseScript : MonoBehaviour
 
     IEnumerator anim()
     {
-        for(float i = 0; i <= 500; i++)
+        GameObject.Find("Music(Clone)").GetComponent<musicScript>().Rimuovi();
+        if (vinci) GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("win");
+        
+        for (float i = 0; i <= 500; i++)
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 500);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(5);
 
-        GameObject.Find("Music(Clone)").GetComponent<musicScript>().Rimuovi();
+        
         for (float i = 500; i >= 0; i--)
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 500);

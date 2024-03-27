@@ -527,6 +527,7 @@ public class battleManager : MonoBehaviour
 
             if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true)
             {
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
                 phase = "animation";
                 animationText = "player";
                 animationTime = Time.time + 3;
@@ -563,6 +564,7 @@ public class battleManager : MonoBehaviour
 
             if (phase == "Player" && unmovedUnits.Count == 0 && animationText == "0")
             {
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("enemyphase");
                 phase = "animation";
                 animationText = "enemy";
                 animationTime = Time.time + 3;

@@ -263,6 +263,8 @@ public class mapScript : MonoBehaviour
                                                         {"Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Roccia","Ciottoli","Ciottoli","Ciottoli"},
                                                         {"Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli"} };
 
+                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial30"), Camera.main.gameObject.transform);
+
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
                     string[] sear = reader.ReadLine().Split(",");

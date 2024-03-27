@@ -648,7 +648,7 @@ public class enemyScript : MonoBehaviour
                 if (mouseIsOver || battleManager.removeGUI)
                 {
                     mouseIsOver = false;
-                    if (infoGUISpawned)
+                    if (infoGUISpawned && infoGUI !=  null)
                     {
                         infoGUI.GetComponent<infoGUIScript>().Rimuovi();
                         infoGUISpawned = false;

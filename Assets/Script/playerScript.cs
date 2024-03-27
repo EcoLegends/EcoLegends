@@ -110,7 +110,7 @@ public class playerScript : MonoBehaviour
             foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player")) {
                 if (p.GetComponent<playerScript>().x == movTiles[i].GetComponent<tileScript>().x && p.GetComponent<playerScript>().y == movTiles[i].GetComponent<tileScript>().y && p != this.gameObject)
                 {
-                    if (heal) mov_tile.GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("tileOverlay")[3];
+                    if (heal && p.GetComponent<playerScript>().hp!=p.GetComponent<playerScript>().maxHp) mov_tile.GetComponent<SpriteRenderer>().sprite = Resources.LoadAll<Sprite>("tileOverlay")[3];
                     add_vector = false;
                 }
             }
@@ -451,7 +451,7 @@ public class playerScript : MonoBehaviour
 
                         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
                         {
-                            if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true && e != this.gameObject)
+                            if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true && e.GetComponent<playerScript>().hp != e.GetComponent<playerScript>().maxHp && e != gameObject)
                             {
 
                                 foreach (GameObject t in movBlueTiles)
@@ -649,7 +649,7 @@ public class playerScript : MonoBehaviour
                     foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
                     attackRedTiles.Clear();
                 }
-
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("select");
                 transform.GetChild(0).GetComponent<Animator>().Play("Select");
                 dragging = true;
                 HighlightMov();                                                                //spawna tasselli blu movimento
@@ -732,7 +732,7 @@ public class playerScript : MonoBehaviour
                     }
                     foreach (GameObject e in GameObject.FindGameObjectsWithTag("Player"))
                     {
-                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true)
+                        if (Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).x) == e.GetComponent<playerScript>().x && Mathf.RoundToInt((Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset).y) == e.GetComponent<playerScript>().y && heal == true && e.GetComponent<playerScript>().hp!=e.GetComponent<playerScript>().maxHp && e!=gameObject)
                         {
 
                             foreach (GameObject t in movBlueTiles)
