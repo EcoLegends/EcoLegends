@@ -8,24 +8,24 @@ public class gestioneMappe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (System.IO.File.Exists("Assets/Resources/completedMaps.txt") ==false){ //controlla file mappe completate
+        if (File.Exists(Application.streamingAssetsPath+"/completedMaps.txt") ==false){ //controlla file mappe completate
 
-            string p = "Assets/Resources/completedMaps.txt";
+            string p = Application.streamingAssetsPath+"/completedMaps.txt";
 
             StreamWriter writer = new StreamWriter(p, false);
             writer.WriteLine("0");
             writer.Close();
         }
-        if (System.IO.File.Exists("Assets/Resources/mappaScelta.txt") ==false){ //controlla file mappe scelta
+        if (File.Exists(Application.streamingAssetsPath+"/mappaScelta.txt") ==false){ //controlla file mappe scelta
 
-            string p = "Assets/Resources/mappaScelta.txt";
+            string p = Application.streamingAssetsPath+"/mappaScelta.txt";
 
             StreamWriter writer = new StreamWriter(p, false);
             writer.WriteLine("1");
             writer.Close();
         }
 
-        string path = "Assets/Resources/completedMaps.txt";
+        string path = Application.streamingAssetsPath+"/completedMaps.txt";
         StreamReader reader = new StreamReader(path);
         int leggi = int.Parse(reader.ReadLine());
         reader.Close();

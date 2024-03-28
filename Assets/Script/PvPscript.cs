@@ -5,10 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
+
 
 public class PvPscript : MonoBehaviour
 {
@@ -24,7 +21,7 @@ public class PvPscript : MonoBehaviour
 
     public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn, bool cura)
     {
-
+        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
         StartCoroutine(iniziaPvP(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn, cura));
 
     }
@@ -249,6 +246,7 @@ public class PvPscript : MonoBehaviour
                 skill.GetComponent<skillGUIScript>().Setup("Dio del Vento");
             }
             
+            
 
             float playerInitialHP = player.hp / (float)player.maxHp*100;
 
@@ -269,6 +267,18 @@ public class PvPscript : MonoBehaviour
             }
 
             if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
+
+            bool playerCanCounter = turns.Contains("player");
+            bool enemyCanCounter = turns.Contains("enemy");
+
+            GameObject pvpForecast = Instantiate(Resources.Load<GameObject>("pvpForecastCombat"),GameObject.Find("CombatCamera").transform);
+            
+            if (playerAS >= enemyAS + 4) pvpForecast.GetComponent<pvpForecastScript>().SetupPlayer(player.hp,player.maxHp,output[0],output[1],output[2],true, playerCanCounter);
+            else pvpForecast.GetComponent<pvpForecastScript>().SetupPlayer(player.hp, player.maxHp, output[0], output[1], output[2], false, playerCanCounter);
+            if (enemyAS >= playerAS + 4) pvpForecast.GetComponent<pvpForecastScript>().SetupEnemy(enemy.hp, enemy.maxHp, output[4], output[5], output[6], true, enemyCanCounter);
+            else pvpForecast.GetComponent<pvpForecastScript>().SetupEnemy(enemy.hp, enemy.maxHp, output[4], output[5], output[6], false, enemyCanCounter);
+
+
             yield return new WaitForSeconds(1);
             UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
             GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
@@ -318,6 +328,7 @@ public class PvPscript : MonoBehaviour
                     
                         if (playerCrit <= output[2])
                         {
+                            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("crit");
                             if (move) spritePlayer.GetComponent<Animator>().Play("Crit");
                             else spritePlayer.GetComponent<Animator>().Play("Crit2");
                             GameObject.Find("Info Canvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>().text=(output[0]*3).ToString();
@@ -341,7 +352,8 @@ public class PvPscript : MonoBehaviour
                             GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
                             skill.GetComponent<skillGUIScript>().Setup("Giardino Fiorito");
                             player.hp = Mathf.Clamp(player.hp += dmg / 2, 0, player.maxHp);
-                            player.healthbar.SetHealth(player.hp);
+                            
+                            
                             GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = (dmg/2).ToString();
                             GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(true);
                             GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x -0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
@@ -366,11 +378,16 @@ public class PvPscript : MonoBehaviour
 
                         oldPos = sprite.transform.position;
 
+                        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("dmg");
                         spriteEnemy.GetComponent<Animator>().Play("Hurt");
+                        enemy.healthbar.SetHealth(enemy.hp);
+                        pvpForecast.GetComponent<pvpForecastScript>().DamageEnemy(enemy.hp, enemy.maxHp);
+                        pvpForecast.GetComponent<pvpForecastScript>().DamagePlayer(player.hp, player.maxHp);
                         yield return new WaitForEndOfFrame();
                         clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                         firstClip = clipInfos[0].clip;
                         duration = firstClip.length + Time.time;
+                        if(GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.activeInHierarchy) GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
 
                         for (float i = 0; i < 100; i++)
                         {
@@ -400,7 +417,7 @@ public class PvPscript : MonoBehaviour
                         GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(false);
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
                         Debug.Log("fine");
-                        enemy.healthbar.SetHealth(enemy.hp);
+                        player.healthbar.SetHealth(player.hp);
 
                     }
                     else         //player miss
@@ -447,6 +464,7 @@ public class PvPscript : MonoBehaviour
                             if(Time.time > half && !enemyMissStarted)
                             {
                                 enemyMissStarted = true;
+                                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("miss");
                                 spriteEnemy.GetComponent<Animator>().Play("Miss");
                             }
                             yield return new WaitForEndOfFrame();
@@ -509,6 +527,7 @@ public class PvPscript : MonoBehaviour
                             output[4] = output[4] / 2;
                         }
                         if (enemyCrit <= output[6]){
+                            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("crit");
                             if (move) spriteEnemy.GetComponent<Animator>().Play("Crit");
                             else spriteEnemy.GetComponent<Animator>().Play("Crit2");
                             GameObject.Find("Info Canvas").transform.GetChild(2).GetComponent<TextMeshProUGUI>().text=(output[4]*3).ToString();
@@ -555,7 +574,10 @@ public class PvPscript : MonoBehaviour
 
                         oldPos = sprite.transform.position;
 
+                        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("dmg");
                         spritePlayer.GetComponent<Animator>().Play("Hurt");
+                        player.healthbar.SetHealth(player.hp);
+                        pvpForecast.GetComponent<pvpForecastScript>().DamagePlayer(player.hp, player.maxHp);
                         yield return new WaitForEndOfFrame();
                         clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                         firstClip = clipInfos[0].clip;
@@ -585,7 +607,7 @@ public class PvPscript : MonoBehaviour
                         GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.SetActive(false);
                         GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position -= new Vector3(0, 1, 0);
                         Debug.Log("fine");
-                        player.healthbar.SetHealth(player.hp);
+                        
                     }
                     else               //enemy miss
                     {
@@ -629,6 +651,7 @@ public class PvPscript : MonoBehaviour
                             if (Time.time > half && !enemyMissStarted)
                             {
                                 enemyMissStarted = true;
+                                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("miss");
                                 spritePlayer.GetComponent<Animator>().Play("Miss");
                             }
                             yield return new WaitForEndOfFrame();
@@ -656,19 +679,69 @@ public class PvPscript : MonoBehaviour
 
             }
 
-            if (player.hp>=0 && player.nome == "Hydris")
+            
+
+            if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
+            if (enemy.hp == 0)
+            {
+
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("defeat");
+                GameObject particle = Instantiate(Resources.Load<GameObject>("Petals Prefab 1"));
+                particle.transform.position = new Vector3(enemyParent.transform.position.x-0.5f, enemyParent.transform.position.y+0.5f, -3.5f);
+
+                particle.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
+                if (enemy.textureFile.Contains("evil"))
+                {
+                    enemy.textureFile = enemy.textureFile.Replace("_evil", "");
+                    Destroy(enemy.gameObject.transform.GetChild(0).gameObject);
+                    var texture = Resources.Load<GameObject>("Characters/" + enemy.textureFile);   //carica la texture del personaggio
+                    GameObject sprite = Instantiate(texture, new Vector3(0, 0, 0), Quaternion.identity);
+                    sprite.transform.parent = enemy.gameObject.transform;
+                    sprite.transform.localPosition = new Vector3(0, 0, 0);
+                    sprite.transform.SetAsFirstSibling();
+                    sprite.transform.Rotate(0, 180, 0);
+
+                    Destroy(spriteEnemy);
+
+                    spriteEnemy = Instantiate(Resources.Load<GameObject>("Characters/" + enemy.textureFile), Vector3.zero, Quaternion.identity);
+
+
+                    spriteEnemy.transform.parent = enemyParent.transform;
+                    spriteEnemy.transform.localEulerAngles = new Vector3(0, 0, 0);
+                    spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
+                    for (float i = 0; i <= 100; i++)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
+                }
+                else
+                {
+                    for (float i = 0; i <= 100; i++)
+                    {
+
+                        enemyParent.transform.localScale = new Vector3(1 - i / 100, 1 - i / 100, 1 - i / 100);
+                        yield return new WaitForEndOfFrame();
+                    }
+                }
+                
+            }
+            if (player.hp >= 0 && player.nome == "Hydris")
             {
                 GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
                 skill.GetComponent<skillGUIScript>().Setup("Guarigione");
                 player.hp = Mathf.Clamp(player.hp += 5 / 2, 0, player.maxHp);
                 player.healthbar.SetHealth(player.hp);
+                pvpForecast.GetComponent<pvpForecastScript>().DamagePlayer(player.hp, player.maxHp);
+                
                 GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = (5).ToString();
                 GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(true);
                 GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x - 0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
                 GameObject.Find("Info Canvas").transform.GetChild(6).localScale = Vector3.zero;
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
                 for (float i = 0; i < 100; i++)
                 {
-                   
+
                     GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f, 0);
                     GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
 
@@ -678,27 +751,14 @@ public class PvPscript : MonoBehaviour
 
 
                 yield return new WaitForSeconds(1);
-                
+
                 GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(false);
             }
 
-            if (!battleManager.canMoveEnemy) battleManager.canMoveEnemy = true;
-            if (enemy.hp == 0)
-            {
-                GameObject particle = Instantiate(Resources.Load<GameObject>("Petals Prefab 1"));
-                particle.transform.position = new Vector3(enemyParent.transform.position.x-0.5f, enemyParent.transform.position.y+0.5f, -3.5f);
+            pvpForecast.GetComponent<pvpForecastScript>().Rimuovi();
+            yield return new WaitForSeconds(0.5f);
 
-                particle.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-
-                for(float i = 0; i <= 100; i++)
-                {
-
-                    enemyParent.transform.localScale = new Vector3(1-i / 100, 1-i / 100, 1-i / 100);
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-
-                int expGained = Mathf.Clamp(damageDealt, 0, 20);
+            int expGained = Mathf.Clamp(damageDealt, 0, 20);
             if (player.hp == 0) expGained = 0;
             if (expGained != 0)
             {
@@ -735,7 +795,7 @@ public class PvPscript : MonoBehaviour
                 {
                     yield return new WaitForSeconds(1/(float)expGained);
                     player.exp++;
-                    if(i%2==0 || expGained < 15)expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
+                    if(i%2==0 || expGained < 15) expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
                     if (player.exp >= expNeeded)
                     {
                         player.exp = 0;
@@ -768,12 +828,12 @@ public class PvPscript : MonoBehaviour
                     while (!finitoLvlUp) yield return new WaitForEndOfFrame();
                 }
 
-                List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Aeria", "Skye" };
+                List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Hydris", "Aeria", "Skye" };
                 try
                 {
-                    string[] arrLine = System.IO.File.ReadAllLines("Assets/Resources/dati.txt");
+                    string[] arrLine = System.IO.File.ReadAllLines(Application.streamingAssetsPath+"/dati.txt");
                     arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.maxHp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
-                    System.IO.File.WriteAllLines("Assets/Resources/dati.txt", arrLine);
+                    System.IO.File.WriteAllLines(Application.streamingAssetsPath+"/dati.txt", arrLine);
                 }
                 catch (System.Exception) { }
                 
@@ -781,7 +841,7 @@ public class PvPscript : MonoBehaviour
 
             if (enemy.hp == 0)
             {
-                
+                battleManager.canMoveEnemy = true;
                 if (battleManager.enemies.Contains(e))
                     battleManager.enemies.Remove(e);
                 enemy.cancInfo();
@@ -802,7 +862,7 @@ public class PvPscript : MonoBehaviour
 
             if (player.hp <= 0)
             {
-
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("defeat");
                 temp.SetActive(true);
                 temp.transform.DetachChildren();
                 player.endPvp();
@@ -829,13 +889,20 @@ public class PvPscript : MonoBehaviour
 
             playerScript player2 = e.GetComponent<playerScript>();
 
+            GameObject pvpForecast = Instantiate(Resources.Load<GameObject>("pvpForecastCombat"), GameObject.Find("CombatCamera").transform);
+            pvpForecast.transform.GetChild(0).GetChild(13).GetChild(2).GetComponent<Image>().color = new Color(0.1607843f, 0.572549f, 0.9607843f);
+
+            pvpForecast.GetComponent<pvpForecastScript>().SetupPlayer(player.hp, player.maxHp, output[0], output[1], output[2], false, true);
+            pvpForecast.GetComponent<pvpForecastScript>().SetupEnemy(player2.hp, player2.maxHp, output[4], output[5], output[6], false, false);
+
+            yield return new WaitForSeconds(1);
             sprite = GameObject.Find("Info Canvas").transform.GetChild(6).gameObject;
             sprite.transform.localScale = Vector3.zero;
             sprite.SetActive(true);
 
             spritePlayer.GetComponent<Animator>().Play("Heal");
-            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=(player.lvl+9).ToString();
-            player2.hp = Mathf.Clamp(player2.hp += 8+player.mag/3, 0, player2.maxHp);
+            GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text=((8 + player.mag / 3)).ToString();
+            player2.hp = Mathf.Clamp(player2.hp += (8+player.mag/3), 0, player2.maxHp);
 
             AnimatorClipInfo[] clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
             AnimationClip firstClip = clipInfos[0].clip;
@@ -846,17 +913,14 @@ public class PvPscript : MonoBehaviour
 
             while (Time.time < duration)
             {
-                if (Time.time > half && !enemyMissStarted)
-                {
-                    enemyMissStarted = true;
-                    spritePlayer.GetComponent<Animator>().Play("Select");
-                }
                 yield return new WaitForEndOfFrame();
             }
 
             oldPos = sprite.transform.position;
-
-                        
+            spriteEnemy.GetComponent<Animator>().Play("Select");
+            player2.healthbar.SetHealth(player2.hp);
+            pvpForecast.GetComponent<pvpForecastScript>().DamageEnemy(player2.hp, player2.maxHp);
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
             for (float i = 0; i < 100; i++)
             {
                 sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
@@ -868,8 +932,86 @@ public class PvPscript : MonoBehaviour
             yield return new WaitForSeconds(1);
             sprite.SetActive(false);
             sprite.transform.position = oldPos;
-            
-            player2.healthbar.SetHealth(player2.hp);
+
+            pvpForecast.GetComponent<pvpForecastScript>().Rimuovi();
+            yield return new WaitForSeconds(0.5f);
+
+            int expGained = (player.lvl + 9);
+            if (player.hp == 0) expGained = 0;
+            if (expGained != 0)
+            {
+
+
+                int expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 2));
+                
+
+
+                GameObject expGUI = (GameObject)Instantiate(Resources.Load("ExpCanvas", typeof(GameObject)), Camera.main.transform.position, Quaternion.identity);
+                expGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = player.nome;
+                expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - player.exp).ToString();
+                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained).ToString();
+                expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
+                expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
+
+                float y = expGUI.transform.position.y * -1;
+                for (int i = 0; i < 100; i++)
+                {
+                    y += 0.01516f;
+                    expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                yield return new WaitForSeconds(0.5f);
+                bool lvlup = false;
+                AudioClip expSfx = (AudioClip)Resources.Load("Sounds/SFX/Exp");
+
+                for (int i = 0; i < expGained; i++)
+                {
+                    yield return new WaitForSeconds(1 / (float)expGained);
+                    player.exp++;
+                    if (i % 2 == 0 || expGained < 15) expGUI.transform.GetChild(7).GetComponent<AudioSource>().PlayOneShot(expSfx);
+                    if (player.exp >= expNeeded)
+                    {
+                        player.exp = 0;
+                        expNeeded = (int)Mathf.Round(100 * Mathf.Pow(1.1f, player.lvl - 1));
+                        expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetMaxHealth(expNeeded);
+                        expGUI.transform.GetChild(6).GetChild(1).GetComponent<UnityEngine.UI.Image>().color = new Color(0, 186, 50);
+                        lvlup = true;
+                    }
+                    expGUI.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (expNeeded - (player.exp)).ToString();
+                    expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "+" + (expGained - i).ToString();
+
+                    expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
+
+                }
+                expGUI.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "0";
+
+                yield return new WaitForSeconds(2);
+
+                for (int i = 0; i < 100; i++)
+                {
+                    y -= 0.01516f;
+                    expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                if (lvlup)
+                {
+                    finitoLvlUp = false;
+                    LevelUp(player);
+                    while (!finitoLvlUp) yield return new WaitForEndOfFrame();
+                }
+
+                List<string> nomi = new List<string> { "Nova", "Sear", "Granius", "Thera", "Acquira", "Hydris", "Aeria", "Skye" };
+                try
+                {
+                    string[] arrLine = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/dati.txt");
+                    arrLine[nomi.IndexOf(player.nome)] = player.nome + "," + player.textureFile + "," + player.lvl + "," + player.exp + "," + player.movement + "," + player.weaponMinRange + "," + player.weaponMaxRange + "," + player.weaponWt + "," + player.weaponMt + "," + player.weaponHit + "," + player.weaponCrit + "," + player.unitType + "," + player.weaponType + "," + player.weaponIsMagic + "," + player.maxHp + "," + player.str + "," + player.mag + "," + player.dex + "," + player.spd + "," + player.lck + "," + player.def + "," + player.res + "," + player.hpGrowth + "," + player.strGrowth + "," + player.magGrowth + "," + player.dexGrowth + "," + player.spdGrowth + "," + player.lckGrowth + "," + player.defGrowth + "," + player.resGrowth + "," + player.heal;
+                    System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/dati.txt", arrLine);
+                }
+                catch (System.Exception) { }
+
+            }
 
 
         }
