@@ -352,8 +352,8 @@ public class PvPscript : MonoBehaviour
                             GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
                             skill.GetComponent<skillGUIScript>().Setup("Giardino Fiorito");
                             player.hp = Mathf.Clamp(player.hp += dmg / 2, 0, player.maxHp);
-                            player.healthbar.SetHealth(player.hp);
-                            pvpForecast.GetComponent<pvpForecastScript>().DamagePlayer(player.hp, player.maxHp);
+                            
+                            
                             GameObject.Find("Info Canvas").transform.GetChild(6).GetComponent<TextMeshProUGUI>().text = (dmg/2).ToString();
                             GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(true);
                             GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x -0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
@@ -382,6 +382,7 @@ public class PvPscript : MonoBehaviour
                         spriteEnemy.GetComponent<Animator>().Play("Hurt");
                         enemy.healthbar.SetHealth(enemy.hp);
                         pvpForecast.GetComponent<pvpForecastScript>().DamageEnemy(enemy.hp, enemy.maxHp);
+                        pvpForecast.GetComponent<pvpForecastScript>().DamagePlayer(player.hp, player.maxHp);
                         yield return new WaitForEndOfFrame();
                         clipInfos = spriteEnemy.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                         firstClip = clipInfos[0].clip;
@@ -416,7 +417,7 @@ public class PvPscript : MonoBehaviour
                         GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.SetActive(false);
                         GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position -= new Vector3(0, 1, 0);
                         Debug.Log("fine");
-                        
+                        player.healthbar.SetHealth(player.hp);
 
                     }
                     else         //player miss
