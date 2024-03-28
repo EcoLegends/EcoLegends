@@ -106,10 +106,16 @@ public class forecastScript : MonoBehaviour
                 else if (enemy.unitEffective == player.unitType) Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
                 else { Destroy(transform.GetChild(0).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(0).GetChild(1).GetChild(0).gameObject); }
             }
-            
+
+            //transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(player.maxHp);
+            //transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetHealth(playerNewHP);
+            //transform.GetChild(0).GetChild(2).GetChild(3).localPosition = new Vector3((float)playerNewHP / (float)player.maxHp * 3.155f - 1.64f, 0.3615f, 0);
+
             transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(player.maxHp);
             transform.GetChild(0).GetChild(2).GetComponent<heathBarScript>().SetHealth(playerNewHP);
-            transform.GetChild(0).GetChild(2).GetChild(3).localPosition = new Vector3((float)playerNewHP / (float)player.maxHp * 3.155f - 1.64f, 0.3615f, 0);
+            transform.GetChild(0).GetChild(2).GetChild(4).localPosition = new Vector3((float)playerNewHP / (float)player.maxHp * 3.155f - 1.64f, 0.3615f, 0);
+            transform.GetChild(0).GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = playerNewHP.ToString();
+            transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Slider>().value = player.hp / (float)player.maxHp;
 
             transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = player.hp.ToString();
             transform.GetChild(0).GetChild(8).GetComponent<TextMeshProUGUI>().text = playerDmgVisual;
@@ -130,12 +136,18 @@ public class forecastScript : MonoBehaviour
                 else if (player.unitEffective == enemy.unitType) Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject);
                 else { Destroy(transform.GetChild(1).GetChild(1).GetChild(1).gameObject); Destroy(transform.GetChild(1).GetChild(1).GetChild(0).gameObject); }
             }
-            
+
 
 
             transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(enemy.maxHp);
             transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetHealth(enemyNewHP);
-            transform.GetChild(1).GetChild(2).GetChild(3).localPosition = new Vector3((float)enemyNewHP / (float)enemy.maxHp * 3.155f - 1.64f, 0.3615f, 0);
+            transform.GetChild(1).GetChild(2).GetChild(4).localPosition = new Vector3((float)enemyNewHP / (float)enemy.maxHp * 3.155f - 1.64f, 0.3615f, 0);
+            transform.GetChild(1).GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = enemyNewHP.ToString();
+            transform.GetChild(1).GetChild(2).GetChild(1).GetComponent<Slider>().value = enemy.hp / (float)enemy.maxHp;
+
+            //transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(enemy.maxHp);
+            //transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetHealth(enemyNewHP);
+            //transform.GetChild(1).GetChild(2).GetChild(3).localPosition = new Vector3((float)enemyNewHP / (float)enemy.maxHp * 3.155f - 1.64f, 0.3615f, 0);
 
             transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = enemy.hp.ToString();
             transform.GetChild(1).GetChild(8).GetComponent<TextMeshProUGUI>().text = enemyDmgVisual;
@@ -271,18 +283,9 @@ public class forecastScript : MonoBehaviour
 
             transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(enemy.maxHp);
             transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetHealth(enemy.hp);
-            Debug.Log("waa1");
             transform.GetChild(1).GetChild(2).GetChild(4).localPosition = new Vector3((float)enemyNewHP / (float)enemy.maxHp * 3.155f - 1.64f, 0.3615f, 0);
             transform.GetChild(1).GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = enemyNewHP.ToString();
-            Debug.Log("waa2");
             transform.GetChild(1).GetChild(2).GetChild(1).GetComponent<Slider>().value = enemyNewHP / (float)enemy.maxHp;
-            Debug.Log("waa3 " + enemyNewHP / (float)enemy.maxHp);
-
-            //transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetMaxHealth(enemy.maxHp);
-            //transform.GetChild(1).GetChild(2).GetComponent<heathBarScript>().SetHealth(enemy.hp);
-            //transform.GetChild(1).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = enemyNewHP.ToString();
-            //transform.GetChild(1).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = enemy.hp.ToString();
-            //transform.GetChild(1).GetChild(2).GetChild(3).localPosition = new Vector3((float)enemyNewHP / (float)enemy.maxHp * 3.155f - 1.64f, 0.3615f, 0);
 
             transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = enemy.hp.ToString();
             transform.GetChild(1).GetChild(8).GetComponent<TextMeshProUGUI>().text = "--";
@@ -319,11 +322,12 @@ public class forecastScript : MonoBehaviour
 
         
             Color rosso = new Color32(204, 99, 99, 255);
-            transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
+            transform.GetChild(0).GetChild(2).GetChild(1).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
+            transform.GetChild(1).GetChild(2).GetChild(1).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
 
             if (playerNewHP <= 0) transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120 - transparency) / 100);
             if (enemyNewHP <= 0) transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, rosso, (120 - transparency) / 100);
-            transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.white, rosso, transparency / 100);
+            
         }
         
         
