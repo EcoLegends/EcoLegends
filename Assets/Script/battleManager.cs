@@ -369,6 +369,9 @@ public class battleManager : MonoBehaviour
                 go.transform.SetParent(temp.transform, false);
 
             }
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
+            yield return new WaitForSeconds(0.5f);
 
             AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
 
@@ -523,10 +526,10 @@ public class battleManager : MonoBehaviour
             transform.localScale = Vector3.one * Camera.main.orthographicSize / 5;
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, (Camera.main.orthographicSize * 1.76f - 3.3f), mapDimX - (Camera.main.orthographicSize * 1.76f - 3.3f) - 1), Mathf.Clamp(transform.position.y, (Camera.main.orthographicSize * 0.98f - 3.3f), mapDimY - (Camera.main.orthographicSize * 0.98f - 3.3f) - 1), transform.position.z);
 
-            
-
-            if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true)
+                        
+            if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true )
             {
+
                 GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
                 phase = "animation";
                 animationText = "player";
@@ -553,8 +556,9 @@ public class battleManager : MonoBehaviour
                 }
 
             }
-            else if(unmovedEnemies.Count > 0 && canMoveEnemy == true)
+            else if(unmovedEnemies.Count > 0 && canMoveEnemy == true && Time.time > GameObject.Find("LevelLoader").GetComponent<LevelLoad>().time && GameObject.Find("LevelLoader").GetComponent<LevelLoad>().time != 0)
             {
+                
                 canMoveEnemy = false;
                 unmovedEnemies[0].GetComponent<enemyScript>().Move();
                 unmovedEnemies.RemoveAt(0);

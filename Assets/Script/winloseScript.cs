@@ -81,6 +81,8 @@ public class winloseScript : MonoBehaviour
             }
         }
 
+        GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
+        yield return new WaitForSeconds(1);
         AsyncOperation async2 = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
         

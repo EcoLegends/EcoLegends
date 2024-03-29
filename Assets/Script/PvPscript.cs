@@ -21,7 +21,6 @@ public class PvPscript : MonoBehaviour
 
     public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn, bool cura)
     {
-        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
         StartCoroutine(iniziaPvP(e, p, output, spritePlayer, spriteEnemy, playerParent, enemyParent,activeScene, temp, initial_turn, cura));
 
     }
@@ -220,7 +219,7 @@ public class PvPscript : MonoBehaviour
 
             int distance = (int)Mathf.Abs(player.x - enemy.x) + (int)Mathf.Abs(player.y - enemy.y);
 
-            if(temp.transform.GetChild(3).GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus > 0 && player.nome=="Granius")
+            if(temp.transform.GetChild(4).GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus > 0 && player.nome=="Granius")
             {
                 GameObject skill = Instantiate(Resources.Load<GameObject>("Skill"));
                 skill.GetComponent<skillGUIScript>().Setup("Istinto Selvaggio");
@@ -845,11 +844,14 @@ public class PvPscript : MonoBehaviour
                 if (battleManager.enemies.Contains(e))
                     battleManager.enemies.Remove(e);
                 enemy.cancInfo();
+                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
+                yield return new WaitForSeconds(0.5f);
                 temp.SetActive(true);
                 temp.transform.DetachChildren();
                 Destroy(temp);
                 Destroy(e);
                 yield return new WaitForEndOfFrame();
+                
                 SceneManager.UnloadSceneAsync(2);
                 SceneManager.SetActiveScene(activeScene);
 
@@ -857,6 +859,7 @@ public class PvPscript : MonoBehaviour
                 player.endPvp();
 
                 Debug.Log("fine");
+                
                 yield break;
             }
 
@@ -870,15 +873,20 @@ public class PvPscript : MonoBehaviour
                     battleManager.units.Remove(p);
                 if (battleManager.unmovedUnits.Contains(p))
                     battleManager.unmovedUnits.Remove(p);
+
+                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
+                yield return new WaitForSeconds(0.5f);
                 Destroy(temp);
                 yield return new WaitForEndOfFrame();
                 Destroy(p);
+                
                 SceneManager.UnloadSceneAsync(2);
                 SceneManager.SetActiveScene(activeScene);
 
                 
                 Destroy(p);
                 Debug.Log("fine");
+                
                 yield break;
             }
         }
@@ -908,7 +916,7 @@ public class PvPscript : MonoBehaviour
             AnimationClip firstClip = clipInfos[0].clip;
             float duration = firstClip.length + Time.time;
             float half = firstClip.length / 2 + Time.time;
-            bool enemyMissStarted = false;
+            
             Debug.Log(firstClip.length);
 
             while (Time.time < duration)
@@ -1016,12 +1024,12 @@ public class PvPscript : MonoBehaviour
 
         }
 
-        
+        GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
+        yield return new WaitForSeconds(0.5f);
 
         temp.SetActive(true);
         temp.transform.DetachChildren();
         Destroy(temp);
-
         SceneManager.UnloadSceneAsync(2);
         SceneManager.SetActiveScene(activeScene);
 

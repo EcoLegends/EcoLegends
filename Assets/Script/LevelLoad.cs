@@ -6,6 +6,7 @@ public class LevelLoad : MonoBehaviour
 {
     public Animator transition; 
     public bool change = false;
+    public float time;
     void Update()
     {
         // if(1>2){
@@ -13,16 +14,17 @@ public class LevelLoad : MonoBehaviour
         // }
     }
 
-    public void LoadNextLevel(){
+    public void LoadNextLevel(int speed){
 
-        StartCoroutine(Load());
-    }
-    public IEnumerator Load(){
-        
-        transition.SetTrigger("Start");
+        transition.speed = speed;
 
-        yield return new WaitForSeconds(1f);
-
+        transition.Play("Crossfade_End");
+        time = 0;
     }
 
+    private void OnEnable()
+    {
+        transition.Play("Crossfade_start");
+        time = Time.time + 0.5f;
+    }
 }

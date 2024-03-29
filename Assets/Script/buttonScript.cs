@@ -16,14 +16,15 @@ public class buttonScript : MonoBehaviour
 {
     public int button;
 
-    public void inizia(AsyncOperation async)
-    {
-
-        StartCoroutine(asin(async));
-        
-    }
+  
     
-    public IEnumerator asin(AsyncOperation async){
+    public IEnumerator asin(string scene){
+
+        GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
+        yield return new WaitForSeconds(1);
+
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+
         while (!async.isDone)     
         {
 
@@ -33,7 +34,8 @@ public class buttonScript : MonoBehaviour
     }
     public void OnClick()
     {
-        foreach( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){       //restart
+        GameObject.Find("Music").GetComponent<musicScript>().Rimuovi();
+        foreach ( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){       //restart
 
             if(e==this.gameObject){
 
@@ -42,9 +44,9 @@ public class buttonScript : MonoBehaviour
                 writer.WriteLine("1");
                 writer.Close();
                 
-                AsyncOperation async = SceneManager.LoadSceneAsync( "Menu");
+                
 
-                asin(async);
+                StartCoroutine(asin("Menu"));
             }
 
         }
@@ -58,10 +60,8 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
                 writer.Close();
-                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().change=true;
-                AsyncOperation async = SceneManager.LoadSceneAsync( "Menu");
-
-                asin(async);
+                
+                StartCoroutine(asin("MainScene"));
             }
         }
 
@@ -74,12 +74,10 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("2");
                 writer.Close();
-                
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
 
-                asin(async);
+                StartCoroutine(asin("MainScene"));
 
-                
+
             }
         }
 
@@ -92,10 +90,8 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("3");
                 writer.Close();
-                
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
 
-                asin(async);
+                StartCoroutine(asin("MainScene")); 
 
                 
             }
@@ -110,12 +106,9 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("4");
                 writer.Close();
-                
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+                StartCoroutine(asin("MainScene"));
 
-                asin(async);
 
-                
             }
         }
 
@@ -128,12 +121,9 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("5");
                 writer.Close();
-                
-                AsyncOperation async = SceneManager.LoadSceneAsync( "MainScene");
+                StartCoroutine(asin("MainScene"));
 
-                asin(async);
 
-                
             }
         }
     }
