@@ -507,10 +507,10 @@ public class battleManager : MonoBehaviour
 
 }
 
-    
 
-    
 
+
+    GameObject glowtile = null;
     void Update()
     {
         if (!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) && phaseCanvas!=null) { 
@@ -529,7 +529,7 @@ public class battleManager : MonoBehaviour
                         
             if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true )
             {
-
+                if (glowtile != null) Destroy(glowtile);
                 GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
                 phase = "animation";
                 animationText = "player";
@@ -558,7 +558,10 @@ public class battleManager : MonoBehaviour
             }
             else if(unmovedEnemies.Count > 0 && canMoveEnemy == true && Time.time > GameObject.Find("LevelLoader").GetComponent<LevelLoad>().time && GameObject.Find("LevelLoader").GetComponent<LevelLoad>().time != 0)
             {
-                
+                if (glowtile != null) Destroy(glowtile);
+                glowtile = Instantiate(Resources.Load<GameObject>("glowTile"));
+                glowtile.transform.parent = unmovedEnemies[0].transform;
+                glowtile.transform.localPosition = new Vector3(0, 0, -10);
                 canMoveEnemy = false;
                 unmovedEnemies[0].GetComponent<enemyScript>().Move();
                 unmovedEnemies.RemoveAt(0);
