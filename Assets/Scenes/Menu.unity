@@ -2707,6 +2707,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7928175015035009740, guid: 3f60d955d2bf2774492b880df7fddfee, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8010933359090418509, guid: 3f60d955d2bf2774492b880df7fddfee, type: 3}
       propertyPath: m_Name
       value: LevelLoader

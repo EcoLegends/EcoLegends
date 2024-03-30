@@ -28,6 +28,6 @@ public class PlayerTileScript : MonoBehaviour
         }
 
         transparency += inc;
-        GetComponent<Renderer>().material.SetColor("_Color",new Color(1,1,1,transparency/100)); //cambia trasparenza
+        GetComponent<SpriteRenderer>().color = new Color(1,1,1,transparency/100); //cambia trasparenza
     }
 }

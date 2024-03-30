@@ -96,7 +96,8 @@ public class musicScript : MonoBehaviour
         }
 
         audioSource.Stop();
+        audioSource.volume = startVolume;
 
-        
+
     }
 }

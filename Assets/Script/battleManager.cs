@@ -10,6 +10,9 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using Dev.ComradeVanti.WaitForAnim;
 using System.Text.RegularExpressions;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using TMPro;
+using UnityEngine.UI;
 
 public class battleManager : MonoBehaviour
 {
@@ -312,7 +315,119 @@ public class battleManager : MonoBehaviour
         return array;
     }
 
+    public void WinCondition(Vector3 newpos, string txt, bool bosses)
+    {
+        stop = true;
+        StartCoroutine(winConditionAnim(newpos, txt, bosses));
+    }
 
+    IEnumerator winConditionAnim(Vector3 newpos, string txt, bool bosses)
+    {
+
+        yield return new WaitForSeconds(0.5f);
+
+
+        GameObject musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
+        
+        musicPlayer.GetComponent<musicScript>().Stop();
+        Vector3 currentpos = transform.position;
+        List<GameObject> glowtiles = new List<GameObject>();
+        if (newpos != Vector3.zero)
+        {
+            
+
+            for(float i = 0; i < 100; i++)
+            {
+                transform.position = Vector3.Lerp(currentpos,newpos,i/100);
+                yield return new WaitForEndOfFrame();
+            }
+            
+            if (bosses)
+            {
+                
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Ding");
+                foreach(GameObject e in enemies)
+                {
+                    if(e.GetComponent<enemyScript>().boss)
+                    {
+                        GameObject glowtile = Instantiate(Resources.Load<GameObject>("glowTile 1"));
+                        glowtile.transform.parent = e.transform;
+                        glowtile.transform.localPosition = new Vector3(0, 0, -10);
+                        
+                        glowtiles.Add(glowtile);
+                    }
+                }
+                yield return new WaitForSeconds(3);
+            }
+        }
+        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Battle Condition");
+
+        GameObject winCond = Instantiate(Resources.Load<GameObject>("WinConditions"),transform);
+        winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = txt;
+        for (float i = 0; i < 100; i++)
+        {
+            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 100 * 0.7f);
+            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            yield return new WaitForEndOfFrame();
+        }
+            
+
+        yield return new WaitForSeconds(3);
+
+        for (float i = 100; i >= 0; i--)
+        {
+            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 100 * 0.7f);
+            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+
+            foreach(GameObject g in glowtiles) g.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (GameObject g in glowtiles) Destroy(g);
+        Destroy(winCond);
+        stop = false;
+        
+        if (newpos != Vector3.zero)
+        {
+            for (float i = 0; i < 100; i++)
+            {
+                transform.position = Vector3.Lerp(newpos, currentpos, i / 100);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        musicPlayer.GetComponent<musicScript>().ChangeMusic( mapScript.music);
+        
+
+        
+
+        switch (mapScript.mapN)
+        {
+            case 1: GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial0"), Camera.main.gameObject.transform); break;
+            case 4: GameObject tutorial2 = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial30"), Camera.main.gameObject.transform); break;
+        }
+
+        while(!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0))
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
+        phase = "animation";
+        animationText = "player";
+        animationTime = Time.time + 3;
+        phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
+        stop = false;
+        
+    }
 
     public void UpdateEnemyMov()
     {
@@ -478,13 +593,8 @@ public class battleManager : MonoBehaviour
 
     void Start()
     {
-        phase = "animation";
-        animationText = "player";
-        animationTime = Time.time + 3;
-
-        phaseCanvas = (GameObject)Instantiate(Resources.Load("playerPhaseCanvas", typeof(GameObject)), this.transform);
-
-        stop = false;
+        
+        stop = true;
         units = new List<GameObject>();
         unmovedUnits = new List<GameObject>();
         enemies = new List<GameObject>();
@@ -513,7 +623,8 @@ public class battleManager : MonoBehaviour
     GameObject glowtile = null;
     void Update()
     {
-        if (!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) && phaseCanvas!=null) { 
+        if (!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) && phaseCanvas!=null) {
+            
             animationTime = Time.time + 3;
             phaseCanvas.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             phaseCanvas.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);

@@ -12,7 +12,7 @@ public class mapScript : MonoBehaviour
     public static bool finitoSpawn = false;
 
 
-    public string music = "Preparations Theme";
+    public static string music = "Preparations Theme";
 
     public GameObject[,] mapTiles = new GameObject[dimY, dimX];
     public static int mapN = 1;
@@ -33,7 +33,7 @@ public class mapScript : MonoBehaviour
         r.Close();
         mapN = mapNum;
 
-        string[] musicArr = { "The Shackled Wolves", "Salvation And Loss", "The Apex of The World", "Trial of Heroes" };
+        string[] musicArr = { "The Shackled Wolves", "Salvation And Loss", "The Apex of The World", "Trial of Heroes" , "Distorted Flash of Light"};
         music = musicArr[mapNum-1];
 
         Camera.main.gameObject.transform.position = new Vector3(13, 4.5f, -10);
@@ -49,8 +49,7 @@ public class mapScript : MonoBehaviour
         battleManager.mapDimX = dimY;
         battleManager.mapDimY = dimX;
 
-        Object musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
-        musicPlayer.GetComponent<musicScript>().music = music;
+        
         string path = Application.streamingAssetsPath+"/dati.txt";
         switch (mapNum)
         {
@@ -81,7 +80,7 @@ public class mapScript : MonoBehaviour
                         writer.WriteLine("Sear,Sear,1,0,4,1,2,3,3,90,5,1,2,true,22,6,6,6,7,6,4,7,45,30,65,45,45,35,25,45,false");
                         writer.Close();
                     }
-                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial0"), Camera.main.gameObject.transform);
+                    
 
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
@@ -112,6 +111,9 @@ public class mapScript : MonoBehaviour
                     new_enemy7.GetComponent<enemyScript>().Setup(20, 13, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 18, 3, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy8.GetComponent<enemyScript>().Setup(19, 15, "???", "terra1", 1, 3, "near", 1, 1, 5, 5, 90, 0, 3, 0, false, 20, 6, 4, 5, 9, 4, 5, 1);
+
+                    GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(Vector3.zero,"Sconfiggi tutti i nemici",false);
+
                     break;
                 }
             case 2:
@@ -170,6 +172,7 @@ public class mapScript : MonoBehaviour
                     new_enemy9.GetComponent<enemyScript>().Setup(10, 13, "Granius?", "Granius", 3, 3, "near", 1, 2, 6, 6, 90, 0, 3, 4, false, 25, 7, 3, 7, 10, 7, 5, 2, "Inconsistant One");
                     GameObject new_enemy10 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy10.GetComponent<enemyScript>().Setup(15, 13, "Thera?", "Thera", 3, 3, "near", 1, 1, 5, 5, 70, 0, 3, 7, false, 29, 10, 5, 5, 8, 6, 6, 3, "Inconsistant One");
+                    GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(new Vector3(13, 10.39f, -10), "Salva Granius e Thera", true);
                     break;
                 }
 
@@ -238,6 +241,7 @@ public class mapScript : MonoBehaviour
                     new_enemy10.GetComponent<enemyScript>().Setup(11, 14, "Acquira?", "Acquira_evil", 4, 3, "near", 1, 1, 6, 6, 90, 0, 2, 6, false, 30, 12, 5, 5, 8, 6, 6, 3, "The Ashen Demon");
                     GameObject new_enemy11 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);                                 //linhardt stats
                     new_enemy11.GetComponent<enemyScript>().Setup(15, 14, "Hydris?", "Hydris_evil", 4, 3, "near", 1, 2, 5, 5, 90, 0, 2, 1, true, 26, 5, 10, 6, 7, 7, 5, 9, "The Ashen Demon");
+                    GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(new Vector3(13.20513f,10.49f,-10), "Sconfiggi Acquira e Hydris", true);
                     break;
                 }
             case 4:
@@ -263,7 +267,7 @@ public class mapScript : MonoBehaviour
                                                         {"Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Roccia","Ciottoli","Ciottoli","Ciottoli"},
                                                         {"Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli","Ciottoli"} };
 
-                    GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial30"), Camera.main.gameObject.transform);
+                    
 
                     StreamReader reader = new StreamReader(path);
                     string[] nova = reader.ReadLine().Split(",");
@@ -339,7 +343,145 @@ public class mapScript : MonoBehaviour
                     new_enemy17.GetComponent<enemyScript>().Setup(27, 5, "???", "volante2", 4, 3, "move", 1, 2, 3, 3, 90, 0, 4, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);
                     GameObject new_enemy18 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
                     new_enemy18.GetComponent<enemyScript>().Setup(27, 1, "???", "volante1", 4, 3, "move", 1, 1, 5, 5, 90, 0, 4, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(Vector3.zero, "Sconfiggi tutti i nemici", false);
+                    break;
+                }
+            case 5:
+                {
 
+                    //        1                      3                        5                       7                      9                      11                       13                      15                     17                      19                       21                      23                      25                      27                     29 
+                    mapArray = new string[dimX, dimY]{  {"Costruzione","Costruzione","Costruzione","Erba","Fuoco","Fuoco","Erba","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Acqua","Acqua","Acqua"},   //           //layout mappa
+                                                        {"Costruzione","Costruzione","Costruzione","Erba","Fuoco","Fuoco","Erba","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua"}, //
+                                                        {"Costruzione","Costruzione","Costruzione","Erba","Erba","Erba","Erba","Erba","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua","Acqua"}, //
+                                                        {"Costruzione","Costruzione","Costruzione","Erba","Erba","Erba","Erba","Erba","Costruzione","Costruzione","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Costruzione","Costruzione","Costruzione","Costruzione","Erba","Costruzione","Costruzione","Pavimento","Pavimento","Costruzione","Erba","Erba","Erba"},//
+                                                        {"Costruzione","Costruzione","Costruzione","Erba","Erba","Erba","Erba","Costruzione","Costruzione","Costruzione","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Costruzione","Costruzione","Erba","Costruzione","Erba","Costruzione","Costruzione","Pavimento","Pavimento","Costruzione","Pavimento","Erba","Erba"},//
+                                                        {"Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Fuoco","Fuoco","Costruzione","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Costruzione","Erba","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba"},//
+                                                        {"Erba","Pavimento","Erba","Erba","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Costruzione","Erba"},//
+                                                        {"Erba","Pavimento","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Costruzione","Costruzione","Costruzione","Costruzione","Pavimento","Erba","Costruzione"},//
+                                                        {"Erba","Pavimento","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba"},//
+                                                        {"Erba","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Erba","Erba","Erba"},//
+                                                        {"Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Erba","Erba","Erba"},//
+                                                        {"Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Fuoco","Fuoco","Erba","Erba"},
+                                                        {"Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Fuoco","Fuoco","Erba","Erba"},
+                                                        {"Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Fuoco","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Erba","Erba","Costruzione"},
+                                                        {"Costruzione","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Costruzione","Costruzione","Fuoco","Costruzione","Costruzione","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Erba","Erba","Costruzione"},
+                                                        {"Costruzione","Costruzione","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Fuoco","Fuoco","Pavimento","Pavimento","Pavimento","Pavimento","Pavimento","Erba","Erba","Erba","Erba","Erba","Costruzione"} };
+
+                    GameObject.Find("Main Camera").transform.localPosition = new Vector3(12.73333f, 5.988889f, -10);
+                    GameObject.Find("Main Camera").transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize = 6.5f;
+
+                    StreamReader reader = new StreamReader(path);
+                    string[] nova = reader.ReadLine().Split(",");
+                    string[] sear = reader.ReadLine().Split(",");
+                    string[] granius = reader.ReadLine().Split(",");
+                    string[] thera = reader.ReadLine().Split(",");
+                    string[] acquira = reader.ReadLine().Split(",");
+                    string[] hydris = reader.ReadLine().Split(",");
+                    string[] aeria = reader.ReadLine().Split(",");
+                    string[] skye = reader.ReadLine().Split(",");
+                    reader.Close();
+
+                    Object player = Resources.Load("player", typeof(GameObject));
+                    GameObject new_player1 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player1.GetComponent<playerScript>().Setup(3, 1, nova[0], nova[1], int.Parse(nova[2]), int.Parse(nova[3]), int.Parse(nova[4]), int.Parse(nova[5]), int.Parse(nova[6]), int.Parse(nova[7]), int.Parse(nova[8]), int.Parse(nova[9]), int.Parse(nova[10]), int.Parse(nova[11]), int.Parse(nova[12]), bool.Parse(nova[13]), int.Parse(nova[14]), int.Parse(nova[15]), int.Parse(nova[16]), int.Parse(nova[17]), int.Parse(nova[18]), int.Parse(nova[19]), int.Parse(nova[20]), int.Parse(nova[21]), int.Parse(nova[22]), int.Parse(nova[23]), int.Parse(nova[24]), int.Parse(nova[25]), int.Parse(nova[26]), int.Parse(nova[27]), int.Parse(nova[28]), int.Parse(nova[29]), bool.Parse(nova[30]));
+
+                    GameObject new_player2 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player2.GetComponent<playerScript>().Setup(5, 1, sear[0], sear[1], int.Parse(sear[2]), int.Parse(sear[3]), int.Parse(sear[4]), int.Parse(sear[5]), int.Parse(sear[6]), int.Parse(sear[7]), int.Parse(sear[8]), int.Parse(sear[9]), int.Parse(sear[10]), int.Parse(sear[11]), int.Parse(sear[12]), bool.Parse(sear[13]), int.Parse(sear[14]), int.Parse(sear[15]), int.Parse(sear[16]), int.Parse(sear[17]), int.Parse(sear[18]), int.Parse(sear[19]), int.Parse(sear[20]), int.Parse(sear[21]), int.Parse(sear[22]), int.Parse(sear[23]), int.Parse(sear[24]), int.Parse(sear[25]), int.Parse(sear[26]), int.Parse(sear[27]), int.Parse(sear[28]), int.Parse(sear[29]), bool.Parse(sear[30]));
+
+                    GameObject new_player3 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player3.GetComponent<playerScript>().Setup(20, 0, granius[0], granius[1], int.Parse(granius[2]), int.Parse(granius[3]), int.Parse(granius[4]), int.Parse(granius[5]), int.Parse(granius[6]), int.Parse(granius[7]), int.Parse(granius[8]), int.Parse(granius[9]), int.Parse(granius[10]), int.Parse(granius[11]), int.Parse(granius[12]), bool.Parse(granius[13]), int.Parse(granius[14]), int.Parse(granius[15]), int.Parse(granius[16]), int.Parse(granius[17]), int.Parse(granius[18]), int.Parse(granius[19]), int.Parse(granius[20]), int.Parse(granius[21]), int.Parse(granius[22]), int.Parse(granius[23]), int.Parse(granius[24]), int.Parse(granius[25]), int.Parse(granius[26]), int.Parse(granius[27]), int.Parse(granius[28]), int.Parse(granius[29]), bool.Parse(granius[30]));
+
+                    GameObject new_player4 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player4.GetComponent<playerScript>().Setup(22, 0, thera[0], thera[1], int.Parse(thera[2]), int.Parse(thera[3]), int.Parse(thera[4]), int.Parse(thera[5]), int.Parse(thera[6]), int.Parse(thera[7]), int.Parse(thera[8]), int.Parse(thera[9]), int.Parse(thera[10]), int.Parse(thera[11]), int.Parse(thera[12]), bool.Parse(thera[13]), int.Parse(thera[14]), int.Parse(thera[15]), int.Parse(thera[16]), int.Parse(thera[17]), int.Parse(thera[18]), int.Parse(thera[19]), int.Parse(thera[20]), int.Parse(thera[21]), int.Parse(thera[22]), int.Parse(thera[23]), int.Parse(thera[24]), int.Parse(thera[25]), int.Parse(thera[26]), int.Parse(thera[27]), int.Parse(thera[28]), int.Parse(thera[29]), bool.Parse(thera[30]));
+
+                    GameObject new_player5 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player5.GetComponent<playerScript>().Setup(19, 1, acquira[0], acquira[1], int.Parse(acquira[2]), int.Parse(acquira[3]), int.Parse(acquira[4]), int.Parse(acquira[5]), int.Parse(acquira[6]), int.Parse(acquira[7]), int.Parse(acquira[8]), int.Parse(acquira[9]), int.Parse(acquira[10]), int.Parse(acquira[11]), int.Parse(acquira[12]), bool.Parse(acquira[13]), int.Parse(acquira[14]), int.Parse(acquira[15]), int.Parse(acquira[16]), int.Parse(acquira[17]), int.Parse(acquira[18]), int.Parse(acquira[19]), int.Parse(acquira[20]), int.Parse(acquira[21]), int.Parse(acquira[22]), int.Parse(acquira[23]), int.Parse(acquira[24]), int.Parse(acquira[25]), int.Parse(acquira[26]), int.Parse(acquira[27]), int.Parse(acquira[28]), int.Parse(acquira[29]), bool.Parse(acquira[30]));
+
+                    GameObject new_player6 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player6.GetComponent<playerScript>().Setup(21, 1, hydris[0], hydris[1], int.Parse(hydris[2]), int.Parse(hydris[3]), int.Parse(hydris[4]), int.Parse(hydris[5]), int.Parse(hydris[6]), int.Parse(hydris[7]), int.Parse(hydris[8]), int.Parse(hydris[9]), int.Parse(hydris[10]), int.Parse(hydris[11]), int.Parse(hydris[12]), bool.Parse(hydris[13]), int.Parse(hydris[14]), int.Parse(hydris[15]), int.Parse(hydris[16]), int.Parse(hydris[17]), int.Parse(hydris[18]), int.Parse(hydris[19]), int.Parse(hydris[20]), int.Parse(hydris[21]), int.Parse(hydris[22]), int.Parse(hydris[23]), int.Parse(hydris[24]), int.Parse(hydris[25]), int.Parse(hydris[26]), int.Parse(hydris[27]), int.Parse(hydris[28]), int.Parse(hydris[29]), bool.Parse(hydris[30]));
+
+                    GameObject new_player7 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player7.GetComponent<playerScript>().Setup(2, 0, aeria[0], aeria[1], int.Parse(aeria[2]), int.Parse(aeria[3]), int.Parse(aeria[4]), int.Parse(aeria[5]), int.Parse(aeria[6]), int.Parse(aeria[7]), int.Parse(aeria[8]), int.Parse(aeria[9]), int.Parse(aeria[10]), int.Parse(aeria[11]), int.Parse(aeria[12]), bool.Parse(aeria[13]), int.Parse(aeria[14]), int.Parse(aeria[15]), int.Parse(aeria[16]), int.Parse(aeria[17]), int.Parse(aeria[18]), int.Parse(aeria[19]), int.Parse(aeria[20]), int.Parse(aeria[21]), int.Parse(aeria[22]), int.Parse(aeria[23]), int.Parse(aeria[24]), int.Parse(aeria[25]), int.Parse(aeria[26]), int.Parse(aeria[27]), int.Parse(aeria[28]), int.Parse(aeria[29]), bool.Parse(aeria[30]));
+
+                    GameObject new_player8 = (GameObject)Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_player8.GetComponent<playerScript>().Setup(4, 0, skye[0], skye[1], int.Parse(skye[2]), int.Parse(skye[3]), int.Parse(skye[4]), int.Parse(skye[5]), int.Parse(skye[6]), int.Parse(skye[7]), int.Parse(skye[8]), int.Parse(skye[9]), int.Parse(skye[10]), int.Parse(skye[11]), int.Parse(skye[12]), bool.Parse(skye[13]), int.Parse(skye[14]), int.Parse(skye[15]), int.Parse(skye[16]), int.Parse(skye[17]), int.Parse(skye[18]), int.Parse(skye[19]), int.Parse(skye[20]), int.Parse(skye[21]), int.Parse(skye[22]), int.Parse(skye[23]), int.Parse(skye[24]), int.Parse(skye[25]), int.Parse(skye[26]), int.Parse(skye[27]), int.Parse(skye[28]), int.Parse(skye[29]), bool.Parse(skye[30]));
+
+                    Object enemy = Resources.Load("enemy", typeof(GameObject));
+                                                                                                                                                                            //"1= Fuoco\n2=Acqua\n3=Terra\n4=Aria"
+                    GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy1.GetComponent<enemyScript>().Setup(3, 4, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);                                    
+                    new_enemy2.GetComponent<enemyScript>().Setup(5, 5, "???", "fuoco2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 1, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy3.GetComponent<enemyScript>().Setup(6, 4, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+                    GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy4.GetComponent<enemyScript>().Setup(18, 4, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy5.GetComponent<enemyScript>().Setup(19, 5, "???", "fuoco2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 1, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy6.GetComponent<enemyScript>().Setup(21, 4, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+
+                    GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy7.GetComponent<enemyScript>().Setup(9, 0, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy8.GetComponent<enemyScript>().Setup(10, 2, "???", "fuoco2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 1, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy9 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy9.GetComponent<enemyScript>().Setup(14, 2, "???", "fuoco2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 1, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy10 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy10.GetComponent<enemyScript>().Setup(15, 0, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+
+                    GameObject new_enemy11 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy11.GetComponent<enemyScript>().Setup(4, 8, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy12 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy12.GetComponent<enemyScript>().Setup(7, 7, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy13 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy13.GetComponent<enemyScript>().Setup(17, 7, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy14 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy14.GetComponent<enemyScript>().Setup(20, 8, "???", "fuoco1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+
+                    GameObject new_enemy15 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy15.GetComponent<enemyScript>().Setup(1, 9, "???", "terra1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy16 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy16.GetComponent<enemyScript>().Setup(4, 11, "???", "terra2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy17 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy17.GetComponent<enemyScript>().Setup(6, 10, "???", "terra2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 3, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy18 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy18.GetComponent<enemyScript>().Setup(5, 13, "???", "terra1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 3, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+                    GameObject new_enemy19 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy19.GetComponent<enemyScript>().Setup(21, 10, "???", "acqua1", 5, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy20 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy20.GetComponent<enemyScript>().Setup(23, 12, "???", "acqua2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy21 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy21.GetComponent<enemyScript>().Setup(26, 6, "???", "acqua2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy22 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy22.GetComponent<enemyScript>().Setup(28, 10, "???", "acqua2", 5, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+
+                    GameObject new_enemy23 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy23.GetComponent<enemyScript>().Setup(12, 6, "???", "fuoco1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy24 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy24.GetComponent<enemyScript>().Setup(14, 6, "???", "fuoco1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy25 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy25.GetComponent<enemyScript>().Setup(11, 8, "???", "fuoco1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy26 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy26.GetComponent<enemyScript>().Setup(15, 8, "???", "fuoco1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 1, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+                    GameObject new_enemy27 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy27.GetComponent<enemyScript>().Setup(10, 9, "???", "volante1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 4, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+                    GameObject new_enemy28 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy28.GetComponent<enemyScript>().Setup(13, 9, "???", "volante2", 5, 3, "near", 1, 2, 3, 3, 90, 0, 4, 2, true, 22, 4, 6, 5, 9, 4, 3, 5);//mago
+                    GameObject new_enemy29 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy29.GetComponent<enemyScript>().Setup(16, 9, "???", "volante1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 4, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
+
+                    GameObject new_enemy30 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    new_enemy30.GetComponent<enemyScript>().Setup(13, 12, "Morgrath", "Edelgard", 1, 2, "near", 1, 2, 5, 5, 90, 0, 4, 0, false, 60, 6, 4, 5, 9, 4, 5, 3, "Distorted Flash of Light");
+
+                    GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(new Vector3(14.06666f,8.833334f,-10), "Sconfiggi Morgrath", true);
                     break;
                 }
         }

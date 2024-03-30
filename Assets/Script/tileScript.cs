@@ -26,6 +26,8 @@ public class tileScript : MonoBehaviour
         {
             case "Roccia":
             case "Lava":
+            case "Costruzione":
+            case "Fuoco":
                 this.description = "Terreno non traversabile.";
                 this.canBeWalkedOn = false;
                 this.travelCost = 0;
