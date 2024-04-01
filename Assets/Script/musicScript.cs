@@ -10,7 +10,9 @@ public class musicScript : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {                                                     
+    {
+
+        if (music == "Preparations Theme") return;
         AudioClip musicStart = (AudioClip)Resources.Load("Sounds/Music/Intro - "+music);
         GetComponent<AudioSource>().clip = (AudioClip)Resources.Load("Sounds/Music/Loop - " + music);
            

@@ -345,7 +345,7 @@ public class battleManager : MonoBehaviour
             if (bosses)
             {
                 
-                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Ding");
+                
                 foreach(GameObject e in enemies)
                 {
                     if(e.GetComponent<enemyScript>().boss)
@@ -357,6 +357,7 @@ public class battleManager : MonoBehaviour
                         glowtiles.Add(glowtile);
                     }
                 }
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Ding");
                 yield return new WaitForSeconds(3);
             }
         }

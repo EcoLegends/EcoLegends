@@ -60,8 +60,14 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("1");
                 writer.Close();
-                
-                StartCoroutine(asin("MainScene"));
+
+                writer = new StreamWriter(Application.streamingAssetsPath + "/dialogo.txt", false);
+                writer.WriteLine(1);
+                writer.WriteLine(false);
+                writer.Close();
+
+
+                StartCoroutine(asin("DialogueScene"));
             }
         }
 
@@ -75,7 +81,12 @@ public class buttonScript : MonoBehaviour
                 writer.WriteLine("2");
                 writer.Close();
 
-                StartCoroutine(asin("MainScene"));
+                writer = new StreamWriter(Application.streamingAssetsPath + "/dialogo.txt", false);
+                writer.WriteLine(2);
+                writer.WriteLine(false);
+                writer.Close();
+
+                StartCoroutine(asin("DialogueScene"));
 
 
             }
@@ -88,10 +99,16 @@ public class buttonScript : MonoBehaviour
                 string path = Application.streamingAssetsPath+"/mappaScelta.txt";
 
                 StreamWriter writer = new StreamWriter(path, false);
-                writer.WriteLine("3");
+                writer.WriteLine("6");
                 writer.Close();
 
-                StartCoroutine(asin("MainScene")); 
+                writer = new StreamWriter(Application.streamingAssetsPath + "/dialogo.txt", false);
+                writer.WriteLine(6);
+                writer.WriteLine(false);
+                writer.Close();
+
+
+                StartCoroutine(asin("DialogueScene")); 
 
                 
             }
@@ -106,7 +123,13 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("4");
                 writer.Close();
-                StartCoroutine(asin("MainScene"));
+
+                writer = new StreamWriter(Application.streamingAssetsPath + "/dialogo.txt", false);
+                writer.WriteLine(4);
+                writer.WriteLine(false);
+                writer.Close();
+
+                StartCoroutine(asin("DialogueScene"));
 
 
             }
@@ -121,7 +144,13 @@ public class buttonScript : MonoBehaviour
                 StreamWriter writer = new StreamWriter(path, false);
                 writer.WriteLine("5");
                 writer.Close();
-                StartCoroutine(asin("MainScene"));
+
+                writer = new StreamWriter(Application.streamingAssetsPath + "/dialogo.txt", false);
+                writer.WriteLine(5);
+                writer.WriteLine(false);
+                writer.Close();
+
+                StartCoroutine(asin("DialogueScene"));
 
 
             }

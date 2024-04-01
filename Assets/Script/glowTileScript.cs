@@ -6,7 +6,7 @@ public class glowTileScript : MonoBehaviour
 {
    
     float transparency = 4;
-    int inc = 1;
+    float inc = 1;
     int times = 0;
     // Update is called once per frame
     void Update()
@@ -19,7 +19,9 @@ public class glowTileScript : MonoBehaviour
                 times++;
             }
 
-            transparency += inc*1.2f;
+            transparency += inc * 2.1f;
+
+            
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, transparency / 100); //cambia trasparenza
         }
         
