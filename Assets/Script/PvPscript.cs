@@ -900,8 +900,10 @@ public class PvPscript : MonoBehaviour
             GameObject pvpForecast = Instantiate(Resources.Load<GameObject>("pvpForecastCombat"), GameObject.Find("CombatCamera").transform);
             pvpForecast.transform.GetChild(0).GetChild(13).GetChild(2).GetComponent<Image>().color = new Color(0.1607843f, 0.572549f, 0.9607843f);
 
-            pvpForecast.GetComponent<pvpForecastScript>().SetupPlayer(player.hp, player.maxHp, output[0], output[1], output[2], false, true);
-            pvpForecast.GetComponent<pvpForecastScript>().SetupEnemy(player2.hp, player2.maxHp, output[4], output[5], output[6], false, false);
+            pvpForecast.GetComponent<pvpForecastScript>().SetupPlayer(player.hp, player.maxHp, (8 + player.mag / 3), 100, 0, false, true);
+            pvpForecast.GetComponent<pvpForecastScript>().SetupEnemy(player2.hp, player2.maxHp, 0, 0, 0, false, false);
+
+            pvpForecast.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Rec";
 
             yield return new WaitForSeconds(1);
             sprite = GameObject.Find("Info Canvas").transform.GetChild(6).gameObject;

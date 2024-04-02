@@ -413,7 +413,7 @@ public class battleManager : MonoBehaviour
         switch (mapScript.mapN)
         {
             case 1: GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial0"), Camera.main.gameObject.transform); break;
-            case 4: GameObject tutorial2 = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial30"), Camera.main.gameObject.transform); break;
+            case 6: GameObject tutorial2 = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial30"), Camera.main.gameObject.transform); break;
         }
 
         while(!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0))
