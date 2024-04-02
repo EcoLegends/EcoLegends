@@ -250,7 +250,7 @@ public class battleManager : MonoBehaviour
             if (enemy.unitEffective == player.unitType)
             {
 
-                enemyAtk = Mathf.FloorToInt(playerAtk * 1.5f);
+                enemyAtk = Mathf.FloorToInt(enemyAtk * 1.5f);
                 enemyHit += 15;
                 playerHit -= 15;
             }
@@ -613,6 +613,9 @@ public class battleManager : MonoBehaviour
         pvpTutorial = 0;
         phaseTutorial = 0;
 
+        phase = "animation";
+        animationText = "player";
+        animationTime = Time.time + 3;
 
         GameObject map = Instantiate(Resources.Load<GameObject>("Mappe/Mappe Prefab/map1"));
 
