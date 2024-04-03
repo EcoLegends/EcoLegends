@@ -147,28 +147,28 @@ public class battleManager : MonoBehaviour
             int enemyProt;
             int enemyCrit;
 
-            Vector2 newPos = new Vector2(player.x, player.y);
+            //Vector2 newPos = new Vector2(player.x, player.y);
 
-            foreach (GameObject t in player.movBlueTiles)
-            {
-                if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
-                {
-                    if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
-                    {
-                        bool check = true;
-                        foreach (GameObject pp in units)
-                        {
-                            if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<playerScript>().y == t.transform.position.y) check = false;
-                        }
-                        if (check)
-                            newPos = new Vector2(t.transform.position.x, t.transform.position.y);
-                    }
-                }
-            }
+            //foreach (GameObject t in player.movBlueTiles)
+            //{
+            //    if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
+            //    {
+            //        if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
+            //        {
+            //            bool check = true;
+            //            foreach (GameObject pp in units)
+            //            {
+            //                if (pp != p && pp.GetComponent<playerScript>().x == t.transform.position.x && pp.GetComponent<playerScript>().y == t.transform.position.y) check = false;
+            //            }
+            //            if (check)
+            //                newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+            //        }
+            //    }
+            //}
 
-            player.x = (int)newPos.x;
+            //player.x = (int)newPos.x;
 
-            player.y = (int)newPos.y;
+            //player.y = (int)newPos.y;
 
             int playerAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[player.x, player.y].GetComponent<tileScript>().avoBonus; 
             int enemyAVOBonus = GameObject.Find("map").GetComponent<mapScript>().mapTiles[enemy.x, enemy.y].GetComponent<tileScript>().avoBonus;
@@ -545,7 +545,9 @@ public class battleManager : MonoBehaviour
                 go.transform.SetParent(temp.transform, false);
 
             }
-
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
+            yield return new WaitForSeconds(0.5f);
             AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
 
             while (!async.isDone)     

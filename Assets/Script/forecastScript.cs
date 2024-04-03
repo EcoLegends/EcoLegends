@@ -13,7 +13,7 @@ public class forecastScript : MonoBehaviour
     int playerNewHP;
     int enemyNewHP;
     bool heal = false;
-    public void Setup(GameObject e, GameObject p, int[] returnList, bool cura)
+    public void Setup(GameObject e, GameObject p, int[] returnList, bool cura, Vector2 newPos)
     {
         if(cura==false)
         {
@@ -44,20 +44,20 @@ public class forecastScript : MonoBehaviour
             List<string> turns = new List<string>();
             turns.Add("player");
 
-            Vector2 newPos = new Vector2(player.x, player.y);
+            //Vector2 newPos = new Vector2(player.x, player.y);
 
 
 
-            foreach (GameObject t in player.movBlueTiles)
-            {
-                if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
-                {
-                    if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
-                    {
-                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
-                    }
-                }
-            }
+            //foreach (GameObject t in player.movBlueTiles)
+            //{
+            //    if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
+            //    {
+            //        if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
+            //        {
+            //            newPos = new Vector2(t.transform.position.x, t.transform.position.y);
+            //        }
+            //    }
+            //}
 
             int distance = (int)Mathf.Abs(newPos.x - enemy.x) + (int)Mathf.Abs(newPos.y - enemy.y);
 
@@ -228,23 +228,7 @@ public class forecastScript : MonoBehaviour
             enemyNewHP = Mathf.Clamp(enemy.hp + (8+player.mag/3),0,enemy.maxHp);
 
 
-            Vector2 newPos = new Vector2(player.x, player.y);
-
-
-
-            foreach (GameObject t in player.movBlueTiles)
-            {
-                if (Mathf.Abs(t.transform.position.x - player.transform.position.x) + Mathf.Abs(t.transform.position.y - player.transform.position.y) < Mathf.Abs(newPos.x - player.transform.position.x) + Mathf.Abs(newPos.y - player.transform.position.y))
-                {
-                    if (Mathf.Abs(t.transform.position.x - enemy.x) + Mathf.Abs(t.transform.position.y - enemy.y) == player.weaponMaxRange)
-                    {
-                        newPos = new Vector2(t.transform.position.x, t.transform.position.y);
-                    }
-                }
-            }
-
-            int distance = (int)Mathf.Abs(newPos.x - enemy.x) + (int)Mathf.Abs(newPos.y - enemy.y);
-
+           
             
             string playerDmgVisual = ((enemy.hp - enemyNewHP)*-1).ToString();
 

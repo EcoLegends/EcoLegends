@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -83,6 +84,14 @@ public class playerScript : MonoBehaviour
     private List<Vector2> mov_tiles_coords = new List<Vector2>();
     public List<GameObject> movBlueTiles = new List<GameObject>();
     private List<GameObject> attackRedTiles = new List<GameObject>();
+
+
+
+    List<Vector2> mousepos = new List<Vector2>();
+
+
+
+
     public void HighlightMov()                                          //spawna i tasselli blu del movimento
     {
         movBlueTiles = new List<GameObject>();
@@ -349,6 +358,14 @@ public class playerScript : MonoBehaviour
     private int counter = 0;
     void Update()
     {
+        if(!mousepos.Contains(new Vector2((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y)))
+        {
+            Debug.Log("Added "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x+ " "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            mousepos.Add(new Vector2((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
+            if (mousepos.Count > 5) mousepos.RemoveAt(0);
+        }
+
+
         if(nome=="Aeria")
         {
             if (hp == maxHp) weaponMaxRange = 3;
@@ -480,15 +497,79 @@ public class playerScript : MonoBehaviour
                             int oldX = x;
                             int oldY = y;
 
+                            List<Vector2> positionsToCheck = new List<Vector2> { new Vector2(target.transform.position.x, target.transform.position.y) };
+                            List<Vector2> positionsToCheckOld = positionsToCheck;
+                            List<GameObject> attackTiles = new List<GameObject>();
+                            GameObject[,] map = GameObject.Find("map").GetComponent<mapScript>().mapTiles;
+                            for (int r = 1; r <= weaponMaxRange; r++)             //tasselli rossi
+                            {
+                                for (int i = 0; i < positionsToCheckOld.Count; i++)
+                                {
+                                    Vector2 v = positionsToCheckOld[i];
+                                    int x = -1;
+                                    int y = 0;
+                                    for (int a = 0; a < 4; a++)
+                                    {
+
+                                        int cx = x + (int)v.x;
+                                        int cy = y + (int)v.y;
+
+                                        int distance = (int)Mathf.Abs(cx - target.transform.position.x) + (int)Mathf.Abs(cy - target.transform.position.y);
+                                        if (distance <= weaponMaxRange && cx >= 0 && cx < battleManager.mapDimX && cy >= 0 && cy < battleManager.mapDimY)
+                                        {
+                                            if (!attackTiles.Contains(map[cx, cy]))
+                                            {
+                                                if (distance == weaponMaxRange && mov_tiles_coords.Contains(new Vector2(cx, cy)))
+                                                {
+                                                    attackTiles.Add(map[cx, cy]);
+                                                }
+
+                                                if (!positionsToCheck.Contains(new Vector2(cx, cy))) positionsToCheck.Add(new Vector2(cx, cy));
+                                            }
+
+                                        }
+
+                                        if (x < 1 && y == 0) x = 1;
+                                        else if (x == 1)
+                                        {
+                                            x = 0;
+                                            y = -1;
+                                        }
+                                        else y = 1;
+
+
+                                    }
+                                }
+                                positionsToCheckOld = positionsToCheck;
+
+                            }
+
+                            Vector2 nearest = mousepos[5 - weaponMaxRange];
+                            Vector2 newpos = new Vector2(0, 0);
+                            foreach (GameObject tile in attackTiles)
+                            {
+                                Vector2 pos = new Vector2(tile.transform.position.x, tile.transform.position.y);
+                                if(Mathf.Abs(pos.x - nearest.x) + (int)Mathf.Abs(pos.y - nearest.y) < Mathf.Abs(newpos.x - nearest.x) + (int)Mathf.Abs(newpos.y - nearest.y))
+                                {
+                                    newpos = pos;
+                                }
+                            }
+
+                            x = (int) newpos.x;
+                            y = (int) newpos.y;
+
 
                             int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player", cura);
-                            newPosTile = (GameObject)Instantiate(Resources.Load("playerTilePrefab", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
+                            newPosTile = (GameObject)Instantiate(Resources.Load("newPosTile", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
                             newPosTile.tag = "Rimuovere";
                             x = oldX;
                             y = oldY;
 
+                            
+
+
                             Debug.Log(cura);
-                            forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura);
+                            forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura, new Vector2(x,y));
 
                             forecastCooldown = Time.time + 0.3f;
 
@@ -720,6 +801,8 @@ public class playerScript : MonoBehaviour
                                 if (e.GetComponent<enemyScript>().x == t.transform.position.x && e.GetComponent<enemyScript>().y == t.transform.position.y)
                                 {
                                     cura = false;
+                                    x = (int) newPosTile.transform.position.x;
+                                    y = (int) newPosTile.transform.position.y;
                                     int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player", cura);     //inizia pvp
                                     Destroy(player_tile);
                                     StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e, this.gameObject, output, "player", cura));
@@ -740,6 +823,8 @@ public class playerScript : MonoBehaviour
                                 if (e.GetComponent<playerScript>().x == t.transform.position.x && e.GetComponent<playerScript>().y == t.transform.position.y)
                                 {
                                     cura = true;
+                                    x = (int)newPosTile.transform.position.x;
+                                    y = (int)newPosTile.transform.position.y;
                                     int[] output = Camera.main.GetComponent<battleManager>().pvp(e, this.gameObject, "player", cura);     //inizia pvp
                                     Destroy(player_tile);
                                     StartCoroutine(Camera.main.GetComponent<battleManager>().CaricaCombat(e, this.gameObject, output, "player", cura));
