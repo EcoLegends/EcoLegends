@@ -336,9 +336,9 @@ public class battleManager : MonoBehaviour
         {
             
 
-            for(float i = 0; i < 100; i++)
+            for(float i = 0; i < 20; i++)
             {
-                transform.position = Vector3.Lerp(currentpos,newpos,i/100);
+                transform.position = Vector3.Lerp(currentpos,newpos,i/20);
                 yield return new WaitForEndOfFrame();
             }
             
@@ -365,43 +365,42 @@ public class battleManager : MonoBehaviour
 
         GameObject winCond = Instantiate(Resources.Load<GameObject>("WinConditions"),transform);
         winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = txt;
-        for (float i = 0; i < 100; i++)
+        for (float i = 0; i < 20; i++)
         {
-            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 100 * 0.7f);
-            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 20 * 0.7f);
+            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
             yield return new WaitForEndOfFrame();
         }
             
 
         yield return new WaitForSeconds(3);
 
-        for (float i = 100; i >= 0; i--)
+        for (float i = 20; i >= 0; i--)
         {
-            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 100 * 0.7f);
-            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
+            winCond.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, i / 20 * 0.7f);
+            winCond.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(3).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(4).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(5).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            winCond.transform.GetChild(6).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
 
-            foreach(GameObject g in glowtiles) g.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+            foreach(GameObject g in glowtiles) g.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 20);
             yield return new WaitForEndOfFrame();
         }
         foreach (GameObject g in glowtiles) Destroy(g);
         Destroy(winCond);
-        stop = false;
-        
+
         if (newpos != Vector3.zero)
         {
-            for (float i = 0; i < 100; i++)
+            for (float i = 0; i < 20; i++)
             {
-                transform.position = Vector3.Lerp(newpos, currentpos, i / 100);
+                transform.position = Vector3.Lerp(newpos, currentpos, i / 20);
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -629,6 +628,9 @@ public class battleManager : MonoBehaviour
     GameObject glowtile = null;
     void Update()
     {
+
+        Debug.Log(units.Count +" unmoved "+unmovedUnits.Count);
+
         if (!(GameObject.FindGameObjectsWithTag("Tutorial").Length == 0) && phaseCanvas!=null) {
             
             animationTime = Time.time + 3;

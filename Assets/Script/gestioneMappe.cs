@@ -8,6 +8,8 @@ public class gestioneMappe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
         if (File.Exists(Application.streamingAssetsPath+"/completedMaps.txt") ==false){ //controlla file mappe completate
 
             string p = Application.streamingAssetsPath+"/completedMaps.txt";

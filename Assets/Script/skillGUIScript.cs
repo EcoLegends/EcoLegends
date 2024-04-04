@@ -24,19 +24,19 @@ public class skillGUIScript : MonoBehaviour
 
     IEnumerator anim()
     {
-        for (float i = 0; i <= 100; i++)
+        for (float i = 0; i <= 20; i++)
         {
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
-            transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 20);
+            transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 20);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(1);
-        for (float i = 100; i >= 0; i--)
+        for (float i = 20; i >= 0; i--)
         {
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 100);
-            transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
-            transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, i / 20);
+            transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 20);
+            transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 20);
             yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);

@@ -360,7 +360,7 @@ public class playerScript : MonoBehaviour
     {
         if(!mousepos.Contains(new Vector2((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y)))
         {
-            Debug.Log("Added "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x+ " "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            //Debug.Log("Added "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x+ " "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
             mousepos.Add(new Vector2((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
             if (mousepos.Count > 3) mousepos.RemoveAt(0);
         }

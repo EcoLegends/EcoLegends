@@ -133,9 +133,9 @@ public class PvPscript : MonoBehaviour
                         
 
                         yield return new WaitForSeconds(1);
-                        for (float i=0; i <= 85; i++)
+                        for (float i=0; i <= 17; i++)
                         {
-                            deez.transform.position = new Vector3(0, i / 100, 0);
+                            deez.transform.position = new Vector3(0, i / 20, 0);
                             yield return new WaitForEndOfFrame();
                         }
                         yield return new WaitForSeconds(0.5f);
@@ -159,18 +159,18 @@ public class PvPscript : MonoBehaviour
                             if (dial.latoSX && !sx)
                             {
                                 sx = true;
-                                for(float i = 0; i <= 100; i++)
+                                for(float i = 0; i <= 20; i++)
                                 {
-                                    deez.transform.GetChild(0).GetChild(0).localScale = new Vector3(9.259258f* (i/100), 5.185184f * (i/100), 9.259258f * (i/100));
+                                    deez.transform.GetChild(0).GetChild(0).localScale = new Vector3(9.259258f* (i/20), 5.185184f * (i/20), 9.259258f * (i/20));
                                     yield return new WaitForEndOfFrame();
                                 }
                             }
                             if (!dial.latoSX && !dx)
                             {
                                 dx = true;
-                                for (float i = 0; i <= 100; i++)
+                                for (float i = 0; i <= 20; i++)
                                 {
-                                    deez.transform.GetChild(0).GetChild(1).localScale = new Vector3(9.259258f * (i / 100), 5.185184f * (i / 100), 9.259258f * (i / 100));
+                                    deez.transform.GetChild(0).GetChild(1).localScale = new Vector3(9.259258f * (i / 20), 5.185184f * (i / 20), 9.259258f * (i / 20));
                                     yield return new WaitForEndOfFrame();
                                 }
                             }
@@ -182,9 +182,9 @@ public class PvPscript : MonoBehaviour
                             }
                             yield return new WaitForSeconds(3);
                         }
-                        for (float i = 85; i >= 0; i--)
+                        for (float i = 17; i >= 0; i--)
                         {
-                            deez.transform.position = new Vector3(0, i / 100, 0);
+                            deez.transform.position = new Vector3(0, i / 20, 0);
                             yield return new WaitForEndOfFrame();
                         }
                         Destroy(deez);
@@ -310,9 +310,9 @@ public class PvPscript : MonoBehaviour
                         
                         if(move == false && player.weaponMaxRange==1){
 
-                            for (float i = 0; i < 100; i++)
+                            for (float i = 0; i < 20; i++)
                             {
-                            playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                            playerParent.transform.position += new Vector3(0.035f*5, 0, 0);
                             yield return new WaitForEndOfFrame();
 
                             }
@@ -388,16 +388,16 @@ public class PvPscript : MonoBehaviour
                         duration = firstClip.length + Time.time;
                         if(GameObject.Find("Info Canvas").transform.GetChild(6).gameObject.activeInHierarchy) GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
 
-                        for (float i = 0; i < 100; i++)
+                        for (float i = 0; i < 20; i++)
                         {
-                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i/2,0,1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position += new Vector3(0, 0.01f*5, 0);
 
-                            GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f, 0);
-                            GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f*5, 0);
+                            GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
 
-                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.position += new Vector3(0, 0.01f * 5, 0);
                             yield return new WaitForEndOfFrame();
 
                         }
@@ -425,9 +425,9 @@ public class PvPscript : MonoBehaviour
 
                         if(move == false && player.weaponMaxRange==1){
 
-                            for (float i = 0; i < 100; i++)
+                            for (float i = 0; i < 20; i++)
                             {
-                            playerParent.transform.position += new Vector3(0.035f, 0, 0);
+                            playerParent.transform.position += new Vector3(0.035f*5, 0, 0);
                             yield return new WaitForEndOfFrame();
 
                             }
@@ -472,10 +472,10 @@ public class PvPscript : MonoBehaviour
                         oldPos = sprite.transform.position;
 
 
-                        for (float i = 0; i < 100; i++)
+                        for (float i = 0; i < 20; i++)
                         {
-                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            sprite.transform.position += new Vector3(0, 0.01f * 5, 0);
                             yield return new WaitForEndOfFrame();
 
                         }
@@ -504,9 +504,9 @@ public class PvPscript : MonoBehaviour
 
                         if(move == false && enemy.weaponMaxRange==1){
 
-                            for (float i = 0; i < 100; i++)
+                            for (float i = 0; i < 20; i++)
                             {
-                            enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                            enemyParent.transform.position -= new Vector3(0.035f * 5, 0, 0);
                             GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(1).gameObject.transform.position.z);
                             GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(4).gameObject.transform.position.z);
                             GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position = new Vector3(enemyParent.transform.position.x,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.y,GameObject.Find("Info Canvas").transform.GetChild(0).gameObject.transform.position.z);
@@ -581,12 +581,12 @@ public class PvPscript : MonoBehaviour
                         clipInfos = spritePlayer.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0);
                         firstClip = clipInfos[0].clip;
                         duration = firstClip.length + Time.time;
-                        for (float i = 0; i < 100; i++)
+                        for (float i = 0; i < 20; i++)
                         {
-                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position += new Vector3(0, 0.01f, 0);
-                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            GameObject.Find("Info Canvas").transform.GetChild(5).gameObject.transform.position += new Vector3(0, 0.01f*5, 0);
+                            sprite.transform.position += new Vector3(0, 0.01f * 5, 0);
                             yield return new WaitForEndOfFrame();
 
                         }
@@ -614,9 +614,9 @@ public class PvPscript : MonoBehaviour
 
                         if(move == false && enemy.weaponMaxRange==1){
 
-                            for (float i = 0; i < 100; i++)
+                            for (float i = 0; i < 20; i++)
                             {
-                            enemyParent.transform.position -= new Vector3(0.035f, 0, 0);
+                            enemyParent.transform.position -= new Vector3(0.035f*5, 0, 0);
                             yield return new WaitForEndOfFrame();
 
                             }
@@ -659,10 +659,10 @@ public class PvPscript : MonoBehaviour
                         oldPos = sprite.transform.position;
 
 
-                        for (float i = 0; i < 100; i++)
+                        for (float i = 0; i < 20; i++)
                         {
-                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                            sprite.transform.position += new Vector3(0, 0.01f, 0);
+                            sprite.transform.localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                            sprite.transform.position += new Vector3(0, 0.01f * 5, 0);
                             yield return new WaitForEndOfFrame();
 
                         }
@@ -709,17 +709,17 @@ public class PvPscript : MonoBehaviour
                     spriteEnemy.transform.parent = enemyParent.transform;
                     spriteEnemy.transform.localEulerAngles = new Vector3(0, 0, 0);
                     spriteEnemy.transform.localPosition = new Vector3(0, 0, 0);
-                    for (float i = 0; i <= 100; i++)
+                    for (float i = 0; i <= 20; i++)
                     {
                         yield return new WaitForEndOfFrame();
                     }
                 }
                 else
                 {
-                    for (float i = 0; i <= 100; i++)
+                    for (float i = 0; i <= 20; i++)
                     {
 
-                        enemyParent.transform.localScale = new Vector3(1 - i / 100, 1 - i / 100, 1 - i / 100);
+                        enemyParent.transform.localScale = new Vector3(1 - i / 20, 1 - i / 20, 1 - i / 20);
                         yield return new WaitForEndOfFrame();
                     }
                 }
@@ -738,11 +738,11 @@ public class PvPscript : MonoBehaviour
                 GameObject.Find("Info Canvas").transform.GetChild(6).position = new Vector3(playerParent.transform.position.x - 0.3f, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.y, GameObject.Find("Info Canvas").transform.GetChild(2).gameObject.transform.position.z);
                 GameObject.Find("Info Canvas").transform.GetChild(6).localScale = Vector3.zero;
                 GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
-                for (float i = 0; i < 100; i++)
+                for (float i = 0; i < 20; i++)
                 {
 
-                    GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f, 0);
-                    GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
+                    GameObject.Find("Info Canvas").transform.GetChild(6).position += new Vector3(0, 0.01f*5, 0);
+                    GameObject.Find("Info Canvas").transform.GetChild(6).localScale = new Vector3(Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
 
                     yield return new WaitForEndOfFrame();
 
@@ -779,9 +779,9 @@ public class PvPscript : MonoBehaviour
                 expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
 
                 float y = expGUI.transform.position.y * -1;
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    y += 0.01516f;
+                    y += 0.01516f *5;
                     expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
                     yield return new WaitForEndOfFrame();
                 }
@@ -813,9 +813,9 @@ public class PvPscript : MonoBehaviour
 
                 yield return new WaitForSeconds(2);
 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    y -= 0.01516f;
+                    y -= 0.01516f * 5;
                     expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
                     yield return new WaitForEndOfFrame();
                 }
@@ -931,10 +931,10 @@ public class PvPscript : MonoBehaviour
             player2.healthbar.SetHealth(player2.hp);
             pvpForecast.GetComponent<pvpForecastScript>().DamageEnemy(player2.hp, player2.maxHp);
             GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("heal");
-            for (float i = 0; i < 100; i++)
+            for (float i = 0; i < 20; i++)
             {
-                sprite.transform.localScale = new Vector3(Mathf.Clamp(i/10,0,1), Mathf.Clamp(i / 10, 0, 1), Mathf.Clamp(i / 10, 0, 1));
-                sprite.transform.position += new Vector3(0, 0.01f, 0);
+                sprite.transform.localScale = new Vector3(Mathf.Clamp(i/2,0,1), Mathf.Clamp(i / 2, 0, 1), Mathf.Clamp(i / 2, 0, 1));
+                sprite.transform.position += new Vector3(0, 0.01f*5, 0);
                 yield return new WaitForEndOfFrame();
 
             }
@@ -964,9 +964,9 @@ public class PvPscript : MonoBehaviour
                 expGUI.transform.GetChild(6).GetComponent<heathBarScript>().SetHealth(player.exp);
 
                 float y = expGUI.transform.position.y * -1;
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    y += 0.01516f;
+                    y += 0.01516f * 5;
                     expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, -1);
                     yield return new WaitForEndOfFrame();
                 }
@@ -998,9 +998,9 @@ public class PvPscript : MonoBehaviour
 
                 yield return new WaitForSeconds(2);
 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    y -= 0.01516f;
+                    y -= 0.01516f*5;
                     expGUI.transform.position = new Vector3(expGUI.transform.position.x, y, expGUI.transform.position.z);
                     yield return new WaitForEndOfFrame();
                 }

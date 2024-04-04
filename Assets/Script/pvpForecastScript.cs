@@ -14,9 +14,9 @@ public class pvpForecastScript : MonoBehaviour
 
     IEnumerator anim()
     {
-        for(float i= 0; i < 100; i++)
+        for(float i= 0; i < 20; i++)
         {
-            transform.localPosition = new Vector3(0, -1 + (i / 100), 15);
+            transform.localPosition = new Vector3(0, -1 + (i / 20), 15);
             yield return new WaitForEndOfFrame();
         }
 
@@ -24,9 +24,9 @@ public class pvpForecastScript : MonoBehaviour
 
     IEnumerator animExit()
     {
-        for (float i = 0; i < 100; i++)
+        for (float i = 0; i < 20; i++)
         {
-            transform.localPosition = new Vector3(0, (i / -100), 15);
+            transform.localPosition = new Vector3(0, (i / -20), 15);
             yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
@@ -128,9 +128,9 @@ public class pvpForecastScript : MonoBehaviour
 
         if(currentHP > hp)
         {
-            for (int i = 0; i < (30 * (currentHP - hp)); i++)
+            for (int i = 0; i < (6 * (currentHP - hp)); i++)
             {
-                sliderValue -= (float)(currentHP - hp) / (30 * (currentHP - hp));
+                sliderValue -= (float)(currentHP - hp) / (6 * (currentHP - hp));
 
                 slider.value = sliderValue / (float)maxhp;
                 
@@ -139,9 +139,9 @@ public class pvpForecastScript : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < (30 * (hp - currentHP)); i++)
+            for (int i = 0; i < (6 * (hp - currentHP)); i++)
             {
-                sliderValue += (float)(hp - currentHP) / (30 * (hp - currentHP));
+                sliderValue += (float)(hp - currentHP) / (6 * (hp - currentHP));
 
                 slider.value = sliderValue;
 

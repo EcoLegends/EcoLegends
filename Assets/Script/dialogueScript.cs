@@ -25,6 +25,9 @@ public class dialogueScript : MonoBehaviour
 
         GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapNum + "_pvp");
 
+        GameObject musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
+
+        musicPlayer.GetComponent<musicScript>().music = "Enjoy the Evening";
 
         List<Dialogo> d = new List<Dialogo>();
 
@@ -59,9 +62,9 @@ public class dialogueScript : MonoBehaviour
 
 
         yield return new WaitForSeconds(1);
-        for (float i = 0; i <= 85; i++)
+        for (float i = 0; i <= 17; i++)
         {
-            deez.transform.position = new Vector3(0, i / 100, 0);
+            deez.transform.position = new Vector3(0, i / 20, 0);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.5f);
@@ -85,18 +88,18 @@ public class dialogueScript : MonoBehaviour
             if (dial.latoSX && !sx)
             {
                 sx = true;
-                for (float i = 0; i <= 100; i++)
+                for (float i = 0; i <= 20; i++)
                 {
-                    deez.transform.GetChild(0).GetChild(0).localScale = new Vector3(9.259258f * (i / 100), 5.185184f * (i / 100), 9.259258f * (i / 100));
+                    deez.transform.GetChild(0).GetChild(0).localScale = new Vector3(9.259258f * (i / 20), 5.185184f * (i / 20), 9.259258f * (i / 20));
                     yield return new WaitForEndOfFrame();
                 }
             }
             if (!dial.latoSX && !dx)
             {
                 dx = true;
-                for (float i = 0; i <= 100; i++)
+                for (float i = 0; i <= 20; i++)
                 {
-                    deez.transform.GetChild(0).GetChild(1).localScale = new Vector3(9.259258f * (i / 100), 5.185184f * (i / 100), 9.259258f * (i / 100));
+                    deez.transform.GetChild(0).GetChild(1).localScale = new Vector3(9.259258f * (i / 20), 5.185184f * (i / 20), 9.259258f * (i / 20));
                     yield return new WaitForEndOfFrame();
                 }
             }
@@ -108,14 +111,15 @@ public class dialogueScript : MonoBehaviour
             }
             yield return new WaitForSeconds(3);
         }
-        for (float i = 85; i >= 0; i--)
+        for (float i = 17; i >= 0; i--)
         {
-            deez.transform.position = new Vector3(0, i / 100, 0);
+            deez.transform.position = new Vector3(0, i / 20, 0);
             yield return new WaitForEndOfFrame();
         }
         Destroy(deez);
 
-
+        
+        musicPlayer.GetComponent<musicScript>().Rimuovi();
         GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
         yield return new WaitForSeconds(1f);
         AsyncOperation async;

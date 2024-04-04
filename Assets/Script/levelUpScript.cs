@@ -61,9 +61,9 @@ public class levelUpScript : MonoBehaviour
 
         float scale = 0;
 
-        for(int i = 0; i < 100; i++)
+        for(int i = 0; i < 20; i++)
         {
-            scale += (0.36f / 100);
+            scale += (0.36f / 20);
             GetComponent<RectTransform>().localScale = new Vector3 (scale, scale, scale);
             yield return new WaitForEndOfFrame();
         }
@@ -72,19 +72,19 @@ public class levelUpScript : MonoBehaviour
 
         transform.GetChild(11).GetComponent<AudioSource>().PlayOneShot(levelUp);
 
-        for (float i = 1; i <= 100; i+=5)
+        for (float i = 1; i <= 20; i++)
         {
-            transform.GetChild(9).GetChild(0).transform.localScale = new Vector3(i / 100, i / 100, i / 100);
-            if(i>=50) transform.GetChild(9).transform.localScale = new Vector3((i+50) / 100, (i+50) / 100, (i+50) / 100);
-            yield return new WaitForSeconds(0.01f);
+            transform.GetChild(9).GetChild(0).transform.localScale = new Vector3(i / 20, i / 20, i / 20);
+            if(i>=10) transform.GetChild(9).transform.localScale = new Vector3((i+10) / 20, (i+10) / 20, (i+10) / 20);
+            yield return new WaitForEndOfFrame();
 
         }
         transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = (lvl + 1).ToString();
-        for (float i = 100; i >= 0; i-=5)
+        for (float i = 20; i >= 0; i--)
         {
-            if (i >= 50) transform.GetChild(9).transform.localScale = new Vector3((i + 50) / 100, (i + 50) / 100, (i + 50) / 100);
-            transform.GetChild(9).GetChild(0).transform.localScale = new Vector3(i / 100, i / 100, i / 100);
-            yield return new WaitForSeconds(0.01f);
+            if (i >= 10) transform.GetChild(9).transform.localScale = new Vector3((i + 10) / 20, (i + 10) / 20, (i + 10) / 20);
+            transform.GetChild(9).GetChild(0).transform.localScale = new Vector3(i / 20, i / 20, i / 20);
+            yield return new WaitForEndOfFrame();
 
         }
 
@@ -96,19 +96,19 @@ public class levelUpScript : MonoBehaviour
             if (increments[j] == 1)
             {
                 transform.GetChild(11).GetComponent<AudioSource>().PlayOneShot(statsUp);
-                for (float i = 1; i <= 100; i += 5)
+                for (float i = 1; i <= 10; i++)
                 {
-                    transform.GetChild(j+1).GetChild(0).transform.localScale = new Vector3(i / 100, i / 100, i / 100);
-                    if (i >= 50) transform.GetChild(j+1).transform.localScale = new Vector3((i + 50) / 100, (i + 50) / 100, (i + 50) / 100);
-                    yield return new WaitForSeconds(0.005f);
+                    transform.GetChild(j+1).GetChild(0).transform.localScale = new Vector3(i / 10, i / 10, i / 10);
+                    if (i >= 5) transform.GetChild(j+1).transform.localScale = new Vector3((i + 5) / 10, (i + 5) / 10, (i + 5) / 10);
+                    yield return new WaitForEndOfFrame();
 
                 }
                 transform.GetChild(j+1).GetComponent<TextMeshProUGUI>().text = (names[j]+" "+(values[j] + 1)).ToString();
-                for (float i = 100; i >= 0; i -= 5)
+                for (float i = 10; i >= 0; i--)
                 {
-                    if (i >= 50) transform.GetChild(j+1).transform.localScale = new Vector3((i + 50) / 100, (i + 50) / 100, (i + 50) / 100);
-                    transform.GetChild(j+1).GetChild(0).GetChild(1).transform.localScale = new Vector3(i / 100, i / 100, i / 100);
-                    yield return new WaitForSeconds(0.005f);
+                    if (i >= 5) transform.GetChild(j+1).transform.localScale = new Vector3((i + 5) / 10, (i + 5) / 10, (i + 5) / 10);
+                    transform.GetChild(j+1).GetChild(0).GetChild(1).transform.localScale = new Vector3(i / 10, i / 10, i / 10);
+                    yield return new WaitForEndOfFrame();
 
                 }
                 yield return new WaitForSeconds(0.05f);
@@ -120,9 +120,9 @@ public class levelUpScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         scale = 0.36f;
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 20; i++)
         {
-            scale -= (0.36f / 100);
+            scale -= (0.36f / 20);
             GetComponent<RectTransform>().localScale = new Vector3(scale, scale, scale);
             yield return new WaitForEndOfFrame();
         }
