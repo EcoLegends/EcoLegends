@@ -362,7 +362,7 @@ public class playerScript : MonoBehaviour
         {
             Debug.Log("Added "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x+ " "+ (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
             mousepos.Add(new Vector2((int)Camera.main.ScreenToWorldPoint(Input.mousePosition).x, (int)Camera.main.ScreenToWorldPoint(Input.mousePosition).y));
-            if (mousepos.Count > 5) mousepos.RemoveAt(0);
+            if (mousepos.Count > 3) mousepos.RemoveAt(0);
         }
 
 
@@ -544,12 +544,14 @@ public class playerScript : MonoBehaviour
 
                             }
 
-                            Vector2 nearest = mousepos[5 - weaponMaxRange];
+                            Vector2 nearest = mousepos[3 - weaponMaxRange];
+                            if(nearest.x == target.transform.position.x && nearest.y == target.transform.position.y) nearest = mousepos[2 - weaponMaxRange];
+
                             Vector2 newpos = new Vector2(0, 0);
                             foreach (GameObject tile in attackTiles)
                             {
                                 Vector2 pos = new Vector2(tile.transform.position.x, tile.transform.position.y);
-                                if(Mathf.Abs(pos.x - nearest.x) + (int)Mathf.Abs(pos.y - nearest.y) < Mathf.Abs(newpos.x - nearest.x) + (int)Mathf.Abs(newpos.y - nearest.y))
+                                if(Mathf.Abs(pos.x - nearest.x) + Mathf.Abs(pos.y - nearest.y) < Mathf.Abs(newpos.x - nearest.x) + Mathf.Abs(newpos.y - nearest.y))
                                 {
                                     newpos = pos;
                                 }
