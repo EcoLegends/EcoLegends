@@ -34,8 +34,21 @@ public class dialogueScript : MonoBehaviour
 
         if (mapNum == 1 && mapCompleted == false)
         {
-            d.Add(new Dialogo("Nova", "Nova", "dialogo mappa 1 okkkkkkk", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "ssiii fraaaaa", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ah, Sear, ricordi quando eravamo solo dei bambini che giocavano nei giardini del palazzo? Il tempo vola così velocemente, non è vero?", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Sì, Nova, è incredibile quanto sia cambiato tutto. Ma in effetti, non ho molto tempo per riflettere sui bei ricordi.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Ci sono così tante questioni politiche da affrontare, soprattutto in un momento come questo.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Oh, non pensare sempre ai doveri, fratello mio! Ricordati di goderti anche i momenti felici.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Sai, è passato esattamente un secolo dalla sconfitta di Morgrath e l'inaugurazione di Eirene come città libera. È un momento da celebrare!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. A volte mi perdo troppo nelle preoccupazioni.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Ma sai quanto è importante mantenere la stabilità del regno, specialmente dopo ciò che abbiamo affrontato con Morgrath.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Certo, capisco le tue preoccupazioni. Ma questo anniversario non riguarda solo la fine di un'epoca buia, riguarda anche il futuro luminoso che abbiamo costruito insieme.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Eirene è un simbolo di speranza per il nostro popolo, e dobbiamo celebrarlo con gioia e gratitudine.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Grazie per avermi ricordato l'importanza di queste celebrazioni.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Sarà un onore festeggiare insieme alla città e onorare coloro che hanno combattuto per la nostra libertà.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Esattamente! E ora, lascia che i nostri doveri si fermino per un momento mentre ci immergiamo nella gioia di questo anniversario.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "(sorride) Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
+            
         }
         else if (mapNum == 1 && mapCompleted == true)
         {
