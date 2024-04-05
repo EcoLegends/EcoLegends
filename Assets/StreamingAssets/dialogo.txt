@@ -1,2 +1,7 @@
+<<<<<<< Updated upstream
 1
 False
+=======
+5
+True
+>>>>>>> Stashed changes
