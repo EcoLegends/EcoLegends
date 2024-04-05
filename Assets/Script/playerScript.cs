@@ -564,15 +564,11 @@ public class playerScript : MonoBehaviour
                             int[] output = Camera.main.GetComponent<battleManager>().pvp(target, this.gameObject, "player", cura);
                             newPosTile = (GameObject)Instantiate(Resources.Load("newPosTile", typeof(GameObject)), new Vector3(x, y, -2), Quaternion.identity);
                             newPosTile.tag = "Rimuovere";
-                            x = oldX;
-                            y = oldY;
-
-                            
-
 
                             Debug.Log(cura);
                             forecast.GetComponent<forecastScript>().Setup(target, this.gameObject, output, cura, new Vector2(x,y));
-
+                            x = oldX;
+                            y = oldY;
                             forecastCooldown = Time.time + 0.3f;
 
 

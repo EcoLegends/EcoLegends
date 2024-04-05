@@ -34,6 +34,7 @@ public class dialogueScript : MonoBehaviour
 
         if (mapNum == 1 && mapCompleted == false)
         {
+            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("castello interno");
             d.Add(new Dialogo("Nova", "Nova", "Ah, Sear, ricordi quando eravamo solo dei bambini che giocavano nei giardini del palazzo? Il tempo vola così velocemente, non è vero?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Sì, Nova, è incredibile quanto sia cambiato tutto. Ma in effetti, non ho molto tempo per riflettere sui bei ricordi.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Ci sono così tante questioni politiche da affrontare, soprattutto in un momento come questo.", false, true));

@@ -291,7 +291,8 @@ public class battleManager : MonoBehaviour
 
             
 
-            int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);               
+            int distance = (int) Mathf.Abs(player.x - enemy.x) + (int) Mathf.Abs(player.y - enemy.y);
+            Debug.Log("DISTANCE: " + distance);
 
             if (initial_turn == "player")                                         //doppi turni con attack speed >=4 
             {

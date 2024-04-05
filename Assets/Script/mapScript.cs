@@ -479,7 +479,7 @@ public class mapScript : MonoBehaviour
                     new_enemy29.GetComponent<enemyScript>().Setup(16, 9, "???", "volante1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 4, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
 
                     GameObject new_enemy30 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy30.GetComponent<enemyScript>().Setup(13, 12, "Morgrath", "Morgrath", 5, 2, "near", 1, 2, 7, 5, 90, 2, 4, 2, false, 60, 6, 6, 5, 9, 4, 5, 5, "Goddess in Shadow (Frenzy)");
+                    new_enemy30.GetComponent<enemyScript>().Setup(13, 12, "Morgrath", "Morgrath", 5, 2, "near", 1, 2, 7, 5, 90, 2, 4, 2, true, 60, 6, 6, 5, 9, 4, 5, 5, "Goddess in Shadow (Frenzy)");
 
                     GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(new Vector3(14.06666f,8.833334f,-10), "Sconfiggi Morgrath", true);
                     break;
