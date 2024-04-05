@@ -53,6 +53,8 @@ public class battleManager : MonoBehaviour
 
     public static bool stop = false;
 
+    bool hasBosses = false;
+
     private void Awake() //roba del tutorial bohh
     {
         _mainCamera = Camera.main;
@@ -84,14 +86,28 @@ public class battleManager : MonoBehaviour
                 
             }
 
+            if (hasBosses)
+            {
+                int bossCount = 0;
+                foreach(GameObject enemy in enemies) if(enemy.GetComponent<enemyScript>().boss) bossCount++;
+                if (bossCount == 0)
+                {
+                    Debug.Log("VINTO!!!!");
+                    stop = true;
+                    mapScript.finitoSpawn = false;
+                    gameObject.transform.GetChild(2).gameObject.SetActive(true);
+                }
+            }
+
+
             if (enemies.Count == 0)
             {
-                
+
                 Debug.Log("VINTO!!!!");
                 stop = true;
                 mapScript.finitoSpawn = false;
                 gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                
+
 
             }
         }
@@ -342,12 +358,13 @@ public class battleManager : MonoBehaviour
                 transform.position = Vector3.Lerp(currentpos,newpos,i/20);
                 yield return new WaitForEndOfFrame();
             }
-            
+            hasBosses = false;
             if (bosses)
             {
-                
-                
-                foreach(GameObject e in enemies)
+                hasBosses = true;
+
+
+                foreach (GameObject e in enemies)
                 {
                     if(e.GetComponent<enemyScript>().boss)
                     {

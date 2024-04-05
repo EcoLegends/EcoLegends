@@ -35,7 +35,7 @@ public class winloseScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        
+        GameObject.Find("Music").GetComponent<musicScript>().Rimuovi();
 
         string scene = "MainScene";
         if (vinci) 
