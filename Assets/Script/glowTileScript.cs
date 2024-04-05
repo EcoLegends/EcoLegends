@@ -19,7 +19,7 @@ public class glowTileScript : MonoBehaviour
                 times++;
             }
 
-            transparency += inc * 2.1f*5;
+            transparency += inc *7.5f;
 
             
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, transparency / 100); //cambia trasparenza
