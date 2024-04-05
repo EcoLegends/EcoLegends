@@ -18,7 +18,7 @@ public class winloseScript : MonoBehaviour
 
     IEnumerator anim()
     {
-        GameObject.Find("Music(Clone)").GetComponent<musicScript>().Stop();
+        GameObject.Find("Music").GetComponent<musicScript>().Stop();
         if (vinci) GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("win");
         
         for (float i = 0; i <= 100; i++)

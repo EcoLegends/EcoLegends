@@ -328,6 +328,7 @@ public class battleManager : MonoBehaviour
 
 
         GameObject musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
+        musicPlayer.name = "Music";
         
         musicPlayer.GetComponent<musicScript>().Stop();
         Vector3 currentpos = transform.position;

@@ -56,7 +56,7 @@ public class PvPscript : MonoBehaviour
                 {
                     if (enemy.boss)
                     {
-                        if(GameObject.Find("Music(Clone)").GetComponent<musicScript>().music!= enemy.musica) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic("Boss Intro");
+                        if(GameObject.Find("Music").GetComponent<musicScript>().music!= enemy.musica) GameObject.Find("Music").GetComponent<musicScript>().ChangeMusic("Boss Intro");
                         List<Dialogo> d = new List<Dialogo>();
 
                         Debug.Log(dialogo);
@@ -265,7 +265,7 @@ public class PvPscript : MonoBehaviour
             if (enemyAS >= playerAS + 4) { turns.Add("enemy"); }
             }
 
-            if (enemy.boss) GameObject.Find("Music(Clone)").GetComponent<musicScript>().ChangeMusic(enemy.musica);
+            if (enemy.boss) GameObject.Find("Music").GetComponent<musicScript>().ChangeMusic(enemy.musica);
 
             bool playerCanCounter = turns.Contains("player");
             bool enemyCanCounter = turns.Contains("enemy");

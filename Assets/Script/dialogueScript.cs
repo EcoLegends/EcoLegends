@@ -26,6 +26,7 @@ public class dialogueScript : MonoBehaviour
         GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapNum + "_pvp");
 
         GameObject musicPlayer = (GameObject)Instantiate(Resources.Load("Music", typeof(GameObject)), Vector3.one, Quaternion.identity);
+        musicPlayer.name = "Music";
 
         musicPlayer.GetComponent<musicScript>().music = "Enjoy the Evening";
 
