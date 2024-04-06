@@ -42,14 +42,25 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Sai, è passato esattamente un secolo dalla sconfitta di Morgrath e l'inaugurazione di Eirene come città libera. È un momento da celebrare!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. A volte mi perdo troppo nelle preoccupazioni.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Ma sai quanto è importante mantenere la stabilità del regno, specialmente dopo ciò che abbiamo affrontato con Morgrath.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Certo, capisco le tue preoccupazioni. Ma questo anniversario non riguarda solo la fine di un'epoca buia, riguarda anche il futuro luminoso che abbiamo costruito insieme.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Certo, capisco le tue preoccupazioni.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ma questo anniversario non riguarda solo la fine di un'epoca buia, riguarda anche il futuro luminoso che abbiamo costruito insieme.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Eirene è un simbolo di speranza per il nostro popolo, e dobbiamo celebrarlo con gioia e gratitudine.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Grazie per avermi ricordato l'importanza di queste celebrazioni.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Sarà un onore festeggiare insieme alla città e onorare coloro che hanno combattuto per la nostra libertà.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Esattamente! E ora, lascia che i nostri doveri si fermino per un momento mentre ci immergiamo nella gioia di questo anniversario.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "(sorride) Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
-            
+            d.Add(new Dialogo("Sear", "Sear", "(sorridendo) Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
+            //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_start");
+            //GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapNum + "_pvp");
+            //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_End");
+            d.Add(new Dialogo("Nova", "Nova", "Sear, non vedo l'ora di arrivare a Eirene! Sarà una festa indimenticabile.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Concordo, Nova. Sarà fantastico passare del tempo nella città delle feste.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Ma... aspetta, cosa sono quei rumori strani?", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Non lo so, sembra provenire dalla boscaglia là davanti. Dobbiamo stare attenti.", true, true));
+            d.Add(new Dialogo("Mostro", "terra1", "Uhrrr!", false, false));
+            d.Add(new Dialogo("Sear", "Sear", "Oh no, sono dei mostri! Preparati, Nova, dobbiamo difenderci!", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Hai ragione, Sear! Non ci tireremo indietro. Pronti a combattere?", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Assolutamente! Affrontiamo prima questi mostri e poi pensiamo al motivo per cui ci sono dei mostri in questa zona", false, true));
         }
         else if (mapNum == 1 && mapCompleted == true)
         {
