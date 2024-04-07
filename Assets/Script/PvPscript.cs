@@ -16,7 +16,7 @@ public class PvPscript : MonoBehaviour
 
     public bool finitoLvlUp = false;
 
-
+    bool skip = false;
 
 
     public void iniziaPvPvero(GameObject e, GameObject p, int[] output, GameObject spritePlayer, GameObject spriteEnemy, GameObject playerParent, GameObject enemyParent, Scene activeScene, GameObject temp, string initial_turn, bool cura)
@@ -187,13 +187,28 @@ public class PvPscript : MonoBehaviour
                                 yield return new WaitForEndOfFrame();
                             }
                         }
-                            
-                        for(int i=0;i<=dial.text.Length;i++)
+
+                        skip = false;
+                        for (int i = 0; i <= dial.text.Length; i++)
                         {
-                            deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text =  dial.text.Substring(0,i);
+                            deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = dial.text.Substring(0, i);
                             yield return new WaitForSeconds(0.025f);
+                            if (skip)
+                            {
+                                deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = dial.text;
+                                skip = false;
+                                break;
+                            }
                         }
-                        yield return new WaitForSeconds(3);
+                        for (int i = 0; i < 30; i++)
+                        {
+                            if (skip)
+                            {
+                                skip = false;
+                                break;
+                            }
+                            yield return new WaitForSeconds(0.1f);
+                        }
                     }
                     for (float i = 17; i >= 0; i--)
                     {
@@ -1055,7 +1070,11 @@ public class PvPscript : MonoBehaviour
 
     }
 
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) skip = true;
 
+    }
     public void LevelUp(playerScript player)
     {
 

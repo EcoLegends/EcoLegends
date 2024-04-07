@@ -8,11 +8,20 @@ using UnityEngine.SceneManagement;
 public class dialogueScript : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    bool skip = false;
+
     void Start()
     {
         StartCoroutine(inizia());
     }
 
+
+    public void Update()
+    {
+        if(Input.GetMouseButtonDown(0)) skip = true;
+
+    }
     IEnumerator inizia()
     {
 
@@ -49,7 +58,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Sear", "Sear", "Sarà un onore festeggiare insieme alla città e onorare coloro che hanno combattuto per la nostra libertà.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Esattamente! E ora, lascia che i nostri doveri si fermino per un momento mentre ci immergiamo nella gioia di questo anniversario.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "(sorridendo) Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
             //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_start");
             //GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapNum + "_pvp");
             //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_End");
@@ -88,12 +97,16 @@ public class dialogueScript : MonoBehaviour
 
 
         yield return new WaitForSeconds(1);
+        
         for (float i = 0; i <= 17; i++)
         {
             deez.transform.position = new Vector3(0, i / 20, 0);
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.5f);
+
+        
+
         foreach (Dialogo dial in d)
         {
             deez.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
@@ -129,13 +142,28 @@ public class dialogueScript : MonoBehaviour
                     yield return new WaitForEndOfFrame();
                 }
             }
-
+            skip = false;
             for (int i = 0; i <= dial.text.Length; i++)
             {
                 deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = dial.text.Substring(0, i);
                 yield return new WaitForSeconds(0.025f);
+                if (skip)
+                {
+                    deez.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = dial.text;
+                    skip = false;
+                    break;
+                }
             }
-            yield return new WaitForSeconds(3);
+            for(int i = 0; i < 30; i++)
+            {
+                if (skip)
+                {
+                    skip = false;
+                    break;
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+            
         }
         for (float i = 17; i >= 0; i--)
         {
