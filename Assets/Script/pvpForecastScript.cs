@@ -82,13 +82,15 @@ public class pvpForecastScript : MonoBehaviour
     {
 
         int currentHP = int.Parse(transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text);
-        if (currentHP > hp) { 
+        if (currentHP >= hp) { 
             transform.GetChild(0).GetChild(12).GetComponent<heathBarScript>().SetHealth(hp);
             transform.GetChild(0).GetChild(12).GetChild(1).GetComponent<Slider>().value = currentHP / (float)maxhp;
+            transform.GetChild(0).GetChild(12).GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(0.9058824f, 0.4431373f, 0.4784314f);
             StartCoroutine(AnimHeathbar(transform.GetChild(0).GetChild(12).GetChild(1).GetComponent<Slider>(), hp, maxhp, currentHP));
         }
         else
         {
+            Debug.Log("HEAL: " + currentHP + " " + hp);
             transform.GetChild(0).GetChild(12).GetChild(1).GetComponent<Slider>().value = hp / (float)maxhp;
             transform.GetChild(0).GetChild(12).GetComponent<heathBarScript>().SetHealth(currentHP);
             transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = hp.ToString();
@@ -105,14 +107,16 @@ public class pvpForecastScript : MonoBehaviour
 
         int currentHP = int.Parse(transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text);
 
-        if (currentHP > hp)
+        if (currentHP >= hp)
         {
             transform.GetChild(0).GetChild(13).GetComponent<heathBarScript>().SetHealth(hp);
             transform.GetChild(0).GetChild(13).GetChild(1).GetComponent<Slider>().value = currentHP / (float)maxhp;
+            transform.GetChild(0).GetChild(13).GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(0.9058824f, 0.4431373f, 0.4784314f);
             StartCoroutine(AnimHeathbar(transform.GetChild(0).GetChild(13).GetChild(1).GetComponent<Slider>(), hp, maxhp, currentHP));
         }
         else
         {
+            
             transform.GetChild(0).GetChild(13).GetChild(1).GetComponent<Slider>().value = hp / (float)maxhp;
             transform.GetChild(0).GetChild(13).GetComponent<heathBarScript>().SetHealth(currentHP);
             transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = hp.ToString();
