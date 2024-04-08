@@ -655,7 +655,7 @@ public class playerScript : MonoBehaviour
        
         if (!battleManager.stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0)
         {
-            if (!tutorialFatto)
+            if (!tutorialFatto && !(Input.GetKey(KeyCode.Mouse0)))
             {
                 if (nome == "Nova" && mapScript.mapN == 2) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial14"), Camera.main.gameObject.transform); return; }
                 if (nome == "Sear" && mapScript.mapN == 2) { tutorialFatto = true; GameObject tutorial = Instantiate(Resources.Load<GameObject>("Tutorials/tutorial16"), Camera.main.gameObject.transform); return; }

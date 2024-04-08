@@ -59,9 +59,9 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Esattamente! E ora, lascia che i nostri doveri si fermino per un momento mentre ci immergiamo nella gioia di questo anniversario.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
-            //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_start");
-            //GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapNum + "_pvp");
-            //GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_End");
+
+            d.Add(new Dialogo("CAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
+
             d.Add(new Dialogo("Nova", "Nova", "Sear, non vedo l'ora di arrivare a Eirene! Sarà una festa indimenticabile.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Concordo, Nova. Sarà fantastico passare del tempo nella città delle feste.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Ma... aspetta, cosa sono quei rumori strani?", false, true));
@@ -109,6 +109,18 @@ public class dialogueScript : MonoBehaviour
 
         foreach (Dialogo dial in d)
         {
+
+            if(dial.nome == "CAMBIOSCENA")
+            {
+                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
+                yield return new WaitForSeconds(1f);
+                GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(dial.text);
+                GameObject.Find("LevelLoader").GetComponent<LevelLoad>().transition.Play("Crossfade_start");
+                yield return new WaitForSeconds(1f);
+                continue;
+            }
+
+
             deez.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
             deez.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
             deez.transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
