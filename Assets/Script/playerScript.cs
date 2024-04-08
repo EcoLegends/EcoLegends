@@ -275,6 +275,9 @@ public class playerScript : MonoBehaviour
         this.resGrowth = resGrowth;
         this.heal = heal;
 
+        this.exp = exp;
+
+
     }
 
 
