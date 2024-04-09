@@ -227,12 +227,80 @@ public class PvPscript : MonoBehaviour
                         //mappa 5
                         case "Nova-Morgrath":
                             {
-                                d.Add(new Dialogo("Nova", "Nova", "test 1 22 3 344234 4 24 2434", true, true));
-                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "funzia booooooooooooooh", false, false));
+                                d.Add(new Dialogo("Nova", "Nova", "È arrivata la tua fine Morgrath!", true, true));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Pensi davvero di potermi fermare? Sei proprio patetica.", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Ho impiegato gli ultimi cento anni a rompere il sigillo magico che mi imprigionava.", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "E adesso finalmente sono libero e posso vendicarmi del vostro lurido mondo!", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Non hai speranze contro il mio potere.", false, false));
+                                d.Add(new Dialogo("Nova", "Nova", "Questo lo vedremo. Non ti lascerò mai distruggere Eldoria!", true, true));
+
+                                break;
+                            }
+                        case "Sear-Morgrath":
+                            {
+                                d.Add(new Dialogo("Sear", "Sear", "Come hai potuto distruggere Eirene!", true, true));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Questo è solo l'inizio del mio regno... Preso tutta Eldoria verrà rasa al suolo!", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "E voi non avete nessun potere per fermarmi!", false, false));
+                                d.Add(new Dialogo("Sear", "Sear", "Te la farò pagare Morgrath, non ti permetterò di fare ulteriori danni.", true, true));
+                                break;
+                            }
+                        case "Granius-Morgrath":
+                            {
+                                d.Add(new Dialogo("Granius", "Granius", "Come hai osato usarci come burattini! Te la farò pagare.", true, true));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Guarda chi si rivede... Distruggere il vostro impero è stato un piacere.", false, false));
+                                d.Add(new Dialogo("Granius", "Granius", "Rivendicherò la mia terra... Stanne sicuro Morgrath!", true, true));
+
+                                break;
+                            }
+                        case "Thera-Morgrath":
+                            {
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Guarda un po' chi si rivede... Sei migliorata molto dal nostro ultimo incontro.", false, false));
+                                d.Add(new Dialogo("Thera", "Thera", "Questa volta riuscirai a prenderci di sopresa, Morgath.", true, true));
+                                d.Add(new Dialogo("Thera", "Thera", "Ti pentirai di aver inquinato il nostro impero e di averci usato come burattini.", true, true));
+
+                                break;
+                            }
+                        case "Acquira-Morgrath":
+                            {
+
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Ah... Sei tu... Uno dei miei più grandi fallimenti...", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Come hai osato far fallire un piano così perfetto!", false, false));
+                                d.Add(new Dialogo("Acquira", "Acquira", "Come hai osato te controllarci ed a farci tradire i nostri amici!", true, true));
+                                d.Add(new Dialogo("Acquira", "Acquira", "Te la farò pagare Morgrath, nessuno mi può mettere contro i miei amici!", true, true));
 
 
                                 break;
                             }
+                        case "Hydris-Morgrath":
+                            {
+                                d.Add(new Dialogo("Hydris", "Hydris", "Come hai osato farmi combattere contro i miei amici!", true, true));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "È la parte più divertente, cara Hydris.", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Seminare caos e inquinamento ovunque è la mia specialità.", false, false));
+                                d.Add(new Dialogo("Hydris", "Hydris", "Io ti fermerò Morgrath, non ti permetterò di distruggere più nulla.", true, true));
+
+                                break;
+                            }
+                        case "Aeria-Morgrath":
+                            {
+
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Siete stati bravi a contenere il mio inquinamento, ma i vostri sforzi non basteranno.", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Quando vi renderò miei schiavi non ci sarà più nessuno a proteggere la vostra gente!", false, false));
+                                d.Add(new Dialogo("Aeria", "Aeria", "Non succederà mai. Io ti fermerò.", true, true));
+                                
+
+
+                                break;
+                            }
+                        case "Skye-Morgrath":
+                            {
+                                d.Add(new Dialogo("Skye", "Skye", "Bruciare un'intera citta? Ma sei forse impazzito?", true, true));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Questo è solo l'inizio...", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Appena avrò finito con voi pesti, il mondo finirà sotto il mio controllo.", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "E non rimarrà neanche una briciola dei vostri regni.", false, false));
+                                d.Add(new Dialogo("Skye", "Skye", "Questo lo vedremo, riusciremo a sconfiggerti prima noi. Stanne certo.", true, true));
+                                break;
+                            }
+
                     }
 
 

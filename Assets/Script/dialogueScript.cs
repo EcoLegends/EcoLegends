@@ -84,10 +84,13 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Hai ragione, Sear! Non ci tireremo indietro. Pronti a combattere?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Assolutamente! Affrontiamo prima questi mostri e poi pensiamo al motivo per cui ci sono dei mostri in questa zona", false, true));
         }
-        else if (mapNum == 1 && mapCompleted == true)
+        else if (mapNum == 2 && mapCompleted == false)
         {
-            d.Add(new Dialogo("Nova", "Nova", "mappa1 finita", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "pro gg fra", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "test: ecco la gemma del fuoco", true, true));
+
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Fuoco", true, true));
+
+            d.Add(new Dialogo("Sear", "Sear", "wow bella", false, true));
         }
 
 
@@ -200,12 +203,42 @@ public class dialogueScript : MonoBehaviour
             if (dial.nome == "SPAWN")
             {
                 GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/"+dial.texture), new Vector3(float.Parse(dial.text.Split(",")[0],CultureInfo.InvariantCulture), float.Parse(dial.text.Split(",")[1],CultureInfo.InvariantCulture), 0), Quaternion.identity);
-                Debug.Log(float.Parse(dial.text.Split(",")[0]) + " " + float.Parse(dial.text.Split(",")[1]));
                 if(!dial.latoSX) pg.transform.Rotate(new Vector3(0, 180, 0));
                 pgs.Add(pg);
                 continue;
             }
+            if (dial.nome == "MOSTRA")
+            {
+                GameObject item = Instantiate(Resources.Load<GameObject>("gemmaGUI"));
+                item.transform.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(dial.text);
+                for(float i=0;i<=10;i++) 
+                {
+                    item.transform.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, i / 10);
+                    item.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 10);
+                    yield return new WaitForEndOfFrame();
+                }
 
+                skip = false;
+                for (int i = 0; i < 30; i++)
+                {
+                    if (skip)
+                    {
+                        skip = false;
+                        break;
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                }
+
+                for (float i = 10; i >= 0; i--)
+                {
+                    item.transform.GetChild(0).GetChild(0).GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, i / 10);
+                    item.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 10);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                Destroy(item);
+                continue;
+            }
 
 
             deez.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
