@@ -239,7 +239,7 @@ public class PvPscript : MonoBehaviour
                         case "Sear-Morgrath":
                             {
                                 d.Add(new Dialogo("Sear", "Sear", "Come hai potuto distruggere Eirene!", true, true));
-                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Questo è solo l'inizio del mio regno... Preso tutta Eldoria verrà rasa al suolo!", false, false));
+                                d.Add(new Dialogo("Morgrath", enemy.textureFile, "Questo è solo l'inizio del mio regno... Presto tutta Eldoria verrà rasa al suolo!", false, false));
                                 d.Add(new Dialogo("Morgrath", enemy.textureFile, "E voi non avete nessun potere per fermarmi!", false, false));
                                 d.Add(new Dialogo("Sear", "Sear", "Te la farò pagare Morgrath, non ti permetterò di fare ulteriori danni.", true, true));
                                 break;

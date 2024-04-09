@@ -84,7 +84,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Hai ragione, Sear! Non ci tireremo indietro. Pronti a combattere?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Assolutamente! Affrontiamo prima questi mostri e poi pensiamo al motivo per cui ci sono dei mostri in questa zona", false, true));
         }
-        else if (mapNum == 2 && mapCompleted == false)
+        else if (mapNum == 1 && mapCompleted == true)
         {
             d.Add(new Dialogo("Nova", "Nova", "test: ecco la gemma del fuoco", true, true));
 
