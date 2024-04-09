@@ -149,9 +149,9 @@ public class dialogueScript : MonoBehaviour
 
             
             d.Add(new Dialogo("Sear", "Sear", "Ce l'abbiamo fatta, per fortuna l'inquinamento non ha avuto la meglio.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Ora che siete al sicuro possiamo dirigerci verso-", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ora che siete al sicuro possiamo dirigerci verso..", true, true));
             d.Add(new Dialogo("CAMBIAMUSICA", "", "Indomitable Will", false, true)); //cambio musica 
-            d.Add(new Dialogo("Acquira", "Acquira", "Fermi dove siete", false, false));
+            d.Add(new Dialogo("Acquira", "Acquira", "Fermi dove siete!", false, true));
 
             d.Add(new Dialogo("INIZIOCAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
 
@@ -170,6 +170,40 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Acquira", "Acquira", "Silenzio!", false, false));
             d.Add(new Dialogo("Acquira", "Acquira", "Se non volete arrendervi non rimane altro che combattere.", false, false));
             d.Add(new Dialogo("Granius", "Granius", "Prepariamoci, questa battaglia non sarà per niente facile...", true, true));
+        }
+
+        else if (mapNum == 3 && mapCompleted == true)
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(2.183945f, -0.2f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(3.031333f, -0.2f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-2.683f, -0.2f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(1.249646f, -0.2f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(-0.858f, -0.2f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(-1.93f, -0.2f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+
+            d.Add(new Dialogo("Acquira", "Acquira", "Per fortuna ci avete salvato... non avevamo idea di essere sotto il controllo di Morgrath.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Non preoccupatevi, non è colpa vostra se Morgrath è riuscito ad avere la meglio su di voi.", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Ci dispiace molto... spero di non aver fatto male a nessuno.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hmm... Hydris, quella gemma che hai sul bastone, potrebbe essere per caso una gemma elementare?", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Una gemma elementare? Cosa sarebbe?", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Le gemme elementari sono state usate dai nostri antenati per sconfiggere ed imprigionare Morgrath.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Sono capaci di purificare l'inquinamento, senza di loro non saremo riusciti a salvarvi.", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Hmm... Il bastone è un cimelio di famiglia, è probabile che sia una delle gemme di cui stai parlando.", true, true));
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Acqua", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "È proprio la gemma dell'acqua. Ora ce ne manca solo una.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Dirigiamoci verso la Federazione dell'Aria, l'ultima gemma deve essere lì.", false, true));
+           
         }
 
         else if(mapNum == 4 && mapCompleted == false)
@@ -228,6 +262,46 @@ public class dialogueScript : MonoBehaviour
 
 
         }
+        else if (mapNum == 4 && mapCompleted == true)
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(0.78f, -0.3f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(1.405f, -0.3f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-1.262866f, -0.3f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(2.177f, -0.3f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(3.049407f, -0.3f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(-3.007282f, -0.3f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Aeria"), new Vector3(-2.231479f, 0, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Skye"), new Vector3(-0.3962449f, 0.12f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+            d.Add(new Dialogo("Aeria", "Aeria", "Per fortuna siete arrivati in tempo, non ce la saremo cavata senza di voi.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Non preoccupatevi, è stato un piacere.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Come avete fatto a resistere così a lungo all'inquinamento?", false, true));
+            d.Add(new Dialogo("Skye", "Skye", "L'altitudine ci è stata di aiuto ma...", true, true));
+            d.Add(new Dialogo("Skye", "Skye", "Ora che ci penso, quando eravamo in difficoltà, il mio bastone ha iniziato a splendere ed a scacciare i mostri.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Potrebbe essere proprio l'ultima gemma elementare che ci manca, posso vedere?", false, true));
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Aria", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "È proprio la gemma dell'aria! Ora che le abbiamo tutte, abbiamo una speranza contro Morgrath!", false, true));
+            d.Add(new Dialogo("Aeria", "Aeria", "Non abbiamo tempo per festeggiare, dobbiamo correre subito ad Eirene prima che la situazione peggiori.", true, true));
+            d.Add(new Dialogo("Aeria", "Aeria", "Da qui in alto riesco già a vedere del fumo...", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Non porta nulla di buono... Dobbiamo sbrigarci!", false, true));
+            
+
+        }
 
 
         else if (mapNum == 5 && mapCompleted == false)
@@ -278,8 +352,46 @@ public class dialogueScript : MonoBehaviour
         }
         else if (mapNum == 5 && mapCompleted == true)
         {
-            d.Add(new Dialogo("Nova", "Nova", "mappa1 finita", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "pro gg fra", false, true));
+            music = "Mirrored Engage";
+
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-1.261f, -0.3729106f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(-3.015f, -0.3729106f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(-2.28f, -0.3729106f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Skye"), new Vector3(-0.54f, -0.009f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(2.861f, -0.3729106f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            GameObject pg1 = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(0, 0, 0), Quaternion.identity);
+            pgs.Add(pg1);
+            pg = new GameObject();
+            pg.transform.position = new Vector3(2.202f, -0.3729106f, 0);
+            pg1.transform.parent = pg.transform;
+            pg1.transform.localPosition = Vector3.zero;
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(0.91f, -0.3729106f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Aeria"), new Vector3(1.603f, -0.159f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+
+
+
+            d.Add(new Dialogo("Nova", "Nova", "Ce l'abbiamo fatta!", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Finalmente siamo riusciti a sconfiggerlo, il mondo è salvo dall' inquinamento ora", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Guardate, tutti i mostri inquinanti stanno sparendo.", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Eldoria è finalmente salva...", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "Adesso l'unica cosa che ci rimane da fare è ricostruire Eirene...", false, true));
+            d.Add(new Dialogo("Skye", "Skye", "Se lavoriamo tutti insieme, Eirene tornerà come prima in un battibaleno.", true, true));
+            d.Add(new Dialogo("Aeria", "Aeria", "Mettiamoci tutti all' opera allora... Prima iniziamo, prima finiamo!", false, true));
+
+
         }
 
         else
@@ -447,10 +559,30 @@ public class dialogueScript : MonoBehaviour
         }
         Destroy(deez);
 
-        
-        musicPlayer.GetComponent<musicScript>().Rimuovi();
+
+        if (!(mapNum == 5 && mapCompleted == true)) musicPlayer.GetComponent<musicScript>().Rimuovi();
         GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
         yield return new WaitForSeconds(1f);
+
+
+        if (mapNum == 5 && mapCompleted == true)
+        {
+            GameObject crediti = Instantiate(Resources.Load<GameObject>("crediti"));
+            for (float i = 0; i <= 100; i++)
+            {
+                crediti.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(5);
+            musicPlayer.GetComponent<musicScript>().Rimuovi();
+
+            for (float i = 100; i >= 0; i--)
+            {
+                crediti.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, i / 100);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
         AsyncOperation async;
         if (mapCompleted ) async = SceneManager.LoadSceneAsync("Menu");
         else async = SceneManager.LoadSceneAsync("MainScene");
