@@ -9,6 +9,7 @@ public class Dialogo : MonoBehaviour
     public string text;
     public bool latoSX;
     public bool player;
+    public string texture;
     public Dialogo(string nome, string texture, string text, bool latoSX, bool player)
     {
         this.nome = nome;
@@ -16,5 +17,6 @@ public class Dialogo : MonoBehaviour
         this.text = text;
         this.latoSX = latoSX;
         this.player = player;
+        this.texture = texture;
     }
 }
