@@ -44,13 +44,21 @@ public class dialogueScript : MonoBehaviour
 
         if (mapNum == 1 && mapCompleted == false)
         {
-            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("castello interno");
+            GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("prologo");
+            GameObject.Find("Sfondo").transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
 
-            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(0.9506399f, -0.49f, 0), Quaternion.identity);
-            pgs.Add(pg);
-            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(2.331744f, -0.49f, 0), Quaternion.identity);
-            pg.transform.Rotate(new Vector3(0, 180, 0));
-            pgs.Add(pg);
+            d.Add(new Dialogo("", "", "Questo è il continente di Eldoria.", true, true));
+            d.Add(new Dialogo("", "", "È abitata da nazioni di elementi diversi:", true, true));
+            d.Add(new Dialogo("", "", "Il Regno del Fuoco, l'Impero della Terra, la Repubblica dell'Acqua e la Federazione dell'Aria.", true, true));
+            d.Add(new Dialogo("", "", "Un giorno, il cielo si oscurò e apparve un entità maligna nota come l'Inquinatore Morgrath che portò il continente alla rovina.", true, true));
+            d.Add(new Dialogo("", "", "Furono quattro eroi passati alla storia come EcoLegends che salvarono Eldoria.", true, true));
+            d.Add(new Dialogo("", "", "Imprigionarono l'Inquinatore sottoterra con la magia, fondando la città Eirene come simbolo di pace.", true, true));
+            d.Add(new Dialogo("", "", "Sono passati più di cento anni dal Grande Inquinamento e la magia si sta indebolendo...", true, true));
+
+            d.Add(new Dialogo("INIZIOCAMBIOSCENA", "despawn", "castello interno", false, true)); //cambioscena 
+            d.Add(new Dialogo("SPAWN", "Nova", "0.9506399,-0.49", true, true));
+            d.Add(new Dialogo("SPAWN", "Sear", "2.331744,-0.49", false, true));
+            d.Add(new Dialogo("FINECAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
 
 
             d.Add(new Dialogo("Nova", "Nova", "Ah, Sear, ricordi quando eravamo solo dei bambini che giocavano nei giardini del palazzo? Il tempo vola così velocemente, non è vero?", true, true));
@@ -94,6 +102,50 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("MOSTRA", "", "Gemma_Fuoco", true, true));
 
             d.Add(new Dialogo("Sear", "Sear", "wow bella", false, true));
+        }
+
+        else if (mapNum == 2 && mapCompleted == true)
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(1.89f, -0.17f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(-2.268654f, -0.17f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-1.190072f, -0.17f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(2.678753f, -0.17f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+
+
+
+            d.Add(new Dialogo("Nova", "Nova", "Per fortuna siamo riusciti a salvarvi, Thera e Granius. Quell'inquinamento vi stava quasi consumando!", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Non so come ringraziarvi abbastanza, Nova e Sear. Senza di voi, non so cosa sarebbe successo.", false, true));
+            d.Add(new Dialogo("Granius", "Granius", "Davvero, siete stati coraggiosi e rapidi nel prendere quella decisione.", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "E questa gemma... non l'avevo mai vista prima. Che cos'è esattamente?", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "È una gemma speciale che Nova portava sulla sua corona.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Si è attivata al contatto con l'inquinamento ed è capace di purificarlo. Senza di essa, temo che avremmo perso.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Dobbiamo essere grati di aver scoperto il potere di questa gemma in tempo.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ma ora dobbiamo capire come usare questa conoscenza per fermare l'inquinamento che minaccia la nostra terra.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Aspetta un attimo, Nova. Anch'io ho una gemma simile!", false, true));
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Davvero? Non me ne hai mai parlato prima.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "L'ho tenuta nascosta tra i fiori della mia ascia per non perderla.", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "Ma ora che sappiamo come funziona, possiamo unire le forze e aumentare le nostre possibilità di sconfiggere l'inquinamento.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Questo è incredibile!", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Con entrambe le gemme a nostra disposizione, possiamo purificare l'inquinamento in modo più efficiente e veloce.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Grazie, Thera, per avercelo detto.", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "Sembra che il destino ci stia dando una mano.", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "Dobbiamo sfruttare al massimo questa opportunità e proteggere Eldoria insieme.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Allora, cosa aspettiamo? Andiamo a sconfiggere Morgrath a Eirene!", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Probabilmente è riuscito ad uscire dalla prigione in qualche modo.", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "Forse è meglio unire prima tutti i poteri rimanenti e poi sconfiggere Morgrath tutti insieme.", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "Vista la situazione, penso che ogni elemento abbia una gemma che può purificare l'inquinamento.", true, true));
+            d.Add(new Dialogo("Granius", "Granius", "Queste gemme devono essere servite ai nostri antenati per combattere e imprigionare Morgrath.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Probabile, allora dirigiamoci prima alla federazione dell'acqua!", false, true));
+            
+
+
         }
 
         else if (mapNum == 6 && mapCompleted == false) //mappa 3 fake
@@ -436,6 +488,7 @@ public class dialogueScript : MonoBehaviour
                 GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
                 yield return new WaitForSeconds(1f);
                 GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(dial.text);
+                GameObject.Find("Sfondo").transform.localScale = new Vector3(0.7244f, 0.9409f, 0);
                 if (dial.texture == "despawn")
                 {
                     foreach (GameObject g in pgs) Destroy(g);
@@ -511,7 +564,9 @@ public class dialogueScript : MonoBehaviour
             deez.transform.GetChild(0).GetChild(index).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             deez.transform.GetChild(0).GetChild(index).GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
 
-            if (dial.latoSX && !sx)
+            if (dial.nome == "") deez.transform.GetChild(0).GetChild(0).localScale = Vector3.zero;
+
+            if (dial.latoSX && !sx && dial.nome != "")
             {
                 sx = true;
                 for (float i = 0; i <= 20; i++)
