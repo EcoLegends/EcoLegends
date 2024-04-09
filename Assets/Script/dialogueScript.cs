@@ -69,7 +69,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
 
-            d.Add(new Dialogo("INIZIOCAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
+            d.Add(new Dialogo("INIZIOCAMBIOSCENA", "despawn", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
             d.Add(new Dialogo("SPAWN", "Nova", "-2.304,-0.209", true, true));
             d.Add(new Dialogo("SPAWN", "Sear", "-0.488,-0.132", false, true));
             d.Add(new Dialogo("FINECAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
@@ -77,6 +77,9 @@ public class dialogueScript : MonoBehaviour
 
             d.Add(new Dialogo("Nova", "Nova", "Sear, non vedo l'ora di arrivare a Eirene! Sarà una festa indimenticabile.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Concordo, Nova. Sarà fantastico passare del tempo nella città delle feste.", false, true));
+
+            d.Add(new Dialogo("CAMBIAMUSICA", "", "Stalwart Preparations", false, true)); //cambio musica 
+
             d.Add(new Dialogo("Sear", "Sear", "Ma... aspetta, cosa sono quei rumori strani?", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Non lo so, sembra provenire dalla boscaglia là davanti. Dobbiamo stare attenti.", true, true));
             d.Add(new Dialogo("Mostro", "terra1", "Uhrrr!", false, false));
@@ -93,7 +96,138 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Sear", "Sear", "wow bella", false, true));
         }
 
+        else if (mapNum == 6 && mapCompleted == false) //mappa 3 fake
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-0.903f, -0.2f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(-1.622701f, -0.32f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-2.36424f, -0.29f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(-0.2195939f, -0.14f, 0), Quaternion.identity);
+            pgs.Add(pg);
 
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(2.746848f, -0.12f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(1.896f, -0.24f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+
+           
+            music = "A Beacon of Light Awakens";
+
+            d.Add(new Dialogo("Sear", "Sear", "Acquira e Hydris? Stavamo cercando proprio voi.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Morgrath è tornato e sta inquinando tutti i regni, ci serve il vostro aiuto per fermarlo.", true, true));
+            d.Add(new Dialogo("CAMBIAMUSICA", "", "Stalwart Preparations", false, true)); //cambio musica 
+            d.Add(new Dialogo("Acquira", "Acquira", "Ne siamo gia al corrente, sono arrivate molte orde di mostri sulle nostre coste.", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "E da ore che proteggiamo le spiagge ma ne continuano ad arrivare. Non so quanto riusciremo a resistere.", false, true));
+            d.Add(new Dialogo("Granius", "Granius", "Non preoccupatevi, adesso che siamo qui possiamo aiutarvi.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Facciamo vedere a questi mostri chi comanda!", true, true));
+
+        }
+        else if (mapNum == 3 && mapCompleted == false) 
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-0.903f, -0.2f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(-1.622701f, -0.32f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-2.36424f, -0.29f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(-0.2195939f, -0.14f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(2.746848f, -0.12f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(1.896f, -0.24f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+
+
+            
+            d.Add(new Dialogo("Sear", "Sear", "Ce l'abbiamo fatta, per fortuna l'inquinamento non ha avuto la meglio.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ora che siete al sicuro possiamo dirigerci verso-", true, true));
+            d.Add(new Dialogo("CAMBIAMUSICA", "", "Indomitable Will", false, true)); //cambio musica 
+            d.Add(new Dialogo("Acquira", "Acquira", "Fermi dove siete", false, false));
+
+            d.Add(new Dialogo("INIZIOCAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
+
+            d.Add(new Dialogo("SPAWN", "acqua1", "0.696,-0.630", false, true));
+            d.Add(new Dialogo("SPAWN", "acqua1", "0.696,0.1211906", false, false));
+            d.Add(new Dialogo("SPAWN", "acqua2", "-3.124906,-0.3192049", true, false));
+
+            d.Add(new Dialogo("FINECAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
+
+            d.Add(new Dialogo("Granius", "Granius", "Cosa sta succedendo?", true, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Siete circondati, arrendetevi ora o saremo costretti a sconfiggervi.", false, false));
+            d.Add(new Dialogo("Thera", "Thera", "Ma che stai dicendo Hydris!? Noi siamo dalla vostra parte.", true, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Siete caduti dritti nella nostra trappola. Il piano di Morgrath era infallibile.", false, false));
+            d.Add(new Dialogo("Nova", "Nova", "Come avete potuto unirvi a Morgrath? Siamo amici!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Vi sta manipolando, non dovete crede a quello che vi ha detto!", true, true));
+            d.Add(new Dialogo("Acquira", "Acquira", "Silenzio!", false, false));
+            d.Add(new Dialogo("Acquira", "Acquira", "Se non volete arrendervi non rimane altro che combattere.", false, false));
+            d.Add(new Dialogo("Granius", "Granius", "Prepariamoci, questa battaglia non sarà per niente facile...", true, true));
+        }
+
+        else if(mapNum == 4 && mapCompleted == false)
+        {
+            GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-2.506786f, -0.3836665f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Thera"), new Vector3(-3.226575f, -0.3836665f, 0), Quaternion.identity);
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Granius"), new Vector3(-1.813266f, -0.3836665f, 0), Quaternion.identity);
+            pgs.Add(pg);
+
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(0.714f, -0.3836665f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Hydris"), new Vector3(2.353106f, -0.3836665f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Acquira"), new Vector3(1.512476f, -0.3836665f, 0), Quaternion.identity);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+
+            GameObject box = new GameObject();
+            box.transform.position = new Vector3(0, 0.5f, 0);
+            
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Aeria"), box.transform);
+            pgs.Add(pg);
+            pg.transform.localPosition = new Vector3(1.38f, -0.195f, 0);
+            
+            pg = Instantiate(Resources.Load<GameObject>("Characters/Skye"), box.transform);
+            pg.transform.Rotate(new Vector3(0, 180, 0));
+            pgs.Add(pg);
+            pg.transform.localPosition = new Vector3(0.528f, 0.194f,0);
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/volante1"), box.transform);
+            pgs.Add(pg);
+            pg.transform.localPosition = new Vector3(-0.677f, -0.602f, 0);
+
+            pg = Instantiate(Resources.Load<GameObject>("Characters/volante2"), box.transform);
+            pgs.Add(pg);
+            pg.transform.localPosition = new Vector3(2.623f,0,0);
+
+
+            box.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            music = "A Beacon of Light Awakens";
+
+            d.Add(new Dialogo("Nova", "Nova", "Abbiamo appena varcato il confine della Federazione dell'Aria.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "State in guardia, non sappiamo cosa aspettarci.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Con questa nebbia sarà difficile avvistare i nemici...", false, true));
+            d.Add(new Dialogo("CAMBIAMUSICA", "", "Stalwart Preparations", false, true)); //cambio musica 
+            d.Add(new Dialogo("Granius", "Granius", "Hmm... Guardate laggiù! Oltre il ponte. Non sono Aeria e Skye?", true, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "Hai ragione, sembra stiano combattendo qualcosa... Potrebbero essere in pericolo.", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "Hydris ha ragione, dobbiamo aiutarli!", true, true));
+            d.Add(new Dialogo("Acquira", "Acquira", "Con questa nebbia non ci vedranno arrivare, possiamo prenderli di sorpresa.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Andiamo a salvarli!", true, true));
+
+
+        }
 
 
         else if (mapNum == 5 && mapCompleted == false)
@@ -190,8 +324,11 @@ public class dialogueScript : MonoBehaviour
                 GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
                 yield return new WaitForSeconds(1f);
                 GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(dial.text);
-                foreach (GameObject g in pgs) Destroy(g);
-                pgs.Clear();
+                if (dial.texture == "despawn")
+                {
+                    foreach (GameObject g in pgs) Destroy(g);
+                    pgs.Clear();
+                }
                 continue;
             }
             if (dial.nome == "FINECAMBIOSCENA")
@@ -207,6 +344,12 @@ public class dialogueScript : MonoBehaviour
                 pgs.Add(pg);
                 continue;
             }
+            if(dial.nome == "CAMBIAMUSICA")
+            {
+                musicPlayer.GetComponent<musicScript>().ChangeMusic(dial.text);
+                continue;
+            }
+
             if (dial.nome == "MOSTRA")
             {
                 GameObject item = Instantiate(Resources.Load<GameObject>("gemmaGUI"));

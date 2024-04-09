@@ -218,23 +218,23 @@ public class mapScript : MonoBehaviour
 
                     Object enemy = Resources.Load("enemy", typeof(GameObject));
                     GameObject new_enemy1 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy1.GetComponent<enemyScript>().Setup(12, 11, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 4, 4, 5, 9, 4, 5, 1);
+                    new_enemy1.GetComponent<enemyScript>().Setup(12, 11, "???", "acqua1", 3, 3, "near", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 5, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy2 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy2.GetComponent<enemyScript>().Setup(16, 11, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 23, 3, 4, 5, 9, 4, 5, 3);
+                    new_enemy2.GetComponent<enemyScript>().Setup(16, 11, "???", "acqua1", 3, 3, "near", 1, 1, 5, 5, 90, 0, 2, 0, false, 25, 5, 4, 5, 9, 4, 5, 3);
                     GameObject new_enemy3 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy3.GetComponent<enemyScript>().Setup(1, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 5, 4, 5, 9, 4, 5, 1);
+                    new_enemy3.GetComponent<enemyScript>().Setup(7, 2, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 6, 6, 5, 9, 4, 5, 1);
                     GameObject new_enemy4 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy4.GetComponent<enemyScript>().Setup(6, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 3, 4, 5, 9, 4, 5, 1);
+                    new_enemy4.GetComponent<enemyScript>().Setup(22, 2, "???", "acqua1", 3, 3, "near", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 6, 4, 5, 9, 4, 5, 1);
                     GameObject new_enemy5 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy5.GetComponent<enemyScript>().Setup(19, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 24, 3, 4, 5, 9, 4, 5, 4);
+                    new_enemy5.GetComponent<enemyScript>().Setup(14, 12, "???", "acqua1", 3, 3, "move", 1, 1, 5, 5, 90, 0, 2, 0, false, 23, 5, 4, 5, 9, 4, 5, 4);
                     GameObject new_enemy6 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy6.GetComponent<enemyScript>().Setup(3, 14, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 5, 5, 9, 4, 3, 5);
+                    new_enemy6.GetComponent<enemyScript>().Setup(10, 4, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 7, 5, 9, 4, 3, 5);
                     GameObject new_enemy7 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy7.GetComponent<enemyScript>().Setup(26, 14, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 4, 5, 9, 4, 2, 5);
+                    new_enemy7.GetComponent<enemyScript>().Setup(18, 4, "???", "acqua2", 3, 3, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 21, 4, 6, 5, 9, 4, 2, 5);
                     GameObject new_enemy8 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy8.GetComponent<enemyScript>().Setup(8, 15, "???", "acqua2", 3, 4, "near", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 3, 5, 9, 4, 4, 5);
+                    new_enemy8.GetComponent<enemyScript>().Setup(8, 8, "???", "acqua2", 3, 4, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 6, 5, 9, 4, 4, 5);
                     GameObject new_enemy9 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy9.GetComponent<enemyScript>().Setup(18, 15, "???", "acqua2", 3, 4, "near", 1, 2, 3, 3, 90, 0, 2, 2, true, 20, 4, 6, 5, 9, 4, 1, 5);
+                    new_enemy9.GetComponent<enemyScript>().Setup(18, 15, "???", "acqua2", 3, 4, "move", 1, 2, 3, 3, 90, 0, 2, 2, true, 22, 4, 6, 5, 9, 4, 1, 5);
 
 
                     GameObject new_enemy10 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);                                 //sylvain stats
@@ -479,7 +479,7 @@ public class mapScript : MonoBehaviour
                     new_enemy29.GetComponent<enemyScript>().Setup(16, 9, "???", "volante1", 5, 3, "near", 1, 1, 5, 5, 90, 0, 4, 0, false, 26, 6, 4, 5, 9, 4, 5, 3);
 
                     GameObject new_enemy30 = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-                    new_enemy30.GetComponent<enemyScript>().Setup(13, 12, "Morgrath", "Morgrath", 5, 2, "near", 1, 2, 7, 5, 90, 2, 4, 2, true, 60, 6, 6, 5, 9, 4, 5, 5, "Goddess in Shadow (Frenzy)");
+                    new_enemy30.GetComponent<enemyScript>().Setup(13, 12, "Morgrath", "Morgrath", 5, 2, "near", 1, 3, 7, 7, 90, 2, 4, 2, true, 150, 10, 10, 6, 10, 4, 10, 10, "Goddess in Shadow (Frenzy)");
 
                     GameObject.Find("Main Camera").GetComponent<battleManager>().WinCondition(new Vector3(14.06666f,8.833334f,-10), "Sconfiggi Morgrath", true);
                     break;
