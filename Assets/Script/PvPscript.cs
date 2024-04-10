@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Unity.VisualScripting;
 
 
 public class PvPscript : MonoBehaviour
@@ -33,7 +35,13 @@ public class PvPscript : MonoBehaviour
         playerScript player = p.GetComponent<playerScript>();
         GameObject.Find("Sfondo").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvp");
         GameObject.Find("Davanti").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Mappe/Mappa" + mapScript.mapN + "_pvpDavanti");
-
+        yield return new WaitForEndOfFrame();
+        try{
+            UnityEngine.Object mov_tile_prefab = Resources.Load("movTileEnemyAllPrefab", typeof(GameObject));
+            GameObject mov_tile = (GameObject)Instantiate(mov_tile_prefab, new Vector3(88, 88, -2), Quaternion.identity);
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("tileViola")) Destroy(g);
+        }catch (System.Exception ee) { }
+        
 
         if (cura==false)
         {
@@ -115,7 +123,7 @@ public class PvPscript : MonoBehaviour
                                 d.Add(new Dialogo("Sear", "Sear", "Cosa stai dicendo, Thera? Cosa sta succedendo qui?", true, true));
                                 d.Add(new Dialogo("Thera?", enemy.textureFile, "Non importa. Quello che devi sapere è che sono ora dalla parte di Morgrath.", false, false));
                                 d.Add(new Dialogo("Thera?", enemy.textureFile, "E non ci sarà pietà per chiunque cerchi di fermarci.", false, false));
-                                d.Add(new Dialogo("Sear", "Sear", "Ma che stai dicendo? Thera, non puoi lasciare che Morgrath ti manipoli in questo modo! Non sei tu!", true, true));
+                                d.Add(new Dialogo("Sear", "Sear", "Ma che stai dicendo? Thera, non puoi lasciare che Morgrath ti manipoli in questo modo! Non sei più tu!", true, true));
                                 d.Add(new Dialogo("Thera?", enemy.textureFile, "È inutile, Sear. Il mio destino è stato scritto, e ora devo seguirlo fino in fondo.", false, false));
                                 d.Add(new Dialogo("Sear", "Sear", "Allora sarà una battaglia, Thera. Non posso permetterti di vincere.", true, true));
 
@@ -176,7 +184,7 @@ public class PvPscript : MonoBehaviour
                                 d.Add(new Dialogo("Nova", "Nova", "Ma a che prezzo? Hai abbandonato tutto ciò in cui credevi per seguirlo.", true, true));
                                 d.Add(new Dialogo("Nova", "Nova", "Come hai potuto farti ingannare così?", true, true));
                                 d.Add(new Dialogo("Hydris?", enemy.textureFile, "Non sei in grado di capire, Nova. Il potere di Morgrath è irresistibile.", false, false));
-                                d.Add(new Dialogo("Hydris?", enemy.textureFile, "È solo questione di tempo prima che tu anche tu ti unisca a noi.", false, false));
+                                d.Add(new Dialogo("Hydris?", enemy.textureFile, "È solo questione di tempo prima che anche tu ti unisca a noi.", false, false));
                                 d.Add(new Dialogo("Nova", "Nova", "Non accadrà mai, continuerò a lottare contro l'inquinamento.", true, true));
                                 d.Add(new Dialogo("Nova", "Nova", "E se devo fermarti, lo farò per riportarti alla ragione, anche se dovrò combattere contro di te.", true, true));
 
@@ -255,7 +263,7 @@ public class PvPscript : MonoBehaviour
                         case "Thera-Morgrath":
                             {
                                 d.Add(new Dialogo("Morgrath", enemy.textureFile, "Guarda un po' chi si rivede... Sei migliorata molto dal nostro ultimo incontro.", false, false));
-                                d.Add(new Dialogo("Thera", "Thera", "Questa volta riuscirai a prenderci di sopresa, Morgath.", true, true));
+                                d.Add(new Dialogo("Thera", "Thera", "Questa volta non riuscirai a prenderci di sopresa, Morgath.", true, true));
                                 d.Add(new Dialogo("Thera", "Thera", "Ti pentirai di aver inquinato il nostro impero e di averci usato come burattini.", true, true));
 
                                 break;
@@ -265,7 +273,7 @@ public class PvPscript : MonoBehaviour
 
                                 d.Add(new Dialogo("Morgrath", enemy.textureFile, "Ah... Sei tu... Uno dei miei più grandi fallimenti...", false, false));
                                 d.Add(new Dialogo("Morgrath", enemy.textureFile, "Come hai osato far fallire un piano così perfetto!", false, false));
-                                d.Add(new Dialogo("Acquira", "Acquira", "Come hai osato te controllarci ed a farci tradire i nostri amici!", true, true));
+                                d.Add(new Dialogo("Acquira", "Acquira", "Tu come hai osato controllarci e farci tradire i nostri amici!", true, true));
                                 d.Add(new Dialogo("Acquira", "Acquira", "Te la farò pagare Morgrath, nessuno mi può mettere contro i miei amici!", true, true));
 
 
@@ -1078,7 +1086,7 @@ public class PvPscript : MonoBehaviour
                 }
                 if (enemy.textureFile == "Morgrath")
                 {
-                    d.Add(new Dialogo("Morgrath", enemy.textureFile, "Ma come... Come ho potuto perdere contro creature inferiori come voi...", false, false));
+                    d.Add(new Dialogo("Morgrath", enemy.textureFile, "Ma come?... Come ho potuto perdere contro creature inferiori come voi?...", false, false));
 
                 }
                 if (d.Count > 0)

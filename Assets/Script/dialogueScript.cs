@@ -66,15 +66,14 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Sear", "Sear", "Ci sono così tante questioni politiche da affrontare, soprattutto in un momento come questo.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Oh, non pensare sempre ai doveri, fratello mio! Ricordati di goderti anche i momenti felici.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Sai, è passato esattamente un secolo dalla sconfitta di Morgrath e l'inaugurazione di Eirene come città libera. È un momento da celebrare!", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. A volte mi perdo troppo nelle preoccupazioni.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. A volte mi preoccupo troppo.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Ma sai quanto è importante mantenere la stabilità del regno, specialmente dopo ciò che abbiamo affrontato con Morgrath.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Certo, capisco le tue preoccupazioni.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Ma questo anniversario non riguarda solo la fine di un'epoca buia, riguarda anche il futuro luminoso che abbiamo costruito insieme.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Eirene è un simbolo di speranza per il nostro popolo, e dobbiamo celebrarlo con gioia e gratitudine.", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Grazie per avermi ricordato l'importanza di queste celebrazioni.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Sarà un onore festeggiare insieme alla città e onorare coloro che hanno combattuto per la nostra libertà.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Esattamente! E ora, lascia che i nostri doveri si fermino per un momento mentre ci immergiamo nella gioia di questo anniversario.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del regno del fuoco sanno fare!", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Eirene ci aspetta, e dobbiamo essere pronti a festeggiare come solo i principi del Regno del Fuoco sanno fare!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione, Nova. Andiamo a celebrare insieme il futuro luminoso di Eirene e del nostro regno!", false, true));
 
             d.Add(new Dialogo("INIZIOCAMBIOSCENA", "despawn", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
@@ -89,7 +88,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("CAMBIAMUSICA", "", "Stalwart Preparations", false, true)); //cambio musica 
 
             d.Add(new Dialogo("Sear", "Sear", "Ma... aspetta, cosa sono quei rumori strani?", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Non lo so, sembra che ci stiano arrivando d'incontro. Dobbiamo stare attenti.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Non lo so, sembra che ci stiano venendo incontro. Dobbiamo stare attenti.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Preparati Nova dobbiamo diffenderci!", false, true));
         }
         else if (mapNum == 1 && mapCompleted == true)
@@ -111,7 +110,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Ho sentito dire che è stata forgiata per assorbire e purificare l'inquinamento.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Potrebbe essere la chiave per risolvere il problema alla radice!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Dobbiamo investigare di più su questa gemma e su come possiamo usarla per fermare l'inquinamento.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Dobbiamo a raggiungere Eirene al più presto... I mostri provenivano da quella direzione...", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Bisogna raggiungere Eirene al più presto... I mostri provenivano da quella direzione...", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Deve essere successo qualcosa di grave...", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Allora sbrighiamoci...", false, true));
 
@@ -126,7 +125,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("FINECAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
 
             d.Add(new Dialogo("???", "terra1", "Grrraugh!", false, false));
-            d.Add(new Dialogo("Nova", "Nova", "Si stanno sbarrando la strada... Dobbiamo affrontarli di nuovo.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ci stanno sbarrando la strada... Dobbiamo affrontarli di nuovo.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Nova, non ha senso sprecare energia contro questi mostri... Sono troppi!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Conviene dirigersi verso l'Impero della Terra e chiedere rinforzi.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Hai ragione... Non ce la faremo mai da soli. Andiamo!", false, true));
@@ -134,31 +133,22 @@ public class dialogueScript : MonoBehaviour
 
         else if (mapNum == 2 && mapCompleted == false){
 
-            // Nova: Sear, quanto ancora dobbiamo camminare prima di raggiungere la capitale Caelum dell' impero della Terra? 
-            // Sear: Siamo quasi arrivati. Dobbiamo solo resistere ancora un po'. Siamo quasi lì.
-            // Nova: Ma guarda intorno! Guarda i campi, le foreste... tutto è in rovina a causa di quest'inquinamento! È orribile.
-            // Sear: Lo so Nova, ma dobbiamo rimanere concentrati sul nostro obiettivo. Una volta che saremo alla città, potremo trovare una soluzione per fermare tutto questo.
-            // Nova: Guarda, Sear! Finalmente vedo le mura della città! Siamo arrivati!
-            // Sear: Sì, finalmente siamo qui. Ma guarda come è stata danneggiata... È ancora più devastata di quanto immaginassi.
-            // Nova: Entriamo nella città!
-            // Nova: Guarda lì! Granius e Thera sono in pericolo! Dobbiamo aiutarli!
-            // Sear: Hai ragione. Non possiamo lasciarli da soli. Preparati, Nova, dobbiamo affrontare questi mostri inquinati e proteggere i nostri amici!
+            
             GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-2.257322f, -0.1896601f, 0), Quaternion.identity);
             pgs.Add(pg);
             pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(-1.094686f, -0.1996828f, 0), Quaternion.identity);
             pg.transform.Rotate(new Vector3(0, 180, 0));
             pgs.Add(pg);
             d.Add(new Dialogo("Nova", "Nova", "Sear, quanto dobbiamo camminare ancora prima di raggiungere la capitale dell'Impero della Terra?", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Siamo quasi arrivati. Dobbiamo solo resistere ancora un po'. Siamo quasi lì.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Siamo quasi arrivati. Dobbiamo solo resistere ancora un po'.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Ma guardati intorno! I campi, le foreste... tutto è in rovina a causa di quest'inquinamento! È orribile.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Lo so Nova, ma dobbiamo rimanere concentrati sul nostro obiettivo.", false, true));
-            d.Add(new Dialogo("Sear", "Sear", "Una volta ragiunta la città, troveremo una soluzione per fermare tutto questo.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Una volta raggiunta la città, troveremo una soluzione per fermare tutto questo.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Guarda, Sear! Finalmente vedo le mura della città! Siamo arrivati!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Sì, finalmente siamo qui. Ma guarda come è stata danneggiata... È ancora più devastata di quanto immaginassi.", false, true));
-            //d.Add(new Dialogo("Nova", "Nova", "Entriamo nella città!", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Guarda lì! Granius e Thera sono in pericolo! Dobbiamo aiutarli!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hai ragione. Non possiamo lasciarli da soli.", false, true));
-            d.Add(new Dialogo("Sear", "Sear", "Preparati Nova, dobbiamo affrontare questi mostri inquinati e proteggere i nostri amici!", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Preparati Nova, dobbiamo affrontare questi mostri inquinanti e proteggere i nostri amici!", false, true));
         }
 
         else if (mapNum == 2 && mapCompleted == true)
@@ -177,18 +167,18 @@ public class dialogueScript : MonoBehaviour
 
 
             d.Add(new Dialogo("Nova", "Nova", "Per fortuna siamo riusciti a salvarvi, Thera e Granius. Quell'inquinamento vi stava quasi consumando!", false, true));
-            d.Add(new Dialogo("Thera", "Thera", "Non so come ringraziarvi abbastanza, Nova e Sear. Senza di voi, non so cosa sarebbe successo.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Non so come ringraziarvi, Nova e Sear. Senza di voi, non so cosa sarebbe successo.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "Davvero, siete stati coraggiosi e rapidi nel prendere quella decisione.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "E questa gemma... non l'avevo mai vista prima. Che cos'è esattamente?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "È una gemma speciale che Nova portava sulla sua corona.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Si è attivata al contatto con l'inquinamento ed è capace di purificarlo. Senza di essa, temo che avremmo perso.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Dobbiamo essere grati di aver scoperto il potere di questa gemma in tempo.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Ma ora dobbiamo capire come usare questa conoscenza per fermare l'inquinamento che minaccia la nostra terra.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ora dobbiamo capire come usare questa conoscenza per fermare l'inquinamento che minaccia la nostra terra.", false, true));
             d.Add(new Dialogo("Thera", "Thera", "Aspetta un attimo, Nova. Anch'io ho una gemma simile!", true, true));
             d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Davvero? Non me ne hai mai parlato prima.", false, true));
             d.Add(new Dialogo("Thera", "Thera", "L'ho tenuta nascosta tra i fiori della mia ascia per non perderla.", true, true));
-            d.Add(new Dialogo("Thera", "Thera", "Ma ora che sappiamo come funziona, possiamo unire le forze e aumentare le nostre possibilità di sconfiggere l'inquinamento.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Ora che sappiamo come funziona, possiamo unire le forze e aumentare le nostre possibilità di sconfiggere l'inquinamento.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Questo è incredibile!", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Con entrambe le gemme a nostra disposizione, possiamo purificare l'inquinamento in modo più efficiente e veloce.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Grazie, Thera, per avercelo detto.", false, true));
@@ -196,10 +186,10 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Granius", "Granius", "Dobbiamo sfruttare al massimo questa opportunità e proteggere Eldoria insieme.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Allora, cosa aspettiamo? Andiamo a sconfiggere Morgrath a Eirene!", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Probabilmente è riuscito ad uscire dalla prigione in qualche modo.", false, true));
-            d.Add(new Dialogo("Thera", "Thera", "Forse è meglio unire prima tutti i poteri rimanenti e poi sconfiggere Morgrath tutti insieme.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Forse è meglio unire prima tutti i poteri rimaste e poi sconfiggere Morgrath tutti insieme.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "Vista la situazione, penso che ogni elemento abbia una gemma che può purificare l'inquinamento.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "Queste gemme devono essere servite ai nostri antenati per combattere e imprigionare Morgrath.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Probabile, allora dirigiamoci prima alla federazione dell'acqua!", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Probabile, allora primaa dirigiamoci verso la Repubblica dell'Acqua!", false, true));
             
 
 
@@ -228,10 +218,10 @@ public class dialogueScript : MonoBehaviour
             music = "A Beacon of Light Awakens";
 
             d.Add(new Dialogo("Sear", "Sear", "Acquira e Hydris? Stavamo cercando proprio voi.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Morgrath è tornato e sta inquinando tutti i regni, ci serve il vostro aiuto per fermarlo.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Morgrath è tornato e sta inquinando tutto il continente, ci serve il vostro aiuto per fermarlo.", true, true));
             d.Add(new Dialogo("CAMBIAMUSICA", "", "Stalwart Preparations", false, true)); //cambio musica 
-            d.Add(new Dialogo("Acquira", "Acquira", "Ne siamo gia al corrente, sono arrivate molte orde di mostri sulle nostre coste.", false, true));
-            d.Add(new Dialogo("Hydris", "Hydris", "E da ore che proteggiamo le spiagge ma ne continuano ad arrivare. Non so quanto riusciremo a resistere.", false, true));
+            d.Add(new Dialogo("Acquira", "Acquira", "Ne siamo già al corrente, sono arrivate molte orde di mostri sulle nostre coste.", false, true));
+            d.Add(new Dialogo("Hydris", "Hydris", "È da ore che proteggiamo le nostre spiagge ma ne continuano ad arrivare. Non so quanto riusciremo a resistere.", false, true));
             d.Add(new Dialogo("Granius", "Granius", "Non preoccupatevi, adesso che siamo qui possiamo aiutarvi.", true, true));
             d.Add(new Dialogo("Thera", "Thera", "Facciamo vedere a questi mostri chi comanda!", true, true));
 
@@ -275,7 +265,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Thera", "Thera", "Ma che stai dicendo Hydris!? Noi siamo dalla vostra parte.", true, true));
             d.Add(new Dialogo("Hydris", "Hydris", "Siete caduti dritti nella nostra trappola. Il piano di Morgrath era infallibile.", false, false));
             d.Add(new Dialogo("Nova", "Nova", "Come avete potuto unirvi a Morgrath? Siamo amici!", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Vi sta manipolando, non dovete crede a quello che vi ha detto!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Vi sta manipolando, non dovete credere a quello che vi ha detto!", true, true));
             d.Add(new Dialogo("Acquira", "Acquira", "Silenzio!", false, false));
             d.Add(new Dialogo("Acquira", "Acquira", "Se non volete arrendervi non rimane altro che combattere.", false, false));
             d.Add(new Dialogo("Granius", "Granius", "Prepariamoci, questa battaglia non sarà per niente facile...", true, true));
@@ -301,7 +291,7 @@ public class dialogueScript : MonoBehaviour
 
 
 
-            d.Add(new Dialogo("Acquira", "Acquira", "Per fortuna ci avete salvato... non avevamo idea di essere sotto il controllo di Morgrath.", true, true));
+            d.Add(new Dialogo("Acquira", "Acquira", "Per fortuna ci avete salvati... non avevamo idea di essere sotto il controllo di Morgrath.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Non preoccupatevi, non è colpa vostra se Morgrath è riuscito ad avere la meglio su di voi.", false, true));
             d.Add(new Dialogo("Hydris", "Hydris", "Ci dispiace molto... spero di non aver fatto male a nessuno.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hmm... Hydris, quella gemma che hai sul bastone, potrebbe essere per caso una gemma elementare?", false, true));
@@ -449,7 +439,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Siamo arrivati finalmente a Eirene...", true, true));
             d.Add(new Dialogo("Sear", "Sear", "La città è in condizioni peggiori di quello che pensavo. Le fiamme stanno divorando tutte le abitazioni.", false, true));
             d.Add(new Dialogo("Hydris", "Hydris", "Speriamo che i cittadini si siano messi al riparo...", true, true));
-            d.Add(new Dialogo("Granius", "Granius", "Morgrath la paghera! Come ha potuto radere al suolo la nostra capitale?", false, true));
+            d.Add(new Dialogo("Granius", "Granius", "Morgrath la pagherà! Come ha potuto radere al suolo la nostra capitale?", false, true));
             d.Add(new Dialogo("Skye", "Skye", "Calmatevi tutti! Abbiamo bisogno di un piano per sconfiggere Morgrath.", true, true));
             d.Add(new Dialogo("Aeria", "Aeria", "Skye ha ragione, calmiamoci tutti e sentiamo il suo piano.", false, true));
             d.Add(new Dialogo("Skye", "Skye", "La città ha due entrate principali, una a destra e una a sinistra.", true, true));
@@ -457,7 +447,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Sear", "Sear", "Per poi riunirsi al centro e attaccare Morgrath tutti insieme?", false, true));
             d.Add(new Dialogo("Skye", "Skye", "Esatto, mi hai proprio letto nel pensiero.", true, true));
             d.Add(new Dialogo("Acquira", "Acquira", "Mi piace, veloci e dritti all'obbiettivo. Dovrebbe andare.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Questa è la nostra ultima battaglia, mettetecela tutta e preparatevi a qualsiasi imprevisto. Ho fidicia in voi.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Questa è la nostra ultima battaglia, mettiamocela tutta e prepariamoci a qualsiasi imprevisto.", true, true));
         }
         else if (mapNum == 5 && mapCompleted == true)
         {
