@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EscMenu",
+                    "type": "Button",
+                    "id": "7cdc00d8-c3dc-49e6-9823-2b29311c7b34",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -39,11 +48,22 @@
                 {
                     "name": "",
                     "id": "69434fed-2ba5-409a-937a-e822fcd83576",
-                    "path": "<Keyboard>/#(C)",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ShowEnemyMov",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "26efdcc4-afe1-4605-87af-02fb9331323b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EscMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,16 +1,9 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
-using Dev.ComradeVanti.WaitForAnim;
-using System.Text.RegularExpressions;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using TMPro;
 using UnityEngine.UI;
 
@@ -54,6 +47,8 @@ public class battleManager : MonoBehaviour
     public static bool stop = false;
 
     bool hasBosses = false;
+
+    bool escMenu = false;
 
     private void Awake() //roba del tutorial bohh
     {
@@ -133,7 +128,51 @@ public class battleManager : MonoBehaviour
         }
     }
 
+    public void OnPressEscape(InputAction.CallbackContext ctx)
+    {
+        if (phase=="Player"&&!stop && mapScript.finitoSpawn && GameObject.FindGameObjectsWithTag("Tutorial").Length == 0 && !escMenu)
+        {
+            escMenu = true;
+            transform.GetChild(3).gameObject.SetActive(true);
+        }
+        else if (phase == "Player" && !stop && mapScript.finitoSpawn && escMenu == true)
+        {
+            transform.GetChild(3).gameObject.SetActive(false);
+            escMenu = false;
+        }
+    }
 
+    public void EndTurn()
+    {
+        transform.GetChild(3).gameObject.SetActive(false);
+        escMenu = false;
+        foreach (GameObject unit in units)
+        {
+            unit.GetComponent<playerScript>().canMove = false;
+
+        }
+        unmovedUnits.Clear();
+    }
+
+    public void Restart()
+    {
+        StartCoroutine(changeScene("MainScene"));
+    }
+    public void Menu()
+    {
+        StartCoroutine(changeScene("Menu"));
+    }
+
+    public IEnumerator changeScene(string sceneName)
+    {
+        stop = true;
+        transform.GetChild(3).gameObject.SetActive(false);
+        GameObject.Find("Music").GetComponent<musicScript>().Rimuovi();
+        GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(1);
+        yield return new WaitForSeconds(1);
+        AsyncOperation async2 = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
+    }
 
 
     public int[] pvp(GameObject e, GameObject p, string initial_turn, bool cura)
@@ -614,7 +653,7 @@ public class battleManager : MonoBehaviour
 
     void Start()
     {
-        
+        escMenu = false;
         stop = true;
         units = new List<GameObject>();
         unmovedUnits = new List<GameObject>();
@@ -792,7 +831,15 @@ public class battleManager : MonoBehaviour
 
             }
 
-    
+            bool qualcunoPuoMuoversi = false;
+            foreach (GameObject unit in units)
+            {
+                if(unit.GetComponent<playerScript>().canMove) qualcunoPuoMuoversi=true;
+               
+            }
+            if(qualcunoPuoMuoversi==false && unmovedUnits.Count > 0) unmovedUnits.Clear();
+
+
         }
         
     }
