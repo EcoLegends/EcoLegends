@@ -175,7 +175,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Quando un tuo personaggio viene sconfitto, \xE8 costretto a ritirarsi
-    dalla battaglia. \nSe tutti i personaggi si ritirano devi ricomincare dall'inizio
+    dalla battaglia. \nSe tutti i personaggi si ritirano devi ricominciare dall'inizio
     la mappa."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06988976c5618664785a91daf90cba32, type: 2}

@@ -158,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 987133518851255614, guid: fc46f3ef8f73da447b005da62334099a, type: 3}
       propertyPath: m_text
       value: Posizionando il cursore sopra un nemico o un giocatore, puoi visualizzare
-        il suo raggio azione e le sue statistiche.
+        il suo raggio di azione e le sue statistiche.
       objectReference: {fileID: 0}
     - target: {fileID: 987133518851255614, guid: fc46f3ef8f73da447b005da62334099a, type: 3}
       propertyPath: m_margin.z

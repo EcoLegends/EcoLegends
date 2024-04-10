@@ -93,39 +93,27 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Sear", "Sear", "Preparati Nova dobbiamo diffenderci!", false, true));
         }
         else if (mapNum == 1 && mapCompleted == true)
-        {
-            /*Sear: il potere oscuro attorno a questi mostri sembra quelli di Morgrath.
-            Nova: Ma non è già stato sconfitto e imprigionato nella città di Eirene?
-            Sear: Probabilmente sarà successo qualcosa a Eirene, è meglio che acceleriamo.
-            Nova: Sear, guarda questa gemma sulla mia corona. Ha iniziato a brillare dopo che abbiamo combattuto quei mostri. Credi che abbia qualcosa a che fare con loro?
-            Sear: Hmm, potrebbe essere. Potrebbe essere stata attivata dall'inquinamento che quei mostri emettono. Ma cosa fa esattamente questa gemma?
-            Nova: Ho sentito dire che è stata forgiata per assorbire e purificare l'inquinamento. Potrebbe essere la chiave per risolvere il problema alla radice anziché solo combattere i mostri.
-            Sear: Potrebbe essere la nostra soluzione! Dobbiamo investigare di più su questa gemma e su come possiamo usarla per combattere l'inquinamento causato dai mostri.
-            Nova: Intanto continuano ad andare a Eirene secondo me sarà successo qualcosa di grave.
-            Sear: Va benee.....
-            Mostro: Ugrrrr
-            Nova: Oh no! La strada per andare a Eirene è tutta bloccata dai mostri inquinati!
-            Sear: Nova, non ha senso sprecare energia contro questi mostri ci deviamo verso l'impero della terra.
-            Nova: Concordo, ci riuniamo prima con gli altri . Andiamo!
-            */
-            
+        {            
             GameObject pg = Instantiate(Resources.Load<GameObject>("Characters/Nova"), new Vector3(-0.6681742f, 0.009735733f, 0), Quaternion.identity);
             pgs.Add(pg);
             pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(1.322946f, 0.06313743f, 0), Quaternion.identity);
             pg.transform.Rotate(new Vector3(0, 180, 0));
             pgs.Add(pg);
-            d.Add(new Dialogo("Sear", "Sear", "Il potere oscuro attorno a questi mostri sembra quelli di Morgrath.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Il potere oscuro attorno a questi mostri sembra quello di Morgrath.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Ma non è già stato sconfitto e imprigionato nella città di Eirene?", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Probabilmente sarà successo qualcosa a Eirene, è meglio che acceleriamo.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Deve essere successo qualcosa a Eirene... È meglio accelerare.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Sear, guarda questa gemma sulla mia corona.", true, true));
             d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Ha iniziato a brillare dopo che abbiamo combattuto quei mostri. Credi che abbia qualcosa a che fare con loro?", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Hmm, potrebbe essere. Potrebbe essere stata attivata dall'inquinamento che quei mostri emettono. Ma cosa fa esattamente questa gemma?", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ha iniziato a brillare dopo che abbiamo combattuto quei mostri.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Credi che abbia qualcosa a che fare con loro?", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hmm, potrebbe essere. Penso si sia attivata al contatto con l'inquinamento.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Ma cosa fa esattamente questa gemma?", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Ho sentito dire che è stata forgiata per assorbire e purificare l'inquinamento.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Potrebbe essere la chiave per risolvere il problema alla radice anziché solo combattere i mostri.", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Potrebbe essere la nostra soluzione! Dobbiamo investigare di più su questa gemma e su come possiamo usarla per combattere l'inquinamento causato dai mostri.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Intanto continuano ad andare a Eirene secondo me sarà successo qualcosa di grave.", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Va benee...", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Potrebbe essere la chiave per risolvere il problema alla radice!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Dobbiamo investigare di più su questa gemma e su come possiamo usarla per fermare l'inquinamento.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Dobbiamo a raggiungere Eirene al più presto... I mostri provenivano da quella direzione...", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Deve essere successo qualcosa di grave...", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Allora sbrighiamoci...", false, true));
 
             d.Add(new Dialogo("INIZIOCAMBIOSCENA", "despawn", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
             
@@ -137,10 +125,11 @@ public class dialogueScript : MonoBehaviour
 
             d.Add(new Dialogo("FINECAMBIOSCENA", "", "Mappe/Mappa" + mapNum + "_pvp", false, true)); //cambioscena 
 
-            d.Add(new Dialogo("???", "erra1", "Ugrrrr!", false, false));
-            d.Add(new Dialogo("Nova", "Nova", "Oh no! La strada per andare a Eirene è tutta bloccata dai mostri inquinati!", false, true));
-            d.Add(new Dialogo("Sear", "Sear", "Nova, non ha senso sprecare energia contro questi mostri ci deviamo verso l'impero della terra.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Concordo, ci riuniamo prima con gli altri . Andiamo!", false, true));
+            d.Add(new Dialogo("???", "terra1", "Grrraugh!", false, false));
+            d.Add(new Dialogo("Nova", "Nova", "Si stanno sbarrando la strada... Dobbiamo affrontarli di nuovo.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Nova, non ha senso sprecare energia contro questi mostri... Sono troppi!", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Conviene dirigersi verso l'Impero della Terra e chiedere rinforzi.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Hai ragione... Non ce la faremo mai da soli. Andiamo!", false, true));
         }
 
         else if (mapNum == 2 && mapCompleted == false){
@@ -159,15 +148,17 @@ public class dialogueScript : MonoBehaviour
             pg = Instantiate(Resources.Load<GameObject>("Characters/Sear"), new Vector3(-1.094686f, -0.1996828f, 0), Quaternion.identity);
             pg.transform.Rotate(new Vector3(0, 180, 0));
             pgs.Add(pg);
-            d.Add(new Dialogo("Nova", "Nova", "Sear, quanto ancora dobbiamo camminare prima di raggiungere la capitale Caelum dell' impero della Terra? ", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Sear, quanto dobbiamo camminare ancora prima di raggiungere la capitale dell'Impero della Terra?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Siamo quasi arrivati. Dobbiamo solo resistere ancora un po'. Siamo quasi lì.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Ma guarda intorno! Guarda i campi, le foreste... tutto è in rovina a causa di quest'inquinamento! È orribile.", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Lo so Nova, ma dobbiamo rimanere concentrati sul nostro obiettivo. Una volta che saremo alla città, potremo trovare una soluzione per fermare tutto questo.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ma guardati intorno! I campi, le foreste... tutto è in rovina a causa di quest'inquinamento! È orribile.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Lo so Nova, ma dobbiamo rimanere concentrati sul nostro obiettivo.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Una volta ragiunta la città, troveremo una soluzione per fermare tutto questo.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Guarda, Sear! Finalmente vedo le mura della città! Siamo arrivati!", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Sì, finalmente siamo qui. Ma guarda come è stata danneggiata... È ancora più devastata di quanto immaginassi.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Entriamo nella città!", true, true));
+            //d.Add(new Dialogo("Nova", "Nova", "Entriamo nella città!", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Guarda lì! Granius e Thera sono in pericolo! Dobbiamo aiutarli!", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Hai ragione. Non possiamo lasciarli da soli. Preparati, Nova, dobbiamo affrontare questi mostri inquinati e proteggere i nostri amici!", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Hai ragione. Non possiamo lasciarli da soli.", false, true));
+            d.Add(new Dialogo("Sear", "Sear", "Preparati Nova, dobbiamo affrontare questi mostri inquinati e proteggere i nostri amici!", false, true));
         }
 
         else if (mapNum == 2 && mapCompleted == true)
@@ -624,6 +615,7 @@ public class dialogueScript : MonoBehaviour
             int index = 0;
             if (!dial.latoSX) index = 1;
             if (!dial.player) deez.transform.GetChild(0).GetChild(index).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("enemyNameBanner");
+            else deez.transform.GetChild(0).GetChild(index).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("playerNameBanner");
             deez.transform.GetChild(0).GetChild(index).GetChild(0).GetComponent<SpriteRenderer>().sprite = dial.sprite;
             deez.transform.GetChild(0).GetChild(index).GetChild(1).GetComponent<TextMeshProUGUI>().text = dial.nome;
 

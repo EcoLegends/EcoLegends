@@ -174,7 +174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Altri terreni come la lava e le rocce non sono traversabili. '
+  m_text: 'Altri terreni come la lava e le rocce non sono attraversabili. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06988976c5618664785a91daf90cba32, type: 2}
   m_sharedMaterial: {fileID: -8008457656545648370, guid: 06988976c5618664785a91daf90cba32, type: 2}
