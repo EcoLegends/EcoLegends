@@ -477,8 +477,9 @@ public class battleManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-
-        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
+        try{
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
+        }catch(System.Exception e){}
         phase = "animation";
         animationText = "player";
         animationTime = Time.time + 3;
