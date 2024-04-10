@@ -694,7 +694,7 @@ public class playerScript : MonoBehaviour
             }
 
 
-            if (canMove && battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
+            if (battleManager.phase == "Player" && !(Input.GetKey(KeyCode.Mouse0)))
             {
                 if (movBlueTiles.Count > 0)
                 {
