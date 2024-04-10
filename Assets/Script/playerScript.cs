@@ -1,4 +1,5 @@
 
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -731,7 +732,9 @@ public class playerScript : MonoBehaviour
                     foreach (GameObject g in attackRedTiles) Destroy(g);                          //elimina tasselli rossi
                     attackRedTiles.Clear();
                 }
+                try{
                 GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("select");
+                }catch(System.Exception e){}
                 transform.GetChild(0).GetComponent<Animator>().Play("Select");
                 dragging = true;
                 HighlightMov();                                                                //spawna tasselli blu movimento
