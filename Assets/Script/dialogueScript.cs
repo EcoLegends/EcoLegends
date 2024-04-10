@@ -103,7 +103,7 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Ma non è già stato sconfitto e imprigionato nella città di Eirene?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Deve essere successo qualcosa a Eirene... È meglio accelerare.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Sear, guarda questa gemma sulla mia corona.", true, true));
-            d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Fuoco", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Ha iniziato a brillare dopo che abbiamo combattuto quei mostri.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Credi che abbia qualcosa a che fare con loro?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hmm, potrebbe essere. Penso si sia attivata al contatto con l'inquinamento.", false, true));
