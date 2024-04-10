@@ -118,6 +118,8 @@ public class dialogueScript : MonoBehaviour
             d.Add(new Dialogo("Nova", "Nova", "Ma non è già stato sconfitto e imprigionato nella città di Eirene?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Probabilmente sarà successo qualcosa a Eirene, è meglio che acceleriamo.", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Sear, guarda questa gemma sulla mia corona.", true, true));
+            d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ha iniziato a brillare dopo che abbiamo combattuto quei mostri. Credi che abbia qualcosa a che fare con loro?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Hmm, potrebbe essere. Potrebbe essere stata attivata dall'inquinamento che quei mostri emettono. Ma cosa fa esattamente questa gemma?", false, true));
             d.Add(new Dialogo("Nova", "Nova", "Ho sentito dire che è stata forgiata per assorbire e purificare l'inquinamento.", true, true));
             d.Add(new Dialogo("Nova", "Nova", "Potrebbe essere la chiave per risolvere il problema alla radice anziché solo combattere i mostri.", true, true));
@@ -183,22 +185,22 @@ public class dialogueScript : MonoBehaviour
 
 
 
-            d.Add(new Dialogo("Nova", "Nova", "Per fortuna siamo riusciti a salvarvi, Thera e Granius. Quell'inquinamento vi stava quasi consumando!", true, true));
-            d.Add(new Dialogo("Thera", "Thera", "Non so come ringraziarvi abbastanza, Nova e Sear. Senza di voi, non so cosa sarebbe successo.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Per fortuna siamo riusciti a salvarvi, Thera e Granius. Quell'inquinamento vi stava quasi consumando!", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "Non so come ringraziarvi abbastanza, Nova e Sear. Senza di voi, non so cosa sarebbe successo.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "Davvero, siete stati coraggiosi e rapidi nel prendere quella decisione.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "E questa gemma... non l'avevo mai vista prima. Che cos'è esattamente?", true, true));
             d.Add(new Dialogo("Sear", "Sear", "È una gemma speciale che Nova portava sulla sua corona.", false, true));
             d.Add(new Dialogo("Sear", "Sear", "Si è attivata al contatto con l'inquinamento ed è capace di purificarlo. Senza di essa, temo che avremmo perso.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Dobbiamo essere grati di aver scoperto il potere di questa gemma in tempo.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Ma ora dobbiamo capire come usare questa conoscenza per fermare l'inquinamento che minaccia la nostra terra.", true, true));
-            d.Add(new Dialogo("Thera", "Thera", "Aspetta un attimo, Nova. Anch'io ho una gemma simile!", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Dobbiamo essere grati di aver scoperto il potere di questa gemma in tempo.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Ma ora dobbiamo capire come usare questa conoscenza per fermare l'inquinamento che minaccia la nostra terra.", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "Aspetta un attimo, Nova. Anch'io ho una gemma simile!", true, true));
             d.Add(new Dialogo("MOSTRA", "", "Gemma_Terra", true, true));
-            d.Add(new Dialogo("Sear", "Sear", "Davvero? Non me ne hai mai parlato prima.", true, true));
-            d.Add(new Dialogo("Thera", "Thera", "L'ho tenuta nascosta tra i fiori della mia ascia per non perderla.", false, true));
-            d.Add(new Dialogo("Thera", "Thera", "Ma ora che sappiamo come funziona, possiamo unire le forze e aumentare le nostre possibilità di sconfiggere l'inquinamento.", false, true));
-            d.Add(new Dialogo("Nova", "Nova", "Questo è incredibile!", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Con entrambe le gemme a nostra disposizione, possiamo purificare l'inquinamento in modo più efficiente e veloce.", true, true));
-            d.Add(new Dialogo("Nova", "Nova", "Grazie, Thera, per avercelo detto.", true, true));
+            d.Add(new Dialogo("Sear", "Sear", "Davvero? Non me ne hai mai parlato prima.", false, true));
+            d.Add(new Dialogo("Thera", "Thera", "L'ho tenuta nascosta tra i fiori della mia ascia per non perderla.", true, true));
+            d.Add(new Dialogo("Thera", "Thera", "Ma ora che sappiamo come funziona, possiamo unire le forze e aumentare le nostre possibilità di sconfiggere l'inquinamento.", true, true));
+            d.Add(new Dialogo("Nova", "Nova", "Questo è incredibile!", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Con entrambe le gemme a nostra disposizione, possiamo purificare l'inquinamento in modo più efficiente e veloce.", false, true));
+            d.Add(new Dialogo("Nova", "Nova", "Grazie, Thera, per avercelo detto.", false, true));
             d.Add(new Dialogo("Granius", "Granius", "Sembra che il destino ci stia dando una mano.", true, true));
             d.Add(new Dialogo("Granius", "Granius", "Dobbiamo sfruttare al massimo questa opportunità e proteggere Eldoria insieme.", true, true));
             d.Add(new Dialogo("Sear", "Sear", "Allora, cosa aspettiamo? Andiamo a sconfiggere Morgrath a Eirene!", false, true));

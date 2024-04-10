@@ -1486,6 +1486,36 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 206
+    m_Metrics:
+      m_Width: 35.453125
+      m_Height: 63.4375
+      m_HorizontalBearingX: 3.875
+      m_HorizontalBearingY: 62.453125
+      m_HorizontalAdvance: 42.203125
+    m_GlyphRect:
+      m_X: 179
+      m_Y: 570
+      m_Width: 37
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 532
+    m_Metrics:
+      m_Width: 0
+      m_Height: 0
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 0
+      m_HorizontalAdvance: 25.015625
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 0
+      m_Height: 0
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 13
@@ -1843,6 +1873,14 @@ MonoBehaviour:
     m_Unicode: 8804
     m_GlyphIndex: 529
     m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 233
+    m_GlyphIndex: 206
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 160
+    m_GlyphIndex: 532
+    m_Scale: 1
   m_AtlasTextures:
   - {fileID: 2847165331018404642}
   m_AtlasTextureIndex: 0
@@ -2197,6 +2235,10 @@ MonoBehaviour:
     m_Y: 342
     m_Width: 59
     m_Height: 71
+  - m_X: 169
+    m_Y: 560
+    m_Width: 56
+    m_Height: 83
   m_FreeGlyphRects:
   - m_X: 337
     m_Y: 60
@@ -2406,10 +2448,6 @@ MonoBehaviour:
     m_Y: 531
     m_Width: 1
     m_Height: 17
-  - m_X: 169
-    m_Y: 548
-    m_Width: 6
-    m_Height: 475
   - m_X: 730
     m_Y: 246
     m_Width: 12
@@ -2427,10 +2465,6 @@ MonoBehaviour:
     m_Width: 14
     m_Height: 59
   - m_X: 118
-    m_Y: 630
-    m_Width: 905
-    m_Height: 393
-  - m_X: 118
     m_Y: 612
     m_Width: 11
     m_Height: 411
@@ -2442,14 +2476,6 @@ MonoBehaviour:
     m_Y: 477
     m_Width: 8
     m_Height: 546
-  - m_X: 169
-    m_Y: 562
-    m_Width: 854
-    m_Height: 461
-  - m_X: 169
-    m_Y: 560
-    m_Width: 67
-    m_Height: 463
   - m_X: 591
     m_Y: 163
     m_Width: 7
@@ -2518,6 +2544,26 @@ MonoBehaviour:
     m_Y: 347
     m_Width: 289
     m_Height: 676
+  - m_X: 169
+    m_Y: 548
+    m_Width: 6
+    m_Height: 12
+  - m_X: 118
+    m_Y: 643
+    m_Width: 905
+    m_Height: 380
+  - m_X: 118
+    m_Y: 630
+    m_Width: 51
+    m_Height: 393
+  - m_X: 225
+    m_Y: 562
+    m_Width: 798
+    m_Height: 461
+  - m_X: 225
+    m_Y: 560
+    m_Width: 11
+    m_Height: 463
   m_fontInfo:
     Name: 
     PointSize: 0
