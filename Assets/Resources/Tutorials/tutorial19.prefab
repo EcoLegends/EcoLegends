@@ -174,8 +174,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "La sua abilit\xE0 Istinto Selvaggio aumenta di 20% la probabilit\xE0 di
-    fare un attacco critico quando si trova su un terreno difensivo."
+  m_text: "La sua abilit\xE0 Istinto Selvaggio aumenta del 20% la probabilit\xE0
+    di fare un attacco critico quando si trova su un terreno difensivo."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06988976c5618664785a91daf90cba32, type: 2}
   m_sharedMaterial: {fileID: -8008457656545648370, guid: 06988976c5618664785a91daf90cba32, type: 2}

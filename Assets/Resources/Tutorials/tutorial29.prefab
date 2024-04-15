@@ -174,7 +174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "La sua abilit\xE0 In Guardia aumenta di 20% la probabilit\xE0 di evitare
+  m_text: "La sua abilit\xE0 In Guardia aumenta del 20% la probabilit\xE0 di evitare
     un attacco nemico per un turno se si \xE8 non attaccato o curato nessuno."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06988976c5618664785a91daf90cba32, type: 2}

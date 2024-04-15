@@ -174,8 +174,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "La sua abilit\xE0 Persistenza le permette di sopravvivere un attacco fatale
-    se all'inizio del combattimento aveva almeno 30% HP."
+  m_text: "La sua abilit\xE0 Persistenza le permette di sopravvivere ad un attacco
+    fatale se all'inizio del combattimento aveva almeno 30% HP."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06988976c5618664785a91daf90cba32, type: 2}
   m_sharedMaterial: {fileID: -8008457656545648370, guid: 06988976c5618664785a91daf90cba32, type: 2}

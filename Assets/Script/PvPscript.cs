@@ -84,7 +84,7 @@ public class PvPscript : MonoBehaviour
                                 d.Add(new Dialogo("Nova", "Nova", "Sei sempre stato un difensore della natura, un nostro alleato! E ora ti allei col Grande Inquinatore?", true, true));
                                 d.Add(new Dialogo("Granius?", enemy.textureFile, "Le cose sono cambiate. Ora devo affrontarti, Nova. Non c'è altra scelta.", false, false));
                                 d.Add(new Dialogo("Nova", "Nova", "Non posso crederci... ma non importa cosa sia successo.", true, true));
-                                d.Add(new Dialogo("Nova", "Nova", "Granius, io ti salverà e non mi arrenderò senza lottare. Se è così che deve essere, allora che lo sia.", true, true));
+                                d.Add(new Dialogo("Nova", "Nova", "Granius, io ti salverò e non mi arrenderò senza lottare. Se è così che deve essere, allora che lo sia.", true, true));
                                 break;
                             }
                         case "Sear-Granius?":
@@ -111,8 +111,8 @@ public class PvPscript : MonoBehaviour
                                 d.Add(new Dialogo("Thera?", enemy.textureFile, "Ora sono con Morgrath.", false, false));
                                 d.Add(new Dialogo("Nova", "Nova", "No, Thera, non puoi arrenderti così! Cosa ti ha fatto Morgrath?", true, true));
                                 d.Add(new Dialogo("Thera?", enemy.textureFile, "Morgrath non mi ha fatto nulla. Mi ha solo aperto gli occhi sulla realtà.", false, false));
-                                d.Add(new Dialogo("Thera?", enemy.textureFile, "E ora devo eliminare qualsiasi ostacolo si frapponga sulla nostra strada.", false, false)); 
-                                d.Add(new Dialogo("Nova", "Nova", "Allora sono obbligata a fermarti, Thera. Non vi lascerò avere la meglio senza lottare.", true, true));
+                                d.Add(new Dialogo("Thera?", enemy.textureFile, "E ora devo eliminare qualsiasi ostacolo si frapponga sulla mia strada.", false, false)); 
+                                d.Add(new Dialogo("Nova", "Nova", "Allora sono obbligata a fermarti, Thera. Non ti lascerò avere la meglio senza lottare.", true, true));
                                     
                                 break;
                             }
@@ -224,7 +224,7 @@ public class PvPscript : MonoBehaviour
                                 d.Add(new Dialogo("Hydris?", enemy.textureFile, "Le cose cambiano, Thera. E io ho scelto il lato che garantirà la mia sopravvivenza.", false, false));
                                 d.Add(new Dialogo("Thera", "Thera", "La tua sopravvivenza? Non hai idea di cosa stai facendo!", true, true));
                                 d.Add(new Dialogo("Thera", "Thera", "Ti stai arrendendo alla corruzione di Morgrath!", true, true));
-                                d.Add(new Dialogo("Hydris?", enemy.textureFile, "Forse è meglio di stare dalla tua parte, Thera.", false, false));
+                                d.Add(new Dialogo("Hydris?", enemy.textureFile, "Forse è meglio che stare dalla tua parte, Thera.", false, false));
                                 d.Add(new Dialogo("Hydris?", enemy.textureFile, "Morgrath mi offre potere e controllo, cosa che voi non potreste mai darmi.", false, false));
                                 d.Add(new Dialogo("Thera", "Thera", "Preferisci il potere alla nostra amicizia?", true, true));
                                 d.Add(new Dialogo("Thera", "Thera", "Allora preparati, perché questa non sarà una battaglia facile per te, Hydris.", true, true));
@@ -1070,13 +1070,13 @@ public class PvPscript : MonoBehaviour
                     d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, "Ma che... "+player.textureFile + "? Perché stiamo combattendo?", false, true));
                     d.Add(new Dialogo(player.textureFile, player.textureFile, "Stai fingendo di nuovo? Ci hai tradito per unirti a Morgrath!", true, true));
                     d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, "Io e Morgrath? Ma di che stai parlando?", false, true));
-                    d.Add(new Dialogo(player.textureFile, player.textureFile, "Ci hai fatto imboscare dai suoi mostri! Non ti ricordi più niente?", true, true));
-                    d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, player.textureFile+", io non mi unirei mai con Morgrath!", false, true));
+                    d.Add(new Dialogo(player.textureFile, player.textureFile, "Ci hai fatto tendere un'imboscata dai suoi mostri! Non ti ricordi più niente?", true, true));
+                    d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, player.textureFile+", io non mi unirei mai a Morgrath!", false, true));
                     d.Add(new Dialogo(player.textureFile, player.textureFile, "Deve aver manipolato anche te allora. Vai al riparo mentre sistemiamo le cose qui.", true, true));
                 }
                 if (enemy.textureFile == "Hydris")
                 {
-                    d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, "Cosa sta succedendo? " + player.textureFile + "? Che ci fai te qui?", false, true));
+                    d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, "Cosa sta succedendo? " + player.textureFile + "? Che ci fai tu qui?", false, true));
                     d.Add(new Dialogo(player.textureFile, player.textureFile, "Non fare finta di non sapere! Ci hai tradito per unirti a Morgrath!", true, true));
                     d.Add(new Dialogo(enemy.textureFile, enemy.textureFile, "Unirmi a Morgrath? Non ha senso, lui è il nostro nemico, perché dovrei mai unirmi a lui?", false, true));
                     d.Add(new Dialogo(player.textureFile, player.textureFile, "Eppure ci hai condotti dritti in un'imboscata dei suoi mostri! Non puoi negare i fatti.", true, true));
