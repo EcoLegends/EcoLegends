@@ -415,11 +415,19 @@ public class battleManager : MonoBehaviour
                         glowtiles.Add(glowtile);
                     }
                 }
-                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Ding");
+                try
+                {
+                    GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Ding");
+                }
+                catch (System.Exception) { }
                 yield return new WaitForSeconds(3);
             }
         }
-        GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Battle Condition");
+        try
+        {
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("Battle Condition");
+        }
+        catch (System.Exception) { }
 
         GameObject winCond = Instantiate(Resources.Load<GameObject>("WinConditions"),transform);
         winCond.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = txt;
@@ -479,7 +487,7 @@ public class battleManager : MonoBehaviour
         }
         try{
             GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
-        }catch(System.Exception e){}
+        }catch(System.Exception){}
         phase = "animation";
         animationText = "player";
         animationTime = Time.time + 3;
@@ -543,7 +551,11 @@ public class battleManager : MonoBehaviour
                 go.transform.SetParent(temp.transform, false);
 
             }
-            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            try
+            {
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            }
+            catch (System.Exception) { }
             GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
             yield return new WaitForSeconds(0.5f);
 
@@ -603,7 +615,11 @@ public class battleManager : MonoBehaviour
                 go.transform.SetParent(temp.transform, false);
 
             }
-            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            try
+            {
+                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("battlestart");
+            }
+            catch (System.Exception) { }
             GameObject.Find("LevelLoader").GetComponent<LevelLoad>().LoadNextLevel(2);
             yield return new WaitForSeconds(0.5f);
             AsyncOperation async = SceneManager.LoadSceneAsync( "CombatScene", LoadSceneMode.Additive);
@@ -708,7 +724,11 @@ public class battleManager : MonoBehaviour
             if (phase == "Enemy" && unmovedEnemies.Count == 0 && animationText == "0" && canMoveEnemy == true )
             {
                 if (glowtile != null) Destroy(glowtile);
-                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
+                try
+                {
+                    GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("player_phase");
+                }
+                catch (System.Exception) { }
                 phase = "animation";
                 animationText = "player";
                 animationTime = Time.time + 3;
@@ -749,7 +769,11 @@ public class battleManager : MonoBehaviour
 
             if (phase == "Player" && unmovedUnits.Count == 0 && animationText == "0")
             {
-                GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("enemyphase");
+                try
+                {
+                    GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("enemyphase");
+                }
+                catch (System.Exception) { }
                 phase = "animation";
                 animationText = "enemy";
                 animationTime = Time.time + 3;

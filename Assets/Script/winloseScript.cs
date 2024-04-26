@@ -19,7 +19,12 @@ public class winloseScript : MonoBehaviour
     IEnumerator anim()
     {
         GameObject.Find("Music").GetComponent<musicScript>().Stop();
-        if (vinci) GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("win");
+        if (vinci)
+        {
+            try{
+            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("win");
+        }catch(System.Exception){}
+        }
         
         for (float i = 0; i <= 100; i++)
         {
