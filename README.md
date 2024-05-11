@@ -2,7 +2,7 @@ Videogioco vincitore del contest [**INFORMATICA x GIOCO = FANTASIA + REGOLE**](h
 
 Creato da quattro studenti (Samuele Pizzardo, Ni Ming Hu, Daniel Tacchetto e Nicholas Bellemo) della classe 4BI dell'Istituto Einstein di Piove di Sacco utilizzando la piattaforma Unity.
 
-Per una presentazione del gioco premere [qui](https://computerscience.unicam.it/informatica-gioco-fantasia-regole).
+Per una presentazione del gioco premere [qui](https://www.canva.com/design/DAGEo3WAFHY/7jb0MoEdhufmKrOQkUDoqQ/edit?utm_content=DAGEo3WAFHY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
 <br>
 <br>
