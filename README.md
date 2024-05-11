@@ -4,6 +4,13 @@ Creato da quattro studenti (Samuele Pizzardo, Ni Ming Hu, Daniel Tacchetto e Nic
 
 Per una presentazione del gioco premere [qui](https://computerscience.unicam.it/informatica-gioco-fantasia-regole).
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 *Sono stati utilizzati degli assets con copyright che provengono dalle seguenti fonti:*
