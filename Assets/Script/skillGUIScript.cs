@@ -9,11 +9,11 @@ public class skillGUIScript : MonoBehaviour
 
     public void Setup(string skill)
     {
-        try
+        if (battleManager.SFX != null)
         {
-            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("skill");
+            battleManager.SFX.GetComponent<sfxScript>().playSFX("skill");
         }
-        catch (System.Exception) { }
+        
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = skill;
 
         string[] arr = { "Vantaggio", "Persistenza", "Istinto Selvaggio", "Giardino Fiorito", "Acqua Cristallina", "Guarigione", "Dio del Vento", "In Guardia" };

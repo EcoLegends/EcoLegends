@@ -18,12 +18,13 @@ public class winloseScript : MonoBehaviour
 
     IEnumerator anim()
     {
-        GameObject.Find("Music").GetComponent<musicScript>().Stop();
+        battleManager.musicPlayer.GetComponent<musicScript>().Stop();
         if (vinci)
         {
-            try{
-            GameObject.Find("SFX").GetComponent<sfxScript>().playSFX("win");
-        }catch(System.Exception){}
+            if (battleManager.SFX != null)
+            {
+                battleManager.SFX.GetComponent<sfxScript>().playSFX("win");
+            }
         }
         
         for (float i = 0; i <= 100; i++)
@@ -40,7 +41,7 @@ public class winloseScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        GameObject.Find("Music").GetComponent<musicScript>().Rimuovi();
+        battleManager.musicPlayer.GetComponent<musicScript>().Rimuovi();
 
         string scene = "MainScene";
         if (vinci) 

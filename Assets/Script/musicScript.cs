@@ -62,6 +62,8 @@ public class musicScript : MonoBehaviour
     // Update is called once per frame
     public void Rimuovi()
     {
+
+        Debug.Log("RIMUOVI MUSICA!!!");
         StartCoroutine(FadeOut(GetComponent<AudioSource>()));
     }
 
