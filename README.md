@@ -4,6 +4,7 @@ Creato da quattro studenti (Samuele Pizzardo, Ni Ming Hu, Daniel Tacchetto e Nic
 
 Per una presentazione del gioco premere [qui](https://www.canva.com/design/DAGEo3WAFHY/7jb0MoEdhufmKrOQkUDoqQ/edit?utm_content=DAGEo3WAFHY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
 
+Per scaricare il gioco premere [qui](https://creeperswizard.itch.io/ecolegends).
 <br>
 <br>
 <br>
