@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.InputSystem;
 
 public class gestioneMappe : MonoBehaviour
 {
+
+    bool generated = false;
+
+    bool exist = false; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,11 +78,30 @@ public class gestioneMappe : MonoBehaviour
             GameObject.Find("bottone 5").transform.GetChild(0).gameObject.SetActive(true);
             GameObject.Find("bottone 5").transform.GetChild(1).gameObject.SetActive(false);
         }
+
+        generated = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (generated)
+            {
+                if (exist)
+                {
+                    exist = false;
+
+                    transform.GetChild(1).GetChild(7).gameObject.SetActive(false);
+                }
+                else
+                {
+                    exist = true;   
+
+                    transform.GetChild(1).GetChild(7).gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }
