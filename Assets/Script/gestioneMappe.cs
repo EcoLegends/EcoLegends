@@ -82,6 +82,17 @@ public class gestioneMappe : MonoBehaviour
         generated = true;
     }
 
+    public void impostazione()
+    {
+        GameObject.Find("Button").transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void esci()
+    {
+        Debug.Log("quit");
+        Application.Quit();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -91,9 +102,16 @@ public class gestioneMappe : MonoBehaviour
             {
                 if (exist)
                 {
+                    if (GameObject.Find("Button").transform.GetChild(1).gameObject.activeSelf)
+                    {
+                        GameObject.Find("Button").transform.GetChild(1).gameObject.SetActive(false);
+                    }
+                    else
+                    {
                     exist = false;
 
                     transform.GetChild(1).GetChild(7).gameObject.SetActive(false);
+                    }
                 }
                 else
                 {

@@ -15,6 +15,9 @@ TagManager:
   - Cap5
   - tileViola
   - Tutorial
+  - Impostazione
+  - Torna menu
+  - Esci dal gioco
   layers:
   - Default
   - TransparentFX

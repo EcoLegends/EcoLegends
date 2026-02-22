@@ -35,7 +35,7 @@ public class buttonScript : MonoBehaviour
     public void OnClick()
     {
         GameObject.Find("Music").GetComponent<musicScript>().Rimuovi();
-        foreach ( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){       //restart
+        foreach ( GameObject e in GameObject.FindGameObjectsWithTag("Restart")){
 
             if(e==this.gameObject){
 
@@ -155,5 +155,6 @@ public class buttonScript : MonoBehaviour
 
             }
         }
+        
     }
 }
